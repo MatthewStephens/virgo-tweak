@@ -1,6 +1,7 @@
 h1. VIRGO
 
 h2. Installation 
+
 To install VIRGO, clone it, run bundler, then start it:
 
 <pre>
