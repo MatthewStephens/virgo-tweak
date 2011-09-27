@@ -1,7 +1,10 @@
-== VIRGO
+h1. VIRGO
 
+h2. Installation 
 To install VIRGO, clone it, run bundler, then start it:
 
+<pre>
 git clone git@github.com:uvalib/virgo.git
 bundle install
 script/server
+</pre>
