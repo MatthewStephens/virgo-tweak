@@ -1,0 +1,7 @@
+<h2>Reserves</h2>
+<% @reserves.courses.each do |course| %>
+  <h3><%= course.code %> : <%= course.name %></h3>
+<% end %>
+<h3><%= @reserves.display_name %></h3>
+
+<%= render :partial=>'catalog/document_list' %>

@@ -1,0 +1,33 @@
+<% @special_collections_request.document.availability.special_collections_holdings.each do |holding| %>
+	<% holding.copies.each do |copy| %>
+		<% barcode = copy.barcode %>
+		<% home_location = copy.home_location %>
+		<% current_location = copy.current_location %>
+		<% call_number = holding.call_number %>
+		<% if !copy.available? %>
+		  <%= check_box_tag "location_plus_call_number[#{home_location.code}][#{barcode}]", call_number, item_included?(@special_collections_request, home_location.code, call_number, barcode)%>
+       <%= home_location.code %>, <%= call_number %><br />
+       <% next%>
+     <% end %>
+    <% if one_holding?(@special_collections_request.document.availability) %>
+      <%= hidden_field_tag("location_plus_call_number[#{current_location.code}][#{barcode}][]", call_number) -%>
+    <% else %>
+      <%= check_box_tag "location_plus_call_number[#{current_location.code}][#{barcode}][]", call_number,  item_included?(@special_collections_request, current_location.code, call_number, barcode) -%>
+    <% end %>
+    <%= current_location.code %>, <%= call_number %><br />    
+ <% end %>
+<% end %>
+
+<p>
+  <%= label(:special_collections_request, :user_note, 'Indicate box number, folder, volume number, etc. (if applicable)') %>
+  <%= user_form.text_field :user_note, :size => 55 %>
+</p>
+<p>
+  <%= user_form.hidden_field :document_id %>
+</p>
+
+<p>
+  <% if current_user and SpecialCollectionsRequestsInternalUser.find_by_computing_id(current_user[:login])%>
+    <%= user_form.check_box :internal, :checked=>true %> This is an internal request
+  <% end %>
+</p>

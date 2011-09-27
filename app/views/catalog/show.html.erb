@@ -1,0 +1,48 @@
+<%# code here should be generic enough to handle all types of items -%>
+<%# add custom HTML to the "view_type" partials -%>
+<% @add_to_html_head = capture do %>
+  <%= javascript_include_tag 'jquery.form.min.js', 'catalog/show', 'jquery.dataTables.min.js' %>
+  <%= javascript_include_tag 'requests.js' if current_user %>
+<% end %>
+
+<% unless session[:full_view] == true or session[:special_collections] == true %>
+	<%= javascript_include_tag 'catalog/show_details' %>
+<% end %>
+
+<% if session[:full_view] == true and session[:special_collections] != true %>
+	<%= javascript_include_tag 'catalog/toggle_details' %>
+<% end %>
+
+  <% unless params[:view]=='print' %>
+    <%= link_to "Print View", params.merge(:view => :print), :class => 'printPreview', :target => 'blank', :title => "Print View" %>
+  <% end %>
+
+  <div class="resultNav top">
+
+		<% if session[:search][:counter].to_i > -1 && !session[:search][:bookmarks_view] %>
+
+		  <%= render 'previous_next_doc' %>
+
+		  <div id="returnToSearch">
+		    <%= link_back_to_catalog :label=>'&larr; Return to search results' %> |
+				<%= link_to "Start&nbsp;over", catalog_index_path(:portal => session[:search][:portal]||"all"), :class=>"start_over" %>
+		  </div>
+
+		<% end %>
+
+		<%= render :partial => 'catalog/show_tools', :locals => { :document=>@document, :current_user=>current_user } %>
+
+  </div>
+
+    <%= render_document_partial @document, :show, session[:search][:counter] %>
+<div class="clearFix"><!-- ye olde clearfixe --></div>
+<div class="resultNav bottom">
+  <% if @previous_document || @next_document %>
+   <div id="previousNextDocument">
+   	<%= link_to_previous_document(@previous_document) %>
+   	<% if @previous_document && @next_document %> | <% end %>
+   	<%= link_to_next_document(@next_document)%>	
+   </div>
+   <% end %>
+
+</div>

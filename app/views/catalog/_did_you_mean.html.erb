@@ -1,0 +1,10 @@
+<% # make sure the current query, isn't the same as the suggested query -%>
+<% if @response.response[:numFound].to_i <= Blacklight.config[:spell_max].to_i and (@response.spelling.words.size > 0 rescue false) %>
+<div class="suggestions">
+  <h2>Did you mean?</h2>
+  <% @response.spelling.words.each_with_index do |word,index| -%>
+    <% if index > 0 -%>, or <% end -%>
+    <%= link_to_query(word) %>
+  <% end %>  
+</div>
+<% end %>

@@ -1,0 +1,24 @@
+<div id="tool_heading"><h1>Send Record by Email</h1></div>
+
+<div id="returnToSearch">
+  <%= link_back_to_catalog :label=>'&larr; Return to search results' %>
+</div>
+
+<div class="tool_content">
+<% form_tag send_email_record_catalog_path, :id => 'email_form', :method => :post do %>
+  <%= label_tag(:to, "Email") %>
+  <%= text_field_tag :to %>
+  <%= label_tag(:message, "Message") %>
+  <%= text_area_tag :message %>
+  <%= label_tag(:full_record, "Brief or detail record") %>
+  <%= radio_button_tag(:full_record, "false", true)%> Send brief listing of the record(s)<br />
+  <%= radio_button_tag(:full_record, "true", false)%> Send detail listing of the record(s)
+  <%=label_tag 'Please type the two words below to help us prevent spam.'%><%= recaptcha_tags %>
+  <% @documents.each do |doc| %>
+    <%=hidden_field_tag "id[]", doc.get(:id)%>
+  <% end %>
+  <%=hidden_field_tag :style, 'email'%>
+  <%=hidden_field_tag :show_max_per_page, 'true'%>
+  <%= submit_tag "Send" %>
+<% end %>
+</div>

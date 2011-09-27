@@ -1,0 +1,48 @@
+form fieldset div.row{
+	clear:both;
+}
+
+div.row label, div.row input, div.row textarea {
+	display: block;
+	float: left;
+	margin-bottom: 10px;
+}
+
+div.row label {
+	text-align: right;
+	width:120px;
+	padding-right: 20px;
+}
+
+fieldset{
+	padding:1em;
+	margin-top:1em;
+}
+
+fieldset div.left{
+  margin-left:140px;
+  margin-top:1em;
+}
+
+label{
+	font-weight:bold;
+	color:#999;
+}
+
+textarea{
+	width:30em;
+	height:15em;
+}
+.fieldWithErrors {
+  background-color: #ffdcdc;
+}
+
+.fieldWithErrors label {
+  background-color: #fff;
+}
+
+.fieldWithErrors input[type=text],
+.fieldWithErrors input[type=password],
+.fieldWithErrors textarea {
+  background: #ffdcdc;
+}

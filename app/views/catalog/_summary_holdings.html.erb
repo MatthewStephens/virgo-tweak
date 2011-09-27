@@ -1,0 +1,22 @@
+<% # make this be "availability" instead of "availability" after refactor done -%>
+<% document.availability.summary_libraries.each do |library| -%>
+  <% first_pass = true -%>
+  <% library_class = library.name.downcase.tr(" ", "_") -%>
+  <div class="holding <%= library_class + (' first' if first_pass).to_s %>">
+  <h3><%= library.name %></h3>
+  <% library.summary_locations.each do |location| -%>
+    <div class="holdingGroup">
+    <div class="homeLocation"><%= location.name %>:</div>
+    <% location.summaries.each do |summary| -%>
+      <% unless summary.text.blank? -%>
+        <div class="summaryText"><%= summary.text %><%= "," unless summary == location.summaries.last %></div>
+      <% end -%>
+      <% unless summary.note.blank? -%>
+        <div class="summaryNote"><%= summary.note %></div>
+      <% end -%>
+    <% first_pass = false -%>  
+    <% end -%>
+    </div><!-- end holdingGroup -->
+  <% end -%>
+  </div><!-- end holding -->
+<% end -%>

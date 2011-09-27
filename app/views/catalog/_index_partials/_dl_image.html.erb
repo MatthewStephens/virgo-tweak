@@ -1,0 +1,68 @@
+<div class="document clearFix" id="Doc<%= document[:id] %>">
+
+	<div class="details">
+		<dl class="metadata hd">
+		  
+			<dt class="hide">Title</dt>
+			<% heading_title = get_heading_title(document.value_for(:main_title_display), document.value_for(:series_title_display), document.value_for(:title_display)) %>
+			<dd class="titleField"><span class="listItemNumber"><%= counter + 1 + offset %>.</span><%= link_to_document document, :label => heading_title, :counter => counter + 1 + offset, :bookmarks_view => bookmarks_view  %></dd>
+		</dl>
+		
+		<div class="previewThumbImg imageCollection">
+  		<% if image_url_exists? document.dl_image_default_preview_src -%>
+    		<% document.values_for(:media_resource_id_display).each_with_index do |media_id, index| -%>
+    		  <% class_att = index > 0 ? 'hide' : nil -%>
+      		<div>
+      			<%= link_to(
+      			  image_tag(
+      			    document.dl_image_preview_src(media_id),
+      			    :class=>:photo,
+      			    :alt=>document[:id]
+      			  ),
+      			  document.dl_image_full_src(media_id),
+      			  :class=>class_att,
+              :title=>get_image_title(document, index, heading_title),
+      			  :"data-group"=>document[:id]
+      			) %>
+      		</div>
+    		<% end -%>
+  		<% end -%>
+  	</div>
+    
+		<dl class="metadata">
+      
+      <% unless document.value_for(:main_title_display) == 'n/a' %>
+        <dt>Title</dt>
+        <dd><%= document.value_for :main_title_display %></dd>
+      <% end %>
+      
+      <% unless document.value_for(:series_title_display) == 'n/a' %>
+        <dt>Series</dt>
+        <dd><%= document.value_for :series_title_display %></dd>
+      <% end %>
+      
+      <% year_display = document.value_for(:year_display) %>
+      <% unless year_display == 'n/a' or year_display.blank? %>
+  			<dt>Date Created</dt>
+  			<dd class="dateField"><%= year_display %></dd>
+      <% end %>
+      
+      <% unless document.value_for(:author_display) == 'n/a' %>
+  			<dt class="creatorField">Creator</dt>
+  			<dd><%= document.value_for :author_display %></dd>
+      <% end %>
+      
+			<dt class="typeField">Contents</dt>
+			<dd><%= pluralize(document[:media_resource_id_display].size, 'digital image') rescue "" %></dd>
+      
+		</dl>
+    
+	</div>
+
+  <% unless bookmarks_view or params[:catalog_select] == 'all' %>
+  <div class="tools">
+     <%= render :partial=>'folder_control', :locals=>{:document=>document} %>
+  </div>
+  <% end %>
+
+</div>

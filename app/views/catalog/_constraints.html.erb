@@ -1,0 +1,111 @@
+<div id="appliedParams"<%= " class=\"advanced-refine\"" if advanced_search_case? %>>
+	<h3>You searched for:</h3>
+	<span id="appliedQueries">
+		<% if ! localized_params[:q].blank? %>
+			<span class="appliedFilter">
+				<span class="first">
+					<span class="queryName"><%= search_field_label(localized_params) %></span>
+					<span><%= h(localized_params[:q]) %></span>
+				</span>
+				
+				<% if params[:controller] == 'articles' %>
+				  <% link = articles_path(localized_params.merge(:q=>nil, :action=>'index')) %>
+				<% else %>
+				  <% link = catalog_index_path(localized_params.merge(:q=>nil, :action=>'index')) %>
+				<% end %>
+				<%= link_to('x', link, :class=>'btnRemove imgReplace') %>
+			</span>
+		<% elsif !populated_advanced_search_fields.empty? %>	
+        <% populated_advanced_search_fields.each_pair do |key, value| %>
+        <span class="appliedFilter">
+          <span class="first">          		
+            <span class="queryName"><%= Blacklight.label_for_search_field(key) %></span>
+            <span><%= h(value)%></span>
+          </span>		  		  		 
+          <% if params[:controller] == 'articles' %> 
+            <% link = articles_path(remove_advanced_search_field(key)) %>
+          <% else %>
+            <% link = catalog_index_path(remove_advanced_search_field(key)) %>          
+          <% end %>
+          <%= link_to('x', link, :class=>'btnRemove imgReplace')%>
+        </span>
+      <% end %>
+		<% else %>
+			<span class="appliedFilter no-keywords"><span class="first"><span>No Keywords</span> </span></span>
+		<% end %>
+	</span>
+
+	<% if localized_params[:f] %>
+		<span id="appliedFilters">
+			<span id = "appliedFiltersList">
+				<% localized_params[:f].each_pair do |facet,values| %>
+					<% values.each do |v| %>
+						<span class="appliedFilter">
+							<span class="first">								
+								<span>
+									<span class="filterName"><%= h facet_field_labels[facet] %></span>
+									<span class="filterValue"><%= h v %></span>
+								</span>
+							</span>
+							<% if params[:controller] == 'articles' %>
+							  <% link = articles_path(remove_facet_params(facet, v, localized_params)) %>
+							<% else %>
+							  <% link = catalog_index_path(remove_facet_params(facet, v, localized_params)) %>							
+							<% end %>
+							<%= link_to('x', link, :class=>'btnRemove imgReplace') %>
+						</span>
+					<% end %>
+				<% end %>
+			</span>
+		</span>
+	<% end %>
+	
+	<% if localized_params[:f_inclusive]%>
+			<span id = "appliedFiltersList">
+				<% localized_params[:f_inclusive].each_pair do |facet,values| %>
+					<% values.each do |v| %>
+						<span class="appliedFilter">
+							<span class="first">
+								<span>									
+									<span class="filterName"><%= h facet_field_labels[facet] %></span>
+									<span class="filterValue"><%= h v.first %></span>
+								</span>
+							</span>
+							<% if params[:controller] == 'articles '%>
+							  <% link = articles_path(remove_advanced_facet_param(facet, v.first, localized_params)) %>
+							<% else %>
+							  <% link = catalog_index_path(remove_advanced_facet_param(facet, v.first, localized_params)) %>							
+							<% end %>
+							<%= link_to('x', link, :class=>'btnRemove imgReplace') %>
+						</span>
+					<% end %>
+				<% end %>
+			</span>
+		</span>
+	<% end %>
+
+	<%=link_to "Start&nbsp;over", catalog_index_path(:portal => session[:search][:portal]||"all"), :id=>"startOverLink" %>
+	
+	
+	<% unless params[:catalog_select] == 'all' %>
+	
+  	<% if advanced_search_case? %>
+  	  <%=link_to "Refine&nbsp;search", advanced_path(refine_search_hash), :id => "refineSearchLink" %>
+  	<% end %>
+		
+  	<div id="resultLine">
+  	  <span class="current-page">
+  		<% if params[:action] == 'index' %>
+  			<%= virgo_page_entries_info @response.docs, :entry_name=>'item' %>
+  		<% else %>
+  			Displaying item <strong><%=format_num(session[:search][:counter].to_i)%></strong> of <strong><%= format_num(session[:search][:total]) %></strong>
+  		<% end %>
+  		</span>
+		
+      <%= pagination_links unless (@response.response['numFound'] < 1 or @response.docs.size < 1) %>
+		
+  	</div>
+	
+	<% end %>
+	
+</div>

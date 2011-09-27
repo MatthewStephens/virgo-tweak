@@ -1,0 +1,61 @@
+<%= search_as_hidden_fields(:params => advanced_search_context ) %>  
+
+<% unless params[:catalog_select] == 'articles' %>
+  <div class="adv_search_filter">
+    <label for="op" id="txt1">Find items that match</label>
+    <%= select_tag(:op, options_for_select({'all'=>'AND','any'=>'OR'}.sort,'all')) %> 
+    <span id="txt2">of the fields below.</span>
+  </div>
+<% end %>
+      
+<%= render 'advanced/advanced_search_fields' %>      
+
+
+<% unless (search_context_str = render_search_to_s( advanced_search_context)).blank? %>
+  <h4>Within search</h4>
+  <%= search_context_str %>
+<% end %>
+
+<div class="adv_search_sort">
+  <%= label_tag(:sort_key, "Sort results by", :class => "adv_sort_label") %> 
+  <%= select_tag(:sort_key, options_for_select(sort_fields,'')) %>
+  <%= hidden_field_tag(:search_field, BlacklightAdvancedSearch.config[:url_key]) %>
+</div>
+
+
+<div class="adv_search_buttons">
+	<%= submit_tag 'Search', :class=>'advanced_button', :id=>'advanced_search' %>
+	<% if params[:catalog_select] == 'articles' %>
+	<%= link_to "Clear", "/articles/advanced?catalog_select=articles", :class =>"reset advanced_button" %>
+	<%else %>
+	<%= link_to "Clear", {:controller => "advanced", :action => "index"}, :class =>"reset advanced_button" %>
+	<%end %>
+</div>
+
+<% sidebar_items << capture do %>
+  <% unless params[:catalog_select] == 'articles' %>
+    <%= render 'advanced/advanced_search_facets' %>
+  <% end %>
+  <nav class="advanced-elsewhere">
+    <h3 class="elsewhere-heading">Go to:</h3>
+    <ul class="elsewhere-links">
+      <li><a class="catalog-article-search" href="/catalog?catalog_select=all">Catalog + Article Search</a></li>
+      <% if params[:catalog_select] == 'articles' %>
+        <li><a class="catalog-search" href="/catalog?catalog_select=catalog">Catalog Search</a></li>
+        <li><%= link_to "Catalog Advanced Search", "/advanced", :class => "catalog-search" %></li>
+      <% else %>
+        <li><a class="article-search" href="/catalog?catalog_select=articles">Article Search</a></li>
+        <li><%= link_to "Article Advanced Search", advanced_articles_path(:catalog_select => 'articles'), :class => "article-search" %></li>
+      <% end %>
+      <li><a class="music-search" href="/catalog?portal=music">Music Search</a></li>
+      <li><a class="video-search" href="/catalog?portal=video">Video Search</a></li>
+      <li><a class="start-over" href="/">Start Over</a></li>
+    </ul>
+    <h3 class="elsewhere-heading">Elsewhere:</h3>
+    <ul class="elsewhere-links">
+      <li><a href="http://guides.lib.virginia.edu/az">Databases</a></li>
+      <li><a href="http://guides.lib.virginia.edu/journalfinder">Journal Finder</a></li>
+      <li><a href="http://research.lib.virginia.edu/">Subject Guides</a></li>
+    </ul>  
+  </nav>
+<% end %>

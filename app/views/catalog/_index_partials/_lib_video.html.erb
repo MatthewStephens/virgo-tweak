@@ -1,0 +1,87 @@
+<div class="document video_doc clearFix <%= (counter + 1) % 2 == 0 ? 'even' : 'odd' %>" id="Doc<%= document[:id] %>">
+  <%- if (document[:linked_title_display] rescue false) -%>
+  		<div class="listItemNumber"><%= counter + 1 + offset %>.</div>
+  		<div class="tools">
+        <%= render :partial=>'folder_control', :locals=>{:document=>document} %>
+      </div>
+  		<div class="title"><span class="linked_title"><%= link_to_document document, :label => document.value_for(:linked_title_display), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view %></span><span class="main_title"><%= link_to_document document, :label => full_title(document), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view  %></span></div>
+  <%- end -%>
+	<%- unless (document[:linked_title_display] rescue false) -%>
+		<div class="listItemNumber"><%= counter + 1 + offset %>.</div>
+		<div class="tools">
+      <%= render :partial=>'folder_control', :locals=>{:document=>document} %>
+    </div>
+    <div class="title">
+      <%= link_to_document document, :label => video_title(document), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view  %>
+    </div>
+	<%- end -%>
+ 
+  	<div class="format">
+   	  <%= video_format(document) %> 			
+  	</div>
+
+  	<div class="year">
+      <% unless journal?(document) %>
+  		  <%= document.value_for :published_date_display %>
+	  	<% end %>
+  	</div>
+	
+  	<div class="location">
+  	  <%= video_location_listing(document)%>
+  	</div>	
+	
+  	<div class="callNumberField">
+    	<% unless call_number(document).blank? %>
+    		<%= video_call_number(document, '<br />') %>
+    	<% end %>
+  	</div>
+
+  	<% unless document.online_only? && !document.get(:url_display).nil? %>						
+      <div class="availability">
+             <%= image_tag javascript_path('ext-2.2/resources/images/default/shared/loading-balls.gif'), :class=>'ajaxLoader hide' %>
+             <%= link_to 'check availability', catalog_path(document[:id]) %>
+      </div>
+    <% end %>
+      
+    <div class="more_info">
+      <h1><%= link_to_document document, :label => video_title(document), :counter => (counter + 1 + offset) %></h1>
+      <div class="cover_summary <%= 'cover_only' if document.get(:description_note_display).nil? %>">
+          <%= link_to_document_from_cover document, :span => "coverImage book", :counter => (counter + 1 + offset), :bookmakrs_view => bookmarks_view  %>
+          <%= truncate(document.get(:description_note_display), 800, ' [...]') if !document.get(:description_note_display).nil? %>
+ 		  </div>
+      <dl class="more_info_meta">
+        <% #------------ Authors ------------- %>
+        <% authors = document.author_type_fields %>
+  			<% authors.each do |k,v| %>
+    			<dt>Author</dt>
+    			<dd class="authorField">
+    				<%= document.value_for k %>
+    			</dd>
+  			<% end %>
+  			<% unless document.get(:video_director_facet).nil? %>	
+    		  <dt>Director</dt>
+          <dd class="directorField">
+            <%= document.value_for :video_director_facet %>
+          </dd>
+        <% end %>
+  			<% unless document.get(:release_date_facet).nil? %>	
+    		  <dt>Release Date</dt>
+          <dd class="releaseDateField">
+            <%= document.value_for :release_date_facet %>
+          </dd>
+        <% end %>        
+        <% unless document.get(:video_run_time_display).nil? %>	
+    		  <dt>Run Time</dt>
+          <dd class="runTimeField">
+            <%= document.value_for :video_run_time_display %> min.
+          </dd>
+        <% end %>
+    		<% unless document.online_only? && !document.get(:url_display).nil? %>	
+    		  <dt>Availability</dt>
+          <dd class="availability">
+            <%= link_to 'check availability', catalog_path(document[:id]) %>
+          </dd>
+        <% end %>
+      </dl>
+    </div>
+</div>

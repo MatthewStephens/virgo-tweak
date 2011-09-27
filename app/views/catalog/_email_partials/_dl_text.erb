@@ -1,0 +1,43 @@
+<%= dl_text_title(document) %>
+<% -%>
+<% unless document.value_for(:author_display) == 'n/a' -%>
+
+Creator:
+<% document.values_for(:author_display).each do |v| -%>
+<%= v %>
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.value_for(:year_display) == 'n/a' or document.value_for(:year_display).blank? -%>
+
+Date:
+<%= document.value_for :year_display %>
+<% end -%>
+<% -%>
+<% unless document.value_for(:composition_era_facet) == 'n/a' -%>
+
+Composition Era:
+<% document.values_for(:composition_era_facet).each do |v| -%>
+<%= v %>									
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.value_for(:format_facet) == 'n/a' -%>
+
+Format:
+<%= document.value_for (:format_facet) %>
+<% end -%>
+<% -%>
+<% unless document.value_for(:language_facet) == 'n/a' -%>
+
+Language:
+<%= document.value_for(:Language_facet) %>
+<% end -%>
+<% -%>
+<% unless document.value_for(:digital_collection_facet) == 'n/a' -%>
+
+Collection:
+<% document.values_for(:digital_collection_facet).each do |v| -%>
+<%= v %>
+<% end -%>
+<% end -%>

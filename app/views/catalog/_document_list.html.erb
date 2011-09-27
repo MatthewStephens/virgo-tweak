@@ -1,0 +1,17 @@
+<div id="results">
+  <h1 class="visuallyhidden">Search Results</h1>
+  <% if video_portal? and (params[:catalog_select] == "catalog" or params[:catalog_select].nil?) %>
+    <div class="document video_doc video_head_row">
+      <div class="video_head tools"><!-- number and star --></div>
+      <div class="video_head title">Title</div>
+      <div class="video_head format">Format</div>
+      <div class="video_head year">Year</div>
+      <div class="video_head location">Location</div>
+      <div class="video_head callNumberField">Call #</div>
+      <div class="video_head availability">Availability</div>
+    </div>
+  <% end %>
+	<% @document_list.each_with_index do |document,counter| %>
+	 <%= render_document_partial document, :index, counter, @response.params[:start].to_i %>
+	<% end %>
+</div>

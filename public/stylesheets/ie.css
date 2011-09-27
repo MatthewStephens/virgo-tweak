@@ -1,0 +1,48 @@
+/* IE7 & 8 Fixes */
+
+#frame {
+	margin-top: 22px;
+}
+
+#container1_login {
+	width: 187px;
+}
+
+#ask_a_librarian {
+	position: relative !important;
+	top: 0 !important;
+}
+
+#searchFieldSelect {
+	margin-top: 7px;
+}
+
+.appliedFilter {
+	height: 1.2em;
+}
+
+.appliedFilter > span {
+		z-index: -1;
+		float: left;
+}
+
+.btnRemove {
+	position: relative;
+	float: right;
+	right: 20px;
+	top: -1px;
+	height: 1.2em;
+}
+
+.side_bar_content_seeall, .side_bar_content_seeall a  {
+	display: block !important;
+	visibility: visible !important;
+	height: 35px !important;
+	width: 100px !important;
+	position: static !important;
+}
+
+.document.video_doc span.format_value {padding-bottom: 2px;}
+
+.ie8 #searchFieldSelect {margin-top: 12px;}
+.ie7 #SelectClearAll { line-height: 30px !important; margin-bottom: -14px !important;}

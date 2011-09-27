@@ -1,0 +1,94 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="no-js ie6"> <![endif]--> 
+<!--[if IE 7 ]>    <html class="no-js ie7"> <![endif]--> 
+<!--[if IE 8 ]>    <html class="no-js ie8"> <![endif]--> 
+<!--[if IE 9 ]>    <html class="no-js ie9"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>
+    <% if params[:controller]=='feedback' %>
+      Virgo - Feedback - University of Virginia Library
+    <% elsif params[:action]=='index' and params[:q].nil? %>
+      Virgo - Find books, articles, digital materials, and more. - University of Virginia Library
+    <% elsif params[:action]=='index' %>
+      Virgo - Results for <%= h params[:q] %> - University of Virginia Library
+    <% elsif params[:action]=='show' %>
+      <% @document.get(:title_display).blank? ? my_title = 'Virgo - Item Details' : my_title = @document.get(:title_display) %>
+      <% unless @document.get(:subtitle_display).blank? -%>
+         <% my_title += ': ' +  @document.get(:subtitle_display) -%>
+      <% end -%> 
+      <%= my_title %> - University of Virginia Library
+    <% else %>
+      Virgo - University of Virginia Library 
+    <% end %>  
+  </title>
+  <meta name="description" content="Virgo, the online catalog of University of Virginia Library.  Books, articles, maps, digital materials, and more.">
+	<meta name="author" content="University of Virginia Library">
+	<meta name="keywords" content="University of Virginia, UVa, Virginia, Library, UVa Library, University of Virginia Library, Research, Virgo, VIRGO, catalog, articles, books, journals" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+	
+  <% if params[:view]=='print' %>
+  	<%= stylesheet_link_tag 'print', :media => 'screen, print' %>
+  <% else %>
+    <%= stylesheet_link_tag 'styles', 'components', 'virgo' %>
+  	<%= stylesheet_link_tag 'print', :media => 'print' %>
+  <% end %>
+  <!--[if lte IE 8 ]>    
+  <%= stylesheet_link_tag 'ie' %>
+  <![endif]-->
+  <%= stylesheet_link_tag 'yui-combo' %>
+
+  <%= javascript_include_tag 	'jquery-1.3.2.min.js', 'modernizr.custom.min.js', 'application' %>
+
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+  <%= @add_to_html_head %>
+</head>
+
+<body id="<%= "#{h(params[:controller])}#{h(params[:action]).capitalize}" %>">
+  <div id="virgo_container">
+    
+    <%= render :partial => 'layouts/header' %>
+    
+  	<% if params[:controller]=='advanced' %>
+  		<form action="<%=catalog_index_path%>" class="advanced" method="get">
+  	<% end %>
+
+    <div id="main" class="clearfix container_24 combined-results">
+      
+  	  <div class="results_search_container grid_24 alpha omega">
+        <%= render :partial=>'catalog/search_box'%>
+      </div>
+  
+      <article id="content" role="main" class="grid_24 alpha omega">
+        <%= render :partial=>'/flash_msg' %>
+        <header id="all_search_header" class="grid_24 alpha omega">
+          <%= render 'catalog/constraints', :localized_params=>params %>
+          <%= link_to "Print View", params.merge(:view => :print), :class => 'printPreview', :target => 'blank', :title => "Print View" %>
+        </header>
+        <section id="catalog_search_results" class="grid_12 alpha omega">
+          <header class="split-header">
+            <h1 class="split-title">Catalog results</h1>
+            <p class="split-header-description">Find books, print journals, maps, videos, digitized materials, and more from the Library's collection.</p>
+          </header>
+          <%= yield %>
+        </section>
+        <section id="article_search_results" class="grid_12 alpha omega">
+          <header class="split-header">
+            <h1 class="split-title">Article results</h1>
+            <p class="split-header-description">Find full-text online articles from the Library's collection of subscription journals.</p>
+          </header>
+          <div id="article_results_container"><p class="no-js-notice">Catalog + Article search requires a browser with JavaScript enabled.  You may still <%= link_to "search online articles", catalog_index_path(:q => params[:q], :catalog_select => 'articles') %>.</p></div>
+        </section>
+      </article>
+      
+       <%= render :partial => 'catalog/search_elsewhere' %>      
+    </div>
+    
+    <%= render :partial => 'layouts/footer' %>
+    
+  </div> <!-- end #virgo_container -->
+
+  <%= render :partial => 'catalog/analytics'%>
+</body>
+</html>

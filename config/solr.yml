@@ -1,0 +1,15 @@
+production:
+  url: http://solrpowr.lib.virginia.edu:8984/solr/all
+development:
+  url: http://solrpowr.lib.virginia.edu:8984/solr/all
+test:
+  url: http://solrpowr.lib.virginia.edu:8984/solr/all
+cucumber:
+  url: http://solrpowr.lib.virginia.edu:8984/solr/all
+
+virgobeta_production:
+  url: http://index.lib.virginia.edu/virgobeta/
+virgobeta_development:
+  url: http://solrpowr.lib.virginia.edu:8984/solr/all
+virgobeta_test:
+  url: http://index.lib.virginia.edu/virgobeta/

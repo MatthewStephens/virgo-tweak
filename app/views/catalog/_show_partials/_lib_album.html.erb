@@ -1,0 +1,200 @@
+<% if request.env['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest' %>
+	<%= javascript_include_tag 'application' %>
+	<%= stylesheet_link_tag 'application' %>
+<% end %>
+
+<div class="itemShowView document" id="Doc<%= document[:id] %>">
+		<div id="identifierFields">
+			<h1 id="titleField"><%= document.marc_display.title %> <span class="documentPart"><%= document.marc_display.part %></span> <span class="medium"><%= document.marc_display.medium %></span> <span id="subtitle"><%= document.marc_display.subtitle %></span></h1>
+			
+			<!-- 	This should be the display quality data about this item, as human readable as possible. 
+				For example, we should include the season information, for comic books, television shows, and other works
+				that are divided into parts (i.e., 245n or document.marc.part) and we should include the responsibility 
+				statement, i.e., the author or editor or whatever of a work, as their name appears on the book, which will 
+				often differ from the authorized forms of people's names as they appear in other marc fields
+			-->
+			<div id="respStmtField">
+				<%= document.marc_display.responsibility_statement %>
+			</div>
+		</div>
+
+	<div id="details">
+
+		<dl>
+		  <dt>Format</dt>
+		  <dd><%= document.value_for :format_facet %></dd>
+		  
+			<dt>Description</dt>
+			<dd>
+				<% #------------ Physical description ------------- -%>
+				<% unless document.marc_display.physical_description.empty? -%>
+				  <%= document.marc_display.physical_description.join(' ')%>
+				<% end -%>
+				<% #------------ Technical details ------------- -%>
+				<% unless document.marc_display.technical_details.empty? -%>
+				  <%= document.marc_display.technical_details.join(' ')%>
+				<% end -%>
+			</dd>
+
+
+			<% #------------ Uniform title -------------%>
+
+			<% unless document.marc_display.uniform_title.empty? %>
+			<dt>Uniform title</dt>
+			<% document.marc_display.uniform_title.each do |v| %>
+			<dd><%= link_to v, add_facet_params(:uniform_title_facet, v).merge(:action=>nil,:id=>nil) %></dd>
+			
+			<% end %>
+			<% end %>
+
+
+			<!-- ============================== -->
+			<!-- 			Edition 			-->
+			<!-- ============================== -->
+
+
+			<% unless document.marc_display.edition.empty? %>
+			<dt>Edition</dt>
+			<dd><%= document.marc_display.edition %></dd>
+			<% end %>
+
+			<!-- ============================== -->
+			<!-- 			Series 				-->
+			<!-- ============================== -->
+
+			<% unless document.marc_display.series_subfields.empty? %>
+			<dt>Series</dt>
+			<% document.marc_display.series_subfields.each do |sf| %>
+			<dd><%= link_to sf, catalog_index_path({:series_title_facet=>sf}) %></dd>
+			<% end %>
+			<% end %>
+
+			<!-- ============================================== -->
+			<!-- 			Publication Statement 				-->
+			<!-- ============================================== -->
+
+			<% unless document.marc_display.publication_statement.empty? %>
+			<dt class="publication">Publication</dt>
+			<dd class="publication"><%= document.marc_display.publication_statement.join(' ') %></dd>
+			<% end %>
+			
+			<!-- ====================================== -->
+			<!-- 			Label Number 				-->
+			<!-- ====================================== -->
+
+			<% unless document.marc_display.label_no.empty? %>
+			<dt class="label_number"><%= label_no_label(document) %></dt>
+				<% document.marc_display.label_no.each do |label_number| %>
+					<dd class="label_number"><%= label_number %></dd>
+				<% end %>
+			<% end %>
+
+
+			<% #------------ Track list ------------- %>
+			<% unless document.marc_display.track_list.empty? %>
+			<dt>Track list</dt>
+			<dd>
+				<ul>
+				<% document.marc_display.track_list.each do |track| %>
+				<li><%= track %></li>
+				<% end %>
+				</ul>
+			</dd>
+			<% end %>
+			
+			<% #------------ Performers ------------- %>
+			<% unless document.marc_display.performers.empty? %>
+			<dt class="show_detail">Performer(s)</dt>
+			<dd class="show_detail">
+				<ul>
+				<% document.marc_display.performers.each do |performer| %>
+				<li><%= performer %></li>
+				<% end %>
+				</ul>
+			</dd>
+			<% end %>
+			
+			<% #---------- Credits ---------- %>
+			<% unless document.marc_display.credits.empty? %>
+			<dt>Credits</dt>
+			<dd>
+			  <ul>
+			  <% document.marc_display.credits.each do |credit| %>
+			    <li><%= credit %></li>
+			  <% end %>
+			  </ul>
+			</dd>
+			<% end %>
+			
+			<% #---------- Recording information ---------- %>
+			<% unless document.marc_display.recording_information.empty? %>
+			<dt>Recording information</dt>
+			<dd>
+			  <ul>
+			  <% document.marc_display.recording_information.each do |info| %>
+			    <li><%= info %></li>
+			  <% end %>
+			  </ul>
+			</dd>
+			<% end %>
+			
+			<% #------------ Notes ------------- %>
+			<% unless document.marc_display.note.empty? and document.marc_display.with_note.empty? and document.marc_display.bibliographical_references_note.empty? %>
+			<dt>Notes</dt>
+			<dd>
+				<ul> 
+					<% document.marc_display.note.each do |v| %>
+					<li><%= v %></li>
+					<% end %>
+					
+					<% #------------- with note -------------------- %>
+          <% unless document.marc_display.with_note.empty? %>
+          <% document.marc_display.with_note.each do |v| %>
+        	<li><%= v %></li>
+        	<% end %>
+        	<% end %>
+
+					<% #------------ Bibliographical references note ------------- %>
+					<% unless document.marc_display.bibliographical_references_note.empty? %>
+					<% document.marc_display.bibliographical_references_note.each do |v| %>
+					<li><%= v %></li>
+					<% end %>
+					<% end %>
+				</ul>
+			</dd>
+			<% end %>
+			
+			<% #------------ Cited in ------------- %>
+			<% unless document.marc_display.cited_in.empty? %>
+			<dt>Cited in</dt>
+			<dd><%= document.marc_display.cited_in %></dd>
+			<% end %>
+			
+			<% #------------ Local note ------------- %>
+			<% unless document.marc_display.local_note.empty? %>
+			<dt>Local Notes</dt>
+			<% document.marc_display.local_note.each do |v| %>
+			<dd><%= v %></dd>
+			<% end %>
+			<% end %>
+			
+			<%= render :partial => "catalog/_show_partials/tech_details", :locals => { :document => document } %>
+  		
+		</dl>
+	</div>
+	<%= render :partial => "catalog/_show_partials/availability", :locals => { :document => document, :online_access_verb=>'Listen' } %>
+</div>
+
+<% sidebar_items << capture do %>
+  <div id="sub1">
+  <div id="sub1Inner">
+	<div class="previewThumbImg">
+		<span class="coverImage" title="<%= document[:id] %>">
+			<%= image_tag 'ajax-loader.gif', :class=>'ajaxLoader', :alt => 'Loading' %>
+		</span>
+	</div>
+  <%= render :partial => 'catalog/_show_partials/subjects', :locals => { :document => document } %>
+  <%= render :partial => 'catalog/_show_partials/related_names', :locals => { :document => document } %>
+  </div>
+  </div>
+<% end %>

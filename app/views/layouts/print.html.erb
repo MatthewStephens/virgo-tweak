@@ -1,0 +1,163 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+<% if params[:controller]=='feedback' %>
+  Please help us improve this interface!  
+<% elsif params[:action]=='index' and params[:q].nil? %>
+  Virgo
+<% elsif params[:action]=='index' %>
+  Virgo Search Results @ U.Va. Library
+<% elsif params[:action]=='show' %>
+  <% @document.get(:title_display).blank? ? my_title = 'VIRGO Item Detail' : my_title = @document.get(:title_display) %>
+  <% unless @document.get(:subtitle_display).blank? -%>
+     <% my_title += ': ' +  @document.get(:subtitle_display) -%>
+  <% end -%> 
+  <%= my_title %> @ U.Va. Library
+<% else %>
+  Virgo @ U.Va. Library 
+<% end %>
+</title>
+
+<%= stylesheet_link_tag 'print', :media => 'screen, print' %>
+
+<link rel="shortcut icon" href="/images/favicon.ico" />
+
+<%= @add_to_html_head %>
+
+</head>
+<% #if we're in the "users" resource area, switch to a single column view -%>
+
+<body id="<%= "#{h(params[:controller])}#{h(params[:action]).capitalize}" %>" class="<%= params[:controller]=~/^users/ ? 'uvalib-t1' : 'uvalib-t3' %>">
+  <!-- panel for modal window, this is hidden by default -->
+  <div id="PanelContainer">
+    <div class="panelHeader">
+      <a class="panelCloseButton" href="#">close</a>
+    </div>
+    <div class="panelBody"></div>
+    <div class="panelFooter"></div>
+  </div><!-- /#PanelContainer -->
+  <div id="page">
+    <div id="pageInner">
+      <div id="topNav">
+        <div id="topNavInner">
+          <ul>
+            <li><a href="http://virgo.lib.virginia.edu/cgi-local/opac.pl?element=60/1315/X&level=public" title="Virgo Classic">Virgo Classic</a></li>
+            <li><a href="http://virgo.lib.virginia.edu/uhtbin/cgisirsi/qULCP37MOH/UVA-LIB/266260185/36/1163/X/BLASTOFF" title="Course Reserves">Course Reserves</a></li>
+            <li><a href="http://lib.virginia.edu/leo/" title="Requests">Requests</a></li>
+            <li><a href="http://guides.lib.virginia.edu" title="Databases">Databases</a></li>
+            <li><a href="http://guides.lib.virginia.edu/journalfinder" title="Journals">Journals</a></li>
+            <li><a href="http://scholar.google.com/advanced_scholar_search?q=myth&hl=en&lr=" title="Articles">Articles</a></li>
+          </ul>
+          <div class="uvaLogo">
+            <a id="logo" href="http://www.lib.virginia.edu"><em class="imgReplace">University of Virginia Library</em></a>
+          </div>
+        </div>
+      </div>
+      <div id="header">
+        <div id="headerInner" class="pageContainerPadded">
+          <div class="skip" tabindex="1">
+            <strong>Skip directly to:</strong>
+          </div>
+          
+          <!-- <div id="bookmarkMotif"></div> -->
+                     
+          <div class="virgo_beta">
+            <%= link_to image_tag("blacklight/virgo_beta.gif", :alt => 'VIRGO', :id => 'virgo_beta'), catalog_index_path(:portal => :all), :id => 'virgo_beta_start_over' %>
+            <p class="tagline">
+              <em>SEARCH the library.</em> REFINE your results. FIND what you need.
+            </p>
+          </div>
+        	<a href="http://www2.lib.virginia.edu/press/virgobeta/index.html" title="About VIRGO" class="aboutVirgo">About VIRGO</a>
+          <div id="globalUtilNav">
+            <div class="NetbadgeLogin">               
+              <ul class="login">
+                <% if current_user %>
+                <li class="button"><%= link_to 'My Account', user_path %></li>
+                <li><ul>
+                  <li><%= link_to'Saved Searches', saved_searches_path %></li>
+                  <li><%= link_to 'My Favorites', bookmarks_path %></li>
+                  <li><%= link_to "Search History", search_history_index_path %></li>
+                  <li><%= link_to "Marked List", folder_index_path %> </li>
+									<li><%= link_to 'Renew Items', 'http://virgo.lib.virginia.edu/uhtbin/cgisirsi/0/UVA-LIB/x/1/1166/X/BLASTOFF', :target => '_blank' %></li>
+                  <li><%= link_to "Change PIN", root_path %> </li>
+                  <li><%= link_to "Review Account", root_path %> </li>
+                  <li><%= link_to "Logout", logout_path %></li>
+
+                </ul></li>
+                <% else %>
+                <li class="button"><span>Log in</span></li>
+                <li><ul>
+                  <li><a href="<%= login_path %>">Login<em class="small"> using NetBadge</em></a></li>
+                  <li><%= link_to "Marked List", folder_index_path %></li>
+                </ul></li>
+                <% end %>
+              </ul>
+            </div>        
+          </div><!-- /#globalUtilNav -->
+        </div><!-- /#headerInner -->
+      </div><!-- /#header -->
+
+      <hr />
+
+      <div id="content">
+        <div id="contentInner" class="pageContainer">
+          <div id="contentInner2">
+            <% if params[:controller]=='catalog' and (params[:action]=='index' or params[:action]=='show') %>
+            <%= render :partial=>'/catalog/search_box' %>
+            <% end %>
+            <div id="main">
+              <div id="mainInner">
+                <div id="mainInner2">
+                  <%= render :partial=>'/flash_msg' %>
+                  <%= yield %>
+                </div><!-- /#mainInner2 -->
+              </div><!-- /#mainInner -->
+            </div><!-- /#main -->
+                    
+            <div id="sub1">
+              <div id="sub1Inner">
+                 <% if params[:controller]!='catalog' || params[:action]!='index' %>
+                   <!-- <%= link_to '<< back to search', catalog_index_path %> -->
+                 <% end %>
+
+                <%= sidebar_items.join('') %>
+                
+              </div><!-- /#sub1Inner -->
+            </div><!-- /#sub1 -->
+
+            <div class="clearer"></div><!-- /.clearer -->
+          </div><!-- /#contentInner2 -->
+        </div><!-- /#contentInner -->
+      </div><!-- /#content -->
+
+      <hr />
+
+      <div id="footer" class="clearFix">
+        <div id="footerInner" class="pageContainerPadded clearFix">
+          <div class="col first">
+            
+            <p>
+              <strong><a href="http://lib.virginia.edu">University&nbsp;of&nbsp;Virginia&nbsp;Library</a></strong><br />
+              PO Box 400113, Charlottesville, VA 22904-4113<br />
+              ph: (434) 924-3021, fax: (434) 924-1431, <a href="mailto:library@virginia.edu">library@virginia.edu</a>
+            </p>
+          </div>
+          <div class="col">
+            <p class="links"><a href="http://www.lib.virginia.edu/dir/libdir.html">Depts./Contacts</a>&nbsp;&nbsp; |&nbsp;&nbsp;<a href="http://www.virginia.edu">U.Va. Home</a>&nbsp;&nbsp; |&nbsp;&nbsp; <a href="http://www.itc.virginia.edu">ITC</a></p>
+            <p class="links"><a href="http://virgobetadev.lib.virginia.edu/feedback" title="Feedback">Feedback</a>&nbsp;&nbsp; |&nbsp;&nbsp; <a href="http://www.lib.virginia.edu/questions.html">Questions? Ask a Librarian</a>&nbsp;&nbsp; |&nbsp;&nbsp; <a href="http://www.lib.virginia.edu/sitesearch.html">Search</a>&nbsp;&nbsp; |&nbsp;&nbsp; <a href="http://www.lib.virginia.edu/hours/">Hours</a>&nbsp;&nbsp; |&nbsp;&nbsp; <a href="http://www.lib.virginia.edu/map.html">Map</a>&nbsp;&nbsp; |&nbsp;&nbsp; <a href="http://www.lib.virginia.edu/policies/">Policies</a>&nbsp;&nbsp; |&nbsp;&nbsp; <a href="http://www.lib.virginia.edu/press/">Press</a>&nbsp;&nbsp; |&nbsp;&nbsp; <a href="http://www.lib.virginia.edu/HR/">Jobs</a></p>
+            <p><a href="http://www.virginia.edu/copyright.html" id="copyrightLink">&copy;</a> 2009 by the Rector and Visitors of the <a href="http://www.virginia.edu">University&nbsp;of&nbsp;Virginia</a></p>         
+          </div>
+          <div id="fdlpInfo">
+          <p><%= link_to(image_tag("global_footer/fdlp_footer.png", :alt => 'Federal Library Depository logo', :width => 41, :height => 36, :class => "iePNG"), "http://www2.lib.virginia.edu/govtinfo", :id => "fdlpBadge") %> This library is a Congressionally designated depository for <a href="http://www2.lib.virginia.edu/govtinfo">U.S. Government documents</a>. Public access to the Government documents is guaranteed by public law.</p>
+          </div>
+        </div><!-- /#footerInner -->      
+      </div><!-- /#footer -->
+    </div><!-- /#pageInner -->
+  </div><!-- /#page -->
+</body>
+</html>

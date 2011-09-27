@@ -1,0 +1,1528 @@
+location_1:
+  id: 1
+  code: SC-TECH
+  value: Special Collections SC-TECH
+location_2:
+  id: 2
+  code: CHECKEDOUT
+  value: CHECKED OUT
+location_3:
+  id: 3
+  code: UL-PRESERV
+  value: ZZZ Preservation
+location_4:
+  id: 4
+  code: ON-ORDER
+  value: Item is on order--Not yet received
+location_5:
+  id: 5
+  code: UNKNOWN
+  value: ZZZ Loc. unknown at time of dataload
+location_6:
+  id: 6
+  code: BP-CIRCDSK
+  value: Biology/Psychology Library Circ Desk
+location_7:
+  id: 7
+  code: MISSING
+  value: Missing
+location_8:
+  id: 8
+  code: LOST
+  value: ZZZ Item is lost
+location_9:
+  id: 9
+  code: BINDERY
+  value: Item has been sent to the bindery
+location_10:
+  id: 10
+  code: IN-PROCESS
+  value: Item being cataloged
+location_11:
+  id: 11
+  code: LOST-NRO
+  value: ZZZ Item is lost--DO NOT RE-ORDER
+location_12:
+  id: 12
+  code: INTRANSIT
+  value: Item in transit to home library
+location_13:
+  id: 13
+  code: ILL
+  value: Interlibrary Lending
+location_14:
+  id: 14
+  code: CIRC-HOLD
+  value: Item is on hold--Ask at circulation desk
+location_15:
+  id: 15
+  code: ED-JUV-REF
+  value: Education Juvenile Reference
+location_16:
+  id: 16
+  code: RAREBKSCHL
+  value: Rare Books School
+location_17:
+  id: 17
+  code: DA-MICFORM
+  value: Darden Microforms
+location_18:
+  id: 18
+  code: ED-JUV-OVR
+  value: Education Juvenile Oversize
+location_19:
+  id: 19
+  code: DA-CURRENT
+  value: Darden Current Reading Collection
+location_20:
+  id: 20
+  code: DISCARD
+  value: ZZZ Item record is being removed
+location_21:
+  id: 21
+  code: WITHDRAWN
+  value: ZZZ Item withdrawn from collection
+location_22:
+  id: 22
+  code: UL-PRNTSVS
+  value: ZZZ Printing Services
+location_23:
+  id: 23
+  code: CONT-ED-NV
+  value: Continuing Education-No.Va.-Reserve
+location_24:
+  id: 24
+  code: CONT-ED-SW
+  value: Continuing Education-SoWestVA-Reserve
+location_25:
+  id: 25
+  code: BARRED
+  value: ZZZ Item billed for replacement
+location_26:
+  id: 26
+  code: BURSARED
+  value: ZZZ Referred to Bursar for collection
+location_27:
+  id: 27
+  code: HS-PATFAM
+  value: Health Sciences Patient & Family Health Collection
+location_28:
+  id: 28
+  code: CATALOGING
+  value: Item intransit to cataloging for processing
+location_29:
+  id: 29
+  code: LOST-PAID
+  value: $<LOCN_desc_lostpaid>
+location_30:
+  id: 30
+  code: LOSTCLOSED
+  value: ZZZ Item is lost--Removed from collection
+location_31:
+  id: 31
+  code: PRESERVATN
+  value: Item has been sent to Preservation
+location_32:
+  id: 32
+  code: ORD-CLOSED
+  value: ZZZ Order closed (Ceased publication)
+location_33:
+  id: 33
+  code: SC-ARCHV
+  value: Special Collections SC-ARCHV
+location_34:
+  id: 34
+  code: SC-ARCHV-X
+  value: Special Collections SC-ARCHV-X
+location_35:
+  id: 35
+  code: SEL-MEDIA
+  value: Research Computing Lab
+location_36:
+  id: 36
+  code: SE-TS-OFF
+  value: ZZZ Brown Library Tech Serv Office
+location_37:
+  id: 37
+  code: AS-RESV
+  value: Astronomy Library Reserves
+location_38:
+  id: 38
+  code: LOST-ASSUM
+  value: ZZZ Assumed lost
+location_39:
+  id: 39
+  code: CONT-EDUC
+  value: Continuing Education Office
+location_40:
+  id: 40
+  code: ATSEA-STKS
+  value: Semester at Sea Collection
+location_41:
+  id: 41
+  code: LOST-CLAIM
+  value: ZZZ Claims lost
+location_42:
+  id: 42
+  code: PHYS-SPEC
+  value: Physics Library Special Collection
+location_43:
+  id: 43
+  code: CONT-ED-RO
+  value: Continuing Education-Roanoke-Reserve
+location_44:
+  id: 44
+  code: ATSEA-RSRV
+  value: Semester at Sea Reserve Collection
+location_45:
+  id: 45
+  code: MU-LABEL
+  value: Music Title Label Prep
+location_46:
+  id: 46
+  code: AL-SCHOLAR
+  value: Scholars' Lab
+location_47:
+  id: 47
+  code: SC-STKS-D
+  value: Special Collections On Deposit
+location_48:
+  id: 48
+  code: CHEM-BOX
+  value: Chem Lib Book is Boxed - Ask Lib Staff
+location_49:
+  id: 49
+  code: AS-CIRCDSK
+  value: Astronomy Library Circ Desk
+location_50:
+  id: 50
+  code: FA-REFARCV
+  value: Fine Arts Ref. Architectural Archives
+location_51:
+  id: 51
+  code: G_S-ATLAS
+  value: Map Room Atlases
+location_52:
+  id: 52
+  code: TLAKE
+  value: Mt. Lake Biological Station Library
+location_53:
+  id: 53
+  code: LAW-HOLD
+  value: Law On Hold
+location_54:
+  id: 54
+  code: LAW-BASEMT
+  value: Law Basement
+location_55:
+  id: 55
+  code: LAW-CAREER
+  value: Law Career Services
+location_56:
+  id: 56
+  code: LAW-FLOOR1
+  value: Law First Floor
+location_57:
+  id: 57
+  code: LAW-FLOOR2
+  value: Law Second Floor
+location_58:
+  id: 58
+  code: LAW-FLOOR3
+  value: Law Third Floor
+location_59:
+  id: 59
+  code: LAW-IVY
+  value: Law Ivy Storage
+location_60:
+  id: 60
+  code: LAW-PUBSER
+  value: Law Public Services
+location_61:
+  id: 61
+  code: LAW1-RSRV
+  value: Law 1st Floor Reserve Room
+location_62:
+  id: 62
+  code: LAW1-TAX
+  value: Law 1st Floor Tax Alcove
+location_63:
+  id: 63
+  code: LAW2-DOCS
+  value: Law 2nd Floor Documents
+location_64:
+  id: 64
+  code: LAB
+  value: 
+location_65:
+  id: 65
+  code: LAW2-FORGN
+  value: Law 2nd Floor Foreign Law
+location_66:
+  id: 66
+  code: LAW2-INTL
+  value: Law 2nd Floor Intl Law
+location_67:
+  id: 67
+  code: LAW2-KLAUS
+  value: Law 2nd Floor Klaus Rr
+location_68:
+  id: 68
+  code: LAW2-MEDIA
+  value: Law 2nd Floor Media
+location_69:
+  id: 69
+  code: LAW2-OCEAN
+  value: Law 2nd Floor Oceans Law
+location_70:
+  id: 70
+  code: LAW2-REF
+  value: Law 2nd Floor Reference
+location_71:
+  id: 71
+  code: LAW-FACOFF
+  value: ZZZ Law Faculty Offices
+location_72:
+  id: 72
+  code: MATH-SPEC
+  value: Math Library Special Collection
+location_73:
+  id: 73
+  code: AL-REQUEST
+  value: Alderman Basement (use request item)
+location_74:
+  id: 74
+  code: DOC-READRM
+  value: Alderman Gov Docs Reading Room
+location_75:
+  id: 75
+  code: AL-OVERSZE
+  value: Alderman Oversize (Near New Stacks elevator)
+location_76:
+  id: 76
+  code: DOC-VA
+  value: Alderman Gov Docs Virginia
+location_77:
+  id: 77
+  code: DOC-INTL
+  value: Alderman Gov Docs International
+location_78:
+  id: 78
+  code: DOC-US
+  value: Alderman Gov Docs U.S.
+location_79:
+  id: 79
+  code: DOC-DESK
+  value: Alderman Gov Docs Info Desk
+location_80:
+  id: 80
+  code: CUR-PER
+  value: Current Periodicals
+location_81:
+  id: 81
+  code: OFFICE
+  value: 
+location_82:
+  id: 82
+  code: LAW3-SPCOL
+  value: Law 3rd Floor Special Collections
+location_83:
+  id: 83
+  code: LAW2-TECSR
+  value: Law 2nd Floor Tech. Services
+location_84:
+  id: 84
+  code: SE-EXHIBIT
+  value: Science & Engr Library Exhibit
+location_85:
+  id: 85
+  code: SC-STKSXFF
+  value: Special Collections SC-STKSXFF
+location_86:
+  id: 86
+  code: LAW-PAID
+  value: ZZZ Law Payment Records
+location_87:
+  id: 87
+  code: BLANDY
+  value: Blandy Farm Library
+location_88:
+  id: 88
+  code: DOC-OFFICE
+  value: Alderman Gov Docs Office
+location_89:
+  id: 89
+  code: MA-JOURNLS
+  value: Math Library Journals
+location_90:
+  id: 90
+  code: HS-HOLDS
+  value: Health Sciences Hold
+location_91:
+  id: 91
+  code: SC-MCGRXFF
+  value: Special Collections SC-MCGRXFF
+location_92:
+  id: 92
+  code: GEOSTAT
+  value: Map Room
+location_93:
+  id: 93
+  code: G_S-OFFICE
+  value: Map Room Office
+location_94:
+  id: 94
+  code: ETEXT-CTR
+  value: Electronic Text Center
+location_95:
+  id: 95
+  code: SC-BARRXFF
+  value: Special Collections SC-BARRXFF
+location_96:
+  id: 96
+  code: HS-ADMIN
+  value: Health Sciences Staff Book
+location_97:
+  id: 97
+  code: CDNETWORK
+  value: Library CD-ROM Network (Online)
+location_98:
+  id: 98
+  code: INTERNET
+  value: Internet materials
+location_99:
+  id: 99
+  code: HS-ATLASST
+  value: Health Sciences Atlas Stand
+location_100:
+  id: 100
+  code: DAMAGED
+  value: Item damaged--Use request item for ILL
+location_101:
+  id: 101
+  code: HS-BIBCONT
+  value: Health Sciences Staff Book
+location_102:
+  id: 102
+  code: HS-BINDERY
+  value: Health Sciences Bindery
+location_103:
+  id: 103
+  code: IVYANNEX
+  value: Ivy Annex
+location_104:
+  id: 104
+  code: HS-BINDPRP
+  value: Health Sciences Bindery Prep
+location_105:
+  id: 105
+  code: HS-BKSTCKS
+  value: Health Sciences Bookstacks Book
+location_106:
+  id: 106
+  code: HS-BD96-97
+  value: ZZZ Health Sciences Journal bound 96-97
+location_107:
+  id: 107
+  code: HS-BD97-98
+  value: ZZZ Health Sciences Journal bound 97-98
+location_108:
+  id: 108
+  code: HS-BD98-99
+  value: ZZZ Health Sciences Journal bound 98-99
+location_109:
+  id: 109
+  code: EXHIBIT
+  value: Exhibit
+location_110:
+  id: 110
+  code: HS-BD99-00
+  value: ZZZ Health Sciences Journal bound 99-00
+location_111:
+  id: 111
+  code: HS-BD2001
+  value: ZZZ Health Sciences Journal bound 2001
+location_112:
+  id: 112
+  code: HS-BD2002
+  value: ZZZ Health Sciences Journal bound 2002
+location_113:
+  id: 113
+  code: HS-BD2003
+  value: ZZZ Health Sciences Journal bound 2003
+location_114:
+  id: 114
+  code: HS-BD2004
+  value: ZZZ Health Sciences Journal bound 2004
+location_115:
+  id: 115
+  code: NEW_BOOKS
+  value: New books shelf
+location_116:
+  id: 116
+  code: HS-BD2005
+  value: ZZZ Health Sciences Journal bound 2005
+location_117:
+  id: 117
+  code: HS-CABELBK
+  value: Health Sciences Cabell Book Stacks
+location_118:
+  id: 118
+  code: HS-CABELJR
+  value: Health Sciences Cabell Journal Stacks
+location_119:
+  id: 119
+  code: HS-CHKDOUT
+  value: Health Sciences checked-out
+location_120:
+  id: 120
+  code: HS-CIRCDPT
+  value: Health Sciences Circulation Dept.
+location_121:
+  id: 121
+  code: HS-CIRCDSK
+  value: Health Sciences Circulation Desk
+location_122:
+  id: 122
+  code: HS-CLMRTD
+  value: Health Sciences Claimed returned
+location_123:
+  id: 123
+  code: HS-CLENP00
+  value: ZZZ Health Sciences Cleanup project
+location_124:
+  id: 124
+  code: HS-COLSERV
+  value: Health Sciences Coll Dev
+location_125:
+  id: 125
+  code: LAW-STKS
+  value: Law Stacks
+location_126:
+  id: 126
+  code: ASTRO-STKS
+  value: Astronomy Library Stacks
+location_127:
+  id: 127
+  code: MATH-STKS
+  value: Math Library Stacks
+location_128:
+  id: 128
+  code: ASTRO-REF
+  value: Astronomy Library Reference
+location_129:
+  id: 129
+  code: MATH-REF
+  value: Math Library Reference
+location_130:
+  id: 130
+  code: LAW2-RREF
+  value: Law 2nd Floor Ready Reference
+location_131:
+  id: 131
+  code: LAW2-HPRES
+  value: Law 2nd Floor Historic Preservation
+location_132:
+  id: 132
+  code: DEC-IND-RM
+  value: Declaration of Independence Room
+location_133:
+  id: 133
+  code: HS-DOCDEL
+  value: Health Sciences Doc Del
+location_134:
+  id: 134
+  code: REFERENCE
+  value: 
+location_135:
+  id: 135
+  code: HS-HISTCOL
+  value: Health Sciences Hist Coll
+location_136:
+  id: 136
+  code: HS-ILL
+  value: Health Sciences Interlibrary Loan
+location_137:
+  id: 137
+  code: RMC-RESV
+  value: RMC reserves
+location_138:
+  id: 138
+  code: STACKS
+  value: 
+location_139:
+  id: 139
+  code: HS-INCOND
+  value: Health Sciences Inconditional
+location_140:
+  id: 140
+  code: HS-REF
+  value: Health Sciences Reference Shelves
+location_141:
+  id: 141
+  code: VAULT
+  value: 
+location_142:
+  id: 142
+  code: FOLIO
+  value: Folio
+location_143:
+  id: 143
+  code: HS-INPROC
+  value: Health Sciences In Processing
+location_144:
+  id: 144
+  code: EQUIPMENT
+  value: Equipment Room
+location_145:
+  id: 145
+  code: STUDYROOM
+  value: Study room
+location_146:
+  id: 146
+  code: HS-INTRANS
+  value: Health Sciences In Transit
+location_147:
+  id: 147
+  code: HS-IVY
+  value: Health Sciences Ivy
+location_148:
+  id: 148
+  code: GBP
+  value: Google Books Project
+location_149:
+  id: 149
+  code: HS-JRLSTKS
+  value: Health Sciences Journal Stack
+location_150:
+  id: 150
+  code: BROWSING
+  value: Browsing
+location_151:
+  id: 151
+  code: BOUND
+  value: Bound
+location_152:
+  id: 152
+  code: HS-LABELLG
+  value: Health Sciences Labeling
+location_153:
+  id: 153
+  code: HS-LEISURE
+  value: Health Sciences Browsing Shelves
+location_154:
+  id: 154
+  code: HS-LOCATE
+  value: Health Sciences Items on Locate
+location_155:
+  id: 155
+  code: HS-LOST
+  value: Health Sciences Lost Items
+location_156:
+  id: 156
+  code: HS-LRCSTKS
+  value: Health Sciences LRC stacks
+location_157:
+  id: 157
+  code: HS-LRCDEPT
+  value: Health Sciences LRC Dept
+location_158:
+  id: 158
+  code: HS-LRCDESK
+  value: Health Sciences LRC Desk
+location_159:
+  id: 159
+  code: VA-REC-CTR
+  value: Virginia State Records Center
+location_160:
+  id: 160
+  code: HS-LRCRSVE
+  value: Health Sciences LRC Reserve
+location_161:
+  id: 161
+  code: HS-MISSING
+  value: Health Sciences Missing Items
+location_162:
+  id: 162
+  code: HS-NETWRK
+  value: Health Sciences items on local server
+location_163:
+  id: 163
+  code: FA-SLD-TST
+  value: Fine Arts Slide Coll.  Test location
+location_164:
+  id: 164
+  code: HS-ONORDER
+  value: Health Sciences items On Order
+location_165:
+  id: 165
+  code: AVAIL_SOON
+  value: $<LOCN_desc_availsoon>
+location_166:
+  id: 166
+  code: HS-ONHOLD
+  value: Health Sciences items On hold
+location_167:
+  id: 167
+  code: HS-ONLINE
+  value: Health Sciences items Online
+location_168:
+  id: 168
+  code: INSHIPPING
+  value: $<LOCN_desc_in_shipping>
+location_169:
+  id: 169
+  code: HS-OVERSZ
+  value: Health Sciences Oversize shelves
+location_170:
+  id: 170
+  code: HS-RAREOVS
+  value: Health Sciences Rare Oversize shelves
+location_171:
+  id: 171
+  code: HS-RARESHL
+  value: Health Sciences Rare Shelves
+location_172:
+  id: 172
+  code: HS-RAREVLT
+  value: Health Sciences Rare Vault
+location_173:
+  id: 173
+  code: HS-RECALLD
+  value: Health Sciences Recalled
+location_174:
+  id: 174
+  code: DOC-OVERSZ
+  value: Alderman Gov Docs Oversize
+location_175:
+  id: 175
+  code: HS-REFDEPT
+  value: Health Sciences Ref. Dept
+location_176:
+  id: 176
+  code: HS-REFDESK
+  value: Health Sciences Ref. Desk
+location_177:
+  id: 177
+  code: HS-REPAIR
+  value: Health Sciences Repair
+location_178:
+  id: 178
+  code: HS-RESERVE
+  value: Health Sciences Reserve
+location_179:
+  id: 179
+  code: HS-SYSDEPT
+  value: Health Sciences Sys Dept
+location_180:
+  id: 180
+  code: HS-WD96/97
+  value: ZZZ Health Sciences withdrawn 96/97
+location_181:
+  id: 181
+  code: HS-WD98/99
+  value: ZZZ Health Sciences withdrawn 98/99
+location_182:
+  id: 182
+  code: HS-WD99/00
+  value: ZZZ Health Sciences withdrawn 99/00
+location_183:
+  id: 183
+  code: HS-WD2001
+  value: ZZZ Health Sciences withdrawn 2001
+location_184:
+  id: 184
+  code: HS-WD2002
+  value: ZZZ Health Sciences withdrawn 2002
+location_185:
+  id: 185
+  code: HS-WD2003
+  value: ZZZ Health Sciences withdrawn 2003
+location_186:
+  id: 186
+  code: HS-WD2004
+  value: ZZZ Health Sciences withdrawn 2004
+location_187:
+  id: 187
+  code: HS-WD2005
+  value: ZZZ Health Sciences withdrawn 2005
+location_188:
+  id: 188
+  code: HS-WED9798
+  value: ZZZ Health Sciences weeded 97/98
+location_189:
+  id: 189
+  code: HS-WED2001
+  value: ZZZ Health Sciences weeded 2001
+location_190:
+  id: 190
+  code: HS-WED2002
+  value: ZZZ Health Sciences weeded 2002
+location_191:
+  id: 191
+  code: HS-WTHDRAW
+  value: ZZZ Health Sciences withdrawn
+location_192:
+  id: 192
+  code: UL-NOTHELD
+  value: ZZZ Received items which are not kept
+location_193:
+  id: 193
+  code: UL-CATDEPT
+  value: ZZZ Cataloging Department (Office copy)
+location_194:
+  id: 194
+  code: HS-REF#1
+  value: Health Sciences Ref. Sect. 1
+location_195:
+  id: 195
+  code: HS-REF#2
+  value: Health Sciences Ref. Sect. 2
+location_196:
+  id: 196
+  code: HS-REF#3
+  value: Health Sciences Ref. Sect. 3
+location_197:
+  id: 197
+  code: UL-ACQDEPT
+  value: ZZZ Acquisitions Department (Office copy)
+location_198:
+  id: 198
+  code: UL-ILSDEPT
+  value: ZZZ Interlibrary Services Dept. (Office copy)
+location_199:
+  id: 199
+  code: UL-SYSDEPT
+  value: ZZZ Systems Department (Office copy)
+location_200:
+  id: 200
+  code: UL-ADMIN
+  value: ZZZ Administration (Office copy)
+location_201:
+  id: 201
+  code: UL-SS-DEPT
+  value: ZZZ Social Sciences Dept. (Office copy)
+location_202:
+  id: 202
+  code: UL-HUMDEPT
+  value: ZZZ Humanities Department (Office copy)
+location_203:
+  id: 203
+  code: UL-RISDEPT
+  value: ZZZ Reference Info. Ser. Dept. (Office copy)
+location_204:
+  id: 204
+  code: UL-SC-DEPT
+  value: ZZZ Special Collections UL-SC-DEPT
+location_205:
+  id: 205
+  code: UL-FA-DEPT
+  value: ZZZ Fine Arts Library (Office copy)
+location_206:
+  id: 206
+  code: UL-CL-DEPT
+  value: ZZZ Clemons Library (Office copy)
+location_207:
+  id: 207
+  code: UL-ED-DEPT
+  value: ZZZ Education Library (Office copy)
+location_208:
+  id: 208
+  code: UL-SE-DEPT
+  value: ZZZ Brown Library Office copy
+location_209:
+  id: 209
+  code: UL-SUPPORT
+  value: ZZZ Misc. acquisitions records
+location_210:
+  id: 210
+  code: HS-REF#4
+  value: Health Sciences Ref. Sect. 4
+location_211:
+  id: 211
+  code: AL-CIRCOFF
+  value: Alderman Library Circulation Office
+location_212:
+  id: 212
+  code: BY-REQUEST
+  value: Ivy Stacks
+location_213:
+  id: 213
+  code: CH-ANNEX
+  value: Chemistry Reference at Brown Library
+location_214:
+  id: 214
+  code: CL-OFFICE
+  value: Clemons Robertson Media Office
+location_215:
+  id: 215
+  code: ALD-STKS
+  value: Alderman Library Stacks
+location_216:
+  id: 216
+  code: AL-MICFORM
+  value: Alderman Library Microforms
+location_217:
+  id: 217
+  code: AL-TIBET
+  value: Alderman Library Tibetan Collection
+location_218:
+  id: 218
+  code: AL-LOCSTKS
+  value: Alderman Library Locked Stacks
+location_219:
+  id: 219
+  code: AL-NEWSPAP
+  value: Alderman Library Newspaper Collection
+location_220:
+  id: 220
+  code: AL-PER-RM
+  value: Alderman Library Periodical Room
+location_221:
+  id: 221
+  code: AL-PERDSK
+  value: Alderman Library Periodical Desk
+location_222:
+  id: 222
+  code: AL-REF
+  value: Alderman Library Reference
+location_223:
+  id: 223
+  code: AL-READYRF
+  value: Alderman Library Ready Reference
+location_224:
+  id: 224
+  code: AL-REFCLAS
+  value: Alderman Library Reference Classroom
+location_225:
+  id: 225
+  code: CLEM-STKS
+  value: Clemons Stacks
+location_226:
+  id: 226
+  code: CLEM-REF
+  value: Clemons Reference
+location_227:
+  id: 227
+  code: HS-REF#5
+  value: Health Sciences Ref. Sect. 5
+location_228:
+  id: 228
+  code: HS-REF#6
+  value: Health Sciences Ref. Sect. 6
+location_229:
+  id: 229
+  code: HS-REF#7
+  value: Health Sciences Ref. Sect. 7
+location_230:
+  id: 230
+  code: HS-REF#8
+  value: Health Sciences Ref. Sect. 8
+location_231:
+  id: 231
+  code: CL-NEWSPAP
+  value: Clemons Newspaper Collection
+location_232:
+  id: 232
+  code: CL-MEDIA
+  value: Clemons Robertson Media Center
+location_233:
+  id: 233
+  code: CL-REFDSK
+  value: Clemons Reference Desk
+location_234:
+  id: 234
+  code: CL-INDXTBL
+  value: Clemons Index Table
+location_235:
+  id: 235
+  code: CL-ATLAS
+  value: Clemons Atlas Stand
+location_236:
+  id: 236
+  code: CL-BROWSE
+  value: Clemons Browsing Collection
+location_237:
+  id: 237
+  code: HS-REF#9
+  value: Health Sciences Ref. Sect. 9
+location_238:
+  id: 238
+  code: MU-STKS
+  value: Music Stacks
+location_239:
+  id: 239
+  code: MU-OVERSZE
+  value: Music Oversize Shelves
+location_240:
+  id: 240
+  code: MU-REF
+  value: Music Reference
+location_241:
+  id: 241
+  code: MU-INDXTBL
+  value: Music Index Table (stacks)
+location_242:
+  id: 242
+  code: MU-REFSTKS
+  value: Music Reference Stacks
+location_243:
+  id: 243
+  code: MU-OFFICE
+  value: Music Office
+location_244:
+  id: 244
+  code: MU-MICFORM
+  value: Music Microforms
+location_245:
+  id: 245
+  code: MU-CIRCDSK
+  value: Music Circulation Desk
+location_246:
+  id: 246
+  code: MU-MINI
+  value: Music Miniature Scores
+location_247:
+  id: 247
+  code: FA-STKS
+  value: Fine Arts Regular Stacks
+location_248:
+  id: 248
+  code: FA-FOLIO
+  value: Fine Arts Folio Stacks
+location_249:
+  id: 249
+  code: FA-OVERSZE
+  value: Fine Arts Oversize Stacks
+location_250:
+  id: 250
+  code: FA-MICFORM
+  value: Fine Arts Microforms Reading Room
+location_251:
+  id: 251
+  code: FA-JOURNLS
+  value: Fine Arts Journal Stacks
+location_252:
+  id: 252
+  code: FA-CIRCDSK
+  value: Fine Arts Circulation Desk
+location_253:
+  id: 253
+  code: FA-RB-STKS
+  value: Fine Arts Special Coll. Regular Stacks
+location_254:
+  id: 254
+  code: HS-REF#10
+  value: Health Sciences Ref. Sect. 10
+location_255:
+  id: 255
+  code: HS-REF#11
+  value: Health Sciences Ref. Sect. 11
+location_256:
+  id: 256
+  code: HS-REF#12
+  value: Health Sciences Ref. Sect. 12
+location_257:
+  id: 257
+  code: FA-ATLAS
+  value: Fine Arts Atlas Stand
+location_258:
+  id: 258
+  code: FA-RB-FOL
+  value: Fine Arts Special Coll. Folio Stacks
+location_259:
+  id: 259
+  code: FA-RB-OVER
+  value: Fine Arts Special Coll. Oversize Stacks
+location_260:
+  id: 260
+  code: FA-THESIS
+  value: Fine Arts Theses and Dissertations
+location_261:
+  id: 261
+  code: HS-REF#13
+  value: Health Sciences Ref. Sect. 13
+location_262:
+  id: 262
+  code: HS-REF#14
+  value: Health Sciences Ref. Sect. 14
+location_263:
+  id: 263
+  code: HS-REF#15
+  value: Health Sciences Ref. Sect. 15
+location_264:
+  id: 264
+  code: FA-REF
+  value: Fine Arts Reference (1st floor)
+location_265:
+  id: 265
+  code: FA-SLIDES
+  value: Fine Arts Slide Coll. Cataloged Slides
+location_266:
+  id: 266
+  code: FA-SLD-NB
+  value: Fine Arts Slide Coll. Notebooks
+location_267:
+  id: 267
+  code: HS-REF#16
+  value: Health Sciences Ref. Sect. 16
+location_268:
+  id: 268
+  code: HS-REF#17
+  value: Health Sciences Ref. Sect. 17
+location_269:
+  id: 269
+  code: FA-SL-STKS
+  value: Fine Arts Slide Coll. Stacks
+location_270:
+  id: 270
+  code: FA-SLD-PDG
+  value: Fine Arts Slide Coll. Pidgeon Sets
+location_271:
+  id: 271
+  code: EDUC-STKS
+  value: Education Stacks
+location_272:
+  id: 272
+  code: ED-JOURNLS
+  value: Education Journals
+location_273:
+  id: 273
+  code: ED-CIRCDSK
+  value: Education Circulation Desk
+location_274:
+  id: 274
+  code: ED-HANDBK
+  value: Education Handbooks
+location_275:
+  id: 275
+  code: ED-TS-OFF
+  value: Education Technical Services Office
+location_276:
+  id: 276
+  code: ED-OFFICE
+  value: Education Librarian's Office
+location_277:
+  id: 277
+  code: ED-OVERSZE
+  value: Education Oversize
+location_278:
+  id: 278
+  code: ED-JUV
+  value: Education Juvenile Collection
+location_279:
+  id: 279
+  code: ED-CIRCOFF
+  value: Education Circulation Office
+location_280:
+  id: 280
+  code: EDUC-REF
+  value: Education Reference
+location_281:
+  id: 281
+  code: ED-INDXTBL
+  value: Education Reference
+location_282:
+  id: 282
+  code: ED-MICFORM
+  value: Education Microform Room
+location_283:
+  id: 283
+  code: CHEM-STKS
+  value: Chemistry Library Stacks
+location_284:
+  id: 284
+  code: CH-JOURNLS
+  value: Chemistry Library Journals
+location_285:
+  id: 285
+  code: CHEM-REF
+  value: Chemistry Reference
+location_286:
+  id: 286
+  code: CHEM-RESV
+  value: Chemistry Library Reserves
+location_287:
+  id: 287
+  code: CH-CIRCDSK
+  value: Chemistry Library Circ Desk
+location_288:
+  id: 288
+  code: SEL-STKS
+  value: Brown Library Stacks
+location_289:
+  id: 289
+  code: SE-JOURNLS
+  value: Brown Library Journals
+location_290:
+  id: 290
+  code: SE-LANDMKS
+  value: Brown Library Microforms
+location_291:
+  id: 291
+  code: SE-OVERSZE
+  value: Brown Library Oversize
+location_292:
+  id: 292
+  code: SEL-REF
+  value: Brown Library Reference
+location_293:
+  id: 293
+  code: SE-REFDSK
+  value: Brown Library Reference Desk
+location_294:
+  id: 294
+  code: SE-MICFORM
+  value: Brown Library Microforms
+location_295:
+  id: 295
+  code: SE-CIRCDSK
+  value: Brown Library Circulation Desk
+location_296:
+  id: 296
+  code: SE-OFF-DIR
+  value: Brown Library Director's Office
+location_297:
+  id: 297
+  code: MA-RESV
+  value: Math Library Reserves
+location_298:
+  id: 298
+  code: A-CIRCDSK
+  value: Math Library Circ Desk
+location_299:
+  id: 299
+  code: ASTRO-CHRT
+  value: Astronomy Library Chart Room
+location_300:
+  id: 300
+  code: BP-STKS
+  value: Biology/Psychology Library Stacks
+location_301:
+  id: 301
+  code: BP-JOURNLS
+  value: Biology/Psychology Library Journals
+location_302:
+  id: 302
+  code: BP-REF
+  value: Biology/Psychology Library Reference
+location_303:
+  id: 303
+  code: BP-RESV
+  value: Biology/Psychology Library Reserves
+location_304:
+  id: 304
+  code: PHYS-STKS
+  value: Physics Library Stacks
+location_305:
+  id: 305
+  code: PH-JOURNLS
+  value: Physics Library Journals
+location_306:
+  id: 306
+  code: PHYS-REF
+  value: Physics Library Reference
+location_307:
+  id: 307
+  code: PHYS-RESV
+  value: Physics Library Reserves
+location_308:
+  id: 308
+  code: PH-CIRCDSK
+  value: Physics Library Circ Desk
+location_309:
+  id: 309
+  code: SC-REF
+  value: Special Collections SC-REF
+location_310:
+  id: 310
+  code: SC-STKS
+  value: Special Collections SC-STKS
+location_311:
+  id: 311
+  code: SC-STKS-X
+  value: Special Collections SC-STKS-X
+location_312:
+  id: 312
+  code: SC-STKS-XZ
+  value: Special Collections SC-STKS-XZ
+location_313:
+  id: 313
+  code: SC-STKS-XF
+  value: Special Collections SC-STKS-XF
+location_314:
+  id: 314
+  code: SC-STKS-M
+  value: Special Collections SC-STKS-M
+location_315:
+  id: 315
+  code: SC-STKS-F
+  value: Special Collections SC-STKS-F
+location_316:
+  id: 316
+  code: SC-STKS-FF
+  value: Special Collections SC-STKS-FF
+location_317:
+  id: 317
+  code: SC-REF-F
+  value: Special Collections SC-REF-F
+location_318:
+  id: 318
+  code: SC-TATUM
+  value: Special Collections SC-TATUM
+location_319:
+  id: 319
+  code: SC-TATUM-F
+  value: Special Collections SC-TATUM-F
+location_320:
+  id: 320
+  code: SC-TATUMFF
+  value: Special Collections SC-TATUMFF
+location_321:
+  id: 321
+  code: SC-TATUM-M
+  value: Special Collections SC-TATUM-M
+location_322:
+  id: 322
+  code: SC-TATUM-X
+  value: Special Collections SC-TATUM-X
+location_323:
+  id: 323
+  code: SC-GARN-RM
+  value: Special Collections SC-GARN-RM
+location_324:
+  id: 324
+  code: SC-GARN-F
+  value: Special Collections SC-GARN-F
+location_325:
+  id: 325
+  code: SC-MCGR-RM
+  value: Special Collections SC-MCGR-RM
+location_326:
+  id: 326
+  code: SC-MCGR-ST
+  value: Special Collections SC-MCGR-ST
+location_327:
+  id: 327
+  code: SC-MCGR-F
+  value: Special Collections SC-MCGR-F
+location_328:
+  id: 328
+  code: SC-MCGR-FF
+  value: Special Collections SC-MCGR-FF
+location_329:
+  id: 329
+  code: SC-MCGR-X
+  value: Special Collections SC-MCGR-X
+location_330:
+  id: 330
+  code: SC-MCGR-XF
+  value: Special Collections SC-MCGR-XF
+location_331:
+  id: 331
+  code: SC-MCGR-XZ
+  value: Special Collections SC-MCGR-XZ
+location_332:
+  id: 332
+  code: SC-BARR-RM
+  value: Special Collections SC-BARR-RM
+location_333:
+  id: 333
+  code: SC-BARR-F
+  value: Special Collections SC-BARR-F
+location_334:
+  id: 334
+  code: SC-IVY
+  value: Special Collections SC-IVY -- Use request item
+location_335:
+  id: 335
+  code: SC-SCOTT
+  value: Special Collections SC-SCOTT
+location_336:
+  id: 336
+  code: SC-SCOTT-F
+  value: Special Collections SC-SCOTT-F
+location_337:
+  id: 337
+  code: SC-SCOTTFF
+  value: Special Collections SC-SCOTTFF
+location_338:
+  id: 338
+  code: SC-SCOTT-M
+  value: Special Collections SC-SCOTT-M
+location_339:
+  id: 339
+  code: SC-SCOTT-X
+  value: Special Collections SC-SCOTT-X
+location_340:
+  id: 340
+  code: SC-SCOTTXF
+  value: Special Collections SC-SCOTTXF
+location_341:
+  id: 341
+  code: SC-BARR-ST
+  value: Special Collections SC-BARR-ST
+location_342:
+  id: 342
+  code: SC-BARR-M
+  value: Special Collections SC-BARR-M
+location_343:
+  id: 343
+  code: SC-BARR-FF
+  value: Special Collections SC-BARR-FF
+location_344:
+  id: 344
+  code: SC-BARR-X
+  value: Special Collections SC-BARR-X
+location_345:
+  id: 345
+  code: SC-BARR-XF
+  value: Special Collections SC-BARR-XF
+location_346:
+  id: 346
+  code: SC-BARR-XZ
+  value: Special Collections SC-BARR-XZ
+location_347:
+  id: 347
+  code: DARD-STKS
+  value: Darden Stacks
+location_348:
+  id: 348
+  code: DARD-REF
+  value: Darden Reference
+location_349:
+  id: 349
+  code: SEL-RESV
+  value: Brown Library Reserves
+location_350:
+  id: 350
+  code: DA-INDXTBL
+  value: Darden Index Tables (Reference room)
+location_351:
+  id: 351
+  code: DA-PLACEMT
+  value: Darden Placement Room
+location_352:
+  id: 352
+  code: DA-JOURNLS
+  value: Darden Bound Journals
+location_353:
+  id: 353
+  code: DA-CIRCDSK
+  value: Darden Circulation Desk
+location_354:
+  id: 354
+  code: AL-CIRCDSK
+  value: Alderman Library Circulation Desk
+location_355:
+  id: 355
+  code: AL-REFATLS
+  value: Alderman Library Reference Atlas
+location_356:
+  id: 356
+  code: AL-REFINDX
+  value: Alderman Library Reference Index
+location_357:
+  id: 357
+  code: FA-RESV
+  value: Fine Arts Reserve Materials
+location_358:
+  id: 358
+  code: EDUC-RESV
+  value: Education Reserve Shelves
+location_359:
+  id: 359
+  code: MU-RESV
+  value: Music Reserves
+location_360:
+  id: 360
+  code: CLEM-RESV
+  value: Clemons Reserves
+location_361:
+  id: 361
+  code: DARD-RESV
+  value: Darden Reserve
+location_362:
+  id: 362
+  code: RSRVSHADOW
+  value: ZZZ Reserve shadow
+location_363:
+  id: 363
+  code: DA-TURNER
+  value: Darden Turner Coll. (leisure reading)
+location_364:
+  id: 364
+  code: CL-STORAGE
+  value: ZZZ Clemons 201 storage room
+location_365:
+  id: 365
+  code: ORD-CANCLD
+  value: ZZZ Canceled order
+location_366:
+  id: 366
+  code: FA-SLIDERF
+  value: Fine Arts Slide Coll. Reference
+location_367:
+  id: 367
+  code: HS-REF#18
+  value: Health Sciences Ref. Sect. 18
+location_368:
+  id: 368
+  code: HS-REF#19
+  value: Health Sciences Ref. Sect. 19
+location_369:
+  id: 369
+  code: HS-REF#20
+  value: Health Sciences Ref. Sect. 20
+location_370:
+  id: 370
+  code: HS-REF#21
+  value: Health Sciences Ref. Sect. 21
+location_371:
+  id: 371
+  code: HS-REF#22
+  value: Health Sciences Ref. Sect. 22
+location_372:
+  id: 372
+  code: HS-REF#23
+  value: Health Sciences Ref. Sect. 23
+location_373:
+  id: 373
+  code: HS-REF#24
+  value: Health Sciences Ref. Sect. 24
+location_374:
+  id: 374
+  code: HS-REF#25
+  value: Health Sciences Ref. Sect. 25
+location_375:
+  id: 375
+  code: HS-REF#26
+  value: Health Sciences Ref. Sect. 26
+location_376:
+  id: 376
+  code: HS-REF#27
+  value: Health Sciences Ref. Sect. 27
+location_377:
+  id: 377
+  code: HS-REF#28
+  value: Health Sciences Ref. Sect. 28
+location_378:
+  id: 378
+  code: HS-REF#29
+  value: Health Sciences Ref. Sect. 29
+location_379:
+  id: 379
+  code: HS-REF#30
+  value: Health Sciences Ref. Sect. 30
+location_380:
+  id: 380
+  code: HS-WD97/98
+  value: ZZZ Health Sciences withdrawn 97/98
+location_381:
+  id: 381
+  code: HS-COVLOC
+  value: ZZZ Health Sciences Cover records
+location_382:
+  id: 382
+  code: SC-STKS-EF
+  value: Special Collections SC-STKS-EF

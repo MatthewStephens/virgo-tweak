@@ -1,0 +1,4 @@
+<div id="item_title"><h1>Item Details 
+	<%- if session[:search][:counter].to_i > 0 -%>
+		(Item <%=format_num(session[:search][:counter].to_i)%> of <%= format_num(session[:search][:total]) %>)
+	<%- end -%></h1></div>

@@ -1,0 +1,67 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="no-js ie6"> <![endif]--> 
+<!--[if IE 7 ]>    <html class="no-js ie7"> <![endif]--> 
+<!--[if IE 8 ]>    <html class="no-js ie8"> <![endif]--> 
+<!--[if IE 9 ]>    <html class="no-js ie9"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <title>Virgo - Find books, articles, digital materials, and more. - University of Virginia Library</title>
+  
+  <meta name="description" content="Virgo, the online catalog of University of Virginia Library.  Books, articles, maps, digital materials, and more.">
+	<meta name="author" content="University of Virginia Library">
+	<meta name="keywords" content="University of Virginia, UVa, Virginia, Library, UVa Library, University of Virginia Library, Research, Virgo, VIRGO, catalog, articles, books, journals" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <%= stylesheet_link_tag 'virgo' %>
+  <%= stylesheet_link_tag 'print', :media => 'print' %>
+  <!--[if lte IE 8 ]>    
+  <%= stylesheet_link_tag 'ie' %>
+  <![endif]-->
+
+  <%= javascript_include_tag 	'jquery-1.3.2.min.js',
+														  'modernizr.custom.min.js',
+														  'application' %>
+
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
+  <%= @add_to_html_head %>
+</head>
+
+<body id="virgo_home">
+  <div id="virgo_container">
+    
+    <%= render :partial => 'layouts/header' %>
+
+    <div id="main" class="clearfix container_24">
+  
+      <article id="content" role="main" class="grid_21 push_3">
+        <%= render :partial=>'search_box'%>
+        <div class="grid_15 push_1 content_info">
+          <div class="flash_message">
+            <%= render :partial=>'/flash_msg' %>
+          </div>
+          <%= yield %>
+        </div>
+      </article>
+      
+      <aside class="contact-info grid_20 push_4">
+        <header class="contact-header">
+      	  <h1>Have Questions?</h1>
+      	</header>
+      	<div class="vcard">
+      	  <address class="url fn org"><a href="http://lib.virginia.edu">University of Virginia Library</a></address>
+          <address class="contact phone tel">Phone: 434.924.3021</address>
+          <address class="contact email">Email: <a href="mailto:library@virginia.edu">library@virginia.edu</a></address>
+          <address class="contact chat"><a href="http://www2.lib.virginia.edu/askalibrarian/">Chat now</a></address>
+        </div>
+      </aside>
+
+    </div>
+
+    <%= render :partial => 'layouts/footer' %>
+  </div> <!-- end #virgo_container -->
+
+  <%= render :partial => 'catalog/analytics' %>
+</body>
+</html>

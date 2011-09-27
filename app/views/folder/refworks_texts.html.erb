@@ -1,0 +1,12 @@
+<div id="list_heading"><h1>Export to Refworks <%= " (#{session[:folder_document_ids].count} items)" unless session[:folder_document_ids].empty? %></h1></div>
+
+<div id="refworks_export">
+  <h2>Now exporting to Refworks.  If you are not redirected to Refworks, please click the button below to export again.</h2>
+  <% form_tag "http://www.refworks.com/express/expressimport.asp?vendor=#{application_name}&filter=MARC%20Format&encoding=65001", :name => "refworks" do %>
+  <%= hidden_field_tag "ImportData", render_refworks_texts(@documents) %>
+  <%= submit_tag "Export to Refworks" %>
+  <% end %>
+  <script>
+    window.onload = document.refworks.submit();
+  </script>
+</div>

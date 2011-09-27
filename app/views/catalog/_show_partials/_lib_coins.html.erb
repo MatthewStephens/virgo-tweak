@@ -1,0 +1,87 @@
+<div class="itemShowView document" id="Doc<%= document[:id] %>">	
+	
+
+	
+	<div id="identifierFields">
+		<h1 id="titleField"><%= @document.value_for :title_display %></h1>
+		<!-- 	This should be the display quality data about this item, as human readable as possible. 
+			For example, we should include the season information, for comic books, television shows, and other works
+			that are divided into parts (i.e., 245n or document.marc.part) and we should include the responsibility 
+			statement, i.e., the author or editor or whatever of a work, as their name appears on the book, which will 
+			often differ from the authorized forms of people's names as they appear in other marc fields
+		-->
+		<div id="respStmtField">
+			<%= @document.value_for :accession_display %>
+		</div>
+	</div>
+	
+	<div id="details">	
+			<dt>Title</dt>
+				<dd><%= @document.value_for :title_display %></dd>
+			  <dt>Mint</dt>
+				<dd><%= @document.value_for :mint_display %></dd>
+			  <dt>Denomination</dt>
+				<dd style="text-transform:capitalize"><%= @document.value_for :denomination_display %></dd>
+			  <dt>Material</dt>
+				<dd style="text-transform:capitalize"><%= @document.value_for :material_display %></dd>
+			  <dt>Format</dt>
+				<dd><%= @document.value_for :format_facet %></dd>
+			  <dt>Location</dt>
+				<dd><%= @document.value_for :location_facet %></dd>
+			  <dt>Accession</dt>
+				<dd><%= @document.value_for :accession_display %></dd>
+			<% if document.has?(:region_facet) %>
+			  <dt>Region(s)</dt>
+				<dd>						
+						<% (document.values_for :region_facet).each do |val| %>
+			  			<div><%= link_to val, add_facet_params(:region_facet, val).merge(:action=>nil, :id=>nil)%></div>
+						<% end %>
+				</dd>
+			<% end %>
+			  <dt>Collections</dt>
+				<dd>		
+					<% (document.values_for:collection_facet).each do |val| %>		
+					<div><%= link_to val, add_facet_params(:collection_facet, val).merge(:action=>nil, :id=>nil)%></div>
+					<% end %>
+				</dd>
+			  <dt>Subjects</dt>
+				<dd>						
+						<% (document.values_for:subject_facet).each do |val| %>
+						<div><%= link_to val, add_facet_params(:subject_facet, val).merge(:action=>nil, :id=>nil)%></div>
+						<% end %>
+				</dd>
+
+			  <dt>Full View</dt>
+			  <dd><%= link_to 'View Complete Record', @document.value_for(:url_display), :target=>'_blank' %></dd>
+
+	</div>
+	
+	<div class="previewThumbImg coinImage imageCollection first">
+		<span class="coinImage" title="Obverse">
+			<img src="<%= document.value_for :thumb_obv_display %>" alt="Obverse"/>		
+		</span>
+	</div>
+	<div class="previewThumbImg coinImage imageCollection">
+		<span class="coinImage" title="Reverse">
+			<img src="<%= document.value_for :thumb_rev_display %>" alt="Reverse"/>
+		</span>
+	</div>
+	
+</div>
+
+<% sidebar_items << capture do %>
+  <div id="sub1">
+  <div id="sub1Inner">
+		<!--
+		<div class="previewThumbImg">
+			<span class="coverImage" title="<%= document.id %>">
+				<%= image_tag 'ajax-loader.gif', :class=>'ajaxLoader', :alt => 'Loading' %>
+			</span>
+		</div>
+		-->
+
+  	<%= render :partial => 'catalog/_show_partials/subjects', :locals => { :document => document } %>
+  	<%= render :partial => 'catalog/_show_partials/related_names', :locals => { :document => document } %>
+  </div>
+  </div>
+<% end %>

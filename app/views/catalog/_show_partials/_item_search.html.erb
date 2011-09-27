@@ -1,0 +1,11 @@
+<div id="itemSearchBox" role="search">
+<form action="<%= catalog_index_path %>" method="get" id="itemSearchForm">
+    <div id="searchInput" class="searchFormDiv">
+			<%= label_tag 'SI', 'Search VIRGO', :class => 'screen-reader-text' %>
+	    <%= text_field_tag('q', h(params[:q]), :class => "searchInHome", :id => "SI") %>
+    </div>
+  	<div id="searchButton" class="searchFormDiv">
+  	  <button type="submit"><span class="button">Search</span></button>
+		</div>
+</form>
+</div>

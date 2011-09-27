@@ -1,0 +1,63 @@
+
+/* Hide elements on printed page */
+#PanelContainer, #topNav, #headerInner, #globalUtilNav, #search, #availableFilters, #noSearchMessage, .tools, #footer .links, #returnToSearch, .pagination, .btnRemove, #startOverLink, .hide, #results dd.availability, #previousNext, .resultNav, .technicalDetails, #uva_lib_banner, #virgo_banner, #ask_a_librarian, #tabs, #searchForm, #search_toggle, #sub1, .show_details, #right_text, #footer_divider, .recallAndLeo, .map_it, #footer img, #appliedParams img, #availability img, .previewThumbImg {display:none;}
+
+/* Basic Fonts */
+* {font:normal normal normal 10pt/14pt Georgia,"Times New Roman",Times,serif;}
+h1, h1#titleField {font-size:14pt;vertical-align: baseline;margin: 1em 0 0.67em;font-family:helvetica,arial,sans-serif;}
+.documentPart, .medium, #subtitle {font-family:helvetica,arial,sans-serif;font-size:10pt;}
+/* Header	 */
+#header {margin:0; padding:0; height:0;}
+.printHeader, .printHeader strong {float:left; text-transform:uppercase; font-size:8pt; display:block; padding:0;font-family: helvetica, arial, sans-serif; color:#656565;}
+.printUrl{display:block;clear:both;}
+.printUrl a {display:block; font-family: helvetica, arial, sans-serif; color:#656565;}
+a.requestUrl {display:block; max-width: 40em; overflow:hidden; white-space:nowrap;}
+
+#footer {margin:0.5em 0; padding: 0.5em 0;clear:both;border-top: 1px dotted #CCC;}
+#footer div, #footer a, #footer p {color:#656565;font-size:9pt;line-height:13pt;font-family:helvetica,arial,sans-serif;}
+
+body, div {margin:0; padding:0;}
+html body {padding:1em;}
+a {color:#000; text-decoration:none;}
+b, strong {font-weight:bold;}
+img {margin:0 1em 2em 0; float:left;}
+a img {border:none;}
+ul, ol {display:block; overflow:hidden; list-style-position:inside; margin:0; padding:0 0 1em 1em;}
+ul {list-style-type:square; }
+dl, dt, dd {margin:0; padding:0;}
+dl {position:relative;}
+dt {font-style:italic; text-transform:capitalize;}
+dd {padding-bottom:.5em;}
+hr {display:none;}
+
+#item_title {display: none;}
+#content, #relatedSubjects, #availability {margin:0.5em 0; padding: 0.5em 0; border:none;clear:both;}
+#appliedParams {padding-bottom:1em; margin-bottom:2em; border:none; }
+#appliedParams h3 {padding: 1em 0;}
+#resultLine span {float: none !important;}
+
+.filterName::after {content: ": ";}
+#results .details {position:relative; overflow:hidden; margin-bottom:2em}
+dd.titleField, dl.metadata.hd {display:block; overflow:hidden; width:100%; margin:0 0 .5em 0 !important; clear:both; padding-bottom:0;}
+#respStmtField div {font-style:italic !important; margin-bottom:1em;font-size: 11pt;}
+.listItemNumber {padding-right:.5em; font: italic normal normal 10pt/16pt Georgia, "Times New Roman", Times, serif;vertical-align: top;}
+#results .details .metadata {clear:left;}
+.titleField a {display:inline; font-size:11pt; font-family:helvetica, arial, verdana, sans-serif; line-height:16pt; text-transform:capitalize;}
+#results .metadata dt {float:left; clear:left; min-width:9em; padding-right:0.5em;}
+#results .metadata dt::after {content: ": ";}
+#results .metadata dd {display:block; float:left; clear:right; overflow:hidden;}
+
+#availability {margin-bottom:1em; overflow:hidden;}
+#details {}
+
+#details dd {padding-bottom:1em;}
+#results img.photo {position:absolute; top:0; left:-12em; z-index:2;}
+#availability {padding:1em 0;}
+#availability h2 {display: none;}
+#availability h2, #availability > div {margin:1em 0;}
+#details dl dt, #details dl dd {display: block !important;}
+.holdings {width: 100%;}
+.holdings td {height: 1.67em;}
+.holdings thead tr {border-bottom: 1px dotted #CCC;}
+.holdings th {font-style: italic;height:1.67em;}
+.dataTables_filter {display: none;}

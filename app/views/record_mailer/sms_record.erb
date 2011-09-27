@@ -1,0 +1,3 @@
+<% @documents.each do |document| -%>
+<%= shortened_title(document) %><%= shortened_authors(document).blank? ? "" : " by #{shortened_authors(document)}" %>. <%= first_call_number(document) %>. <%= shortened_link(document) %>
+<% end -%>

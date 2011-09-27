@@ -1,0 +1,30 @@
+<% carriers = 
+[
+['Please select your carrier', ''],
+['Alltel', 'alltel'],
+['AT&T', 'att'],
+['CenturyLink/Embarq/Sprint', 'sprint'],
+['Cricket', 'cricket'],
+['Nextel', 'nextel'],
+['T Mobile', 'tmobile'],
+['Verizon', 'verizon'],
+['Virgin Mobile', 'virgin']
+]
+%>
+<div id="tool_heading"><h1>Send Record by Text Message</h1></div>
+<div class="tool_content">
+<% form_tag send_email_record_catalog_path, :id => 'email_form', :id => 'sms_form', :method => :post do %>
+  <%= label_tag(:to, "Phone Number") %>
+  <%= text_field_tag :to %>
+  <%= label_tag(:carrier, "Carrier") %>
+  <%= select_tag(:carrier, options_for_select(carriers, '')) %>
+  <%=hidden_field_tag :style, 'sms'%>
+  <% @documents.each do |doc| %>
+    <%=hidden_field_tag "id[]", doc.get(:id)%>
+  <% end %>
+  <%=label_tag 'Please type the two words below to help us prevent spam.'%><%= recaptcha_tags %>
+  <%=hidden_field_tag :show_max_per_page, 'true'%>
+  
+  <%= submit_tag "Send" %>
+<% end %>
+</div>

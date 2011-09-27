@@ -1,0 +1,68 @@
+<% @add_to_html_head = capture do %>
+  <%= javascript_include_tag 'jquery.form.min.js', 'catalog/search', 'catalog/index' %>
+  <%= javascript_include_tag  'jquery.hoverIntent.minified.js', 'catalog/video' if video_portal? %>
+  
+<% end %>
+
+<% @your_search = capture do %>
+  <% unless home_page? or music_home_page? or video_home_page? or params[:catalog_select] == 'all' %>
+   
+      <%= render 'catalog/constraints', :localized_params=>params %>
+      <%= render 'catalog/sort_and_per_page' %>      
+
+  <% end %>
+<% end %>
+
+<% if params[:catalog_select] == 'all' %>
+  <div class="results-total">
+    <%= virgo_page_entries_info @response.docs, :entry_name=>'item' %>
+    <%= see_all_results("view-full view-full-catalog") %>
+  </div>
+<% end %>
+
+<%= @your_search %>
+	
+	
+<% if music_home_page? %>
+
+  <%= render :partial=>'featured_documents' %>
+  
+<% elsif video_home_page? %>
+
+  <%= render :partial=>'featured_documents' %>
+  
+<% elsif home_page? and params[:controller] == 'catalog' and params[:catalog_select].nil? %>
+
+  <%= render :partial=>'search_help' %>
+  
+<% elsif (@response.response['numFound'] < 1 or @response.docs.size < 1) and params[:catalog_select] != 'all' %>
+  
+  <%= render :partial=>'catalog/chat_with_librarian' %>
+  
+<% elsif params[:catalog_select] == 'all' %>
+
+  <%= render :partial=>'catalog/document_list' %>
+  
+<% else %>
+	
+	<% if params[:catalog_select] != 'articles' %>	
+	<div id="SelectClearAll">
+		<a class="select_all" href="#"><span class="screen-reader-text">Add Star to </span>All</a>
+	</div>
+	<% end %>
+	
+  <%= render :partial=>'catalog/document_list' %>
+	
+  <%= pagination_links %>
+  
+<% end %>
+
+<% sidebar_items << capture do %>
+  <%= render :partial=>'catalog/facets'%>
+<% end %>
+
+<% if params[:catalog_select] == 'all' && @response.response['numFound'] > 0 %>  
+  <div class="split-footer">
+    <%= see_all_results("view-full view-full-catalog view-full-footer") %>
+  </div>
+<% end %>

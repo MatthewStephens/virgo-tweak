@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>Page Turner</title>
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
+	<%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js' %>
+	<%= javascript_include_tag 'catalog/OpenLayers.js' %>
+	<%= javascript_include_tag 'catalog/iscroll-lite-min.js' %>
+	
+	<% start_page = params[:page] ? params[:page] : @exemplar_id %>
+	
+	<script type="text/javascript">
+		// Pass repo URL and exemplar PID from app
+		var PageTurner = {
+			<%= ("z: " + params[:z] + ",") if params[:z] -%>
+			<%= ("x: " + params[:x] + ",") if params[:x] -%>
+			<%= ("y: " + params[:y] + ",") if params[:y] -%>			
+			repo: '<%= @repository %>',
+			id: '<%= @document[:id] %>',
+			pid: '<%= start_page %>'
+		}
+	</script>
+	
+	<%= javascript_include_tag 'catalog/page_turner' %>
+
+	<%= stylesheet_link_tag 'page_turner' %>
+</head>
+
+<body>
+
+  <div id="container">
+		<div class="page_turner_head">
+			<% unless @document[:title_display].nil? %>
+				<h1><%= @document.value_for(:title_display) %></h1>
+			<% end %>
+			<% unless @document[:author_display].nil? %>
+				<h2><%= @document.values_for(:author_display).join("; ") %></h2>
+			<% end %>
+			<% unless @document[:year_display].nil? %>
+				<h3><%= ("[" + @document[:year_display] + "]") %></h3>
+			<% end %>
+			<div class="page_turner_nav">
+				<a id="return_to_search" href="/catalog/<%= @document[:id] %>">&laquo; Return to Item Details</a>	
+				
+				<span class="page_turner_prev">&laquo; Previous</span>
+
+				<% if @image_pids %>
+					<span class="page_turner_select">
+						<select>
+							<% @image_pids.each_with_index do |page, i| %>
+								<option value="<%= page %>"><%= @image_titles[i] %></option>
+							<% end %>
+						</select>
+					</span>
+				<% end %>
+				
+				<span class="page_turner_next">Next &raquo;</span>
+				
+				<a id="page_permalink" href="#">Permalink</a>				
+			</div>
+		</div>
+		<div class="page_container">
+			
+			<div id="page_viewer"><!-- OpenLayers loads here --></div>
+
+			<% if @image_pids %>
+				<ul class="page_thumbs">
+			<% @image_pids.each_with_index do |page, i| %>
+			  <li id="<%= page %>" class="page_thumb previewThumbImg <%= 'thumb_select' if page == start_page %>">
+			    <span class="jp2kPreview"><%= image_tag "/images/page_default.gif", :alt => "loading page image", :class => "page_default" %></span>
+					<p class="page_title"><%= @image_titles[i] %></p>
+			  </li>
+			<% end %>
+				</ul>
+			<% end %>
+		</div> <!--! end .page_container -->
+  </div> <!--! end #container -->
+
+
+</body>
+</html>

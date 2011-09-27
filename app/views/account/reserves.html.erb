@@ -1,0 +1,49 @@
+<%- @add_to_html_head = capture do -%>
+  <%= javascript_include_tag 'jquery.dataTables.min.js', 'account-listing.js' %>
+<%- end -%>
+<div id="list_heading"><h1>My Account</h1></div>
+<div class="account_container">
+  <h2>Items on Reserve: <span class="account-total"><%= @user_reserves.reserve_count %></span></h2>
+
+  <% if @user_reserves.courses.count > 0 %>
+  <table id="reserves_listing" class="account-listing">
+    <thead>
+      <tr>
+        <th class="account-number-heading hidden-heading"> <!-- Number --> </th>
+        <th class="account-title-heading">Title</th>
+        <th class="account-author-heading">Author</th>
+        <th class="account-course-name-heading">Course Name</th>
+        <th class="account-reserve-location-heading">Reserve Location</th>
+        <th class="account-call-heading">Call Number</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% reserves_count = 1 %> 
+    <% @user_reserves.sorted_courses.each do |course| %>
+      <% course.sorted_reserves.each do |reserve| %>
+        <% reserve.catalog_item.holdings.each do |holding| %>
+          <% holding.copies.each do |copy| %>
+            <% title = reserve.catalog_item.title %>
+            <% title += " : #{reserve.catalog_item.subtitle}" unless reserve.catalog_item.subtitle.blank? %>
+            <tr class="item <%= cycle("even", "odd") %>">
+              <td class="item-number"><%= reserves_count.to_s + "." %></td>
+              <td class="title"><%= title %></td>
+              <td class="author"><%= reserve.catalog_item.authors %></td>
+              <td class="course-name"><%= course.code %></td>
+              <td class="library"><%= holding.library.name%> <%= copy.current_location.name %></td>
+              <td class="call-number"><%= holding.call_number %></td></tr>
+            <% reserves_count += 1 %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+  <%else %>
+    <h2 class="no-items">No Items on Reserve</h2>
+  <% end %>
+</div>
+
+<% sidebar_items << capture do %>
+  <%= render :partial => 'sidebar', :locals => {:user => @user_reserves} %>
+<% end %>

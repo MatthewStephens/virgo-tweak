@@ -1,0 +1,38 @@
+<div class="document clearFix" id="Doc<%= document[:id] %>">
+
+  <div class="details">
+		  
+  		<dl class="metadata hd">
+  			<% document.title_type_fields.each do |k,v| %>
+  			<dt class="hide">Title: </dt>
+  			<dd class="titleField"><span class="listItemNumber"><%= counter + 1 + offset %>.</span><%= link_to_document document, :label => :title_display, :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view %></dd>
+  			<% end %>
+  		</dl>
+		
+  		<dl class="metadata">
+  		  <div class="previewThumbImg imageCollection">
+      		  <%= link_to image_tag(document.get(:thumb_obv_display), :alt => "Obverse"), catalog_path(document[:id]), :counter => (counter + 1 + offset) %>
+      	</div>
+  		  
+  			<dt>Mint</dt>
+  			<dd><%= document.value_for :mint_display %></dd>
+
+  			<dt>Format</dt>
+  			<dd><%= document.value_for :format_facet %></dd>
+
+  			<dt>Location</dt>
+  			<dd><%= document.value_for :location_facet %></dd>
+		
+  			<dt>Accession</dt>
+  			<dd><%= document.value_for :accession_display %></dd>
+  		</dl>
+      
+  </div>
+	
+	<% unless bookmarks_view or params[:catalog_select] == 'all' %>  
+  <div class="tools">
+     <%= render :partial=>'folder_control', :locals=>{:document=>document} %>
+  </div>
+  <% end %>
+  
+</div>

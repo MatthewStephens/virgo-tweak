@@ -1,0 +1,13 @@
+<% form_tag reserves_path, :method=>:get do %>
+  <%= label_tag(:computing_id, "Instructor computing id:") %>
+  <%= text_field_tag(:computing_id) %>
+<% end %>
+
+<% unless @reserves.blank? %>
+  Courses for <%= @reserves.display_name %>
+  <ul>
+  <% @reserves.courses.each do |course| %>
+    <li><%= link_to "#{course.code}: #{course.name}", reserve_course_path(@reserves.computing_id, course.key) %></li>
+  <% end %>
+  </ul>
+<% end %>

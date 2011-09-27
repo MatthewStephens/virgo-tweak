@@ -1,0 +1,35 @@
+<form action="<%= catalog_index_path %>" method="get" id="search" role="search">
+
+  <div class="search_form_container grid_16 push_1 alpha">
+    <h1 class="visuallyhidden">Search</h1>
+    <div id="search_input" class="search_form grid_13 alpha">
+      <%= label_tag 'SI', 'Search VIRGO', :class => 'visuallyhidden' %>
+      <%= text_field_tag('q', h(params[:q]), :class => "search_home", :id => "SI", :placeholder => "Search for books, articles, digital materials, and more.", :autofocus => "autofocus") %>
+    </div>
+    <%= search_as_hidden_fields(:omit_keys => [:q, :search_field, :qt, :f, :page]) %>
+    <%= render :partial=>'catalog/hidden_filters' %>
+    <button id="main_search_submit" class="search_submit grid_3 omega" type="submit">Search</button>
+  </div>
+
+  <div class="grid_4 push_1 omega" id="advanced_search">
+    <a href="/advanced" class="advanced_search_link">Catalog Advanced Search</a>
+    <%= link_to "Article Advanced Search", advanced_articles_path(:catalog_select => 'articles'), :class => "advanced_search_link" %>
+  </div>
+
+  <% if home_page? %>
+    <div class="search_toggle grid_16 push_1">
+      <%= label_tag( "catalog_select_all", radio_button_tag( "catalog_select", "all", true ) + "Catalog + Articles" ) %>
+      <%= label_tag( "catalog_select_catalog", radio_button_tag( "catalog_select", "catalog" ) + "Catalog only" ) %>
+      <%= label_tag( "catalog_select_articles", radio_button_tag( "catalog_select", "articles" ) + "Articles only" ) %>
+      <%= link_to "Which one?", catalog_index_path, :class => "which-search" %>
+      <div class="which-search-help">Selecting <strong>Catalog only</strong> searches the Library's collection of books, videos, journals, and other materials, while <strong>Articles only</strong> offers results from online journals to which the Library subscribes. <strong>Catalog + Articles</strong> searches both collections at once.</div>
+    </div>
+  <% else %>
+    <div class="search_toggle search-switch grid_24 pull_1" role="navigation">
+      <p class="switch_view">
+        <%= switch_search_scope_links %>
+      </p>
+    </div>
+  <% end %>
+  
+</form>

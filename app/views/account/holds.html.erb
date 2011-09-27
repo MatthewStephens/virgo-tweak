@@ -1,0 +1,44 @@
+<%- @add_to_html_head = capture do -%>
+  <%= javascript_include_tag 'jquery.dataTables.min.js', 'account-listing.js' %>
+<%- end -%>
+<div id="list_heading"><h1>My Account</h1></div>
+<div class="account_container">
+  <h2>Requested Items: <span class="account-total"><%= @user_holds.hold_count %></span>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<%= link_to "ILL/LEO Requests", "http://www2.lib.virginia.edu/leo", :class => "renew-all-link" %></h2>
+
+  <% if @user_holds.holds.count > 0 %>
+  <table id="requests_listing" class="account-listing">
+    <thead>
+      <tr>
+        <th class="hidden-heading"> <!-- Number --> </th>
+        <th class="account-title-heading">Title</th>
+        <th class="account-author-heading">Author</th>
+        <th class="account-request-date-heading">Request date</th>
+        <th class="account-pickup-heading">Pick-up Library</th>
+        <th class="account-request-type-heading">Type</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% request_count = 1 %>
+    <% @user_holds.sorted_holds.each do |hold| %>
+      <tr class="item <%= cycle("even", "odd") %>">
+        <% title =  hold.catalog_item.title %>
+        <% title += " #{hold.catalog_item.subtitle}" if hold.catalog_item.subtitle %>
+        <td class="item-number"><%= request_count.to_s + "." %></td>
+        <td class="title"><%= link_to(title, catalog_path("u#{hold.catalog_item.key}")) %></td>
+        <td class="author"><%= hold.catalog_item.authors %></td>
+        <td class="date-placed"><%= hold.date_placed_f %></td>
+        <td class="library"><%= hold.pickup_library.name %></td>
+        <td class="type"><%= hold.type %></td>
+      </tr>
+      <% request_count += 1 %>
+    <% end %>
+    </tbody>
+  </table>
+  <%else %>
+    <h2 class="no-items">No Requests</h2>
+  <% end %>
+</div>
+
+<% sidebar_items << capture do %>
+  <%= render :partial => 'sidebar', :locals => {:user => @user_holds} %>
+<% end %>

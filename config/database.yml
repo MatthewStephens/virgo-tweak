@@ -1,0 +1,53 @@
+# SQLite version 3.x
+#   gem install sqlite3-ruby (not necessary on OS X Leopard)
+development:
+  adapter: mysql
+  database: blacklight_development
+  username: bldevelopment
+  password: d01pswd
+  socket: 
+  
+# Warning: The database defined as 'test' will be erased and
+# re-generated from your development database when you run 'rake'.
+# Do not set this db to the same as development or production.
+test: &TEST
+  adapter: mysql
+  database: blacklight_test
+  username: bltest
+  password: t01pswd 
+  socket: 
+
+production:
+  adapter: mysql
+  database: blacklight_production
+  username: blproduction
+  password: p01pswd
+  socket: 
+
+cucumber:
+  <<: *TEST
+
+
+#
+virgobeta_production:
+  adapter: mysql
+  database: virgobeta_production
+  username: vbp
+  password: rZex6F2
+  host: mysql.lib.virginia.edu
+
+#
+virgobeta_development:
+  adapter: mysql
+  database: virgobeta_development
+  username: vbd
+  password: Xearv6YK
+  host: mysql.lib.virginia.edu
+
+#
+virgobeta_test:
+  adapter: mysql
+  database: virgobeta_test
+  username: vbt
+  password: q7u2xYw
+  host: mysql.lib.virginia.edu

@@ -1,0 +1,57 @@
+<div id="list_heading"><h1>Starred Items<%= " (#{session[:folder_document_ids].count})" unless !session[:folder_document_ids] %></h1></div>
+
+<% unless @documents.empty? %>
+  <p class="starred-info">Track and export up to <strong>100</strong> items by starring results. Starred items are not saved permanently but will persist for your full visit to Virgo.</p>
+  <%= render "catalog/sort_and_per_page" %>
+  <%= render "catalog/results_pagination" %>
+<% end %>
+
+<% sidebar_items << capture do %>
+	<div id="sub1" class="bookmarks_sub">
+	<div id="sub1Inner">
+	  <div id="account_menu" class="tools box menu">
+      <ul>
+        <li class="account-home-nav"><%= link_to("My Account", account_index_path) %></li>
+        <% unless @documents.empty? %>
+        <li class="actions-list-container">
+    		  <h2>Starred Items</h2>
+    			<ul id="markedListTools">
+    			  <li>
+    			    <%= link_to "Email", email_path %>
+    			  </li>
+    			  <li>
+    			    <%= link_to "Text Message", sms_catalog_path(:id => session[:folder_document_ids], :show_max_per_page => 'true') %>
+    			  </li>
+    			  <li>
+    			    <%= link_to "Cite", citation_path %>
+    			  </li>
+    			  <li>
+    			    <%= link_to "Export to Refworks", refworks_texts_path %>
+    			  </li>
+    			  <li>
+    			    <%= link_to "Export to EndNote/Zotero", endnote_path %>
+    			  </li>
+    			  <li>
+    			    <%= link_to "Export CSV", csv_path(:format => 'csv')%>
+    			  </li>
+    			  <li>
+    			    <%= link_to "Clear Starred Items", clear_folder_path, :method => :delete %>
+    			  </li>
+    			</ul>
+		    </li>
+		  <% end %>
+		</ul>
+	</div>
+	</div>
+	</div>
+<% end %>
+
+<div id="results">
+<%= "<h2 class='no-items'>No Starred Items</h2>" if @documents.empty? -%>
+<% i = 0 %>
+<% @documents.each do |document| %>
+	<%= render_document_partial document, :index, i, folder_offset, true %>
+	<span class="remove-item">[<%= link_to 'remove', folder_path(document[:id]), :method => :delete, :confirm => 'Remove star from this item?' %>]</span>
+  <% i+= 1%>
+<% end %>
+</div>

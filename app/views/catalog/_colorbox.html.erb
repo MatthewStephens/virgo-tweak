@@ -1,0 +1,15 @@
+<%# Include ColorBox-related files only once on the page -%>
+<% unless @colorbox_loaded -%>
+  <%= stylesheet_link_tag javascript_path('colorbox/uva/colorbox.css') %>
+  <%= stylesheet_link_tag 'uva_colorbox.css' %>
+  <%= javascript_include_tag 'colorbox/colorbox/jquery.colorbox.min.js' %>
+  <% @colorbox_loaded = true -%>
+<% end -%>
+
+<%# Set up a ColorBox group (group of <a> elements with same @rel value)
+  # containing only the images associated with this particular record -%>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".imageCollection a").colorbox({maxHeight: "100%", photo:true,maxWidth:"95%",scalePhotos:true,opacity:0.7,current:"{current} of {total}"});
+});
+</script>

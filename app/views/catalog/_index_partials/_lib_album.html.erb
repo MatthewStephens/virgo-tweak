@@ -1,0 +1,86 @@
+<div class="document clearFix" id="Doc<%= document[:id] %>">
+	
+	<div class="details">
+		<dl class="metadata hd">
+			
+			<% flag = 0 %>
+			<% document.title_type_fields.each do |k,titles| %>
+			  <dt class="hide">Title: </dt>			  		
+			  <% title = document.value_for :title_display rescue "Title not available" %>
+			  <% linked_title = document.value_for :linked_title_display rescue "" %>		 
+			  
+			  <% document.has_value?(:part_display) ? part = " " + document.value_for(:part_display) rescue "" : part = " " %> 
+			  
+			  <% if document.has_value?(:medium_display) %>
+				  <% medium =  (document.value_for :medium_display).match(/^\[/) ? "" + document.value_for(:medium_display) : " ["+ document.value_for(:medium_display) + "]" %>
+				<% else %>
+				  <% medium = " "%>
+				<% end %>
+				
+				<% medium.blank? or medium.end_with?("]") ? separator = " : " : separator = " " %>
+				
+			  <% document.has_value?(:subtitle_display) ? subtitle = separator + document.value_for(:subtitle_display) rescue "" : subtitle = " " %>
+			  
+			  <dd class="titleField"><span class="listItemNumber"><%= counter + 1 + offset %>.</span><span><%= link_to_document document, :label => flag == 0 ? title + part + medium + subtitle : linked_title + part + medium + subtitle, :counter => counter + 1 + offset, :bookmarks_view => bookmarks_view %></span></dd>
+			  <% flag = 1 %>
+			<% end %>
+		</dl>
+		
+		<div class="previewThumbImg">
+		   <%= link_to_document_from_cover document, :span => "coverImage album", :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view  %>
+		</div>
+		
+		<dl class="metadata">
+      
+			<% document.author_type_fields.each do |k,v| %>
+			<dt>Composer/Performer</dt>
+			<dd class="authorField">
+				<%= document.value_for k %>
+			</dd>
+			<% end %>
+
+			<dt>Format</dt>
+			<dd class="formatField">
+				<%= document.value_for :format_facet %>
+			</dd>
+			
+			<dt>Publication</dt>
+			<dd class="publicationField">
+				<%= document.value_for :published_display, '<br/>' %>
+			</dd>
+			
+			<dt>Location</dt>
+			<dd class="locationField">
+			  <%= location_listing(document)%>
+			</dd>
+			
+			<% unless call_number(document).blank? %>
+			<dt>Call Number</dt>
+			<dd class="callNumberField">
+				<%= call_number(document, '<br />') %>
+			</dd>
+			<% end %>
+			
+			<% if !document.get(:url_display).nil? %>
+  		  <dt>Online Versions</dt>
+  		  <dd class="onlineAccessField"><%= link_to_online_access(document) %></dd>
+  		<% end %>
+
+			<% unless document.online_only? && !document.get(:url_display).nil? %>
+			  <dt>Availability</dt>
+        <dd class="availability">
+          <%= image_tag 'ajax-loader.gif', :class=>'ajaxLoader hide', :alt => 'Loading availability' %>
+          <%= link_to 'check availability', catalog_path(document[:id]) %>
+        </dd>
+      <% end %>
+		</dl>
+
+	</div>
+	
+	<% unless bookmarks_view or params[:catalog_select] == 'all' %>
+  <div class="tools">
+     <%= render :partial=>'folder_control', :locals=>{:document=>document} %> 
+   </div>
+  <% end %>
+	
+</div>

@@ -1,0 +1,20 @@
+map_1:
+  id: 1
+  url: http://www.famsi.org/research/pohl/images/aztec2figure01.jpg
+  Description: The Huitzilopochtli Department of History Library
+map_2:
+  id: 2
+  url: http://www.fao.org/ag/AGP/agpc/doc/Counprof/uruguay/map.gif
+  Description: Uruguay
+map_3:
+  id: 3
+  url: http://global.tulane.edu/studyabroad/programs/images/MapArgentina.jpg
+  Description: Argentina
+map_4:
+  id: 4
+  url: http://www.astrosurf.com/jwisn/virgo-cluster.jpg
+  Description: Virgo Cluster
+map_5:
+  id: 5
+  url: http://myweb.unomaha.edu/~dselling/images/germany_political_map.gif
+  Description: Germany

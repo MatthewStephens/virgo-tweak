@@ -1,0 +1,12 @@
+<%= render :partial=>'summary_holdings', :locals=>{:document=>@document} %>
+
+<%= leo_and_recall_links(@document) %>
+
+<%= special_collections_request_link(@document, 5) %>
+
+<%= render :partial=>"holdings", :locals=>{:document=>@document} %>
+
+<%= special_collections_request_link(@document) %>
+
+<%= access_restriction_text(@document) %>
+

@@ -1,0 +1,90 @@
+<% heading_title = get_heading_title(document.value_for(:main_title_display), document.value_for(:series_title_display), document.value_for(:title_display)) -%>
+<%= heading_title %>
+<% unless document.value_for(:author_display) == 'n/a' -%>
+<%= document.value_for :author_display %>
+<% end -%>
+<% -%>
+<% unless document.values_for(:media_resource_id_display).nil? %>
+<% document.values_for(:media_resource_id_display).each_with_index do |media_id, index| %>
+
+Image URL:
+<%= document.dl_image_preview_src(media_id) %>
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.value_for(:main_title_display) == 'n/a' -%>
+
+Title:
+<%= document.value_for :main_title_display %>
+<% end -%>
+<% -%>
+<% unless document.value_for(:series_title_display) == 'n/a' -%>
+
+Series:
+<%= document.value_for :series_title_display %>
+<% end -%>
+<% -%>
+<% unless document.value_for(:alternate_title_display) == 'n/a' -%>
+
+Alternate Title:
+<% document.values_for(:alternate_title_display).each do |v| -%>
+<%= v %>									
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.value_for(:author_display) == 'n/a' -%>
+
+Creator:
+<% document.values_for(:author_display).each do |v| -%>
+<% -%>
+<% author_facet = document.values_for(:author_facet).find {|f| v =~ /^#{f}/ } unless document.values_for(:author_facet).nil? -%>
+<% q = author_facet.blank? ? v : author_facet -%>
+<%= v %>
+<% -%>
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.value_for(:year_display) == 'n/a' -%>
+
+Date Created:
+<% document.values_for(:year_display).each do |v| -%>
+<%= v %>									
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.value_for(:composition_era_facet) == 'n/a' -%>
+
+Composition Era:
+<% document.values_for(:composition_era_facet).each do |v| -%>
+<%= v %>									
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.value_for(:subject_genre_facet) == 'n/a' -%>
+
+Subject / Genre:
+<% document.values_for(:subject_genre_facet).each do |v| -%>
+<%= v %>									
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.value_for(:desc_meta_file_display) == 'n/a' -%>
+<%= show_descmeta( document.value_for(:desc_meta_file_display, '') ) %>
+<% end -%>
+<% -%>
+<% unless document.value_for(:media_retrieval_id_display) == 'n/a' -%>
+
+Retrieval ID:
+<% document.values_for(:media_retrieval_id_display).each do |v| -%>
+<%= v %>									
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.value_for(:digital_collection_facet) == 'n/a' -%>
+
+Collection:
+<% document.values_for(:digital_collection_facet).each do |v| -%>
+<%= v %>
+<% end -%>
+<% end -%>
+<% -%>

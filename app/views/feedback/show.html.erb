@@ -1,0 +1,24 @@
+<div id="tool_heading"><h1>Send Us Feedback</h1></div>
+
+<div class="tool_content">
+<% unless @errors.empty? %>
+  <strong>Please fix the following form errors:</strong>
+  <ul class="errors">
+  <% @errors.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<% form_tag do %>
+  <fieldset>
+    <%= label_tag 'Your Name' %> <%= text_field_tag :name, h(params[:name]) %>
+    <%= label_tag 'Your Email' %> <%= text_field_tag :email, h(params[:email]) %>
+    <%= label_tag 'Your Message' %> <%= text_area_tag :message, h(params[:message]) %>
+    <%#= show_simple_captcha(:image_style => 'random', :label => "Enter the characters you see into the text field") %>
+    <%=label_tag 'Please type the two words below to help us prevent spam.'%><%= recaptcha_tags %>
+    <%= hidden_field_tag 'referer', h(request.referer) %>
+    <%= submit_tag 'Send' %>
+  </fieldset>
+<% end %>
+</div>

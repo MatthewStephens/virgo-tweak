@@ -1,0 +1,40 @@
+<div id="availableFilters" role="complementary">
+  
+  <h2 class="filter-title"><span class="ribbon-corner"><!-- ribbon corner triangle --></span>Limit results by:</h2>
+  
+  <% facet_field_names.each do |solr_fname| %>
+    <% display_facet = @response.facets.detect {|f| f.name == solr_fname} -%>
+    <% next if display_facet.nil? || display_facet.items.nil? %>
+    <% hits = 0 %>
+    <% display_facet.items.collect {|x| hits += x.hits} %>
+    <% next if hits == 0 %>
+    
+    <div class="limitsMenu">
+    <div class="side_bar_heading facet">
+    <% if params[:controller] == 'articles' %>
+	    <%= link_to facet_field_labels[solr_fname], facet_articles_path(:id => display_facet.name, :params => params_for_facet_values.merge("facet.limit" => 500, "width" => 490)), :class=>'more_facets_link' %>
+    <% else %>
+		  <%= link_to facet_field_labels[solr_fname], catalog_facet_path(:id => display_facet.name, :params => params_for_facet_values.merge("facet.limit" => 500, "width" => 490)), :class=>'more_facets_link'  %>
+		<% end %>
+		</div>
+    <div class="side_bar_content">
+    <% items = facet_sort!(solr_fname, display_facet.items) %>
+    <% items.each_with_index do |item, index| %>
+      <% break if index > 2 %>
+      <% item.respond_to?(:display_value) ? display_value = item.display_value(solr_fname) : display_value = item.value %>
+      <% if facet_in_params? solr_fname, item.value %>
+        <span class="facet_value"><%= h(display_value) %> (<%= format_num item.hits %>)</span>
+      <% else %>   
+       <span class="facet_value"><%= link_to h(display_value), add_facet_params(solr_fname, item.value) %> (<%= format_num item.hits %>)</span>
+      <% end %>
+    <% end %>
+    <div class="side_bar_content_seeall"> 
+    <% if params[:controller] == 'articles' %>
+    <%= link_to 'See More →', facet_articles_path(:id => display_facet.name, :params => params_for_facet_values.merge("facet.limit" => 500, "width" => 490)), :class=>'more_facets_link' %></div>    
+    <% else %>
+      <%= link_to 'See More →', catalog_facet_path(:id => display_facet.name, :params => params_for_facet_values.merge("facet.limit" => 500, "width" => 490)), :class=>'more_facets_link' %></div>
+    <% end %>
+    </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,16 @@
+<div id="video_header">
+  Browse by Genre
+  <img src="images/content_divider.png" width="490" height="5" alt=" " />
+</div>
+<div id="video_genres">
+  <ul class="genre_list">
+    <li class="genre"><%= link_to h("Action/Adventure"), add_facet_params(:subject_facet, "Action and adventure films") %></li>
+    <li class="genre"><%= link_to h("Animated"), add_facet_params(:subject_facet, "Animated films") %></li>
+    <li class="genre"><%= link_to h("Comedy"), add_facet_params(:subject_facet, "Comedy films") %></li>
+    <li class="genre"><%= link_to h("Documentary"), add_facet_params(:subject_facet, "Documentary films") %></li>
+    <li class="genre"><%= link_to h("Horror"), add_facet_params(:subject_facet, "Horror films") %></li>
+    <li class="genre"><%= link_to h("Mystery"), add_facet_params(:subject_facet, "Detective and mystery films") %></li>
+    <li class="genre"><%= link_to h("Science fiction"), add_facet_params(:subject_facet, "Science fiction films") %></li>
+    <li class="genre"><%= link_to h("International"), add_facet_params(:subject_facet, "Foreign films") %></li>
+  </ul>
+</div>

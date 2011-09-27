@@ -1,0 +1,28 @@
+<div id="title" class="request-heading"><h1>Request this Item</h1></div>
+
+<div id="content_area">
+
+  <div id="request_container">
+    <% form_tag(create_hold_account_request_path) do %>
+  
+      <p class="request-call-select">
+      <% if @document.availability.holdable_call_numbers.count == 1 %>
+        <%= @document.availability.holdable_call_numbers[0] %>
+      <% else %>
+        <%= label_tag "call_number", "Please select an item: #{select_tag("call_number", options_for_select(@document.availability.holdable_call_numbers))}" %>
+      <% end %>
+      </p>
+    
+      <p class="request-delivery-select"> 
+        <%= label_tag "library_id", "Deliver to: #{select_tag("library_id", options_for_select(@library_list.names_and_ids))}" %>
+      </p>
+      <%= hidden_field_tag(:id, params[:id]) %>
+  
+      <p class="request-submit">
+        <%= submit_tag "Place Request" %>
+        <%= link_to 'cancel', catalog_path(params[:id]), :target => "_top" %>
+      </p>  
+    <% end %>
+  </div>
+
+</div>

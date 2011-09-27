@@ -1,0 +1,124 @@
+<%= document.marc_display.title %> <%= document.marc_display.part %> <%= document.marc_display.medium %> <%= document.marc_display.subtitle %>
+<% -%>			
+<%= document.marc_display.responsibility_statement %>
+<% -%>
+
+Format:
+<%= document.values_for(:format_facet).collect do |f|
+		field_label(f)
+		end.join(' | ') rescue 'n/a' %>
+<% -%>
+<% unless document.marc_display.physical_description.empty? -%>
+<% document.marc_display.physical_description.each do |v| -%>
+<%= v %>
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.marc_display.technical_details.empty? -%>
+<% document.marc_display.technical_details.each do |v| -%>
+<%= v %>
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.marc_display.uniform_title.empty? -%>
+
+Uniform title:
+<% document.marc_display.uniform_title.each do |v| -%>
+<%= v %>
+<% end %>
+<% end %>
+<% -%>
+<% unless document.marc_display.edition.empty? -%>
+
+Edition:
+<%= document.marc_display.edition -%>
+<% end -%>
+<% -%>
+<% unless document.marc_display.series_subfields.empty? -%>
+
+Series:
+<% document.marc_display.series_subfields.each do |sf| -%>
+<%= sf %>
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.marc_display.publication_statement.empty? -%>
+
+Publication:
+<%= document.marc_display.publication_statement.join(' ') %>
+<% end -%>
+<% -%>			
+<% unless document.marc_display.label_no.empty? -%>
+<%= label_no_label(document) %>
+<% document.marc_display.label_no.each do |label_number| -%>
+<%= label_number %>
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.marc_display.track_list.empty? -%>
+
+Track list:
+<% document.marc_display.track_list.each do |track| -%>
+<%= track %>
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.marc_display.performers.empty? -%>
+
+Performer(s):
+<% document.marc_display.performers.each do |performer| -%>
+<%= performer -%>
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.marc_display.credits.empty? -%>
+
+Credits:
+<% document.marc_display.credits.each do |credit| -%>
+<%= credit %>
+<% end -%>
+<% end -%>
+<% -%>			
+<% unless document.marc_display.recording_information.empty? -%>
+
+Recording information:
+<% document.marc_display.recording_information.each do |info| -%>
+<%= info %>
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.marc_display.note.empty? and document.marc_display.with_note.empty? and document.marc_display.bibliographical_references_note.empty? %>
+
+Notes:
+<% document.marc_display.note.each do |v| -%>
+<%= v %>
+<% end -%>
+<% -%>
+<% unless document.marc_display.with_note.empty? -%>
+<% document.marc_display.with_note.each do |v| -%>
+<%= v %>
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.marc_display.bibliographical_references_note.empty? -%>
+<% document.marc_display.bibliographical_references_note.each do |v| -%>
+<%= v %>
+<% end -%>
+<% end -%>
+<% end -%>
+<% -%>
+<% unless document.marc_display.cited_in.empty? -%>
+
+Cited in:
+<%= document.marc_display.cited_in %>
+<% end -%>
+<% -%>
+<% unless document.marc_display.local_note.empty? -%>
+
+Local Notes:
+<% document.marc_display.local_note.each do |v| -%>
+<%= v %>
+<% end -%>
+<% end -%>
+<% -%>
+<%= render :partial => 'catalog/status', :locals => { :document => document }  %>

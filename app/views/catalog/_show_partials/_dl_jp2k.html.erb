@@ -1,0 +1,140 @@
+<% if request.env['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest' %>
+	<%= javascript_include_tag 'application' %>
+	<%= stylesheet_link_tag 'application' %>
+<% end %>
+
+<div class="itemShowView document" id="Doc<%= document[:id] %>">
+  
+	<div id="identifierFields">
+	  <% heading_title = get_heading_title(@document.value_for(:main_title_display), @document.value_for(:series_title_display), @document.value_for(:title_display)) %>
+		<h1 id="titleField"><%= heading_title %></h1>
+		<!-- 	This should be the display quality data about this item, as human readable as possible. 
+			For example, we should include the season information, for comic books, television shows, and other works
+			that are divided into parts (i.e., 245n or document.marc.part) and we should include the responsibility 
+			statement, i.e., the author or editor or whatever of a work, as their name appears on the book, which will 
+			often differ from the authorized forms of people's names as they appear in other marc fields
+		-->
+		<div id="respStmtField">
+			<% unless @document.value_for(:author_display) == 'n/a' %>
+			<%= @document.value_for :author_display %>
+			<% end %>
+		</div>
+	</div>
+	
+	
+	<div id="details">	
+		<dl>
+  			<% #------------ Title ------------- %>
+        <% unless @document.value_for(:main_title_display) == 'n/a' %>
+        <dt>Title</dt>
+        <dd><%= @document.value_for :main_title_display %></dd>
+        <% end %>
+        
+        <% unless @document.value_for(:series_title_display) == 'n/a' %>
+        <dt>Series</dt>
+        <dd><%= @document.value_for :series_title_display %></dd>
+        <% end %>
+        
+				<% unless @document.value_for(:alternate_title_display) == 'n/a' %>
+				<dt>Alternate Title</dt>
+				<% @document.values_for(:alternate_title_display).each do |v| %>
+				<dd><%= v %></dd>									
+				<% end %>
+				<% end %>
+        
+				<% #------------ Author ------------- %>
+				<% unless @document.value_for(:author_display) == 'n/a' %>
+				<dt>Creator</dt>
+				<% @document.values_for(:author_display).each do |v| %>
+				<dd>
+				  <%# use author_display for display (link text) but author_facet for searching (link URL) %>
+				  <% author_facet = @document.values_for(:author_facet).find {|f| v =~ /^#{f}/ } unless @document.values_for(:author_facet).nil? %>
+				  <% q = author_facet.blank? ? v : author_facet %>
+		      <%= link_to v, catalog_index_path({:focus=>'author', :q=>q}) %>
+				</dd>
+				<% end %>
+				<% end %>
+
+				<% #------------ Date Created------------- %>
+				<% unless @document.value_for(:year_display) == 'n/a' %>
+				<dt>Date Created</dt>
+				<% @document.values_for(:year_display).each do |v| %>
+				<dd><%= v %></dd>									
+				<% end %>
+				<% end %>
+				
+				<% #------------ descmeta fields  ------------- %>
+    		<% unless @document.value_for(:desc_meta_file_display) == 'n/a' %>
+				<dt>Description</dt>
+				<dd><%= @document.value_for(:desc_meta_file_display, '') %></dd>
+    		<% end %>
+				
+				<% #------------ Type------------- %>
+				<% unless @document.value_for(:genre_facet) == 'n/a' %>
+				<dt>Type</dt>
+				<% @document.values_for(:genre_facet).each do |v| %>
+				<dd><%= v %></dd>									
+				<% end %>
+				<% end %>
+				
+				<% #------------ Composition Era ------------- %>
+				<% unless @document.value_for(:composition_era_facet) == 'n/a' %>
+				<dt>Composition Era</dt>
+				<% @document.values_for(:composition_era_facet).each do |v| %>
+				<dd><%= v %></dd>									
+				<% end %>
+				<% end %>
+				
+				
+				<% #------------ Staff Notes ------------- %>
+    			<% unless @document.value_for(:note_display) == 'n/a' %>
+				<dt>Note</dt>
+	    		<% @document.value_for(:note_display).each do |v| %>
+				<dd><%= v %></dd>
+				<% end %>
+				<% end %>
+				
+				<% #------------ Location ------------- %>
+    			<% unless @document.value_for(:location_display) == 'n/a' %>
+				<dt>Location</dt>
+	    		<% @document.value_for(:location_display).each do |v| %>
+				<dd><%= v %></dd>
+				<% end %>
+				<% end %>
+				
+        <% unless @document.value_for(:media_retrieval_id_display) == 'n/a' %>
+          <dt>Retrieval ID</dt>
+          <% @document.values_for(:media_retrieval_id_display).each do |v| %>
+            <dd><%= v %></dd>									
+          <% end %>
+        <% end %>
+				
+				<% #------------ Collection  ------------- %>
+				<% unless @document.value_for(:digital_collection_facet) == 'n/a' %>
+				<dt>Collection</dt>
+				<% @document.values_for(:digital_collection_facet).each do |v| %>
+				<dd><%= link_to v, add_facet_params(:digital_collection_facet, v).merge(:action=>nil,:id=>nil) %></dd>
+				<% end %>
+				<% end %>
+		</dl>	
+		
+    
+	</div><!--end #details -->
+	
+	
+	<!-- #availability -->
+
+</div>
+
+<iframe src="<%= @document.dl_jp2k_viewer %>" width="840px" height="820px" frameborder="0"></iframe>
+
+<% sidebar_items << capture do %>
+  <div id="sub1">
+  <div id="sub1Inner">
+	<div class="previewThumbImg">
+  		<span class="jp2kPreview"><%= image_tag document.dl_jp2k_preview, :alt => "Image preview" %></span>
+  </div>
+  <%= render :partial => 'catalog/_show_partials/subjects', :locals => { :document => document } %>
+  </div>
+  </div>
+<% end %>

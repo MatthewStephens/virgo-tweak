@@ -1,0 +1,17 @@
+<h1>Create a New Map User</h1>
+
+<%= error_messages_for :maps_user %>
+
+<% form_for(@maps_user) do |f| -%>
+<fieldset>
+<div class="row">
+  <%= label(:maps_user, :computing_id, "Computing ID") %>
+  <%= f.text_field :computing_id %>
+</div>
+<div class="row">
+  <%= label_tag '' %>
+  <%= f.submit "Create", :class => 'button' %> &nbsp; or <%= link_to 'cancel', maps_users_path %>
+  </div>
+</fieldset>
+<% end -%>
+

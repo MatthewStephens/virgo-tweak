@@ -1,0 +1,8 @@
+/*
+uva-colorbox.css - UVa customizations to the "ColorBox" JavaScript image viewer (jQuery lightbox plugin)
+  These styles override or supplement the ones in public/javascripts/colorbox/example1/colorbox.css
+*/
+#cboxCurrent{position:absolute; bottom:20px !important;}
+#cboxPrevious{position:absolute; bottom:21px !important;}
+#cboxNext{position:absolute; bottom:21px !important;}
+#cboxClose{position:absolute;}

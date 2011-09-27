@@ -1,0 +1,46 @@
+<% @add_to_html_head = capture do %>
+  <%= javascript_include_tag 'account.js' %>
+<% end %>
+
+<div id="list_heading"><h1>My Account</h1></div>
+
+<div class="account_container">
+  <div class="vcard">
+    <h2><span class="fn"><%= @user_patron.display_name %></span> (<span class="uid"><%= @user_patron.computing_id %></span>)</h2>
+    <p class="title"><%= "#{@user_patron.title} &ndash; " unless @user_patron.title.blank? %><%= @user_patron.profile %></p>
+    <p class="org"><%= @user_patron.organizational_unit %></p>
+    <p class="adr"><%= @user_patron.physical_delivery %></p>
+    <p class="email"><%= @user_patron.email %></p>
+    <p class="tel"><%= @user_patron.telephone %></p>
+  </div>
+
+  <% if @user_patron.barred? %>
+    <p class="user-status"><span class="user-status-name">Barred</span> <a href="#" class="whats-this">What's this?</a> <a href="http://www2.lib.virginia.edu/askalibrarian/">Contact the Library</a></p>
+  <% end %>
+  
+  <div class="account-tasks">
+    <h2>Tasks</h2>
+    <ul>
+      <li><%= link_to "Renew items", renew_all_path %></li>
+      <% if @user_patron.faculty? %>
+        <li><%= link_to "Request LEO delivery", "http://www2.lib.virginia.edu/leo" %></li>
+      <% end %>
+      <% if @user_patron.faculty? or @user_patron.continuing_education? %>
+        <li><%= link_to "Request interlibrary loan", "http://guides.lib.virginia.edu/requests" %></li>
+      <% end %>
+      <% unless @user_patron.undergraduate? %>
+        <li><%= link_to "Place course reserve request (Print &amp; Collab)", "http://www2.lib.virginia.edu/faculty/course_materials.html" %></li>
+      <% end %>
+      <li><%= link_to "Request a purchase (books, videos, etc.)", "https://www.lib.virginia.edu/purchaserequest" %></li>
+      <li><%= link_to "Request scanning of Special Collections materials", "http://tracksys.lib.virginia.edu/request" %></li>
+    </ul>
+  </div>
+</div>
+
+<% sidebar_items << capture do %>
+  <%= render :partial => 'sidebar', :locals => {:user => @user_patron} %>
+<% end %>
+
+<% if @user_patron.barred %>
+  <%= render :partial => 'barred' %>
+<% end %>

@@ -1,0 +1,49 @@
+<%= document.value_for :title_display %>
+
+<%= document.value_for :accession_display %>
+
+URLs:
+<%= document.value_for :thumb_obv_display %>		
+<%= document.value_for :thumb_rev_display %>
+
+Title:
+<%= document.value_for :title_display %>
+
+Mint:
+<%= document.value_for :mint_display %>
+
+Denomination:
+<%= document.value_for :denomination_display %>
+
+Material:
+<%= document.value_for :material_display %>
+
+Format:
+<%= document.value_for :format_facet %>
+
+Location:
+<%= document.value_for :location_facet %>
+
+Accession:
+<%= document.value_for :accession_display %>
+<% if document.has?(:region_facet) -%>
+
+Region(s):
+<% document.values_for(:region_facet).each do |val| -%>
+<%= val %>
+<% end -%>
+<% end -%>
+
+Collections:
+<% document.values_for(:collection_facet).each do |val| -%>
+<%= val %>
+<% end -%>
+
+Subjects:
+<% document.values_for(:subject_facet).each do |val| -%>
+<%= val %>
+<% end -%>
+
+Full View:
+<%= document.value_for(:url_display) %>
+

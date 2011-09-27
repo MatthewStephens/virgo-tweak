@@ -1,0 +1,82 @@
+<!-- Holdings, physical and online -->
+<div id="availability">
+	<h2>Availability</h2>
+	
+  	<% #------------ Online ------------- %>
+  	<% if document[:marc_display] %>
+  	<% unless document.marc_display.nil? or document.marc_display.online_versions.empty? %>
+  	<div id="onlineAvailability" class="holding">
+  	  <h3><%= online_access_verb(document) %> Online</h3>
+  		<% document.marc_display.online_versions.each do |x| %>
+  		<div class="onlineHolding">
+  		  <%= link_to x["label"], x["value"], :target => '_blank' %>
+  		</div>
+  		<% end %>
+  	</div><!-- /#onlineAvailability -->
+  	<% end %>
+  	<% end %>
+
+  	<% #--------- DL Text Object  ------------- %>
+  	<% if document.has?(:source_facet, 'Digital Library') and (document[:content_model_facet].to_s == 'text' or document[:content_model_facet].to_s == 'finding aid') %>
+  	  <% unless document.doc_sub_type == :finding_aid %>
+  	    <div id="onlineAvailability" class="holding">
+					<h3><%= online_access_verb(document) %> Online</h3>
+					<div class="onlineHolding">
+	  	    	<%= xtf_url_link(document) %>
+					</div>
+  	    </div>
+  	  <% end %>
+  	<% end %>
+
+  	<% #--------- Digital Book Object  ------------- %>
+  	<% if document.has?(:content_model_facet, 'digital_book') %>
+  	    <div id="onlineAvailability" class="holding">
+					<h3><%= online_access_verb(document) %> Online</h3>
+					<div class="onlineHolding">
+	  	    	<%= link_to "http://#{request.host_with_port}#{document.dl_jp2k_applet_viewer(document[:id])}", document.dl_jp2k_applet_viewer(document[:id]) %>
+					</div>
+  	    </div>
+  	<% end %>
+	
+	<% if document[:marc_display]%>  
+    <script type="text/javascript">
+      // for info on this implementation, see http://markmail.org/message/o4wnzm7wdxbn66mu
+      // Configure these lines for your page
+      // Put in all the identifiers you know of to ensure a match
+      var keys = <%= google_preview_numbers(document) %>;
+      var cburl = "http://books.google.com/books";
+  
+      // Retrieve the info for these bibkeys           
+      var api_url = cburl + "?jscmd=viewapi&bibkeys=" + keys.join();
+      document.write(unescape("%3Cscript src=" + api_url +
+        " type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      var buttonImg =
+        'http://books.google.com/intl/en/googlebooks/images/gbs_preview_button1.gif'
+      for (isbn in _GBSBookInfo) {
+        var b = _GBSBookInfo[isbn];
+        if (b && (b.preview == "full" || b.preview == "partial")) {
+					document.write('<div id="googlePreview" class="holding">');
+					document.write('<h3>Read Online</h3>');
+          document.write('<a href="#" onclick="return open_second_win(\'' + b.preview_url + '\');">');
+          document.write('<img src="' + buttonImg + '" style="border:0;" alt="Google Books Preview" />'); 
+          document.write("</a></div>");
+          break;
+        }
+      }
+      function open_second_win(url) { 
+        second_win = window.open(url,"second_win")
+      }
+    </script>
+	<% end %>
+		
+	<% unless document.online_only? or document.has?(:content_model_facet, 'digital_book') %>
+	<div id="physicalAvailability" title="<%= document.id %>">
+		<%= image_tag 'ajax-loader.gif', :alt => "Loading availability", :class => "availability_loader" %>
+	</div>
+	<% end %>
+
+	</div>
+  
+<!-- /#availability -->

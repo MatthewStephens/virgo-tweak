@@ -1,0 +1,14 @@
+<dt class="technicalDetails">Technical details</dt>
+<dd class="technicalDetails">
+  <ul>
+    <li><%= link_to_ilink_record(document, 'Access in Virgo Classic') %></li>
+    <li>
+      <a href="" onclick="$('#marc_view_switch').toggle();return false;">Staff View</a>
+      <%- if document.respond_to?(:marc) -%>
+      <div id="marc_view_switch" style="display:none;">
+        <%= render "catalog/marc_view"  %>
+      </div>
+      <%- end -%>
+    </li>
+  </ul>
+</dd>

@@ -1,0 +1,73 @@
+<nav class="skip_nav visuallyhidden">
+  <h1>Skip directly to</h1>
+    <ul class="skip-nav-links">
+      <li><a href="#content">Main Content</a></li>
+      <li><a href="#SI">Search</a></li>
+      <%- if !home_page? -%>
+      <li><a href="#availableFilters">Filters and Tools</a></li>
+      <%- end -%>
+      <li><a href="http://www2.lib.virginia.edu/accessibility/">Library Disability Services</a></li>
+    </ul>
+</nav> <!-- end .skip_nav -->
+
+<header id="virgo_banner" role="banner">
+  
+  <div class="lib_banner_container">
+    <div class="lib_banner container_24">
+      <div id="uva_lib_logo" class="grid_14 alpha">
+        <a href="http://www2.lib.virginia.edu">
+          <img src="/images/uva_lib_logo.png" width="200" height="15" alt="University of Virginia Library" />
+        </a>
+        <div class="portal_status">
+      	  <%= session[:special_collections] ? "<span class='specialCollectionsHeader'>&nbsp;&nbsp;Special Collections</span><span class='returnToGeneral'><a href='/?special_collections=false'>View Full Collection</a></span>" : "" -%>
+      	</div>
+      </div> <!-- end #uva_lib_logo -->
+    
+      <nav id="account_nav" class="grid_10 omega">
+        <h1 class="visuallyhidden">Account Links</h1>
+        <ul class="account_links">
+          <% if current_user %>
+            <li class="first"><%= link_to "My Account (" + current_user.login + ")", account_index_path %></li>
+            <% if session[:notice_count] and session[:notice_count] > 0 %>
+              <li class="notice-badge"><%= link_to(session[:notice_count], notices_account_path) %></li>
+            <% end %>
+            <li><%= link_to "Sign out", logout_path %></li>
+          <% else %>
+            <li class="first"><a href="<%= login_path %>" id="login">Sign in</a></li>
+            <li><%= link_to "Non-U.Va. User?", "http://virgo.lib.virginia.edu/uhtbin/cgisirsi/0/UVA-LIB/0/1/1166/X/BLASTOFF" %></li>
+          <% end %>
+        </ul>
+      </nav> <!-- end #account_nav -->
+    </div> <!-- end .lib_banner -->
+  </div> <!-- end .lib_banner_container -->
+  
+  <div class="app_banner_container">        
+    <div class="app_banner container_24">
+      <hgroup class="virgo_logo grid_14 alpha">
+    	  <h1 class="virgo-logo-heading"><%= link_to "Virgo", catalog_index_path(:portal => :all), :id => "virgo_logo_link" %></h1>
+    	  <% if params[:controller] == 'articles' or params[:controller] == 'catalog' and params[:action] == 'index' and !home_page? -%>
+    	    <h2 class="search-scope <%= search_result_label.downcase %>-scope"><%= search_result_label %> Search</h2>
+    	  <% end %>
+    	</hgroup> <!-- end .virgo_logo -->
+  	
+    	<nav class="util_nav grid_10 omega" role="navigation">
+        <h1 class="visuallyhidden">Other Services</h1>
+        <ul class="util_links">
+          <li class="first"><a href="http://virgo.lib.virginia.edu/cgi-local/opac.pl?element=60/1315/X&amp;level=public" title="Virgo Classic">Virgo Classic</a></li>
+          <li><a href="http://virgo.lib.virginia.edu/uhtbin/cgisirsi/0/UVA-LIB/0/36/1163/X/BLASTOFF" title="Course Reserves">Course Reserves</a></li>
+          <li class="last"><a href="http://libra.virginia.edu" title="Libra: Online Archive of U.Va. Scholarship">Libra</a></li>
+        </ul>
+      </nav>
+    </div> <!-- end .app_banner -->
+  </div> <!-- end .app_banner_container -->
+  
+</header> <!-- end #virgo_banner -->
+
+<!--[if lt IE 9]>  
+<noscript>
+  <div class="ui-state-error error">
+   <h1 class="notice">Notice</h1>
+   This site requires an HTML5-compliant browser or the use of JavaScript.  Please enable JavaScript or upgrade to the latest version of Internet Explorer, Firefox, Safari, or Chrome in order to display this page properly.
+  </div>
+</noscript>
+<![endif]-->  

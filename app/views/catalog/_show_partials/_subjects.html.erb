@@ -1,0 +1,15 @@
+<div class="box menu" id="relatedSubjects">
+  
+  <% #------------ Subjects ------------- %>
+  <% if document.has?(:subject_facet) %>
+     	
+  	<h2>Related Subjects</h2>
+	<ul>
+  	  <% document.values_for(:subject_facet).each do |f| %>
+  	    <% f_display = f.gsub(/\s*--\s*/, ' &#8212; ') %>
+  		  <li><%= link_to f_display, add_facet_params('subject_facet', f).merge(:action=>nil) %></li>
+  		<% end %>
+  	</ul>
+  <% end %>
+
+</div>

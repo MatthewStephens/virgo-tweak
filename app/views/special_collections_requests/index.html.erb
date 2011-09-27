@@ -1,0 +1,54 @@
+<% @add_to_html_head = capture do %>
+  <meta http-equiv="refresh" content="60" > 
+<% end %>
+
+<div id="list_heading"><h1>Special Collections Requests</h1></div>
+
+<div class="tool_content spec_coll">
+	
+<div class="dateSelector">
+<% form_tag(special_collections_requests_path, :method => :get) do %>
+  Select a date: <%= date_select('range', 'date', :order => [:month, :day, :year])%>
+  <%= submit_tag "Go" %>
+<% end %>
+</div>
+
+<h3>Requests for <%= @date %></h3>
+<div class="requests-legend">
+  <span class="processed-label">Processed</span>
+  <span class="unprocessed-label">Unprocessed</span>
+  <span class="internal-label">Unprocessed (internal)</span>
+</div>
+<table id="special_collections_requests">
+<tr>
+  <th>Request ID</th>
+  <th>User ID</th>
+  <th>Name</th>
+  <th>Item</th>
+  <th>Requested</th>
+  <th>Processed</th>
+  <th>View Request</th>
+</tr>
+<% for request in @special_collections_requests -%>
+  <% if !request.processed_at.nil? %>
+  	<tr class="processed">
+  <% elsif request.internal? %>
+  	<tr class="unprocessed_internal">
+  <% elsif !request.internal? %>
+  	<tr class="unprocessed">
+  <% end %>
+    <td><%= h request.id %></td>
+    <td><%= h request.user_id %></td>
+    <td><%=  h request.name %></td>
+    <td>
+    <%= request.document.value_for(:title_display)%><br />
+    <%= request.document.value_for(:author_display)%>
+    </td>
+    <td><%= request.created_at.strftime("%I:%M%p")%></td>
+    <td><%= request.processed_at.strftime("%I:%M%p") rescue '&nbsp;'%></td>	
+    <td><%= link_to("View", edit_special_collections_request_path(request.id))%></td>
+  </tr>  
+<% end -%>
+</table>
+
+</div>

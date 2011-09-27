@@ -1,0 +1,21 @@
+<% if @featured_documents %>
+
+<div id="header">
+  Recently Added Items
+  <img src="images/content_divider.png" width="490" height="5" alt=" " />
+</div>
+<div id="recently_added_items">
+  <% featured_documents_rows.each do |row| %>
+    <div class="clearFix">
+      <% row.each do |document| %>
+        <div class="previewThumbImg">
+          
+         <%= link_to_document_from_cover document, :span => "coverImage album", :counter => -1  %>  
+          
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<% end %>

@@ -1,0 +1,157 @@
+/* ========================
+Page Hierarchy
+======================== */
+body {min-width:1010px;}
+#page {}
+#pageInner {}
+#topNavInner,
+	#headerInner,
+  #contentInner,
+  #footerInner {width:1010px; padding:0; margin:0 auto; text-align:left;}
+
+#header {background:url(../images/blacklight/blue_gradient_bg_hd3.gif) repeat-x top left; color:#fff;}
+#header, #headerInner {overflow:visible; position:relative; z-index:5;}
+#headerInner {min-height:80px;}
+
+#content {z-index: 0; padding-bottom:30px; background:#fff url(../images/blacklight/content_bg_tile-x.gif) repeat-x top left;}
+#content,
+#contentInner,
+  #contentInner2 {position:relative; overflow:hidden;}
+
+#main {min-height:400px; float:left; width:761px; float:right; margin-top:40px; clear:both; background:#fff url(../../images/main_col_center.gif) left top repeat-x; position:relative; overflow:hidden;}
+#mainInner {background:url(../../images/main_col_right_edge.png) no-repeat top right; position:relative; width:100%;}
+#mainInner2 {padding:80px 30px 0; overflow:visible; background: url(../../images/main_col_left_edge_gutter.png) left top no-repeat; min-height:420px; }
+#search {position:absolute; right:0; z-index:4; width:761px; float:right; padding:0; font-size:13px;}
+#searchInner {margin:3px 30px 0 30px; position:relative; width:701px; overflow:visible; display:block; padding:0; background: url(../../../../images/blacklight/search_L.gif) no-repeat bottom left;}
+
+#sub1 {width:264px; min-height:420px; float:left; margin:40px -233px 0 0; background:transparent url('../../../../images/left_col_left_edge.png') left top no-repeat;}
+#sub1Inner,
+  #sub2Inner {margin-left:16px; padding:20px 0 0;min-height:420px;background:transparent url(../../../../images/side_col_bg_repeat_x.png) 31px 0px repeat-x;}
+#sub1Inner {position:relative;}
+#sub1,
+  #sub1 div {overflow:visible;}
+
+#footer {background:#195DA3; color:#FFF;}
+#footerInner {}
+.col.first {}
+
+
+/* ========================
+Page Elements
+======================== */
+/* HEADER */
+#topNav {background:#0B1D38;}
+#topNavInner {position:relative; font:normal normal normal 11px/12px helvetica, arial, sans-serif;}
+	#topNavInner ul {display:block; position:relative; float:left; margin:0 0 0 7px;}
+	#topNavInner li {display:inline-block; float:left; overflow:hidden; text-transform:uppercase;}
+	#topNavInner li a, #topNavInner li a:visited, #topNavInner li a:hover {display:inline-block; padding:8px; color:#A2BCD0;}
+	#topNavInner li a:hover {background:#1C2D4E; color:#FFF;}
+	#topNavInner div.uvaLogo {float:right; margin-right:5px;}
+	#topNavInner .uvaLogo a#logo {display:block; height: 12px; width: 150px; position:relative; padding:8px 75px; background: url(../images/blacklight/uva_logo2.gif) center right no-repeat;}
+#branding {width:250px; float:left;}
+#branding a#logo:link,
+  #branding a#logo:visited,
+  #branding a#logo:hover,
+  #branding h1#logo{float:left; height:80px; width:300px; border-bottom:none;margin:0; background:none;}
+body.uvalib-hd1 #branding a#logo:link,
+  body.uvalib-hd1 #branding a#logo:visited,
+  body.uvalib-hd1 #branding h1#logo{height:30px;}
+#header p {padding:0; margin:0; font:italic normal normal 11px/14px helvetica, arial, sans-serif; color:#B0CFF4;}
+#header p.beta_message {text-align:left; width:320px; margin:25px 0 0 135px; float:left; }
+#headerInner .virgo_beta {float:left; padding-left:16px;}
+	#header img#virgo_beta {float: left;}
+#header #virgo_beta {border:none;}
+#header .aboutVirgo {display:block; float:right; margin:43px 261px 0 0; padding-right:10px; color:#EDAF3D; border-right: 1px solid #4E5E6D; font-size:11px;}
+#header .aboutVirgo:hover {color:#E7C584;}
+#globalUtilNav {position:absolute; z-index:20; top:40px; right:10px; width:auto; margin:53px 10px 0 0; clear:both;}
+#globalUtilNav * {clear:both;}
+#globalUtilNav li{overflow:hidden;}
+#globalUtilNav em.small{font-size:.85em;font-weight:bold;color:#CADCF3;}
+div.NetbadgeLogin {position:relative;}
+	div.NetbadgeLogin .login {display:block; font-style:normal; margin:0; padding-right:6px;}
+	.login .button { min-width:135px; padding:2px 10px 2px 10px; margin-bottom:2px; color:#264C84; font-weight:bold; border:1px solid #DBE8FA; background:#A5BDE4; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px;
+		background: -webkit-gradient(linear, left bottom, left top, color-stop(1, rgb(248,250,255)), color-stop(0.5, rgb(205,226,255)), color-stop(0.49, rgb(176,209,251)), color-stop(0, rgb(185,214,255)));
+		background: -moz-linear-gradient(top, #f8faff, #cde2e1 49%, #b0d1fb 50%, #b9d6ff);
+		}
+  .login {overflow:hidden;}
+	.login .button a,
+		.login .button a:hover,
+		.login .button span {display:block; min-width:135px; color:#264C84;}
+  .login .button span {padding-right:30px; background:url(../images/blacklight/admin_dropdown.gif) no-repeat right center;}
+	.login .button a:hover {color:#002B59; }
+	.login ul {display:none;/*shown on hover*/ background:#132951; border:1px solid #11264C;  border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px;  box-shadow: 1px 1px 2px #333; -moz-box-shadow: 1px 1px 2px #333; -webkit-box-shadow: 1px 1px 2px #333;}
+	.login ul li {min-width:155px; padding:0;}
+	.login ul li:hover {}
+div.NetbadgeLogin .login ul a:link,
+  div.NetbadgeLogin .login ul a:visited {min-width:135px; display:block; width:100%; padding:4px 10px; color:#FFF; text-decoration:none; border-bottom:1px solid #132242; border-top:1px solid #1B305C;}
+div.NetbadgeLogin .login ul a:hover {background:#24426E; border-bottom:1px solid #0C162B; border-top:1px solid #51688A;}
+div.NetbadgeLogin a.feedback, 
+  #header div.NetbadgeLogin a.feedback:hover {margin:0 3px; padding-right:12px; background:url(../../images/blacklight/arrow.gif) no-repeat right;}
+
+
+/* SEARCH */
+
+#ask_a_librarian {display:block; float:right; margin:0;}
+
+#search {overflow:hidden; padding:0; margin:0;}
+#search .tabNav {position:relative; z-index:6; overflow:hidden; width:100%; margin-top:15px;}
+#search .tabNav ul {display:block; float:left; position:relative; margin:0; overflow:hidden; background:transparent; }
+#search .tabNav ul li {display:block; float:left; position:relative; margin-left:3px;}
+#search .tabNav ul li a {display:block; padding:2px 8px 1px; background-color:none; color:#585C65; border:1px solid #AFD0F0; border-bottom:0; font-size:11px; font-weight:normal; text-decoration:none;}
+#search .tabNav ul li a.selected {background-color:#AFD0F0; border:1px solid #8ABDE3; border-bottom:0; color:#000;}
+#search .tabNav ul li a:hover {color:#2d5794; background:none;}
+#search .tabNav ul li a.selected:hover {background-color:#AFD0F0;}
+
+#search div.tabView div.tabContent {margin:-0; background: url(../../../../images/blacklight/search_R.gif) no-repeat bottom right;  overflow:hidden; clear:both; position:relative; width:100%;}
+#search form {display:block; height:32px; margin:0 5px; padding:7px 3px 8px; overflow:hidden; position:relative; background:url(../../../../images/blacklight/search_Center.gif) repeat-x top;}
+.searchFormDiv {display:block;float:left;width:auto;line-height:2.2em;}
+
+#search {}
+#searchButton span,
+  #searchButton input{padding:0;margin:0;height:auto;display:inline;}
+#search .button{width:75px; display:block;float:left;margin:0;border:none;background:transparent url(../../../../images/components/search/search_btn_top.gif) no-repeat scroll left top;text-align:center;}
+#search .button *{cursor:pointer;}
+#search .button .first-child{display:block;float:left;margin:0pt;padding:3px 0;width:100%;background:transparent url(../../../../images/components/search/search_btn_bot.gif) no-repeat scroll left bottom;}
+#search .button .first-child,#search .button button{font-size:11px;border:0pt none; line-height:32px; height:26px;}
+#search .button button,#search .button a{color:#FFF; display:block;line-height:26px;margin:0pt auto;min-height:10px;padding:0pt;text-align:center;background:none;float:left;width:100%;}
+#search #searchButton{width:75px;margin-left:10px; float:right;}
+#search #searchFieldSelect{margin-left:10px;}
+#search input.searchIn, #search input.searchInHome{border:1px solid #666; width:450px; height:21px; padding:5px; background:#FFF url(../../../../javascripts/ext-2.2/resources/images/default/form/text-bg.gif) repeat-x scroll 0 0; border:none; font-size:15px; border-top:1px solid #3f5679; border-left:1px solid #3d5a87;}
+#search .searchFilterField {width:120px; margin-top:7px;}
+
+.sampleSearches {float:left; width:447px; margin-bottom:5px; top:-19px; padding:10px; background:#FAF7E3; border:1px solid #E4DFA5;}
+#main .sampleSearches ul, #main .sampleSearches li {margin:0; padding:0;}
+
+/* CONTENT */
+#main hr,
+#sub1 .box hr{position:static;}
+#sub1 h2,
+#sub2 h2 {
+	margin-top: 0; font-size: 1.23em;}	
+
+/* #main .hd{margin:0 20px -10px 0;padding:0;background:url(../../images/content_col_backgrounds/title_2col_630-330.png) left top no-repeat;} */
+body.uvalib-t1 #main .hd{margin-right:0;/*width:994px;*/ background:url(../../images/content_col_backgrounds/title_1col_980.png) left top no-repeat;}
+#main .bd{margin:20px 20px 0 0;padding:0 20px 0 20px;}
+
+.printPreview {display:block; float:right; clear:both; overflow:hidden; margin:0 0 1em; padding:0 1em 0 2em; background:url(../images/blacklight/printer.gif) no-repeat 6px center;}
+
+/* FOOTER */ 
+#footer{clear:both;color:#A7BDDF;background:#4672AF url(../../../../images/global_footer/footer_gradient.png) top repeat-x;}
+#footerInner{padding-top:20px;line-height:2em;font-size:85%;/* ~11px */
+font-weight:bold;}
+#footer p{margin:0;}
+#footer .col{float:right;width:600px;text-align:right;}
+#footer .first{float:left;width:360px;text-align:left;}
+#footerHomeLink{font-size:114%;font-weight:bold;line-height:2.2em;color:#FFF;}
+#copyrightLink{font-size:120%;line-height:1em;font-weight:bold;}
+
+#footer a:link,
+#footer a:visited{font-weight:bold;color:#E6E8F5;border-bottom:1px solid #839DBF;text-decoration:none;}
+#footer a:hover,
+#footer a:hover{border-bottom:1px solid #FFF;text-decoration:none;background:none;}
+
+/* FDLP footer content */
+#fdlpInfo {clear: both;padding-top: 1em;line-height: 1.8em;font-weight: bold;border-left-color: #7499CF;}
+a#fdlpBadge, a#fdlpBadge:visited, a#fdlpBadge:hover {text-decoration: none;border: none;}
+#fdlpInfo img {vertical-align: top;}
+#fdlpInfo p {padding-top: 1em;border-top: 1px solid #648FC7;margin: 0;}

@@ -1,0 +1,14 @@
+<h1>Edit Location and Call Number Range for "<%= @map_guide.map.description %>"</h1>
+
+<%= error_messages_for :map_guide %>
+
+<% form_for(@map_guide) do |f| %>
+<fieldset>
+  <%= render :partial => 'form', :object => f %>
+  <div class="row">
+  <%= label_tag '' %>
+  <%= f.submit "Update", :class => 'button' %> &nbsp; or 
+  <%= link_to 'cancel', maps_path %>
+  </div>
+</fieldset>
+<% end %>

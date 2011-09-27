@@ -1,0 +1,12 @@
+<div id="title" class="request-heading"><h1>Request Complete</h1></div>
+
+<div id="content_area">
+
+  <div id="request_container">
+    <p>The following item has been requested:</p>
+    <p class="request-title"><%= full_title(@document, true) %></p>
+    <p>You will receive a confirmation email on the next business day with more information about your request.  Questions?  Please <a href="http://www2.lib.virginia.edu/askalibrarian" target="_top">contact a librarian</a>.</p>
+    <p class="request-return"><%= link_to '&larr; Return to item details', catalog_path(params[:id]), :target => "_top" %></p>
+  </div>
+
+</div>

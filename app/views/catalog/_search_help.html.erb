@@ -1,0 +1,32 @@
+<div class="search_help help_section">
+  <header class="help_header entry_header">
+    <h1>What's Included?</h1>
+  </header>
+  <div class="help_content entry_content">
+    <p class="split_content">Virgo contains both the <strong>catalog</strong>&mdash;with materials like books, print journals, DVDs, maps, and digitized materials&mdash; and <strong>online articles</strong> from our rich array of subscription journals.  The sub-collections at right have custom searches for media- and discipline-specific materials.</p>
+    <h2 class="split-heading">Collections</h2>
+    <ul class="split_list">
+      <li><%= link_to h("Digital Collections"), catalog_index_path(:catalog_select => "catalog", :"f_inclusive[source_facet][Digital Library]" => "1", :"f_inclusive[source_facet][UVA Library Digital Repository]" => "1") %></li>
+      <li><%= link_to 'Video Search', catalog_index_path(:portal=>:video) %></li>
+      <li><%= link_to 'Music Search', catalog_index_path(:portal=>:music) %></li>
+    </ul>
+  </div>
+  <header class="help_header entry_header">
+    <h1>Getting Started</h1>
+  </header>
+  <div class="help_content entry_content">
+    <p><img src="/images/home-catlin.jpg" alt="Beautiful Grassy Bluffs, 110 Miles Above St. Louis by George Catlin" title="Beautiful Grassy Bluffs, 110 Miles Above St. Louis by George Catlin" height="120" width="120"/>Type some keywords, an author's name, or even a full title in the search box above, optionally limit your search to just the catalog or online articles, then click "Search."  Once you've settled on either a catalog or article search, you can filter results by author, publication period, and more.  Need to craft a complex search?  Choose an advanced search option to the right of the search box.</p>
+  </div>
+  <header class="help_header entry_header">
+    <h1>Next Steps</h1>
+  </header>
+  <div class="help_content entry_content">
+    <p class="split_content">The Library offers more than just search&mdash;subject and departmental guides will point you toward the best databases and online resources in your area, while our comprehensive database list and journal finder tools can help you find specific articles, datasets, or other resources.</p>
+    <h2 class="split-heading">Resources</h2>
+    <ul class="split_list">
+      <li><a href="http://research.lib.virginia.edu">Subject Guides</a></li>
+      <li><a href="http://guides.lib.virginia.edu/az">Databases A&ndash;Z</a></li>
+      <li><a href="http://guides.lib.virginia.edu/journalfinder">Journal Finder</a></li>
+    </ul>
+  </div>
+</div>

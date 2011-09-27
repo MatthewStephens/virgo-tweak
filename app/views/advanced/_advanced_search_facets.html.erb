@@ -1,0 +1,22 @@
+<div id="advanced_search_facets">
+  <ul class="facet-categories">
+    <li class="facet-category-heading facet-category-label first">Limit Results by:</li>
+<% facet_field_names.each_with_index do |solr_fname, index| %>
+  <% display_facet = @response.facets.detect {|f| f.name == solr_fname} -%>
+  <% # if it's NOT a refinement facet -- they are handled in get_refine_facet -%>
+  <% if display_facet && display_facet.items.length > 0 %>
+     <li class="facet-category<%= ' last' if index == facet_field_names.length - 1 %>">
+       <span class="facet-category-label"><%= facet_field_labels[solr_fname] -%></span>
+       <ul class="facet-choices">
+        <% facet_count = 0 %>
+        <% display_facet.items.each_with_index do |item, index| -%>
+          <% next if item.value.blank? %>
+          <li class="facet-choice<%= ' first' if facet_count == 0 %><%= ' last' if index == display_facet.items.length - 1 %>"><%= check_box_tag "f_inclusive[#{solr_fname}][#{item.value.to_sym}]", 1, facet_value_checked?(solr_fname, item.value)%> <%= label_tag "f_inclusive_#{solr_fname}[#{item.value.to_sym}]", h(item.value) %> (<%= format_num item.hits %>)</li>
+          <% facet_count += 1 unless item.value.blank? %>
+        <% end -%>
+      </ul>
+    </li>
+  <% end %>
+<% end %>
+</ul>
+</div>

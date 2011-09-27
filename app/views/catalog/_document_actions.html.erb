@@ -1,0 +1,20 @@
+<div id="ActionListContainer">
+	<ul class="action_list">
+		<li class="list_title">Starred Items</li>
+		<li class="list_body">
+			<ul class="action_list_menu all_star_menu">
+				<li class="all_action"><a class="view_star_list" href="/folder">View Starred Items</a></li>
+				<li class="all_action"><%= link_to "Clear Starred Items", clear_folder_path, :class => 'clear_all' %></li>
+			</ul>
+			<ul class="action_list_menu">
+				<li class="add_action"><%= link_to "Cite", citation_path %></li>
+				<li class="add_action"><%= link_to "Email", email_path %></li>
+				<li><a href="/folder?view=print" target="_blank">Print</a></li>
+				<li class="refworks_action"><%= link_to "Export (Refworks)", refworks_texts_path %>
+				</li>
+				<li class="add_action"><%= link_to "Export (EndNote/Zotero)", endnote_path %></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+

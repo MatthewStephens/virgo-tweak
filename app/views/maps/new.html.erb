@@ -1,0 +1,13 @@
+<h1>Create a New Map</h1>
+
+<%= error_messages_for :map %>
+
+<% form_for(@map) do |f| -%>
+<fieldset>
+  <%= render :partial => 'form', :object => f %>
+    <div class="row">
+    <%= label_tag '' %>
+    <%= f.submit "Create", :class => 'button' %> &nbsp; or <%= link_to 'cancel', maps_path %>
+    </div>
+</fieldset>
+<% end -%>

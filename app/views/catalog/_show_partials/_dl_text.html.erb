@@ -1,0 +1,73 @@
+<% if request.env['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest' %>
+	<%= javascript_include_tag 'application' %>
+	<%= stylesheet_link_tag 'application' %>
+<% end %>
+
+<div class="itemShowView document" id="Doc<%= document[:id] %>">
+	
+	<div id="identifierFields">
+		<h1 id="titleField"><%= dl_text_title(document) %></h1>
+		<!-- 	This should be the display quality data about this item, as human readable as possible. 
+			For example, we should include the season information, for comic books, television shows, and other works
+			that are divided into parts (i.e., 245n or document.marc.part) and we should include the responsibility 
+			statement, i.e., the author or editor or whatever of a work, as their name appears on the book, which will 
+			often differ from the authorized forms of people's names as they appear in other marc fields
+		-->
+		<div id="respStmtField">
+			<% (@document.value_for :author_display).split(';').each do |sf| %>
+				<%= sf.strip %><br/>
+			<% end %>
+		</div>
+	</div>
+
+	<div id="details">	
+		<dl>
+				<% #------------ Author ------------- %>
+				<% unless @document.value_for(:author_display) == 'n/a' %>
+				<dt>Creator</dt>
+				<% @document.values_for(:author_display).each do |v| %>
+				<dd><%= link_to v, catalog_index_path({:focus=>'author',:q=>v.sub(/, \d\d\d\d-\d\d\d\d/,'')}) %></dd>
+				<% end %>
+				<% end %>
+
+				<% #------------ Year ------------- %>
+        <% unless document.value_for(:year_display) == 'n/a' or document.value_for(:year_display).blank? %>
+  			  <dt>Date</dt>
+          <dd><%= document.value_for :year_display %></dd>
+        <% end %>
+				
+				<% #------------ Composition Era ------------- %>
+				<% unless @document.value_for(:composition_era_facet) == 'n/a' %>
+				<dt>Composition Era</dt>
+				<% @document.values_for(:composition_era_facet).each do |v| %>
+				<dd><%= v %></dd>									
+				<% end %>
+				<% end %>
+				
+				<% #------------ Collection  ------------- %>
+				<% unless @document.value_for(:digital_collection_facet) == 'n/a' %>
+				<dt>Collection</dt>
+				<% @document.values_for(:digital_collection_facet).each do |v| %>
+				<dd><%= link_to v, add_facet_params(:digital_collection_facet, v).merge(:action=>nil,:id=>nil) %></dd>
+				<% end %>
+				<% end %>
+				
+		</dl>	
+	</div><% # end #details %>
+  
+  <%= render :partial => "catalog/_show_partials/availability", :locals => { :document => document } %>
+  
+</div>
+
+<% sidebar_items << capture do %>
+  <div id="sub1">
+  <div id="sub1Inner">
+	<div class="previewThumbImg">
+		<span class="coverImage" title="<%= document[:id] %>">
+			<%= image_tag 'ajax-loader.gif', :class=>'ajaxLoader', :alt => "Loading" %>
+		</span>
+	</div>
+  <%= render :partial => 'catalog/_show_partials/subjects', :locals => { :document => document } %>
+  </div>
+  </div>
+<% end %>

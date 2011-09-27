@@ -1,0 +1,37 @@
+<div class="document clearFix" id="Doc<%= document[:id] %>">
+	<div class="details">
+	  
+	  <dl class="metadata hd">
+			<dt class="hide">Title</dt>
+			<dd class="titleField"><span class="listItemNumber"><%= counter + 1 + offset %></span>
+			<%= link_to_document document, :label => :title_display, :counter => counter + 1 + offset, :bookmarks_view => bookmarks_view %></dd>
+		</dl>
+		
+		<dl class="metadata">
+      
+			<dt>Type</dt>
+			<dd>Text Resource</dd>
+      
+			<dt>Creator</dt>
+			<dd><%= document.value_for :author_display %></dd>
+			
+			<dt>Year</dt>
+      <dd><%= document.value_for :year_facet %></dd>
+            
+			<dt>Collection</dt>
+			<dd><%= document.value_for :digital_collection_facet %> </dd>
+      
+      <% unless document[:doc_sub_type] == :finding_aid %>
+			  <dt>Full Text</dt>
+			  <dd><%= xtf_link('view', document) %></dd>
+      <% end %>
+		</dl>
+	</div>
+	
+	<% unless bookmarks_view or params[:catalog_select] == 'all' %>
+	<div class="tools">
+    <%= render :partial=>'folder_control', :locals=>{:document=>document} %>
+  </div>
+  <% end %>
+  
+</div>

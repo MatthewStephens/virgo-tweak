@@ -1,0 +1,13 @@
+<div class="row">
+  <%= label(:map_guide, :location_id)  %>
+  <%= collection_select(:map_guide, :location_id, @locations, :id, :code, options = {:prompt => "Select a location"}) %>
+</div>
+
+<div class="row">
+  <%= label(:map_guide, :call_number_range)  %>
+  <%= form.text_field :call_number_range %>
+</div>
+
+<div class="row">
+<%= form.hidden_field :map_id %>
+</div>

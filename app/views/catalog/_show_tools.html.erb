@@ -1,0 +1,50 @@
+<div class="add_star">
+	  <div class="folder_form">
+	    <%= render :partial=>'folder_control', :locals=>{:document=>@document} %>
+	  </div>
+</div>
+
+<div id="ActionListContainer" role="complementary">	
+	<ul class="action_list">
+		<li class="list_title">Item Actions</li>
+		<li class="list_body">
+			<ul class="action_list_menu all_star_menu">
+				<li class="all_action"><a class="view_star_list" href="/folder">View Starred Items</a></li>
+			</ul>
+			<ul class="action_list_menu">
+				<% if @document.respond_to?(:export_as_openurl_ctx_kev) %>
+  				<li class="Z3988-container"><span class="Z3988" title="<%= @document.export_as_openurl_ctx_kev(@document.get(:format_facet) || '') %>" ><!-- COinS --></span></li>
+				<% end %>
+				
+				<% if (@document.respond_to?(:export_as_mla_citation_txt) || @document.respond_to?(:export_as_apa_citation_txt)) %>
+					<li class="cite_this">
+						<%= link_to "Cite", citation_catalog_path(:id => @document.id), {:id => 'citation'} %>
+    			</li>
+  			<% end %>
+
+		    <li class="email_this">
+		       <%= link_to "Email", email_catalog_path(:id => @document.id), {:id => 'email'} %>
+		    </li>
+		
+		    <li class="sms_this">
+		       <%= link_to "Text Message", sms_catalog_path(:id => @document.id), {:id => 'sms'} %>
+		    </li>
+
+			  <% if @document.export_formats.keys.include?( :refworks_marc_txt ) %>
+			    <li class="refworks">
+			      <%= link_to "Export (RefWorks)", refworks_export_url(@document), :target => '_blank' %> 
+			    </li>
+			  <% end %>
+  
+			  <% if @document.export_formats.keys.include?( :endnote ) %>
+			     <li class="endnote">
+			       <%= link_to "Export (EndNote/Zotero)", catalog_path(@document[:id], :format => 'endnote') %>
+			     </li>
+			  <% end %>
+
+    		<li class="delicious"><%= link_to 'Export (Delicious)', delicious_export_url(@document), :target=>:_blank %></li>
+
+			</ul>
+		</li>
+	</ul>
+</div>

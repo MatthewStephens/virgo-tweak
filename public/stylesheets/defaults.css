@@ -1,0 +1,108 @@
+
+/* ========================
+General Reset
+======================== */
+html,body,div,span,applet,object,iframe,
+  h1,h2,h3,h4,h5,h6,p,blockquote,pre,
+  a,abbr,acronym,address,big,cite,code,
+  del,dfn,em,font,img,ins,kbd,q,s,samp,
+  small,strike,strong,sub,sup,tt,var,
+  b,u,i,center,
+  dl,dt,dd,ol,ul,li,
+  fieldset,form,label,legend,
+  table,caption,tbody,tfoot,thead,tr,th,td {margin:0; padding:0; border:0; outline:0; vertical-align:baseline; background:transparent;}
+body {font:normal normal normal 13px/20px arial,helvetica,sans-serif; color:#121212; background:#e4ebfd;}
+div {position:relative; overflow:hidden;}
+ul,ol {list-style:none outside;}
+a img {border:none;}
+a, a:hover, a:visited {text-decoration:none; color:#4079A0;}
+hr {position:absolute; left:-3000px;}
+
+
+/* ========================
+HTML Elements
+======================== */
+
+/* Default top and bottom margins of content block elements */
+#main p,
+  #main ol,
+  #main ul,
+  #main dl,
+  #main .spacedList li{
+  margin:0 0 1.23em 0;}
+p, ul, ol, dl, blockquote {margin-bottom: 1.54em;}
+
+/* Headings in #main */
+#main h1 {font-size: 1.54em; font-weight: bold; margin: 0 0 1.54em; line-height: 1.923em; color: #5B4418;}
+body.uvalib-t1 #main h1{background:url(../../images/content_col_backgrounds/title_shadow.png) left bottom no-repeat;}
+#main h2{line-height:1.25em;font-weight:normal;font-size:139%;margin:0 0 .7em 0;color:#8F8A82;}
+#main h2.first{margin-top:0;}
+#main h3{font-size:108%;line-height:1.45em;margin:1.1em 0;color:#333;}
+#main h4{margin:1.25em 0;font-family:Georgia,"Times New Roman",Times,serif;font-size:100%;font-weight:bold;}
+
+/* Blockquote in #main */
+#main blockquote{margin-left:2.4em;font-style:italic;}
+
+/* Ordered and unordered lists in #main */
+#main ol,
+#main ul ol{/* Nudge list items over a little further left than the default 40px left margin/padding. 
+See http://developer.mozilla.org/en/docs/Consistent_List_Indentation */
+margin-left:15px;padding-left:15px;}
+#main ul {margin-left:1.2em;padding-left:0;list-style:none;}
+#main ul ul,
+  #main ul ol,
+  #main ol ul,
+  #main ol ol {margin-top:0;margin-bottom:0;}
+#main ul ol li,
+  #main ol ul ol li {padding-left:0;background:none;}
+#main ul li,
+  #main ol ul li {padding-left:15px;}
+
+/* Ordered and unordered lists in #main with some spacing between items */
+#main .spacedList dt{margin-top:1.25em;}
+#main .spacedList .unspacedList{margin-top:1.25em;}
+#main .spacedList .unspacedList li{margin-top:0;margin-bottom:0;}
+dt{font-weight:bold;}
+dd{margin-left:1.15em;}
+
+blockquote,q{quotes:none;}
+blockquote:before,blockquote:after,
+q:before,q:after{content:'';content:none;}
+
+/* Focus is defined only on appropriate elements and sometimes with something different than an outline */
+:focus{outline:0;}
+
+/* remember to highlight inserts somehow! */
+ins{text-decoration:none;}
+del{text-decoration:line-through;}
+
+/* Tables */
+table{border-collapse:collapse;border-spacing:0;/* tables still need 'cellspacing="0"' in the markup */
+margin-bottom:1.54em;/* give a bottom margin,just like <p> tags,etc. */}
+caption,th,td{text-align:left;font-weight:normal;}
+table,td,th{vertical-align:middle;}
+table.full{width:100%;}
+table.fixed{table-layout:fixed}
+
+/* Hide any <hr /> elements not in the main and sub content areas */
+hr{position:absolute;left:-3000px;}
+#main hr,
+#sub1 hr,
+#sub2 hr,
+#sub3 hr{position:static;color:#fff;background:transparent;margin:0 0 0.5em 0;padding:0 0 0.5em 0;border:0;border-bottom:1px #eee solid;}
+
+/* Links */ 
+a,a:visited{color:#0F3E83;}
+a:visited{/*color:#3F6DAF;*/ /* lighter blue */}
+a,.menu a{text-decoration:none;}
+p a,ul a,ol a,dl a,blockquote a,table a{text-decoration:none;}
+
+/* Make sure it looks like a quote/citation */
+blockquote{font-style:italic;}
+
+/* Make acronyms and abbreviations a bit distinct */
+acronym,abbr{letter-spacing:.07em;border-bottom:.1em dashed #c00;cursor:help;}
+acronym{text-transform:uppercase;}
+
+/* keep the 20px vertical rhythm with bottom margins */
+p,ul,ol,dl,blockquote{margin-bottom:1.54em;}
