@@ -62,6 +62,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.logged_out 'logged_out', :controller => 'user_sessions', :action => 'logged_out'
 
+  map.patron_login 'patron_login', :controller => 'user_sessions', :action => 'patron_login'
+  map.do_patron_login 'do_patron_login', :controller => 'user_sessions', :action => 'do_patron_login'
+
   map.resources(:account,
       :only => [:index],
       # /resources/checkouts

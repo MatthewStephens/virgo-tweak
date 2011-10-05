@@ -2,6 +2,10 @@ Given /^I am logged in as "([^\"]*)"$/ do |login|
   visit login_path(:login => login)
 end
 
+Given /^I am logged in as virginia borrower "([^\"]*)"$/ do |login|
+  visit do_patron_login_path(:login => login)
+end
+
 Given /^I am viewing the stubbed account page for mst3k$/ do
   visit login_path(:login => "mst3k")
   FakeWeb.register_uri(:get, "#{FIREHOSE_URL}/firehose2/users/mst3k", 

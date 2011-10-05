@@ -32,6 +32,14 @@ Feature: Display Accounts
     Given I am logged in as "fakeuser"
     And I am on my account page
     Then I should see "No Account Found"
+
+	Scenario: Virginia Borrower login
+		Given I am logged in as virginia borrower "a61221042"
+		And I am on my account page
+		Then I should see "Virginia Borrower"
+		And I should not see "Request LEO delivery"
+		And I should not see "Request interlibrary loan"
+		And I should not see "Place course reserve request"
     
   Scenario: Account page
     Given I am viewing the stubbed account page for mst3k

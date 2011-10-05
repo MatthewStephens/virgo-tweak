@@ -1,0 +1,9 @@
+<% form_tag(do_patron_login_path, :method=>:post) do %>
+<fieldset>
+	<p>
+	  <%= label_tag 'login', 'Enter your Library ID'%>
+	  <%= text_field_tag 'login' %>
+	</p>
+	<%= submit_tag "Login", :class => 'button' %>
+</fieldset>
+<% end %>

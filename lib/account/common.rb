@@ -315,8 +315,16 @@ module Account::Common
       return false if @profile.blank?
       @profile.downcase == "undergraduate"
     end
+    def virginia_borrower?
+      return false if @profile.blank?
+      @profile.downcase == "virginia borrower"
+    end
     def barred?
       @barred
+    end
+    def can_make_reserves?
+      return false if undergraduate? or virginia_borrower?
+      return true
     end
   end
   

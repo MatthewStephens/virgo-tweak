@@ -28,7 +28,7 @@
       <% if @user_patron.faculty? or @user_patron.continuing_education? %>
         <li><%= link_to "Request interlibrary loan", "http://guides.lib.virginia.edu/requests" %></li>
       <% end %>
-      <% unless @user_patron.undergraduate? %>
+      <% if @user_patron.can_make_reserves? %>
         <li><%= link_to "Place course reserve request (Print &amp; Collab)", "http://www2.lib.virginia.edu/faculty/course_materials.html" %></li>
       <% end %>
       <li><%= link_to "Request a purchase (books, videos, etc.)", "https://www.lib.virginia.edu/purchaserequest" %></li>

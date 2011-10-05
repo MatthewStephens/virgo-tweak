@@ -37,7 +37,7 @@ class UserSessionsController < ApplicationController
        # request coming from PubCookie... get login from REMOTE_USER
        elsif request.env['REMOTE_USER']
          if (request.env['REMOTE_USER'] == 'mjb7q')
-           user = User.create(:login=>params[:login]) if user.nil?
+           user = User.find_or_create_by_login(:login=>params[:login]) if user.nil?
          else
            user = User.find_or_create_by_login(request.env['REMOTE_USER']) if user.nil?
          end
@@ -50,30 +50,48 @@ class UserSessionsController < ApplicationController
        else
          # Create the temp/demo user if the above methods didn't work
          user = User.create(:login=>'demo_' + User.count.to_s) if user.nil? 
-            
        end
-       # store the user_id in the session
-       session[:login] = user.login
-       @user_session = UserSession.create(user, true)
-
-       # redirect to the catalog with http protocol
-       # make sure there is a session[:search] hash, if not just use an empty hash
-       # and merge in the :protocol key
-       redirect_params = {:protocol=>'http'}
-       if params[:redirect] == 'maps'
-         redirect_to maps_url(redirect_params)
-       elsif params[:redirect] == 'special_collections_user'
-         redirect_params.merge!(:id => params[:id], :qt => 'document')
-         redirect_to new_special_collections_request_url(redirect_params)
-       elsif params[:redirect] == 'special_collections_admin'
-         redirect_to special_collections_requests_url(redirect_params)
-       elsif params[:redirect] == 'recall'
-         redirect_params[:id] = params[:id]
-         redirect_to start_hold_account_request_url(redirect_params)
-       else
-         redirect_params.merge!(session[:search] || {})
-         redirect_to root_url(redirect_params)
-       end
+       do_redirect(user) and return
+   end
+   
+   def do_patron_login
+      if session[:login]
+        user = User.find_by_login(session[:login])
+      else
+        patron = get_patron(params[:login]) or render 'account/not_found'
+        unless patron.virginia_borrower?
+          flash[:error] = 'UVa members should use NetBadge to authenticate'
+          redirect_to catalog_index_path
+        else 
+           user = User.find_or_create_by_login(params[:login])
+           do_redirect(user) and return
+        end
+      end
+   end
+   
+   def do_redirect(user)
+     # store the user_id in the session
+      session[:login] = user.login
+      @user_session = UserSession.create(user, true)
+      
+     # redirect to the catalog with http protocol
+      # make sure there is a session[:search] hash, if not just use an empty hash
+      # and merge in the :protocol key
+      redirect_params = {:protocol=>'http'}
+      if params[:redirect] == 'maps'
+        redirect_to maps_url(redirect_params)
+      elsif params[:redirect] == 'special_collections_user'
+        redirect_params.merge!(:id => params[:id], :qt => 'document')
+        redirect_to new_special_collections_request_url(redirect_params)
+      elsif params[:redirect] == 'special_collections_admin'
+        redirect_to special_collections_requests_url(redirect_params)
+      elsif params[:redirect] == 'recall'
+        redirect_params[:id] = params[:id]
+        redirect_to start_hold_account_request_url(redirect_params)
+      else
+        redirect_params.merge!(session[:search] || {})
+        redirect_to root_url(redirect_params)
+      end
    end
    
    # logs out the user. maintains the special collections lens, if appropriate.
@@ -85,6 +103,10 @@ class UserSessionsController < ApplicationController
       redirect_params = (session[:search] || {}).merge(:protocol=>'http')
       redirect_to logged_out_url(redirect_params)
     end
+    
+  # dispatches to patron login
+  def patron_login
+  end
   
   # dummy method so that we can dispatch to a logged out page  
   def logged_out
