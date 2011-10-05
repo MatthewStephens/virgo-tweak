@@ -3,7 +3,7 @@
 <% document.availability.summary_libraries.each do |library| -%>
 <%= library.name %>
 <% library.summary_locations.each do |location| -%>
-<%= location.value %>
+<%= location.name %>
 <%= summary.text %>, <%= summary.note %>
 <% end -%>
 <% end -%>
