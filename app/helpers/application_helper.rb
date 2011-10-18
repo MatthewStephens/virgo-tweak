@@ -521,7 +521,13 @@ module ApplicationHelper
     return false if availability.special_collections_holdings.size == 0
     availability.special_collections_holdings.each do |holding|
       holding.copies.each do |copy|
-        return true if copy.current_location.code !~ /SC-IVY/
+        if copy.current_location.code !~ /SC-IVY/
+          if copy.home_location.code =~ /SC-IVY/ and ["IN-PROCESS", "SC-IN-PROCESS"].include?(copy.current_location.code)
+            # don't display link
+          else
+            return true
+          end
+        end
       end
     end
     return false
