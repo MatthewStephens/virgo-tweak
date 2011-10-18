@@ -77,7 +77,7 @@ Feature: Display Availability
     Then I should see "LEO delivery (faculty/SCPS)"
 
 	Scenario: Show "Request Unavailable Item" if the only copy is unavailable
-		Given I am on the status page for id u3766511
+		Given I am on the status page for id u4215764
 		Then I should see "Request Unavailable Item"
 	
 	Scenario: Do not show "Request Unavailable Item" if a copy is available
@@ -98,7 +98,7 @@ Feature: Display Availability
 		And I should not see "LEO delivery (faculty/SCPS)"
 		
 	Scenario: Show "LEO delivery (faculty/SCPS)" if only one of the holdings is at Blandy
-	  When I am on the status page for id u3753
+	  When I am on the status page for id u131949
 	  Then I should see "LEO delivery (faculty/SCPS)"
 
 	Scenario: Do not show "LEO delivery (faculty/SCPS)" for an item whose only holding is at Mt. Lake
@@ -106,7 +106,7 @@ Feature: Display Availability
 		And I should not see "LEO delivery (faculty/SCPS)"
 
 	Scenario: Show "LEO delivery (faculty/SCPS)" if only one of the holdings is at Mt. Lake
-	  When I am on the status page for id u135
+	  When I am on the status page for id u145947
 	  Then I should see "LEO delivery (faculty/SCPS)"
 	        
   Scenario: Show number of copies for SAS but not whether they are available

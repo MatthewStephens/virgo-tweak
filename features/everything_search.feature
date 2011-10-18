@@ -416,11 +416,11 @@ Feature: Everything (Default) Search Result Relevancy
     
    Scenario: Return user to first page of search results after refining a search
     Given I am on the homepage
-    When I fill in "q" with "william w pusey"
+    When I fill in "q" with "william pusey"
     And I choose "catalog_select_catalog"
     And I press "search"
     Then I should get results
-	When I follow "Next »"
+		When I follow "Next »"
     And I follow "Alderman"
     Then I should get results
     
