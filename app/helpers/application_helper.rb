@@ -297,8 +297,8 @@ module ApplicationHelper
 
   # determines what the inverse values and labels of the current facet sort is
   def facet_sort_inverse(facet_name = '')
-    return ['hits', 'Numerical sort'] if facet_sort_scheme(facet_name) == 'alpha'
-    return ['alpha', 'A-Z sort'] if facet_sort_scheme(facet_name) == 'hits'
+    return ['hits', 'Number of Results'] if facet_sort_scheme(facet_name) == 'alpha'
+    return ['alpha', 'A-Z'] if facet_sort_scheme(facet_name) == 'hits'
   end
   
   # determines what label we should assign to the facet inverse  
@@ -309,6 +309,12 @@ module ApplicationHelper
   # determines that the value we should assign to the facet inverse
   def facet_sort_inverse_value(facet_name='')
     return facet_sort_inverse(facet_name)[0]
+  end
+  
+  # determines the current sort behavior
+  def current_facet_sort(facet_name = '')
+    return 'Number of Results' if facet_sort_scheme(facet_name) == 'hits'
+    return 'A-Z' if facet_sort_scheme(facet_name) == 'alpha'
   end
   
   # sorts facet values in memory, after lower-casing them

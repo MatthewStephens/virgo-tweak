@@ -1345,6 +1345,7 @@ p,ul,ol,dl,blockquote{margin-bottom:1.54em;}
 	display:none;
 }
 .facetSort {
+  font-size: 12px;
 	text-align:right;
 	padding: 1em;
 }
