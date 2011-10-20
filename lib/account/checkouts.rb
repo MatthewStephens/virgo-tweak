@@ -4,7 +4,7 @@ require 'open-uri'
 module Account::Checkouts  
 
   def get_checkouts(computing_id)
-    uri = URI.parse("#{FIREHOSE_URL}/firehose2/users/#{computing_id}/checkouts")
+    uri = URI.parse("#{FIREHOSE_URL}/users/#{computing_id}/checkouts")
     begin
       str = uri.read
       return Account::Common::User.parse(str, :single=>true, :use_default_namespace => true)
@@ -15,7 +15,7 @@ module Account::Checkouts
 
   def do_renew_all(computing_id)
     params = { "computingId" => computing_id }
-    res = Net::HTTP.post_form(URI.parse("#{FIREHOSE_URL}/firehose2/request/renewAll"), params)
+    res = Net::HTTP.post_form(URI.parse("#{FIREHOSE_URL}/request/renewAll"), params)
     case res
     when Net::HTTPSuccess, Net::HTTPRedirection
       return
@@ -27,7 +27,7 @@ module Account::Checkouts
   
   def do_renew(computing_id, checkout_key=nil)
     params = { "computingId" => computing_id, "checkoutKey" => checkout_key }
-    res = Net::HTTP.post_form(URI.parse("#{FIREHOSE_URL}/firehose2/request/renew"), params)
+    res = Net::HTTP.post_form(URI.parse("#{FIREHOSE_URL}/request/renew"), params)
     case res
     when Net::HTTPSuccess, Net::HTTPRedirection
       return
