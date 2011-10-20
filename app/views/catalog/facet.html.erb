@@ -14,7 +14,10 @@
     <% else %>
     <% link = catalog_facet_path(:id => params[:id], :params => params_for_facet_values.merge("facet.limit" => facet_limit, "width" => 490, :facet_sort => facet_sort_inverse_value(params[:id]), :complete => complete_param )) %>
     <% end %>
-    <%= link_to facet_sort_inverse_label(params[:id]), link, :class => facet_sort_style %>
+    Sort by:
+    <span class="current-sort"><%= current_facet_sort %></span>
+    &middot;
+    <%= link_to(facet_sort_inverse_label(params[:id]), link, :class => facet_sort_style) %>
   </div>
 
 

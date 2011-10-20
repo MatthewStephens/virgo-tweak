@@ -25,6 +25,11 @@ Feature: Display Special Collections Lens
     Given I am in the Special Collections lens
     And I am on the status page for id u5492
     Then I should not see "Request this Item"
+
+	Scenario: Do not show request link if the item has home location SC-IVY and is IN-PROCESS
+		Given I am in the Special Collections lens
+		And I am on the status page for id u1896264
+		Then I should not see "Request this Item"
     
   Scenario: Present login options
     Given I am in the Special Collections lens

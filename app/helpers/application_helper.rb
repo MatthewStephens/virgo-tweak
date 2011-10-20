@@ -297,8 +297,8 @@ module ApplicationHelper
 
   # determines what the inverse values and labels of the current facet sort is
   def facet_sort_inverse(facet_name = '')
-    return ['hits', 'Numerical sort'] if facet_sort_scheme(facet_name) == 'alpha'
-    return ['alpha', 'A-Z sort'] if facet_sort_scheme(facet_name) == 'hits'
+    return ['hits', 'Number of Results'] if facet_sort_scheme(facet_name) == 'alpha'
+    return ['alpha', 'A-Z'] if facet_sort_scheme(facet_name) == 'hits'
   end
   
   # determines what label we should assign to the facet inverse  
@@ -309,6 +309,12 @@ module ApplicationHelper
   # determines that the value we should assign to the facet inverse
   def facet_sort_inverse_value(facet_name='')
     return facet_sort_inverse(facet_name)[0]
+  end
+  
+  # determines the current sort behavior
+  def current_facet_sort(facet_name = '')
+    return 'Number of Results' if facet_sort_scheme(facet_name) == 'hits'
+    return 'A-Z' if facet_sort_scheme(facet_name) == 'alpha'
   end
   
   # sorts facet values in memory, after lower-casing them
@@ -521,7 +527,13 @@ module ApplicationHelper
     return false if availability.special_collections_holdings.size == 0
     availability.special_collections_holdings.each do |holding|
       holding.copies.each do |copy|
-        return true if copy.current_location.code !~ /SC-IVY/
+        if copy.current_location.code !~ /SC-IVY/
+          if copy.home_location.code =~ /SC-IVY/ and ["IN-PROCESS", "SC-IN-PROCESS"].include?(copy.current_location.code)
+            # don't display link
+          else
+            return true
+          end
+        end
       end
     end
     return false

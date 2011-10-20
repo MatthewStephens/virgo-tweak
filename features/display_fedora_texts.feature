@@ -10,7 +10,3 @@ Feature: Display digital texts
 	Scenario: Use main title display if it is available
 	  Given I am on the document page for id uva-lib:3388
 	  Then I should see a title of "The story of the Negro ; the rise of the race from slavery. Vol. 1"
-
-	Scenario: If main title display isn't available, use title display
-	  Given I am on the document page for id uva-lib:123321
-	  Then I should see a title of "The Cavalier daily - Wednesday, January 5, 1972"

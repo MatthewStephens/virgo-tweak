@@ -8,7 +8,7 @@ Feature: Display Articles
 		And I choose "catalog_select_articles"
 		And I fill in "q" with "global warming"
 		And I press "search"
-		Then I should get at least 200000 results
+		Then I should get at least 151000 results
 		And I should see the keyword label "Keyword"
 		And I should see the keyword value "global warming"
 		
@@ -52,8 +52,8 @@ Feature: Display Articles
 		Then I should see "Article Advanced Search"
 		When I fill in "author" with "Pickral"
 		And I press "Search"
-		Then I should get at least 10 results
-		And I should get at most 50 results
+		Then I should get at least 5 results
+		And I should get at most 20 results
 		And I should see the keyword label "Author"
 		And I should see the keyword value "Pickral"
 		
@@ -64,7 +64,7 @@ Feature: Display Articles
 		And I fill in "publication_date_start" with "1970"
 		And I fill in "publication_date_end" with "1980"
 		And I press "Search"
-		Then I should get at least 5 results
+		Then I should get at least 2 results
 		And I should get at most 10 results
 		And I should see the keyword label "Year Published"
 		And I should see the keyword value "1970 - 1980"

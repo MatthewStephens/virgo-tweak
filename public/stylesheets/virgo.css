@@ -448,9 +448,9 @@ a.start-over {background: url('/images/icon-sprite.png') no-repeat scroll 0 -280
 /* =ITEM & TOOL DISPLAY
 -------------------------------------------------------------- */
 
-.show-page #main, .account-page #main, .folder-page #main, .user_sessions-page #main, .advanced-page #main, .sms-page #main, .email-page #main, .citation-page #main, .special_collections_requests-page #main, .account_requests-page #main {background: transparent; border-left: none;}
-.show-page #content, .account-page #content, .folder-page #content, .user_sessions-page #content, .advanced-page #content, .sms-page #content, .email-page #content, .citation-page #content, .special_collections_requests-page #content, .account_requests-page #content {background: white; border-left: 1px solid #DACDCA; min-height: 360px; padding-left: 12px; padding-right: 12px; width: 703px;}
-.show-page #sidebar, .account-page #sidebar, .folder-page #sidebar, .user_sessions-page #sidebar, .advanced-page #sidebar, .sms-page #sidebar, .email-page #sidebar, .citation-page #sidebar, .special_collections_requests-page #sidebar, .account_requests-page #sidebar {background: transparent;}
+.show-page #main, .account-page #main, .folder-page #main, .user_sessions-page #main, .advanced-page #main, .sms-page #main, .email-page #main, .citation-page #main, .special_collections_requests-page #main, .account_requests-page #main, .feedback-page #main {background: transparent; border-left: none;}
+.show-page #content, .account-page #content, .folder-page #content, .user_sessions-page #content, .advanced-page #content, .sms-page #content, .email-page #content, .citation-page #content, .special_collections_requests-page #content, .account_requests-page #content, .feedback-page #content {background: white; border-left: 1px solid #DACDCA; min-height: 360px; padding-left: 12px; padding-right: 12px; width: 703px;}
+.show-page #sidebar, .account-page #sidebar, .folder-page #sidebar, .user_sessions-page #sidebar, .advanced-page #sidebar, .sms-page #sidebar, .email-page #sidebar, .citation-page #sidebar, .special_collections_requests-page #sidebar, .account_requests-page #sidebar, .feedback-page #sidebar {background: transparent;}
 #list_heading, #tool_heading, #adv_search,
 #catalogShow .resultNav.top, #item_title {
   display: block;

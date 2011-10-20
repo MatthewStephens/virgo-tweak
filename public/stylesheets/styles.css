@@ -1004,6 +1004,7 @@ li.Z3988-container {display: none;}
 	margin: 0.67em 0 0.1em; }
 
 .tool_content {	padding: 3em 2em;	line-height: 1.5em; }
+.tool_content.feedback_response {text-align: center;}
 .tool_content h2, #list_heading + h2 {	font-size: 16px; padding: 1em 0; }
 .tool_content input, .tool_content textarea, .tool_content select {
 	margin-bottom: 1.5em;
@@ -1345,6 +1346,7 @@ p,ul,ol,dl,blockquote{margin-bottom:1.54em;}
 	display:none;
 }
 .facetSort {
+  font-size: 12px;
 	text-align:right;
 	padding: 1em;
 }
