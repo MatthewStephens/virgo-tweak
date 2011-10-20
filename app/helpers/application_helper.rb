@@ -47,15 +47,16 @@ module ApplicationHelper
   def location_listing(document)
     libraries = document.values_for(:library_facet)
     locations = document.values_for(:location_facet)
+    locations2 = document.values_for(:location2_facet)
     return '' if libraries.nil? or locations.nil?
     if special_collections_lens?
-      locations = locations.select{ |loc| loc =~ /Special Collections/ }
-      return locations[0]
+      libraries = libraries.select{ |lib| lib =~ /Special Collections/ }
+      return libraries[0]
     end
     return '' if locations.length == 0
     return 'Multiple locations' if libraries.length > 1 or locations.length > 1
-    return locations[0] if locations[0] =~ /Special Collections/
-    return locations[0] if locations[0] =~ /Reserve/
+    return locations2[0] if locations2[0] =~ /Special Collections/
+    return locations2[0] if locations2[0] =~ /Reserve/
     return (document.values_for(:library_facet)[0] + " " + locations[0]) rescue locations[0]
   end
   
