@@ -284,7 +284,7 @@ module Account::Common
     element :description, String
     element :first_name, String, :tag => "givenName"
     element :middle_name, String, :tag => "initials"
-    element :last_name, String, :tag => "surName"
+    element :last_name, String, :tag => "sirName"
     element :physical_delivery, String, :tag => "physicalDelivery"
     element :status_id, Integer, :tag => "statusId"
     element :telephone, String
