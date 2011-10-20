@@ -65,6 +65,7 @@ div, p, h1, h2, h3, h4, h5, h6 {
 .page_thumb {
     border-bottom: 1px dotted #D6CEB7;
     border-top: 1px solid transparent;
+    cursor: pointer;
     min-height: 160px;
     padding: 1em 2em; }
 .page_thumb .jp2kPreview {
@@ -78,9 +79,28 @@ div, p, h1, h2, h3, h4, h5, h6 {
 .page_thumbs .page_pid {
     margin: 0.33em 0 0 0.1em;
     text-align: center; }
-.page_thumbs .page_title {
+.page_thumbs .page_title,
+.page_thumbs .page_download {
     margin: 0.67em 0 0 0;
     text-align: center; }
+.page_thumbs .page_download a {
+  background: url('/images/download.png') no-repeat scroll 9px 50% #B4A989;
+  color: #EFEAD6;
+  font-size: 13px;
+  padding: 5px 10px 5px 26px;
+  text-decoration: none;
+  vertical-align: middle;
+  -webkit-border-radius: 32px;
+  -moz-border-radius:    32px;
+  border-radius:         32px;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip:    padding-box;
+  background-clip:         padding-box; 
+  -webkit-transition: background 300ms ease-in-out;
+  -moz-transition:    background 300ms ease-in-out;
+  transition:         background 300ms ease-in-out;  
+}
+.page_thumbs .page_download a:hover {background-color: #9A8969;}
 .page_thumbs .thumb_select {
     background: #FFFFE5; }
 #page_permalink {
