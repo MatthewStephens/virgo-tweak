@@ -35,5 +35,5 @@ FEEDBACK_NOTIFICATION_RECIPIENTS = %W(virgo-feedback@virginia.edu)
 FEEDBACK_NOTIFICATION_FROM = 'virgo-feedback@virginia.edu'
 FEEDBACK_NOTIFICATION_SUBJECT = 'Virgo Feedback (virgobetadev)'
 
-FIREHOSE_URL = "http://webservice.lib.virginia.edu:8080"
+FIREHOSE_URL = "http://webservice.lib.virginia.edu:8080/firehose2"
 PRIMO_URL = "http://primo4.hosted.exlibrisgroup.com:1701/PrimoWebServices/xservice/search/brief?institution=UVA&onCampus=true"

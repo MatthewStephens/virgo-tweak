@@ -38,6 +38,15 @@
   	    </div>
   	<% end %>
 	
+	<% #------------ Hathi Object ------------------%>
+	 <% if document.doc_type == :hathi %>
+	 <div id="onlineAvailability" class="holding">
+		<div class="onlineHolding">
+		<%= link_to_online_access(document) %>
+		</div>
+		</div>
+	<% end %>
+	
 	<% if document[:marc_display]%>  
     <script type="text/javascript">
       // for info on this implementation, see http://markmail.org/message/o4wnzm7wdxbn66mu
