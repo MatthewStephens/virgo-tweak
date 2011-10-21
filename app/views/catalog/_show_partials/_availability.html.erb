@@ -1,6 +1,10 @@
 <!-- Holdings, physical and online -->
 <div id="availability">
-	<h2>Availability</h2>
+	<% if document.doc_type == :hathi %>
+		<h2>Access Online</h2>
+	<% else %>
+		<h2>Availability</h2>
+	<% end %>
 	
   	<% #------------ Online ------------- %>
   	<% if document[:marc_display] %>
