@@ -31,12 +31,12 @@
 			<% end %>
 					
 			<% if !document.get(:url_display).nil? %>
-				<dt>Online Versions</dt>
+				<dt>Access Online</dt>
   			<dd class="onlineAccessField">
 					<% if document[:url_display].length > 1 %>
-						<%= link_to_document document, :label => "Access Online", :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view %>
+						<%= link_to_document document, :label => "View list of available content", :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view %>
 					<% else %>
-						<%= link_to_online_access(document) %>
+						<%= link_to_online_access(document, "", "View full text from Hathi Digital Trust") %>
 					<% end %>
 				</dd>
 			<% end %>

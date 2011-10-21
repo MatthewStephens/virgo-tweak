@@ -250,13 +250,17 @@ module ApplicationHelper
   end
   
   # parses :url_display, which has the format url||label (often label is missing)
-  def link_to_online_access(document, separator = "<br />")
+  def link_to_online_access(document, separator = "<br />", link_text = "")
     return if document.get(:url_display).nil?
     out = ''
     document.values_for(:url_display).each do |string|
       parts = string.split('||')
       url = parts[0]
-      label = parts[1]||online_access_verb(document) + " online"
+      unless link_text.blank?
+        label = link_text
+      else   
+        label = parts[1]||online_access_verb(document) + " online"
+      end
       out += link_to(label, url, :target => '_blank') + separator
     end
     out
