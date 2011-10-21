@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
 <head>
-  <title>Page Turner</title>
+  <title><%= @document.value_for(:title_display).nil? ? "Document Viewer" : truncate(@document.value_for(:title_display), 80, "...") %> - Virgo - University of Virginia Library</title>
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 
 	<%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js' %>
