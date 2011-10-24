@@ -9,7 +9,7 @@ Feature: Everything (Default) Search Result Relevancy
     And I press "Search"
 	  Then I should get results
     Then I should get at least 6500 results
-	  Then I should get at most 11000 results
+	  Then I should get at most 13000 results
 
   Scenario: Search "String quartets Parts" and variants
 	  Given I am on the homepage
@@ -30,7 +30,7 @@ Feature: Everything (Default) Search Result Relevancy
 	  Given I am on the homepage
 	  When I fill in "q" with "united states in the air"
 	  And I press "search"
-	  And I should get ckey u4823821 in the first 1 results
+	  And I should get ckey u4823821 in the first 2 results
 	
   Scenario: Search "thomas jefferson library personal copy" without quotes
 	  Given I am on the homepage
@@ -54,8 +54,7 @@ Feature: Everything (Default) Search Result Relevancy
     Given I am on the homepage
     When I fill in "q" with "columbia law review"
     And I press "search"
-    Then I should get ckey u4482328 in the first 2 results
-    And I should get ckey u3488491 in the first 2 results
+    Then I should get ckey 008894325 in the first 2 results
   
   Scenario: Additive facets
     Given I am on the homepage
@@ -416,11 +415,11 @@ Feature: Everything (Default) Search Result Relevancy
     
    Scenario: Return user to first page of search results after refining a search
     Given I am on the homepage
-    When I fill in "q" with "william w pusey"
+    When I fill in "q" with "william pusey"
     And I choose "catalog_select_catalog"
     And I press "search"
     Then I should get results
-	When I follow "Next »"
+		When I follow "Next »"
     And I follow "Alderman"
     Then I should get results
     
