@@ -36,7 +36,7 @@
 					<% if document[:url_display].length > 1 %>
 						<%= link_to_document document, :label => "View list of available content", :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view %>
 					<% else %>
-						<%= link_to_online_access(document, "", "View full text from Hathi Digital Trust") %>
+						<%= link_to_online_access(document, "", "View full text from Hathi Trust") %>
 					<% end %>
 				</dd>
 			<% end %>
