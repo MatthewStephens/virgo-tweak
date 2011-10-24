@@ -68,10 +68,6 @@ describe CatalogController do
         get :index, :sort_key => 'published', :format => 'rss'
         session[:search][:sort].should == "year_multisort_i desc"
       end
-      it "should sort by call number for call number searches" do
-        get :index, :search_field => 'call_number'
-        session[:search][:sort].should == "call_number_sort_facet asc"
-      end
       it "should allow for alternate sort for call number searches" do
         get :index, :search_field => 'call_number', :sort_key => 'published'
         session[:search][:sort].should == "year_multisort_i desc"
@@ -93,8 +89,8 @@ describe CatalogController do
         session[:search][:sort].should == 'score desc, year_multisort_i desc'
       end
       it "should sort by the sort key" do
-        get :index, :sort_key => 'call_number'
-        session[:search][:sort].should == "call_number_sort_facet asc"
+        get :index, :sort_key => 'published'
+        session[:search][:sort].should == "year_multisort_i desc"
       end  
       it "should sort by date received if no options" do
         get :index
@@ -182,13 +178,9 @@ describe CatalogController do
     before(:each) do
       record = mock("blah")
       record.stubs(:to_xml).returns("blah_as_xml")
-      firehose = mock(UVA::Availability)
-      firehose.stubs(:by_document).returns(record)
-      UVA::Availability.stubs(:new).returns(firehose)
-    end
-    it "should get the availability" do
-      get :firehose, :id => doc_id
-      assigns[:record].should_not be_nil
+      firehose = mock(Account::Availability)
+      firehose.stubs(:to_xml).returns(record)
+      Account::Availability.stubs(:find).returns(firehose)
     end
     it "should give an xml response" do
       get :firehose, :id => doc_id, :format => 'xml'

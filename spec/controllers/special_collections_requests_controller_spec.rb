@@ -77,20 +77,22 @@ describe SpecialCollectionsRequestsController do
     describe "patron lookup" do
       it "should throw an error if there is no patron information" do
         controller.stubs(:uva_id?).returns(false)
-        patron = mock_model(UVA::Patron)
-        patron.stubs(:by_uid).returns("")
-        UVA::Patron.stubs(:new).returns(patron)
+        patron = mock()
+        patron.stubs(:display_name).returns("")
+        controller.stubs(:get_patron).returns(patron)
         get :new, :id => "u4967160", :user_id => "blahblah"
         flash[:error].should == "Unable to locate your patron record.  Please verify your login information and try again."
-        response.should redirect_to start_special_collections_request_path(:id => "u4967160")
+        response.should redirect_to catalog_path(:id => "u4967160")
       end
       it "should look up patron information" do
         login_user
-        patron = mock_model(UVA::Patron)
-        patron.stubs(:by_uid).returns("Pickral, Mary")
-        UVA::Patron.stubs(:new).returns(patron)
+        patron = mock()
+        patron.stubs(:display_name).returns("Clown, Bozo")
+        patron.stubs(:overdue_count).returns(0)
+        patron.stubs(:recalled_count).returns(0)
+        controller.stubs(:get_patron).returns(patron)
         get :new, :id => "u4967160"
-        assigns[:special_collections_request].name.should == "Pickral, Mary"
+        assigns[:special_collections_request].name.should == "Clown, Bozo"
       end
       it "should fake looking up patron information for a demo account" do
         controller.stubs(:uva_id?).returns(false)
@@ -134,7 +136,7 @@ describe SpecialCollectionsRequestsController do
     describe "verify admin" do
       it "should throw an error if there is no current user" do
         get :index
-        flash[:error].should == "Please log in to manage Special Collections Requests. <a href='/login?redirect=special_collections_admin'>Login</a>"
+        flash[:error].should == "Please log in to manage Special Collections Requests. <a class='btn small' href='/login?redirect=special_collections_admin'>Login</a>"
         response.should redirect_to catalog_index_path
       end
       it "should allow an admin in" do
@@ -165,7 +167,6 @@ describe SpecialCollectionsRequestsController do
       get :edit, :id => @special_collections_request.id
       assigns[:special_collections_request].document.should_not be_nil
       assigns[:special_collections_request].document.availability.should_not be_nil
-      assigns[:location_notes].should_not be_nil
     end
     it "should render update template" do
       authorize_admin
