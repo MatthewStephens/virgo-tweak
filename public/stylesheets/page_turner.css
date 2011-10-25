@@ -101,6 +101,8 @@ div, p, h1, h2, h3, h4, h5, h6 {
   transition:         background 300ms ease-in-out;  
 }
 .page_thumbs .page_download a:hover {background-color: #9A8969;}
+.page_thumbs .page_download .terms-link { display: block; padding: 3px 0 0 0;}
+.page_thumbs .page_download .terms-link a {background: none; color: #555; font-size: 11px; padding: 0; vertical-align: middle;}
 .page_thumbs .thumb_select {
     background: #FFFFE5; }
 #page_permalink {
