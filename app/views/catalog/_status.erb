@@ -4,7 +4,9 @@
 <%= library.name %>
 <% library.summary_locations.each do |location| -%>
 <%= location.name %>
+<% location.summaries.each do |summary| -%>
 <%= summary.text %>, <%= summary.note %>
+<% end -%>
 <% end -%>
 <% end -%>
 <% if document.availability.holdings.size == 0 -%>

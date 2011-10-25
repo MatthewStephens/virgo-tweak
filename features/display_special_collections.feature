@@ -115,23 +115,39 @@ Feature: Display Special Collections Lens
     And I press "search"
     Then I should see one filter for Special Collections
     
-    
- Scenario: Display location notes without Z39.50
-   Given I am in the Special Collections lens
-   Given I am logged in as "xw5d"
-   And I am on the status page for id u2394108
-   And I follow "Request this Item"
-   And I press "Request"
-   Then I should see "Request successfully submitted"
-   Given I am logged in as a Special Collections administrator
-   Then I should see "Requests for" 
-   Then I should see "Papers of Henry James" 
-   And I follow "View"
-   Then I should see "SPECIAL COLLECTIONS: #9930 = 1 box, MSS stacks; also on Microfilm M-2334"
-   Then I should see "SPECIAL COLLECTIONS: #9930-a returned. Photocopy boxed with #9930"
+	Scenario: Display location notes without Z39.50
+	  Given I am in the Special Collections lens
+	  Given I am logged in as "xw5d"
+	  And I am on the status page for id u2394108
+	  And I follow "Request this Item"
+	  And I press "Request"
+	  Then I should see "Request successfully submitted"
+	  Given I am logged in as a Special Collections administrator
+	  Then I should see "Requests for" 
+	  Then I should see "Papers of Henry James" 
+	  And I follow "View"
+	  Then I should see "SPECIAL COLLECTIONS: #9930 = 1 box, MSS stacks; also on Microfilm M-2334"
+	  Then I should see "SPECIAL COLLECTIONS: #9930-a returned. Photocopy boxed with #9930"
    
-   
-   
+	Scenario: Display name from LDAP
+		Given I am in the Special Collections lens
+	  Given I am logged in as "mpc3c"
+	  And I am on the status page for id u2394108
+	  And I follow "Request this Item"
+	  And I press "Request"
+	  Then I should see "Request successfully submitted"
+	  Given I am logged in as a Special Collections administrator	
+		Then I should see "Pickral, Mary Hope"
+		
+	Scenario: If no name in LDAP, display name from SIRSI
+   	Given I am in the Special Collections lens
+	  Given I am logged in as "A61221042"
+	  And I am on the status page for id u2394108
+	  And I follow "Request this Item"
+	  And I press "Request"
+	  Then I should see "Request successfully submitted"
+	  Given I am logged in as a Special Collections administrator
+		Then I should see "BRICKHOUSE, E N"
    
    
    
