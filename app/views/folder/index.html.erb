@@ -1,9 +1,7 @@
-<div id="list_heading"><h1>Starred Items<%= " (#{session[:folder_document_ids].count})" unless !session[:folder_document_ids] %></h1></div>
+<div id="list_heading"><h1>Starred Items<%= " (#{session_folder_document_ids.count + session_folder_article_ids.count})"  %></h1></div>
 
 <% unless @documents.empty? %>
   <p class="starred-info">Track and export up to <strong>100</strong> items by starring results. Starred items are not saved permanently but will persist for your full visit to Virgo.</p>
-  <%= render "catalog/sort_and_per_page" %>
-  <%= render "catalog/results_pagination" %>
 <% end %>
 
 <% sidebar_items << capture do %>
@@ -47,11 +45,12 @@
 <% end %>
 
 <div id="results">
-<%= "<h2 class='no-items'>No Starred Items</h2>" if @documents.empty? -%>
-<% i = 0 %>
-<% @documents.each do |document| %>
-	<%= render_document_partial document, :index, i, folder_offset, true %>
-	<span class="remove-item">[<%= link_to 'remove', folder_path(document[:id]), :method => :delete, :confirm => 'Remove star from this item?' %>]</span>
-  <% i+= 1%>
+<% if @documents.empty? and @articles.empty? %>
+	<h2 class='no-items'>No Starred Items</h2>
+<% else %>
+	<table border="1">
+		<%= render :partial => 'folder_rows', :locals=>{:documents => @documents} %>
+		<%= render :partial => 'folder_rows', :locals=>{:documents => @articles} %>
+	</table>
 <% end %>
 </div>

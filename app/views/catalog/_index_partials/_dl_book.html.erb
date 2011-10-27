@@ -45,10 +45,8 @@
     </dl>
   </div>
 
-  <% unless bookmarks_view or params[:catalog_select] == 'all' %>
   <div class="tools">
      <%= render :partial=>'folder_control', :locals=>{:document=>document} %>
   </div>
-  <% end %>
 
 </div>

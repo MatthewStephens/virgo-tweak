@@ -6,7 +6,7 @@ class CatalogController < ApplicationController
   include UVA::Fedora
   include Account::Holds
   include BlacklightAdvancedSearch::AdvancedSearchFields
-  include UVA::ScopeHelper
+  include UVA::ArticlesHelper
   
   # the featured_documents are used when there are no queries or filters applied
   before_filter :adjust_for_advanced_search, :only=>:index
@@ -20,6 +20,7 @@ class CatalogController < ApplicationController
   before_filter :adjust_for_bookmarks_view, :only=>:update
   before_filter :recaptcha_check, :only=>:send_email_record
   before_filter :filters, :only =>:show
+  before_filter :articles, :only=>[:email, :send_email_record]
   
   # when a request for /catalog/HIDDEN_SOLR_ID is made, this method is executed...
   rescue_from HiddenSolrID, :with => lambda {
@@ -71,7 +72,6 @@ class CatalogController < ApplicationController
     @filters = params[:f] || []
     respond_to do |format|
       format.html { 
-        save_current_search_params
         render :layout => index_layout 
       }
       format.json { render :json => @response.to_json}
@@ -146,20 +146,20 @@ class CatalogController < ApplicationController
             if params[:to].length != 10
               flash[:error] = "You must enter a valid 10 digit phone number"
             else
-              email = RecordMailer.create_sms_record(@documents, {:to => params[:to], :carrier => params[:carrier]}, from, host)
+              email = RecordMailer.create_sms_record(@documents, @articles, {:to => params[:to], :carrier => params[:carrier]}, from, host)
             end
           else
             flash[:error] = "You must select a carrier"
           end
         when 'email'
           if params[:to].match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
-            email = RecordMailer.create_email_record(@documents, {:to => params[:to], :message => params[:message], :full_record => params[:full_record]}, from, host)
+            email = RecordMailer.create_email_record(@documents, @articles, {:to => params[:to], :message => params[:message], :full_record => params[:full_record]}, from, host)
           else
             flash[:error] = "You must enter a valid email address"
           end
       end
       RecordMailer.deliver(email) unless flash[:error]
-      if @documents.size == 1
+      if @articles.size == 0 && @documents.size == 1
         redirect_to catalog_path(@documents.first.id)
       else
         redirect_to folder_index_path
@@ -394,6 +394,10 @@ class CatalogController < ApplicationController
       end
       
       return layout
+    end
+    
+    def articles
+      @articles = get_articles_by_ids(params[:article_id])
     end
  
 end

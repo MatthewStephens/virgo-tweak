@@ -1,0 +1,18 @@
+<tr id="<%= document[:id] %>">
+	<td><%= full_title(document) %></td>
+	<td>
+		<% authors = document.author_type_fields -%>
+		<% authors.each do |k,v| -%>
+			<div><%= document.value_for(k) %></div>
+		<% end %>
+	</td>
+	<td><%= document.value_for :format_facet %></td>
+	<td>
+		<% unless journal?(document) -%>
+			<%= document.value_for :published_date_display %>
+		<% end %>
+	</td>
+	<td><%= location_listing(document)%></td>
+	<td><%= call_number(document, '<br />') %></td>
+	<td><%= link_to 'X', folder_path(document[:id]), :method => :delete, :confirm => 'Remove star from this item?' %></td>
+</tr>

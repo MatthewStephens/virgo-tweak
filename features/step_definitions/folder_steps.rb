@@ -1,5 +1,14 @@
 Then /^I should see an add to folder form for ckey "([^\"]*)"$/ do |arg1|
-  response.should have_tag("form.addFolderForm")
+  response.should have_tag("form.addFolderForm input", :id=>"id#{arg1}")
+end
+
+Then /^I (should|should not) see ckey "([^\"]*)" in the folder$/ do |comparator, arg1|
+  case comparator
+    when "should"
+      response.should have_tag("tr", :id => "#{arg1}")
+    when "should not"
+      response.should_not have_tag("tr", :id => "#{arg1}")
+    end
 end
 
 When /^I add ckey "([^\"]*)" to my folder$/ do |arg1|

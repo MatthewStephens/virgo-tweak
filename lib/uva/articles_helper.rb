@@ -31,6 +31,15 @@ module UVA::ArticlesHelper
     attribute :name, String, :tag => "NAME"
     has_many :items, Item, :namespace => "sear", :tag => "FACET_VALUES"
   end
+
+  class Search
+    include HappyMapper
+    register_namespace 'sear', 'http://www.exlibrisgroup.com/xsd/jaguar/search'
+    register_namespace 'prim', 'http://www.exlibrisgroup.com/xsd/primo/primo_nm_bib'
+    tag 'search'
+    namespace 'prim'
+    element :id, String, :tag => "recordid"
+  end
   
   class Display
     include HappyMapper
@@ -82,12 +91,26 @@ module UVA::ArticlesHelper
     register_namespace 'prim', 'http://www.exlibrisgroup.com/xsd/primo/primo_nm_bib'
     tag 'DOC'
     namespace 'sear'
-    attribute :id, String, :tag => "ID"
     has_one :display, Display, :tag => "display", :deep => "true"
+    has_one :search, Search, :tag => "search", :deep => "true"
     has_many :links, Link, :tag => "LINKS"
     has_many :get_its, GetIt, :tag => "GETIT"
     def doc_type
       return "article"
+    end
+    def id
+      return @search.id
+    end
+    def value_for(field)
+      if Document.method_defined?(field.to_sym)
+        m = Document.instance_method(field.to_sym)
+        return m.bind(self).call
+      else
+        Document.instance_variable_get(field_to_sym)
+      end
+    end
+    def [](field)
+      return value_for(field)
     end
   end
   
@@ -186,12 +209,12 @@ module UVA::ArticlesHelper
   # extract populated advanced search fields and make URL pieces
   def get_advanced_search_queries(extra_controller_params={})
     queries = []
-    BlacklightAdvancedSearch.search_field_list(params).each do |field_def|
+    BlacklightAdvancedSearch.search_field_list(extra_controller_params).each do |field_def|
       key = field_def[:key].to_sym
       primo_key = field_def[:primo_key]
       if field_def[:range]
         raw_value = extra_controller_params[key]
-        if ! raw_value.blank?
+        if ! raw_value.blank?          
           if raw_value =~ /-/
             value = raw_value.sub("-", "TO")
           else
@@ -200,7 +223,7 @@ module UVA::ArticlesHelper
           queries << "&query=facet_#{primo_key},exact,[#{value}]"
         end   
       else  
-        value = params[key]
+        value = extra_controller_params[key]
         unless value.blank?
           queries << "&query=#{primo_key},#{scope(value)},#{scrubbed_query(value)}"
         end
@@ -243,7 +266,7 @@ module UVA::ArticlesHelper
     "&loc=adaptor,primo_central_multiple_fe"
   end
   
-  def build_journal_url(extra_controller_params={})
+  def build_articles_url(extra_controller_params={})
     url = PRIMO_URL
     url += get_query(extra_controller_params)
     get_advanced_search_queries(extra_controller_params).each do |q|
@@ -263,9 +286,37 @@ module UVA::ArticlesHelper
     url
   end
   
+  def build_article_url(article_id, extra_controller_params={})
+    url = PRIMO_URL
+    url += "&query=rid,exact,#{article_id}"
+    url += get_scope(extra_controller_params)
+    RAILS_DEFAULT_LOGGER.info("primo request url: #{url}")
+    url
+  end
+  
+  # looks up a specific article using the article identifier in "rid"
+  def get_article_by_id(article_id, extra_controller_params={})
+    url = build_article_url(article_id, extra_controller_params)
+    uri = URI.parse(URI.encode(url))
+    content = uri.read
+    response = Response.custom_parse(content, extra_controller_params)
+    return [response, response.docs]
+  end
+  
+  # gets specific articles using the article identifier in "rid"
+  def get_articles_by_ids(article_ids=[])
+    return [] if article_ids.blank?
+    articles = []
+    article_ids.each do |article_id|
+      response, documents = get_article_by_id(article_id)
+      articles << documents.first
+    end
+    articles
+  end
+  
   def get_article_search_results(extra_controller_params={})
-    RAILS_DEFAULT_LOGGER.info("primo encoded is #{URI.encode(build_journal_url(extra_controller_params)).inspect}")
-    uri = URI.parse(URI.encode(build_journal_url(extra_controller_params)))
+    RAILS_DEFAULT_LOGGER.info("primo encoded is #{URI.encode(build_articles_url(extra_controller_params)).inspect}")
+    uri = URI.parse(URI.encode(build_articles_url(extra_controller_params)))
     content = uri.read
     response = Response.custom_parse(content, extra_controller_params)
     return [response, response.docs]

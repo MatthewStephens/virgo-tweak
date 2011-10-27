@@ -1,6 +1,10 @@
 <div class="folder_container">
 <% form_tag("/folder", :name => "folder#{document[:id]}", :class => 'addFolderForm') do -%>
-  <%= hidden_field_tag(:id, h(document[:id]), :id => "id#{document[:id]}") %>
+	<% if document.doc_type == 'article' %>
+		<%= hidden_field_tag(:article_id, h(document.id), :id => "id#{document.id}") %>
+  <% else %>
+		<%= hidden_field_tag(:id, h(document[:id]), :id => "id#{document[:id]}") %>
+	<% end %>
   <%= link_to('Add Star', folder_index_path, :class => 'submitForm', :title=>'Add to Starred Items')%>
   <%= submit_tag 'Add Star', :id => "submitFolderForm_#{document[:id]}", :class => 'hide' %>
 <% end %>

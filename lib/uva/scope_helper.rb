@@ -50,6 +50,14 @@ module UVA::ScopeHelper
     session[:search] ||= {}
   end
   
+  def session_folder_document_ids
+    session[:folder_document_ids] ||= []
+  end  
+ 
+  def session_folder_article_ids
+    session[:folder_article_ids] ||= []
+  end
+  
   #
   # If the :format is rss, use :received
   # If there is no query, don't allow sorting on relevance

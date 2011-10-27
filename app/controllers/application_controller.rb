@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_filter :notices_update
 
   include ExceptionNotification::Notifiable
+  include UVA::ScopeHelper
 
   # ensures that the current user is allowed to administer maps
   def verify_map_user
@@ -33,7 +34,6 @@ class ApplicationController < ActionController::Base
       return
     end
   end
-  
   
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password

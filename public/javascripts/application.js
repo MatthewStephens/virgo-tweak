@@ -51,6 +51,16 @@ jQuery(document).ready(function($) {
 	  }
 	}
 	
+	function loadFolderArticles(){
+	  if($('#folder_article_container').length > 0) {
+	      load_url = "/folder/articles";
+		  $('#folder_article_container').load(load_url, 
+		  function() {
+		    $('#folder_article_container').css('background', '#FFF');
+		  });
+	  }
+	}
+	
 	/*
 		Bind the availability links to a handler
 		
@@ -292,6 +302,7 @@ jQuery(document).ready(function($) {
 		allowSelectAll();
 		allowClearAll();
 		loadArticles();
+		loadFolderArticles();
 		changePerPage();
 		addChatLink();
 	}

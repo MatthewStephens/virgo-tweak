@@ -1,5 +1,7 @@
 <% if item_in_folder?(document.value_for(:id)) %>
   <div class="folder_container"><%= link_to 'Remove Star', folder_path(document[:id]), :class=>'deleteFolder_link', :title=>'Remove Star' %></div>
+<% elsif item_in_article_folder?(document.id) %>
+	<div class="folder_container"><%= link_to 'Remove Star', folder_article_destroy_path(:article_id => document[:id]), :class=>'deleteFolderArticle_link', :title=>'Remove Star' 	%></div>
 <% else %>
   <%= render :partial=>'catalog/folder_form', :locals=>{:document=>document} %>
 <% end %>

@@ -941,7 +941,7 @@ a.more_facets_link { color: #2f3e6a;}
 #results .document .tools .folder_container .submitForm.saving-star {
   background-image: url('/images/marked-list-saving.gif');
 }
-.add_star .folder_container .deleteFolder_link {
+.add_star .folder_container .deleteFolder_link, .add_star .folder_container .deleteFolderArticle_link {
   background: url('/images/marked-list.gif') no-repeat scroll 0 6px transparent;
   display: block;
   padding-left: 20px;

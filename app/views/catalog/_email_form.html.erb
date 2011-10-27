@@ -17,6 +17,9 @@
   <% @documents.each do |doc| %>
     <%=hidden_field_tag "id[]", doc.get(:id)%>
   <% end %>
+  <% @articles.each do |article| %>
+    <%=hidden_field_tag "article_id[]", article.id%>
+  <% end %>
   <%=hidden_field_tag :style, 'email'%>
   <%=hidden_field_tag :show_max_per_page, 'true'%>
   <%= submit_tag "Send" %>

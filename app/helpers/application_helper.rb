@@ -578,10 +578,9 @@ module ApplicationHelper
   end
   
   # use google link shortener
-  def shortened_link(document)
+  def shortened_link(document, host)
     url = "https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyDTcTFIqkvnwK0VJ9q64BZLs7AGx_0oJdI"
-    @host = "search.lib.virginia.edu"
-    data = {"longUrl" => catalog_path(document.id, :only_path => false, :host => @host)}.to_json
+    data = {"longUrl" => catalog_path(document.id, :only_path => false, :host => host)}.to_json
     response = Curl::Easy.http_post(url, data) do |curl|
       curl.headers['Accept'] = 'application/json'
       curl.headers['Content-Type'] = 'application/json'
@@ -589,6 +588,18 @@ module ApplicationHelper
     end
     body = JSON.parse(response.body_str)
     body["id"]
+  end
+  
+  def shortened_article_link(article, host)
+    url = "https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyDTcTFIqkvnwK0VJ9q64BZLs7AGx_0oJdI"
+    data = {"longUrl" => article.links.first.fulltext_url, :only_path => false, :host => host}.to_json
+    response = Curl::Easy.http_post(url, data) do |curl|
+      curl.headers['Accept'] = 'application/json'
+      curl.headers['Content-Type'] = 'application/json'
+      curl.headers['Api-Version'] = '2.2'
+    end
+    body = JSON.parse(response.body_str)
+    body["id"]    
   end
 
  # find advanced search
@@ -662,6 +673,11 @@ module ApplicationHelper
     session[:folder_document_ids] && session[:folder_document_ids].include?(doc_id) ? true : false
   end
   
+  # determines if the given document id is in the article folder.
+  def item_in_article_folder?(doc_id)
+    session[:folder_article_ids] && session[:folder_article_ids].include?(doc_id) ? true : false
+  end
+  
   # handles refworks generation for multiple documents.  This can probably go away when the Folder
   # logic is added to the Blacklight plugin
   def render_refworks_texts(documents)
@@ -686,11 +702,14 @@ module ApplicationHelper
     val
   end
   
- def render_csv(documents)
+ def render_csv(documents, articles=[])
     csv_string = FasterCSV.generate do |csv|
       csv << ["ITEM_ID", "ITEM_FORMAT", "ITEM_TITLE", "ITEM_AUTHOR"]        
       documents.each do |doc|
         csv << [doc.value_for(:id), doc.value_for(:format_facet), doc.value_for(:title_facet), doc.value_for(:author_facet)]
+      end
+      articles.each do |article|
+        csv << [article.id, article.doc_type, article.display.title, article.display.creator]
       end
     end    
   end
@@ -746,6 +765,15 @@ module ApplicationHelper
       render :partial=>"catalog/_#{action_name}_partials/#{format}", :locals=>{:document=>doc, :counter=>counter, :offset=>offset, :bookmarks_view=>bookmarks_view}
     rescue ActionView::MissingTemplate
       render :partial=>"catalog/_#{action_name}_partials/default", :locals=>{:document=>doc, :counter=>counter, :offset=>offset, :bookmarks_view=>bookmarks_view}
+    end
+  end
+  
+  def render_document_row(doc)
+    format = document_partial_name(doc)
+    begin
+      render :partial=>"catalog/_row_partials/#{format}", :locals=>{:document=>doc}
+    rescue ActionView::MissingTemplate
+      render :partial=>"catalog/_row_partials/default", :locals=>{:document=>doc}
     end
   end
 
@@ -878,6 +906,7 @@ module ApplicationHelper
     query_params = session[:search].dup || {} rescue {}
     query_params.delete :counter
     query_params.delete :total
+    query_params.delete :controller
     scrunge_portal(query_params)
     link_url = catalog_index_path(query_params)
     link_to opts[:label], link_url

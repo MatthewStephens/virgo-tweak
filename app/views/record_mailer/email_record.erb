@@ -34,3 +34,20 @@ URL of page:
 <%= catalog_path(document.id, :only_path => false, :host => @host) %>
 --------------------------------------------------------------------
 <% end -%><% # end of%>
+<% @articles.each do |article| -%>
+<%= article.display.title %>
+<% unless article.display.creator.blank? -%>
+Creator: <%= article.display.creator %>
+<% end -%>
+<% unless article.display.is_part_of.blank? -%>
+Published in: <%= article.display.is_part_of %>
+<% end -%>
+<% unless article.display.identifier.blank? -%>
+<%= article.display.identifier %>
+<% end -%>
+<% unless article.links.empty? -%>
+<%= shortened_article_link(article, @host) %>
+<% end -%>
+--------------------------------------------------------------------
+<% end -%>
+

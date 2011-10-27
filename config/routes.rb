@@ -52,6 +52,7 @@ ActionController::Routing::Routes.draw do |map|
   map.page_turner 'catalog/:id/page_turner', :controller => 'catalog', :action => 'page_turner'
   map.fedora_metadata 'fedora_metadata/:id/:pid.:format', :controller => 'catalog', :action => 'fedora_metadata'
   map.refworks_texts 'folder/refworks_texts', :controller => 'folder', :action => 'refworks_texts'
+  map.folder_article_destroy 'folder/article_destroy', :controller => 'folder', :action => 'article_destroy'
   map.csv 'folder/csv', :controller => 'folder', :action => 'csv'
   
   map.citation 'folder/citation', :controller => 'folder', :action => 'citation'
