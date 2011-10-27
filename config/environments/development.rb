@@ -44,5 +44,5 @@ FEDORA_REST_URL = 'http://localhost:8080/fedora'
 Fedora_username = 'fedoraAdmin'
 Fedora_password = 'fedoraAdmin'
 
-FIREHOSE_URL = "http://webservice.lib.virginia.edu:8080"
+FIREHOSE_URL = "http://webservice.lib.virginia.edu:8080/firehose2"
 PRIMO_URL = "http://primo4.hosted.exlibrisgroup.com:1701/PrimoWebServices/xservice/search/brief?institution=UVA&onCampus=true"

@@ -1,6 +1,10 @@
 <!-- Holdings, physical and online -->
 <div id="availability">
-	<h2>Availability</h2>
+	<% if document.doc_type == :hathi %>
+		<h2>Access Online</h2>
+	<% else %>
+		<h2>Availability</h2>
+	<% end %>
 	
   	<% #------------ Online ------------- %>
   	<% if document[:marc_display] %>
@@ -37,6 +41,15 @@
 					</div>
   	    </div>
   	<% end %>
+	
+	<% #------------ Hathi Object ------------------%>
+	 <% if document.doc_type == :hathi %>
+	 <div id="onlineAvailability" class="holding">
+		<div class="onlineHolding">
+		<%= link_to_online_access(document) %>
+		</div>
+		</div>
+	<% end %>
 	
 	<% if document[:marc_display]%>  
     <script type="text/javascript">

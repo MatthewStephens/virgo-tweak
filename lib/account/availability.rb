@@ -185,7 +185,7 @@ class Account::Availability
   def self.find(document)
     ckey = document.value_for :id
     ckey = Account::Common.ckey_converter(ckey)
-    uri = URI.parse("#{FIREHOSE_URL}/firehose2/items/#{ckey}")
+    uri = URI.parse("#{FIREHOSE_URL}/items/#{ckey}")
     begin
       xml = uri.read
       ret = Account::Availability.new(document, Account::Common::CatalogItem.parse(xml, :single=>true, :use_default_namespace => true), xml)

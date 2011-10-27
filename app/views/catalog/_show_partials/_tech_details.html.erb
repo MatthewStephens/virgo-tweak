@@ -1,7 +1,9 @@
 <dt class="technicalDetails">Technical details</dt>
 <dd class="technicalDetails">
   <ul>
-    <li><%= link_to_ilink_record(document, 'Access in Virgo Classic') %></li>
+		<% unless document.doc_type == :hathi %>
+    	<li><%= link_to_ilink_record(document, 'Access in Virgo Classic') %></li>
+		<% end %>
     <li>
       <a href="" onclick="$('#marc_view_switch').toggle();return false;">Staff View</a>
       <%- if document.respond_to?(:marc) -%>

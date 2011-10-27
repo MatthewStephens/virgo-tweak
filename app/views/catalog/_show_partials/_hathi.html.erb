@@ -1,0 +1,123 @@
+<% if request.env['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest' %>
+	<%= javascript_include_tag 'application' %>
+	<%= stylesheet_link_tag 'application' %>
+<% end %>
+
+<div class="itemShowView document" id="Doc<%= document[:id] %>">
+  
+	<div id="identifierFields">
+
+		<% if (document.get :linked_title_display rescue false) %>
+			<h1 id="titleField"><%= document.value_for :linked_title_display %></h1>
+		<% end %>
+		
+	    <h1 id="titleField"><%= full_title(document, true) %></h1>
+
+		<!-- 	This should be the display quality data about this item, as human readable as possible. 
+			For example, we should include the season information, for comic books, television shows, and other works
+			that are divided into parts (i.e., 245n or document.marc_display.part) and we should include the responsibility 
+			statement, i.e., the author or editor or whatever of a work, as their name appears on the book, which will 
+			often differ from the authorized forms of people's names as they appear in other marc fields
+		-->
+		
+		<div id="respStmtField">
+			<% if (document.get :linked_responsibility_statement_display rescue false) %>
+			<div><%= document.value_for :linked_responsibility_statement_display %></div>
+			<% end %>
+			<div><%= document.marc_display.responsibility_statement %></div>
+		</div>
+	</div>
+
+	<div id="details">
+	  <dl>	
+	    <dt>Format</dt>
+		  <dd><%= document.value_for :format_facet %></dd>
+	    
+			<dt>Description</dt>
+			<dd>
+				<% #------------ Physical description ------------- -%>
+				<% unless document.marc_display.physical_description.empty? -%>
+				  <%= document.marc_display.physical_description.join(' ')%>
+				<% end -%>
+			
+			<% #------------ Edition ------------- %>
+			<% unless document.marc_display.edition.empty? %>
+			<dt>Edition</dt>
+			<dd><%= document.marc_display.edition %></dd>
+			<% end %>
+			
+			<% #------------ Publication statement ------------- %>
+			<% unless document.marc_display.publication_statement.empty? %>
+			<dt>Published</dt>
+			<dd><%= document.marc_display.publication_statement.join(' ') %></dd>
+			<% end %>
+
+			<% #------------ ISBN ------------- %>
+			<% unless document.marc_display.isbn(document.doc_sub_type).empty? %>
+			<dt>ISBN(s)</dt>
+			<dd>  
+			<% document.marc_display.isbn(true).each do |v| %>
+			<%= v %>,
+			<% end %>	    
+			</dd>
+			<% end %>
+			
+			<% #------------ Language -------------%>
+			<% unless document.marc_display.language.empty? %>
+			<dt>Language</dt>
+			<% document.marc_display.language.each do |v| %>
+			<dd><%= v %></dd>
+			<% end %>
+			<% end %>
+
+
+			<% #------------ Frequency (journals) -------------%>
+			<% unless document.marc_display.journal_frequency.empty? %>
+			<dt>Frequency (journals)</dt>
+			<% document.marc_display.journal_frequency.each do |v| %>
+			<dd><%= v %></dd>
+			<% end %>
+			<% end %>
+			
+			<% #------------ Publication history ---------------%>
+			<% unless document.marc_display.publication_history.empty? %>
+			<dt>Publication history</dt>
+			<% document.marc_display.publication_history.each do |v| %>
+			<dd><%= v %></dd>
+			<% end %>
+			<% end %>
+			
+			
+			<% #------------ Series statement -------------%>
+			<% unless document.marc_display.series_statement.empty? %>
+			<dt>Series statement</dt>
+			<% document.marc_display.series_statement.each do |v| %>
+			<dd><%= v %></dd>
+			<% end %>
+			<% end %>
+			
+  		<%= render :partial => "catalog/_show_partials/tech_details", :locals => { :document => document } %>
+
+		</dl>	
+  	
+	</div><% # end #details %>  
+  
+  <%= render :partial => "catalog/_show_partials/availability", :locals => { :document => document } %>
+  
+</div>
+
+<% sidebar_items << capture do %>
+  <div id="sub1">
+  <div id="sub1Inner">
+		
+		<div class="previewThumbImg">
+			<span class="coverImage" title="<%= document.id %>">
+				<%= image_tag 'ajax-loader.gif', :class=>'ajaxLoader', :alt => 'Loading' %>
+			</span>
+		</div>
+	
+  	<%= render :partial => 'catalog/_show_partials/subjects', :locals => { :document => document } %>
+  	<%= render :partial => 'catalog/_show_partials/related_names', :locals => { :document => document } %> 
+  </div>
+  </div>
+<% end %>

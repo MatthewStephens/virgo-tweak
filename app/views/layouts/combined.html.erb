@@ -37,9 +37,9 @@
   <!--[if lte IE 8 ]>    
   <%= stylesheet_link_tag 'ie' %>
   <![endif]-->
-  <%= stylesheet_link_tag 'yui-combo' %>
+  <%= stylesheet_link_tag 'yui-combo', javascript_path('colorbox/uva/colorbox.css'), 'uva_colorbox.css' %>
 
-  <%= javascript_include_tag 	'jquery-1.3.2.min.js', 'modernizr.custom.min.js', 'application' %>
+  <%= javascript_include_tag 	'jquery-1.3.2.min.js', 'modernizr.custom.min.js', 'colorbox/colorbox/jquery.colorbox.min.js', 'application' %>
 
   <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
   <%= @add_to_html_head %>

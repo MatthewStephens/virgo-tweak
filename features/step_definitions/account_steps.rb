@@ -8,35 +8,35 @@ end
 
 Given /^I am viewing the stubbed account page for mst3k$/ do
   visit login_path(:login => "mst3k")
-  FakeWeb.register_uri(:get, "#{FIREHOSE_URL}/firehose2/users/mst3k", 
+  FakeWeb.register_uri(:get, "#{FIREHOSE_URL}/users/mst3k", 
     :body => File.read("#{RAILS_ROOT}/test/fixtures/mst3k_account.xml"))
   visit account_index_path
 end
 
 Given /^I am viewing the stubbed account page for barred mst3k$/ do
   visit login_path(:login => "mst3k")
-  FakeWeb.register_uri(:get, "#{FIREHOSE_URL}/firehose2/users/mst3k", 
+  FakeWeb.register_uri(:get, "#{FIREHOSE_URL}/users/mst3k", 
     :body => File.read("#{RAILS_ROOT}/test/fixtures/mst3k_barred.xml"))
   visit account_index_path
 end
 
 Given /^I am viewing the stubbed checkouts page for mst3k$/ do
   visit login_path(:login => "mst3k")
-  FakeWeb.register_uri(:get, "#{FIREHOSE_URL}/firehose2/users/mst3k/checkouts",
+  FakeWeb.register_uri(:get, "#{FIREHOSE_URL}/users/mst3k/checkouts",
     :body => File.read("#{RAILS_ROOT}/test/fixtures/mst3k_checkouts.xml"))
   visit checkouts_account_path
 end
 
 Given /^I am viewing the stubbed holds page for mst3k$/ do
   visit login_path(:login => "mst3k")
-  FakeWeb.register_uri(:get, "#{FIREHOSE_URL}/firehose2/users/mst3k/holds",
+  FakeWeb.register_uri(:get, "#{FIREHOSE_URL}/users/mst3k/holds",
     :body => File.read("#{RAILS_ROOT}/test/fixtures/mst3k_holds.xml"))
   visit holds_account_path
 end
 
 Given /^I am viewing the stubbed reserves page for mst3k$/ do
   visit login_path(:login => "mst3k")
-  FakeWeb.register_uri(:get, "#{FIREHOSE_URL}/firehose2/users/mst3k/reserves",
+  FakeWeb.register_uri(:get, "#{FIREHOSE_URL}/users/mst3k/reserves",
     :body => File.read("#{RAILS_ROOT}/test/fixtures/mst3k_reserves.xml"))
   visit reserves_account_path
 end
@@ -127,7 +127,7 @@ end
 
 Given /^I am viewing the stubbed status page for an item in ivy that is checked out$/ do
   visit login_path(:login => "mst3k")
-  FakeWeb.register_uri(:get, "#{FIREHOSE_URL}/firehose2/items/751547", 
+  FakeWeb.register_uri(:get, "#{FIREHOSE_URL}/items/751547", 
     :body => File.read("#{RAILS_ROOT}/test/fixtures/ivy_checked_out.xml"))
   visit status_catalog_path("u751547")
 end

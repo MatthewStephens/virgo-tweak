@@ -148,6 +148,7 @@ module UVA
     def doc_type
       @doc_type||=(
         types = [
+          [:hathi, has?(:source_facet, 'Hathi Trust Digital Library')],
           [:lib_album, has?(:format_facet, /Musical Recording/i)],
           [:dl_book, has?(:content_model_facet, 'digital_book')],
           [:lib_catalog, has?(:source_facet, 'Library Catalog')],

@@ -165,7 +165,15 @@ class SpecialCollectionsRequestsController < ApplicationController
   # sets the name from the patron record.
   def patron_lookup
     return if @special_collections_request.user_id.blank?
-    name = get_patron(@special_collections_request.user_id).display_name rescue nil
+    patron = get_patron(@special_collections_request.user_id)
+    last_name = patron.last_name rescue ""
+    first_name = patron.first_name rescue ""
+    middle_name = patron.middle_name rescue ""
+    unless last_name.blank?
+      name = "" + last_name + ", " + first_name + " " + middle_name
+    else
+      name = patron.display_name rescue ""
+    end
     if @special_collections_request.user_id =~ /^demo_/
       @special_collections_request.name = @special_collections_request.user_id
     elsif name.blank?

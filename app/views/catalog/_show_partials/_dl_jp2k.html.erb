@@ -24,6 +24,7 @@
 	
 	<div id="details">	
 		<dl>
+		  			
   			<% #------------ Title ------------- %>
         <% unless @document.value_for(:main_title_display) == 'n/a' %>
         <dt>Title</dt>
@@ -116,17 +117,18 @@
 				<dd><%= link_to v, add_facet_params(:digital_collection_facet, v).merge(:action=>nil,:id=>nil) %></dd>
 				<% end %>
 				<% end %>
-		</dl>	
-		
+				
+				<dt class="show_detail">Download</dt>
+  			<dd class="show_detail"><%= link_to "Full-size Image",  document.fedora_url + "/objects/" + document[:id].to_s + "/methods/djatoka:StaticSDef/getStaticImage", :target => "_blank" %>
+  			  <span class="terms-link">[<%= link_to "Terms of Use",  "http://www2.lib.virginia.edu/small/using/use_of_materials_policy.html", :target => "_blank" %>]</span></dd>
+  							
+		</dl>		
     
-	</div><!--end #details -->
-	
-	
-	<!-- #availability -->
+	</div><!--end #details -->	
 
 </div>
 
-<iframe src="<%= @document.dl_jp2k_viewer %>" width="840px" height="820px" frameborder="0"></iframe>
+<iframe src="<%= @document.dl_jp2k_viewer %>" width="700px" height="850px" frameborder="0"></iframe>
 
 <% sidebar_items << capture do %>
   <div id="sub1">

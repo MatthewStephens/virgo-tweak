@@ -47,15 +47,16 @@ module ApplicationHelper
   def location_listing(document)
     libraries = document.values_for(:library_facet)
     locations = document.values_for(:location_facet)
+    locations2 = document.values_for(:location2_facet)
     return '' if libraries.nil? or locations.nil?
     if special_collections_lens?
-      locations = locations.select{ |loc| loc =~ /Special Collections/ }
-      return locations[0]
+      libraries = libraries.select{ |lib| lib =~ /Special Collections/ }
+      return libraries[0]
     end
     return '' if locations.length == 0
     return 'Multiple locations' if libraries.length > 1 or locations.length > 1
-    return locations[0] if locations[0] =~ /Special Collections/
-    return locations[0] if locations[0] =~ /Reserve/
+    return locations2[0] if locations2[0] =~ /Special Collections/
+    return locations2[0] if locations2[0] =~ /Reserve/
     return (document.values_for(:library_facet)[0] + " " + locations[0]) rescue locations[0]
   end
   
@@ -249,13 +250,17 @@ module ApplicationHelper
   end
   
   # parses :url_display, which has the format url||label (often label is missing)
-  def link_to_online_access(document, separator = "<br />")
+  def link_to_online_access(document, separator = "<br />", link_text = "")
     return if document.get(:url_display).nil?
     out = ''
     document.values_for(:url_display).each do |string|
       parts = string.split('||')
       url = parts[0]
-      label = parts[1]||online_access_verb(document) + " online"
+      unless link_text.blank?
+        label = link_text
+      else   
+        label = parts[1]||online_access_verb(document) + " online"
+      end
       out += link_to(label, url, :target => '_blank') + separator
     end
     out
@@ -297,8 +302,8 @@ module ApplicationHelper
 
   # determines what the inverse values and labels of the current facet sort is
   def facet_sort_inverse(facet_name = '')
-    return ['hits', 'Numerical sort'] if facet_sort_scheme(facet_name) == 'alpha'
-    return ['alpha', 'A-Z sort'] if facet_sort_scheme(facet_name) == 'hits'
+    return ['hits', 'Number of Results'] if facet_sort_scheme(facet_name) == 'alpha'
+    return ['alpha', 'A-Z'] if facet_sort_scheme(facet_name) == 'hits'
   end
   
   # determines what label we should assign to the facet inverse  
@@ -309,6 +314,12 @@ module ApplicationHelper
   # determines that the value we should assign to the facet inverse
   def facet_sort_inverse_value(facet_name='')
     return facet_sort_inverse(facet_name)[0]
+  end
+  
+  # determines the current sort behavior
+  def current_facet_sort(facet_name = '')
+    return 'Number of Results' if facet_sort_scheme(facet_name) == 'hits'
+    return 'A-Z' if facet_sort_scheme(facet_name) == 'alpha'
   end
   
   # sorts facet values in memory, after lower-casing them
@@ -521,7 +532,13 @@ module ApplicationHelper
     return false if availability.special_collections_holdings.size == 0
     availability.special_collections_holdings.each do |holding|
       holding.copies.each do |copy|
-        return true if copy.current_location.code !~ /SC-IVY/
+        if copy.current_location.code !~ /SC-IVY/
+          if copy.home_location.code =~ /SC-IVY/ and ["IN-PROCESS", "SC-IN-PROCESS"].include?(copy.current_location.code)
+            # don't display link
+          else
+            return true
+          end
+        end
       end
     end
     return false

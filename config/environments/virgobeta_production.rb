@@ -46,5 +46,5 @@ FEEDBACK_NOTIFICATION_SUBJECT = 'Virgo Feedback (production)'
 # Enable threaded mode
 # config.threadsafe!
 
-FIREHOSE_URL = "http://firehose.lib.virginia.edu:8080"
+FIREHOSE_URL = "http://firehose.lib.virginia.edu:8080/firehose2"
 PRIMO_URL = "http://primo4.hosted.exlibrisgroup.com:1701/PrimoWebServices/xservice/search/brief?institution=UVA&onCampus=true"
