@@ -8,7 +8,7 @@ Feature: Display Articles
 		And I choose "catalog_select_articles"
 		And I fill in "q" with "global warming"
 		And I press "search"
-		Then I should get at least 151000 results
+		Then I should get at least 150000 results
 		And I should see the keyword label "Keyword"
 		And I should see the keyword value "global warming"
 		
