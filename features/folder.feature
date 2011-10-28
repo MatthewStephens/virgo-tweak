@@ -11,11 +11,11 @@ Feature: User Folder
 	  And I should get ckey u4322506 in the results
  	  And I should see an add to folder form for ckey "u4322506"
  	  
- 	Scenario: Ensure "Add to Folder" for is present on individual record
+ 	Scenario: Ensure "Add to Folder" form is present on individual record
  	  Given I am on the document page for id u4322506
  	  Then I should see an add to folder form for ckey "u4322506"
 
-	Scenario:  Ensure "Add to Folder" for is present in article search results
+	Scenario:  Ensure "Add to Folder" form is present in article search results
 		Given I am on the homepage
 		When I fill in "q" with "pickral odum benthic detritus"
 		And I choose "catalog_select_articles"
@@ -55,7 +55,7 @@ Feature: User Folder
 	      
   Scenario: Remove an item from the folder
     Given I have ckey "u5076740" in my folder
-    When I follow "remove"
+    When I follow "X"
     Then I should see "Removed from Starred Items"
     And I should not see ckey "u5076740" in the folder
     
