@@ -112,7 +112,7 @@ class Account::Availability
       hold_map[:at_sea] << holding and next if at_sea?(holding.library.code)
       order << holding
     end
-    order = order.sort_by {|a| [a.library.name, a.call_number] } # sort by library and call number
+    order = order.sort_by {|a| [a.library.name, a.shelving_key] } # sort by library and shelving key
     finalize_holdings(order, hold_map)
   end
   
