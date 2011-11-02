@@ -30,6 +30,13 @@
 			</dd>
 			<% end %>
 					
+			<% if document.value_for(:format_facet) != 'Journal/Magazine; Online'%>
+				<dt>Publication Date</dt>
+				<dd class="formatField">
+		 		<%= document.value_for :published_date_display %> 			
+				</dd>
+			<% end%>
+			
 			<% if !document.get(:url_display).nil? %>
 				<dt>Access Online</dt>
   			<dd class="onlineAccessField">
