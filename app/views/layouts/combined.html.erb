@@ -65,6 +65,7 @@
         <header id="all_search_header" class="grid_24 alpha omega">
           <%= render 'catalog/constraints', :localized_params=>params %>
           <%= link_to "Print View", params.merge(:view => :print), :class => 'printPreview', :target => 'blank', :title => "Print View" %>
+          <%= render :partial=>'/catalog/document_actions' %>
         </header>
         <section id="catalog_search_results" class="grid_12 alpha omega">
           <header class="split-header">

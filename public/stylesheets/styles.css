@@ -775,6 +775,7 @@ a.more_facets_link { color: #2f3e6a;}
   width: 170px;
   z-index: 40;
 }
+.combined-results #ActionListContainer {float: right; top: 2px; margin-right: 20px;}
 
 #ActionListContainer .action_list {
   background: url('/images/marked-list.gif') no-repeat scroll 0 33% transparent;
@@ -828,7 +829,7 @@ a.more_facets_link { color: #2f3e6a;}
 }
 
 .no-starred {font-style: italic; margin-left: 1.5em; padding: 1em 0;}
-.starred-info {color: #555; font-size: 14px; font-style: italic; line-height: 1.5em; padding: 0.5em 6em 1em; text-align: center;}
+.starred-info {color: #555; font-size: 14px; font-style: italic; line-height: 1.5em; padding: 0.5em 6em 0; text-align: center;}
 .starred-info strong {font-weight: bold;}
 .link_disabled {  color: #888 !important; }
 
@@ -1506,6 +1507,7 @@ transition: background 200ms ease-in-out; }
 .account_container td.date {width: 85px;}
 .account_container td.item-number {color: #777; font-style: italic; width: 24px; text-align: right;}
 .account_container td.course-name {width: 140px;}
+.account_container .remove-star { background: url("/images/marked-list.gif") no-repeat scroll 0 0 transparent; display: block; height: 16px; outline: none; overflow: hidden; width: 16px; text-indent: -9999px;}
 .account-notice-container {font-weight: bold;}
 .account-notice {display: block; padding-left: 1em;}
 .account-tasks li {color: #777; list-style: square inside none; margin-bottom: 0.5em; margin-left: 0.25em;}

@@ -1,3 +1,7 @@
+<%- @add_to_html_head = capture do -%>
+  <%= javascript_include_tag 'jquery.dataTables.min.js', 'account-listing.js' %>
+<%- end -%>
+
 <div id="list_heading"><h1>Starred Items<%= " (#{session_folder_document_ids.count + session_folder_article_ids.count})"  %></h1></div>
 
 <% unless @documents.empty? %>
@@ -44,13 +48,27 @@
 	</div>
 <% end %>
 
-<div id="results">
+<div id="results" class="account_container">
 <% if @documents.empty? and @articles.empty? %>
 	<h2 class='no-items'>No Starred Items</h2>
 <% else %>
-	<table border="1">
-		<%= render :partial => 'folder_rows', :locals=>{:documents => @documents} %>
-		<%= render :partial => 'folder_rows', :locals=>{:documents => @articles} %>
+	<table id="starred-listing" class="account-listing">
+	  <thead>
+      <tr>
+        <th class="starred-number-heading hidden-heading"> <!-- Number --> </th>
+        <th class="starred-star-heading hidden-heading"> <!-- Remove --> </th>
+        <th class="starred-title-heading">Title</th>
+        <th class="starred-author-heading">Creator</th>
+        <th class="starred-format-heading">Format</th>
+        <th class="starred-year-heading">Year</th>
+        <th class="starred-library-heading">Type</th>
+        <th class="starred-call-heading">Availability</th>        
+      </tr>
+    </thead>
+    <tbody>
+		  <%= render :partial => 'folder_rows', :locals=>{:documents => @documents} %>
+		  <%= render :partial => 'folder_rows', :locals=>{:documents => @articles} %>
+		</tbody>
 	</table>
 <% end %>
 </div>

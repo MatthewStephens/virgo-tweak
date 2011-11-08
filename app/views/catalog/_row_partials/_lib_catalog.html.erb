@@ -1,18 +1,19 @@
 <tr id="<%= document[:id] %>">
-	<td><%= full_title(document) %></td>
-	<td>
+  <td><!--number --></td>
+	<td><%= link_to 'Remove', folder_path(document[:id]), :method => :delete, :confirm => 'Remove star from this item?', :class => "remove-star" %></td>
+	<td class="title"><%= full_title(document) %></td>
+	<td class="author">
 		<% authors = document.author_type_fields -%>
 		<% authors.each do |k,v| -%>
-			<div><%= document.value_for(k) %></div>
+			<span class="starred-author"><%= document.value_for(k) %></span>
 		<% end %>
 	</td>
-	<td><%= document.value_for :format_facet %></td>
-	<td>
+	<td class="format"><%= document.value_for :format_facet %></td>
+	<td class="date">
 		<% unless journal?(document) -%>
 			<%= document.value_for :published_date_display %>
 		<% end %>
 	</td>
-	<td><%= location_listing(document)%></td>
-	<td><%= call_number(document, '<br />') %></td>
-	<td><%= link_to 'X', folder_path(document[:id]), :method => :delete, :confirm => 'Remove star from this item?' %></td>
+	<td>Catalog</td>
+	<td class="availability"><%= link_to 'Check availability', catalog_path(document[:id]) %></td>
 </tr>

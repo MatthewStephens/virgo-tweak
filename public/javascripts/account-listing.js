@@ -18,15 +18,18 @@ $(document).ready(function() {
     return ((x < y) ? 1 : ((x > y) ? -1 : 0));
   };
 
-  /* Sort by item status if the column is present,  */
-  /* otherwise sort by due date.                    */
-  var sortOrder = $('.account-item-status-heading').length > 0 ? [[3, 'desc'], [4, 'asc']] : [[3, 'asc']];
+  /* Sort by item status if the column is present,            */
+  /* otherwise sort by due date (account) or title (starred). */
+  var sortOrder = [[2, 'asc']];
+  if(!$('#starred-listing').length) {
+    sortOrder = $('.account-item-status-heading').length > 0 ? [[3, 'desc'], [4, 'asc']] : [[3, 'asc']];
+  }
 
   /* Initialize DataTable column sorting and callbacks */
   $('table.account-listing').dataTable({
     "aaSorting": sortOrder,
     "aoColumnDefs": [
-    	{ "bSortable": false, "aTargets": [ 'account-number-heading', 'account-renew-heading', 'account-call-heading' ] }
+    	{ "bSortable": false, "aTargets": [ 'account-number-heading', 'account-renew-heading', 'account-call-heading', 'starred-star-heading', 'starred-number-heading' ] }
     ],
   	"bAutoWidth": false,
   	"bInfo": false,

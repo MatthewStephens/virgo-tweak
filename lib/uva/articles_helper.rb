@@ -38,6 +38,7 @@ module UVA::ArticlesHelper
     register_namespace 'prim', 'http://www.exlibrisgroup.com/xsd/primo/primo_nm_bib'
     tag 'search'
     namespace 'prim'
+    element :creation_date, String, :tag => "creationdate"
     element :id, String, :tag => "recordid"
   end
   
