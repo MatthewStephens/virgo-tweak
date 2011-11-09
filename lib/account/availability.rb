@@ -96,7 +96,9 @@ class Account::Availability
   
   def set_maps
     @_catalog_item.holdings.each do |holding|
-      holding.map = Map.find_best_map(holding.library.code, holding.call_number)
+      holding.copies.each do |copy|
+        copy.map = Map.find_best_map(holding, copy) if copy.available?
+      end
     end
   end
   

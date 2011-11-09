@@ -1,6 +1,7 @@
 # A map plus a combination of a location and/or call number range.
 class CallNumberRange < ActiveRecord::Base
   belongs_to :map
+  has_many :locations
       
   validates_presence_of :map_id
       
@@ -51,4 +52,23 @@ class CallNumberRange < ActiveRecord::Base
     return out
   end  
   
+  def self.location_match(location_code, maps)
+    out = []
+    maps.each do |map|
+      map.call_number_ranges.each do |raw_range|
+        out << map if raw_range.location == location_code and raw_range.call_number_range == ""
+      end
+    end
+    out
+  end
+  
+  def self.location_and_call_number_match(holding, copy, maps)
+    call_number_matches = call_number_match(holding.call_number, maps) || []
+    location_and_call_number_matches = call_number_matches.select{ |r| r.location == copy.current_location.code } || []
+    location_matches = location_match(copy.current_location.code, maps)
+    
+    return location_and_call_number_matches unless location_and_call_number_matches.empty?
+    return location_matches unless location_matches.empty?
+    return call_number_matches
+  end
 end

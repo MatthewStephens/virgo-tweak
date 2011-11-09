@@ -9,7 +9,7 @@ class CallNumberRangesController < ApplicationController
   
   # creates a call nuumber range
   def create
-    @call_number_range = CallNumberRange.new(:call_number_range => params[:call_number_range], :map_id => params[:map_id])
+    @call_number_range = CallNumberRange.new(:call_number_range => params[:call_number_range], :location => params[:location], :map_id => params[:map_id])
     respond_to do |format|
       if @call_number_range.save
         flash[:notice] = 'Entry successfully saved'

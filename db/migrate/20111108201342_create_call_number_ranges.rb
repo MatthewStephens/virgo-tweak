@@ -3,6 +3,7 @@ class CreateCallNumberRanges < ActiveRecord::Migration
     create_table :call_number_ranges do |t|
       t.column :map_id, :integer
       t.column :call_number_range, :string
+      t.column :location, :string
     end
   end
 

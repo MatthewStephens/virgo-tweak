@@ -13,16 +13,21 @@
     </div>
 
   	<div class="mapGuides">    
-	   Call Number Ranges For this Map (leave blank if there is only one map for the whole library)
+	   Location and Call Number Ranges For this Map (not needed if there is only one map for the whole library)
     <% unless map.call_number_ranges.empty? %>
+				<table border="1">
+				<tr><th>Location</th><th>Call Number Range</th><th>Delete</th></tr>
 	      <% map.call_number_ranges.each do |range| %>
-					<div>
-	          <%= h range.call_number_range %>
-	          [<%= link_to "remove", call_number_range_path(range.id), :method => :delete, :confirm => 'Are you sure you want to delete this entry?' %>]
-	        </div>
+						<tr>
+	          <td><%= h range.location %></td><td><%= h range.call_number_range %></td>
+	          <td><%= link_to "remove", call_number_range_path(range.id), :method => :delete, :confirm => 'Are you sure you want to delete this entry?' %></td>
+						</tr>
 	      <% end %>
+			</table>
     <% end %>
+
 		<% form_tag(call_number_ranges_path) do %>
+			<%= select_tag :location, options_for_select(Location.find(:all, :order=>:value).collect{ |c| [c.value, c.value]}.insert(0, ""))   %>
 			<%= text_field_tag(:call_number_range) %>
 			<%= hidden_field_tag(:map_id, map.id) %>
 			<%= submit_tag "Add" %>

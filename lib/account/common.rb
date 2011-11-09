@@ -88,6 +88,7 @@ module Account::Common
     element :last_checkout, Date, :tag => "lastCheckout"
     has_one :current_location, CurrentLocation, :tag => "currentLocation"
     has_one :home_location, HomeLocation, :tag => "homeLocation"
+    attr_accessor :map
     def shadowed?
       @shadowed
     end
@@ -124,7 +125,6 @@ module Account::Common
     attribute :holdable, Boolean
     attribute :shadowed, Boolean
     element :shelving_key, String, :tag => "shelvingKey"
-    attr_accessor :map
     
     def initialize
       @groups = []
