@@ -13,6 +13,7 @@ class Account::Availability
     @_summary_libraries = []
     set_summary_holdings
     weed_holdings
+    set_maps
   end
   
   def to_xml
@@ -91,6 +92,12 @@ class Account::Availability
     end
     # if everything was shadowed, pitch it
     @_catalog_item.holdings.delete_if { |holding| holding.copies.size == 0 }    
+  end
+  
+  def set_maps
+    @_catalog_item.holdings.each do |holding|
+      holding.map = Map.find_best_map(holding.library.code, holding.call_number)
+    end
   end
   
   def finalize_holdings(order, hold_map)

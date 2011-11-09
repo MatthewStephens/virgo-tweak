@@ -1,9 +1,15 @@
 <div class="row">
-  <%= label(:map, :url) %>
-  <%= form.text_field :url %>
+  <%= label(:map, :library_id) %>
+  <%= collection_select(:map, :library_id, Library.find(:all, :order => :name), :id, :name, options = {:prompt => "Select a library"}) %>
 </div>
 
 <div class="row">
   <%= label(:map, :description) %>
   <%= form.text_field :description %>
 </div>
+
+<div class="row">
+  <%= label(:map, :url) %>
+  <%= form.text_field :url %>
+</div>
+

@@ -513,7 +513,7 @@ module ApplicationHelper
   # display map link
   def link_to_map(holding)
     unless holding.map.nil?
-      link_to "[Map]", Map.find(holding.map.id).url, :target => "_blank"
+      link_to "[Map]", holding.map.url, :target => "_blank"
     end 
   end
   

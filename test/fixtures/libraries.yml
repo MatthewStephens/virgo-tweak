@@ -1,0 +1,60 @@
+library_1:
+  id: 1
+  name: ALDERMAN
+library_2:
+  id: 2
+  name: CLEMONS
+library_3:
+  id: 3
+  name: FINE-ARTS
+library_4:
+  id: 4
+  name: SCI-ENG
+library_5:
+  id: 5
+  name: BIO-PSYCH
+library_6:
+  id: 6
+  name: CHEMISTRY
+library_7:
+  id: 7
+  name: MATH
+library_8:
+  id: 8
+  name: PHYSICS
+library_9:
+  id: 9
+  name: SPEC-COLL
+library_10:
+  id: 10
+  name: EDUCATION
+library_11:
+  id: 11
+  name: MUSIC
+library_12:
+  id: 12
+  name: DARDEN
+library_13:
+  id: 13
+  name: IVY
+library_14:
+  id: 14
+  name: ASTRONOMY
+library_15:
+  id: 15
+  name: MT-LAKE
+library_16:
+  id: 16
+  name: LAW
+library_17:
+  id: 17
+  name: BLANDY
+library_18:
+  id: 18
+  name: HEALTHSCI
+library_19:
+  id: 19
+  name: MEDIA-CTR
+library_20:
+  id: 20
+  name: AT-SEA

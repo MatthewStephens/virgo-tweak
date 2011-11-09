@@ -1,30 +1,34 @@
-<h1>Maps</h1>
+<div id="list_heading">Maps</div>
+
+<div class="tool_content">
 
 <%= link_to 'Add a new map', new_map_path %> | <%= link_to 'Administer Maps Users', maps_users_path %>
 
 <% for map in @maps -%>
   <div id="map_<%= map.id %>">
     <div class="mapEntry">
-      <div class="mapName"><%= h map.description %></div>
-      <div class="mapTools">[<%= link_to 'Edit Map', edit_map_path(map.id)%> | <%= link_to "Delete Map", map_url(map), :method => :delete, :confirm => 'Are you sure you want to delete this map and its location / call numbers? You cannot undo this.' %> | <%= link_to "Associate a location / call number range with this map", new_map_guide_path(:map_id => map.id) %>]</div>
+	    <div class="mapName"><%= h map.library.name %>: <%= h map.description %></div>
+      <div class="mapTools">[<%= link_to 'Edit Map', edit_map_path(map.id)%> | <%= link_to "Delete Map", map_url(map), :method => :delete, :confirm => 'Are you sure you want to delete this map and its call numbers? You cannot undo this.' %>]</div>
       <div class="mapUrl">URL: <%= h map.url %></div>
     </div>
 
-    
-    <% unless map.map_guides.empty? %>
-    <div class="mapGuides">
-    <table>
-      <tr><th>Location</th><th>Call Number Range</th><th></th><th></th></tr>
-      <% map.map_guides.each do |guide| %>
-        <tr>
-          <td><%= h guide.location.code %></td>
-          <td><%= h guide.call_number_range %></td>
-          <td><%= link_to 'Edit', edit_map_guide_path(guide.id) %></td>
-          <td><%= link_to "Delete", map_guide_path(guide), :method => :delete, :confirm => 'Are you sure you want to delete entry?' %></td>
-        </tr>
-      <% end %>
-      </table>
-      </div>
+  	<div class="mapGuides">    
+	   Call Number Ranges For this Map (leave blank if there is only one map for the whole library)
+    <% unless map.call_number_ranges.empty? %>
+	      <% map.call_number_ranges.each do |range| %>
+					<div>
+	          <%= h range.call_number_range %>
+	          [<%= link_to "remove", call_number_range_path(range.id), :method => :delete, :confirm => 'Are you sure you want to delete this entry?' %>]
+	        </div>
+	      <% end %>
     <% end %>
+		<% form_tag(call_number_ranges_path) do %>
+			<%= text_field_tag(:call_number_range) %>
+			<%= hidden_field_tag(:map_id, map.id) %>
+			<%= submit_tag "Add" %>
+		<% end %>
+		</div>
   </div>
 <% end -%>
+
+</div>

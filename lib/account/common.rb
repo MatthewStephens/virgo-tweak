@@ -124,6 +124,8 @@ module Account::Common
     attribute :holdable, Boolean
     attribute :shadowed, Boolean
     element :shelving_key, String, :tag => "shelvingKey"
+    attr_accessor :map
+    
     def initialize
       @groups = []
     end

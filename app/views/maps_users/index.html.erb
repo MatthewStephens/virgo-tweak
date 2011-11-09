@@ -1,4 +1,6 @@
-<h1>Maps Users</h1>
+<div id="list_heading">Maps Users</div>
+
+<div class="tool_content">
 
 <%= link_to '&larr; Return to maps', maps_path %>
 
@@ -9,3 +11,5 @@
   <li><%= maps_user.computing_id %> [<%= link_to "Delete", maps_user_url(maps_user), :method => :delete, :confirm => 'Are you sure you want to delete this map user? You cannot undo this.' %>]</li>
 <% end %>
 </ul>
+
+</div>

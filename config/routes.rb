@@ -75,7 +75,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :maps
   map.resources :maps_users
   map.resources :locations
-  map.resources :map_guides
+  map.resources :call_number_ranges
   map.resources(:special_collections_requests,
       :member=>{:start=>:get, :non_uva=>:get}
   )
