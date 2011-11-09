@@ -1,6 +1,4 @@
-require 'active_record/fixtures'
-
-class CreateLocations < ActiveRecord::Migration
+class DropLocations < ActiveRecord::Migration
   def self.up
     drop_table :locations
   end
