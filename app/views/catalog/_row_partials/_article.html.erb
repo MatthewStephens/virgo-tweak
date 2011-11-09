@@ -2,9 +2,9 @@
   <td><!--number --></td>
 	<td><%= link_to 'Remove', folder_article_destroy_path(:article_id => document[:id]), :confirm => 'Remove star from this item?', :class => "remove-star" %></td>
 	<td class="title"><%= link_to document.display.title, document.links.first.fulltext_url %></td>
-	<td class="author"><%= document.display.creator %></td>
+	<td class="author"><span class="starred-author"><%= document.display.creator %></span></td>
 	<td class="format"><%= document.display.type.capitalize %></td>
-	<td class="date"><%= document.search.creation_date %></td>
+	<td class="year"><%= document.search.creation_date %></td>
 	<td>Article</td>
-	<td class="availability"><%= link_to "Access online", document.links.first.fulltext_url, :target => "_blank" %></td>
+	<td class="access"><%= link_to "Access online", document.links.first.fulltext_url, :target => "_blank" %></td>
 </tr>

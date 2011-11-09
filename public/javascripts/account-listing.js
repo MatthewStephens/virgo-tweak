@@ -29,7 +29,7 @@ $(document).ready(function() {
   $('table.account-listing').dataTable({
     "aaSorting": sortOrder,
     "aoColumnDefs": [
-    	{ "bSortable": false, "aTargets": [ 'account-number-heading', 'account-renew-heading', 'account-call-heading', 'starred-star-heading', 'starred-number-heading' ] }
+    	{ "bSortable": false, "aTargets": [ 'account-number-heading', 'account-renew-heading', 'account-call-heading', 'starred-star-heading', 'starred-number-heading', 'starred-availability-heading' ] }
     ],
   	"bAutoWidth": false,
   	"bInfo": false,

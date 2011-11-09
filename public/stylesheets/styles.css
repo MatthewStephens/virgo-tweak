@@ -1505,6 +1505,7 @@ transition: background 200ms ease-in-out; }
 .account_container tr.even {background: #fff;}
 .account_container td.title {width: 28%;}
 .account_container td.date {width: 85px;}
+.account_container td.availability {width: 18%;}
 .account_container td.item-number {color: #777; font-style: italic; width: 24px; text-align: right;}
 .account_container td.course-name {width: 140px;}
 .account_container .remove-star { background: url("/images/marked-list.gif") no-repeat scroll 0 0 transparent; display: block; height: 16px; outline: none; overflow: hidden; width: 16px; text-indent: -9999px;}

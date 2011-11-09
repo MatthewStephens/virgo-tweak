@@ -1,4 +1,4 @@
-<tr id="<%= document[:id] %>">
+<tr class="document" id="<%= document[:id] %>">
   <td><!--number --></td>
 	<td><%= link_to 'Remove', folder_path(document[:id]), :method => :delete, :confirm => 'Remove star from this item?', :class => "remove-star" %></td>
 	<td class="title"><%= link_to_document document, :label => full_title(document) %></td>
@@ -9,7 +9,7 @@
 		<% end %>
 	</td>
 	<td class="format"><%= document.value_for :format_facet %></td>
-	<td class="date">
+	<td class="year">
 		<% unless journal?(document) -%>
 			<%= document.value_for :published_date_display %>
 		<% end %>

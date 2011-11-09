@@ -55,7 +55,7 @@ Feature: User Folder
 	      
   Scenario: Remove an item from the folder
     Given I have ckey "u5076740" in my folder
-    When I follow "X"
+    When I follow "Remove"
     Then I should see "Removed from Starred Items"
     And I should not see ckey "u5076740" in the folder
     
