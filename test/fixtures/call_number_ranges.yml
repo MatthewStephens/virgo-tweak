@@ -1,25 +1,25 @@
-map_guides_1:
+call_number_ranges_1:
  id: 1
- location_id: 215
+ location: ALDERMAN
  map_id: 1
  call_number_range: J-JX5355.M
-map_guides_2:
+call_number_ranges_2:
  id: 2
- location_id: 215
+ location: ALDERMAN
  map_id: 2
  call_number_range: PQ1-PQ4999
-map_guides_3:
+call_number_ranges_3:
  id: 3
- location_id: 215
+ location: ALDERMAN
  map_id: 3
  call_number_range: PQ5000-PQ9999
-map_guides_4:
+call_number_ranges_4:
  id: 4
- location_id: 215
+ location: ALDERMAN
  map_id: 4
  call_number_range: '-'
-map_guides_5:
+call_number_ranges_5:
  id: 5
- location_id: 215
+ location: ALDERMAN
  map_id: 5
  call_number_range: 'JX5355.N-JZ'
