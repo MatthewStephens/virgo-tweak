@@ -64,7 +64,7 @@ class CallNumberRange < ActiveRecord::Base
   
   def self.location_and_call_number_match(holding, copy, maps)
     call_number_matches = call_number_match(holding.call_number, maps) || []
-    location_and_call_number_matches = call_number_matches.select{ |r| r.location == copy.current_location.code } || []
+    location_and_call_number_matches = location_match(copy.current_location.code, call_number_matches)
     location_matches = location_match(copy.current_location.code, maps)
     
     return location_and_call_number_matches unless location_and_call_number_matches.empty?
