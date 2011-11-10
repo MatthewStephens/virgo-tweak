@@ -9,15 +9,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110707184856) do
+ActiveRecord::Schema.define(:version => 20111109184948) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "user_id",     :null => false
+    t.text     "url"
     t.string   "document_id"
     t.string   "title"
+    t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "user_type"
+  end
+
+  create_table "call_number_ranges", :force => true do |t|
+    t.integer "map_id"
+    t.string  "call_number_range"
+    t.string  "location"
   end
 
   create_table "document_image_request_records", :force => true do |t|
@@ -27,15 +34,8 @@ ActiveRecord::Schema.define(:version => 20110707184856) do
 
   add_index "document_image_request_records", ["requested_at"], :name => "index_document_image_request_records_on_requested_at"
 
-  create_table "document_image_requests", :force => true do |t|
-    t.string   "document_id"
-    t.boolean  "running",      :default => false
-    t.boolean  "complete",     :default => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "image_size"
-    t.string   "content_type"
-    t.binary   "image"
+  create_table "libraries", :force => true do |t|
+    t.string "name"
   end
 
   create_table "locations", :force => true do |t|
@@ -43,15 +43,10 @@ ActiveRecord::Schema.define(:version => 20110707184856) do
     t.string "value"
   end
 
-  create_table "map_guides", :force => true do |t|
-    t.integer "location_id"
-    t.integer "map_id"
-    t.string  "call_number_range"
-  end
-
   create_table "maps", :force => true do |t|
-    t.string "url"
-    t.string "description"
+    t.string  "url"
+    t.string  "description"
+    t.integer "library_id"
   end
 
   create_table "maps_users", :force => true do |t|
@@ -63,7 +58,6 @@ ActiveRecord::Schema.define(:version => 20110707184856) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "user_type"
   end
 
   add_index "searches", ["user_id"], :name => "index_searches_on_user_id"
