@@ -503,7 +503,7 @@ Feature: Everything (Default) Search Result Relevancy
     Given I am on the homepage
     When "library_facet":"Alderman" is applied
     And I follow "resultsRSSLink"
-    Then I should see "VIRGO Catalog Search Results"
+    Then I should see "VIRGO Search Results"
   
   Scenario: Display chat widget, remove per page and RSS when there's no search result
     Given I am on the homepage
