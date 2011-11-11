@@ -2,24 +2,24 @@ xml.instruct! :xml, :version=>"1.0"
 xml.rss(:version=>"2.0"){
 	
 	xml.channel{
-		
-		xml.title('VIRGO Catalog Search Results')
+		xml.title('VIRGO Search Results')
+    params.delete :controller
 		xml.link(catalog_index_url(:format => :rss, :params => params))
 		xml.description('from the University of Virginia Library')
 		xml.language('en-us')
 		
 		@document_list.each do |document| 
 			xml.item do
-			  
-				xml.title( document.value_for(:title_display)  )
-          
-				xml.link(catalog_url(document[:id]) )
-        xml.cdata!( 
-          summary = document.value_for(:description_note_display).match('n/a') ? "" : document.value_for(:description_note_display) + "<br />")
-           
-          
-        xml.description( summary + "Call number: " + document.value_for(:call_number_display) + "  Location: " + document.value_for(:library_facet) )
-				
+			  document.doc_type == :article ? title = document.display.title : title = document.value_for(:title_display)
+				xml.title(  title )
+        document.doc_type == :article ? link = document.links.first.fulltext_url : link = catalog_url(document[:id])
+				xml.link( link )
+				unless document.doc_type == :article
+          xml.cdata!( 
+            summary = document.value_for(:description_note_display).match('n/a') ? "" : document.value_for(:description_note_display) + "<br />")
+             xml.description( summary + "Call number: " + document.value_for(:call_number_display) + "  Location: " + document.value_for(:library_facet) 
+          )
+				end
 			#  xml.author( document.value_for(:author_display) )
 				
 			#xml.description{

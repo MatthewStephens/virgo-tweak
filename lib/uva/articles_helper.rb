@@ -97,7 +97,7 @@ module UVA::ArticlesHelper
     has_many :links, Link, :tag => "LINKS"
     has_many :get_its, GetIt, :tag => "GETIT"
     def doc_type
-      return "article"
+      return :article
     end
     def id
       return @search.id
@@ -258,6 +258,9 @@ module UVA::ArticlesHelper
   
   # extract sort and make URL piece
   def get_sort(extra_controller_params={})
+    if extra_controller_params[:format] == "rss"
+      extra_controller_params[:sort_key] = 'articles_date'
+    end
     return "" if extra_controller_params[:sort_key].blank?
     sort = Blacklight.config[:articles_sort_fields][extra_controller_params[:sort_key]][1] rescue ''
     return "&sortField=#{sort}" 

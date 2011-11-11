@@ -65,6 +65,8 @@ class CatalogController < ApplicationController
       else
         my_params = populated_advanced_search_fields.merge(:catalog_select => "articles", :search_field => params[:search_field])
       end
+      # ensure rss and json calls are handled
+      my_params[:format] = params[:format]
       redirect_to articles_path(my_params) and return
     end
     (@response, @document_list) = get_search_results(params)

@@ -9,7 +9,16 @@ class ArticlesController < ApplicationController
   
   def index
     (@response, @document_list) = get_article_search_results(params)
-    render 'catalog/index'
+      respond_to do |format|
+      format.html { 
+        render 'catalog/index' 
+      }
+      format.json { 
+        params[:controller] = 'catalog'
+        render :json => @response.to_json
+      }
+      format.rss  { render 'catalog/index', :layout => false }
+    end
   end
 
   def facet
