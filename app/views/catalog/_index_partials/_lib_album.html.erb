@@ -49,30 +49,12 @@
 				<%= document.value_for :published_display, '<br/>' %>
 			</dd>
 			
-			<dt>Location</dt>
-			<dd class="locationField">
-			  <%= location_listing(document)%>
-			</dd>
-			
-			<% unless call_number(document).blank? %>
-			<dt>Call Number</dt>
-			<dd class="callNumberField">
-				<%= call_number(document, '<br />') %>
-			</dd>
-			<% end %>
-			
 			<% if !document.get(:url_display).nil? %>
   		  <dt>Online Versions</dt>
   		  <dd class="onlineAccessField"><%= link_to_online_access(document) %></dd>
   		<% end %>
 
-			<% unless document.online_only? && !document.get(:url_display).nil? %>
-			  <dt>Availability</dt>
-        <dd class="availability">
-          <%= image_tag 'ajax-loader.gif', :class=>'ajaxLoader hide', :alt => 'Loading availability' %>
-          <%= link_to 'check availability', catalog_path(document[:id]) %>
-        </dd>
-      <% end %>
+			<%= render :partial=>'brief_status', :locals=>{:document=>document} %>
 		</dl>
 
 	</div>

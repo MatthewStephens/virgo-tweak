@@ -40,34 +40,14 @@
 				<%= document.value_for :published_date_display %>
 			</dd>
 			<% end %>
-			
-			<% unless location_listing(document).blank? %>			
-			<dt>Location</dt>
-			<dd class="locationField">
-			  <%= location_listing(document)%>
-			</dd>	
-			<% end %>
-			
-			<% unless call_number(document).blank? %>
-			<dt>Call Number</dt>
-			<dd class="callNumberField">
-				<%= call_number(document, '<br />') %>
-			</dd>
-			<% end %>
 		
 			<% if !document.get(:url_display).nil? %>
   		  <dt>Online Versions</dt>
   		  <dd class="onlineAccessField"><%= link_to_online_access(document) %></dd>
   		<% end %>
 
+			<%= render :partial=>'brief_status', :locals=>{:document=>document} %>
 
-			<% unless document.online_only? && !document.get(:url_display).nil? %>						
-			  <dt>Availability</dt>
-        <dd class="availability">
-               <%= image_tag javascript_path('ext-2.2/resources/images/default/shared/loading-balls.gif'), :class=>'ajaxLoader hide' %>
-               <%= link_to 'check availability', catalog_path(document[:id]) %>
-        </dd>
-      <% end %>
 		</dl>
 		
 	</div>

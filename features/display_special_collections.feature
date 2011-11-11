@@ -7,14 +7,6 @@ Feature: Display Special Collections Lens
     Given I am in the Special Collections lens
   	And I am on the status page for id u2243187
   	Then I should not see a library "Alderman"
-  	
-  Scenario: only list Special Collections as the location on search results
-    Given I am in the Special Collections lens
-    And I am on the homepage
-    When I fill in "q" with "jefferson a monticello sampler"
-    And I press "search"
-	  Then the result display for ckey u4750939 should have a location of "Special Collections"
-    And I should not see "Multiple locations"
     
   Scenario: Do not show request link if the item has no holdings
     Given I am in the Special Collections lens
@@ -118,16 +110,14 @@ Feature: Display Special Collections Lens
 	Scenario: Display location notes without Z39.50
 	  Given I am in the Special Collections lens
 	  Given I am logged in as "xw5d"
-	  And I am on the status page for id u2434648
+	  And I am on the status page for id u3811764
 	  And I follow "Request this Item"
+		And I check "location_plus_call_number_ARCHV-STKS_X030080645_"
 	  And I press "Request"
 	  Then I should see "Request successfully submitted"
 	  Given I am logged in as a Special Collections administrator
-	  Then I should see "Requests for" 
-	  Then I should see "Land papers of Patrick Henry and James Monroe" 
 	  And I follow "View"
-	  Then I should see "SPECIAL COLLECTIONS: Henry letter in McGregor Autograph Collection Box 4 \"Henry.\""
-	  Then I should see "SPECIAL COLLECTIONS: Monroe land survey in McGregor Autograph Collection Box 7 \"Monroe\""
+	  Then I should see "SPECIAL COLLECTIONS: @ RG."
    
 	Scenario: Display name from LDAP
 		Given I am in the Special Collections lens
