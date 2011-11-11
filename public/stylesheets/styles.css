@@ -1542,3 +1542,32 @@ h2.error-heading {width: 400px;}
 #refworks_export {margin: 0 auto; width: 60%;}
 #refworks_export input {display: block; margin: 0 auto; text-align: center;}
 #refworks_export h2 {font-size: 16px; margin: 2em auto; text-align: center;}
+
+
+/* Maps */
+
+.maps_users-page .tool_content, .maps-page .tool_content {position: relative;}
+.maps-return {position: absolute; top: 5px; left: 5px;}
+.maps-container {margin-bottom: 2em;}
+.maps-container .btn {font-weight: normal; margin-right: 2em;}
+.maps-container h2 {border-bottom: 1px solid #BBB; font-weight: bold;}
+.maps-container h2 .btn {margin-left: 2em;}
+.maps-container .maps-button-heading {display: inline; font-size: 16px; margin-right: 2em;}
+.maps-container .user-list li { border-bottom: 1px dotted #AAA; font-size: 1.2em; padding: 0.8em 0.33em; }
+.map-listing { border-bottom: 1px solid #CCC; border-top: 1px solid #A4C6EF;}
+.map-listing h3 {font-size: 15px; padding: 1em 0 0.67em;}
+.map-entry {background: #e3ecfd; overflow: hidden; padding: 3px 10px; }
+.maps-container .map-entry .btn {margin-left: 2em; margin-right: 0;}
+.map-guides {clear: both; padding: 0.5em 10px;}
+.range-listing { clear: both; margin-bottom: 0.5em; overflow: hidden;}
+.range-listing span {display: block; float: left; line-height: 32px; height: 32px; padding: 0; text-indent: 0.33em; width: 80%;}
+.range-listing span.range-remove {text-align: right; width: 20%;}
+.range-listing.odd {background: #EEE;}
+.maps-container h2.map-name {border-bottom: none; float: left; font-size: 16px; line-height: 32px; margin: 0; padding: 0; width: 70%;}
+.tool_content .map-guides label {display: inline; font-size: 13px; font-weight: normal; margin: 0; padding: 0; }
+.map-guides .optional {color: #555; font-size: 12px; font-style: italic; padding-left: 1em;}
+.tool_content .map-guides input,
+.tool_content .map-guides select {margin-right: 1em;}
+.tool_content .map-guides input[type="submit"] {margin-top: 0;}
+.map-name .map-url {font-size: 13px; font-weight: normal; padding-left: 1em;}
+.map-tools {float: left; line-height: 32px; text-align: right; width:30%;}

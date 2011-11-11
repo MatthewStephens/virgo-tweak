@@ -103,7 +103,7 @@ box-shadow:         inset 0 0 3px #420; }
 #results dd.titleField {margin:0;font-size:1.08em;}
 #results dd.titleField + dd.titleField {border: none;}
 #results dd.titleField + dd.titleField a {padding-top: 0;}
-.titleField a, .mapName {font-size: 15px; text-decoration:none;display:block;padding:7px 10px; line-height:22px; margin-left: 32px; text-decoration:underline;}
+.titleField a {font-size: 15px; text-decoration:none;display:block;padding:7px 10px; line-height:22px; margin-left: 32px; text-decoration:underline;}
 #results dt {float:left;line-height: 14px; margin: 0 8px 0 10px;text-align:right;width:137px;}
 #results dd {margin-left:160px;}
 #results dd img {margin-top:.5em;}
@@ -401,12 +401,6 @@ div.fail,
 #marc_view .field { clear:both; border-bottom:1px solid #CCCCCC; }
 
 div.specialCollectionsRequestLink { font-weight:bold; font-size:1.2em; margin-bottom:10px; text-align:center;}
-
-.mapEntry{margin:0;border-top:1px solid #A4C6EF;border-bottom:1px solid #E0E7EF;background-color:#e3ecfd;}
-.mapName{font-weight:bold;font-size:1.08em;}
-.mapTools {float: right;}
-.mapUrl, .mapGuides {padding-left:2em;}
-.mapGuides {padding-top:1em;}
 
 .subFacets li.limitsListItem {}
 .subFacets li.limitsListItem a {}
