@@ -993,6 +993,11 @@ module ApplicationHelper
   ############# end methods for Video Search view
   ############# methods for articles
   
+  # determines if there are no documents and no articles in the folder
+  def folder_empty?
+    session_folder_document_ids.empty? && session_folder_article_ids.empty?
+  end
+  
   # picks appropriate lael for the search results
   def search_result_label
     if params[:controller] == 'articles'

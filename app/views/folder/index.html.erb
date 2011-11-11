@@ -4,7 +4,7 @@
 
 <div id="list_heading"><h1>Starred Items<%= " (#{session_folder_document_ids.count + session_folder_article_ids.count})"  %></h1></div>
 
-<% unless @documents.empty? %>
+<% unless folder_empty? %>
   <p class="starred-info">Track and export up to <strong>100</strong> items by starring results. Starred items are not saved permanently but will persist for your full visit to Virgo.</p>
 <% end %>
 
@@ -14,7 +14,7 @@
 	  <div id="account_menu" class="tools box menu">
       <ul>
         <li class="account-home-nav"><%= link_to("My Account", account_index_path) %></li>
-        <% unless @documents.empty? %>
+        <% unless folder_empty? %>
         <li class="actions-list-container">
     		  <h2>Starred Items</h2>
     			<ul id="markedListTools">
@@ -46,7 +46,7 @@
 <% end %>
 
 <div id="results" class="account_container">
-<% if @documents.empty? and @articles.empty? %>
+<% if folder_empty? %>
 	<h2 class='no-items'>No Starred Items</h2>
 <% else %>
 	<table id="starred-listing" class="account-listing">
