@@ -46,7 +46,7 @@ class CallNumberRange < ActiveRecord::Base
     maps.each do |map|
       map.call_number_ranges.each do |raw_range|
         call_number_range = raw_range.call_number_range.split(/\-/)
-        out << map if call_number_range.length == 1 and call_number[0,1] == call_number_range.first[0,1] rescue()
+        out << map if call_number_range.length == 1 and call_number.match(/^#{call_number_range.first}/) rescue()
         next if call_number_range.length != 2
         out << map if self.bounded?(call_number_range.first, call_number, true) and self.bounded?(call_number_range.second, call_number,false)
       end
