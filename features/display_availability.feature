@@ -119,7 +119,7 @@ Feature: Display Availability
     
   Scenario: Display summary holding text
     When I am on the status page for id u1614058
-    Then I should see a summary text "SPECIAL (MAR 30, 2009)"
+    Then I should see a summary text "no.1875-2039 (2007:Nov.5-2011:Jan.3)"
     
   Scenario: Display summary holding note
     When I am on the status page for id u1614058
