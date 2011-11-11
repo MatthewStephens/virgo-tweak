@@ -11,7 +11,7 @@
           <li class="reserves-nav"><%= link_to("Course Reserves (#{user.reserve_count})", reserves_account_path) %></li>
         <% end %>
         <li class="notices-nav"><%= link_to("Notices (#{user.overdue_count + user.recalled_count})", notices_account_path) %></li>
-        <li class="starred-nav"><%= link_to("Starred Items (#{session[:folder_document_ids].count rescue 0})", folder_index_path) %></li>
+        <li class="starred-nav"><%= link_to("Starred Items (#{session_folder_document_ids.count + session_folder_article_ids.count})", folder_index_path) %></li>
       </ul>
     </div>
   </div>
