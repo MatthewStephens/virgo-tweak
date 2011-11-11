@@ -2,11 +2,6 @@ class CallNumberRangesController < ApplicationController
   
   before_filter :verify_map_user
   
-  # entry point for making a new call number range
-  def new
-    @call_number_range = CallNumberRange.new(:map_id => params[:map_id])
-  end
-  
   # creates a call nuumber range
   def create
     @call_number_range = CallNumberRange.new(:call_number_range => params[:call_number_range], :location => params[:location], :map_id => params[:map_id])
@@ -15,7 +10,7 @@ class CallNumberRangesController < ApplicationController
         flash[:notice] = 'Entry successfully saved'
         format.html { redirect_to maps_path }
       else
-        format.html { render :action => 'new' }
+        format.html { redirect_to maps_path }
       end
     end
   end
