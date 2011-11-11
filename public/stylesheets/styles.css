@@ -661,7 +661,7 @@ a.more_facets_link { color: #2f3e6a;}
 	padding: 0.33em 0.5em;}
 .holdings .library_name {	width: 130px;}
 .holdings .location_name {	width: 150px;}
-.holdings .map_it {	display: none;}
+.holdings .map_it {	}
 .holdings .num_available {	width: 160px;}
 .holdings .call_number {	width: 200px;}
 .holdings .no_info {
