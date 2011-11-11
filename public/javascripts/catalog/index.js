@@ -42,4 +42,13 @@ $(document).ready(function() {
   $(".imageCollection a").each(function(index) {
     $(this).colorbox({rel:$(this).attr('data-group'), maxHeight: "100%", photo:true,maxWidth:"95%",scalePhotos:true,opacity:0.7,current:"{current} of {total}"});
   });
+
+	$('.single-copy').each(function(index) {
+		var item_availability = $(this);
+		var item_id = item_availability.parent().attr('id').split('availability_')[1];
+		item_availability.load('/catalog/' + item_id + '/brief_status');		
+	});
+
+	
+
 });

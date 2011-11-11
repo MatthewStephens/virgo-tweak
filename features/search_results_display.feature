@@ -9,13 +9,12 @@ Feature: Everything (Default) Search Results Display
     And I press "search"
     Then I should see "Author" data of "Great Britain. Ordnance Survey"
     
-   Scenario: Display location properly
+  Scenario: Display availability link if there are multiple copies
     Given I am on the homepage
-    When I fill in "q" with "da vinci code"
+    When I fill in "q" with "da vinci code videorecording 2006"
     And I press "search"
-    Then the result display for ckey u4442841 should have a location of "Multiple locations"
-    And the result display for ckey u4069463 should have a location of "Alderman Stacks"
-
+		Then I should see "View Multiple Locations and Availability "
+		
   Scenario: Suppress call number display if there are multiple locations and multiple call numbers
     Given I am on the homepage
     When I fill in "q" with "da vinci code"

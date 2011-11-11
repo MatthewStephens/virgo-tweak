@@ -16,7 +16,7 @@ class CatalogController < ApplicationController
   before_filter :adjust_for_full_view, :only=>[:index, :show]
   before_filter :resolve_sort, :only=>:index
   before_filter :load_featured_documents, :only=>:index  
-  before_filter :add_lean_query_type, :only=>[:image_load, :image]
+  before_filter :add_lean_query_type, :only=>[:image_load, :image, :brief_status]
   before_filter :adjust_for_bookmarks_view, :only=>:update
   before_filter :recaptcha_check, :only=>:send_email_record
   before_filter :filters, :only =>:show
@@ -102,6 +102,16 @@ class CatalogController < ApplicationController
     @document.availability = Account::Availability.find(@document)
     respond_to do |format|
       format.html
+      format.json {render :layout=>false}
+    end
+  end
+  
+  # just get the availability info independently of the docume
+  def brief_status
+    @response, @document = get_solr_response_for_doc_id(params[:id], params)
+    @document.availability = Account::Availability.find(@document)    
+    respond_to do |format|
+      format.html {render :layout=>false}
       format.json {render :layout=>false}
     end
   end

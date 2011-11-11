@@ -45,6 +45,7 @@ ActionController::Routing::Routes.draw do |map|
   #map.connect ':controller/:action/:id.:format'
 
   map.image 'catalog/:id/image', :controller => 'catalog', :action => 'image'
+  map.brief_status 'catalog/:id/brief_status', :controller => 'catalog', :action => 'brief_status'
   map.image_load 'catalog/:id/image_load', :controller => 'catalog', :action => 'image_load'
   map.firehose 'catalog/:id/firehose', :controller => 'catalog', :action => 'firehose'
   map.album 'catalog/:id/album', :controller => 'catalog', :action => 'album'
