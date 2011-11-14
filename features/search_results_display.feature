@@ -13,7 +13,7 @@ Feature: Everything (Default) Search Results Display
     Given I am on the homepage
     When I fill in "q" with "da vinci code videorecording 2006"
     And I press "search"
-		Then I should see "View Multiple Locations and Availability "
+		Then I should see "View Locations and Availability "
 		
   Scenario: Suppress call number display if there are multiple locations and multiple call numbers
     Given I am on the homepage
