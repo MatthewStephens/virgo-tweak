@@ -86,6 +86,7 @@ module Account::Common
     attribute :barcode, String, :tag => "barCode"
     attribute :current_periodical, Boolean, :tag => "currentPeriodical"
     element :last_checkout, Date, :tag => "lastCheckout"
+    element :circulate, String
     has_one :current_location, CurrentLocation, :tag => "currentLocation"
     has_one :home_location, HomeLocation, :tag => "homeLocation"
     attr_accessor :map
@@ -109,6 +110,9 @@ module Account::Common
     end
     def in_transit?
       @current_location.code =~ /INTRANSIT/
+    end
+    def circulates?
+      @circulate == "Y"
     end
     def special_collections_display?
       @current_location.code =~ /DEC-IND-RM|SC-IN-PROC/
