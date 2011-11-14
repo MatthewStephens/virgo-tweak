@@ -513,7 +513,7 @@ module ApplicationHelper
   # display map link
   def link_to_map(copy)
     unless copy.map.nil?
-      link_to "[Map]", copy.map.url, :target => "_blank"
+      link_to "Map", copy.map.url, :class => "map-link", :target => "_blank"
     end 
   end
   
