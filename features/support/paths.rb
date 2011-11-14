@@ -29,12 +29,12 @@ module NavigationHelpers
      when /the image page for id (.+)/ 
        image_load_path($1)
 
-     when /the availability page for id (.+)/ 
-       availability_catalog_path($1)
-
      when /the status page for id (.+)/ 
        status_catalog_path($1)
-
+       
+     when /the brief status page for id (.+)/ 
+      brief_status_path($1)
+    
      when /the firehose page for id (.+)/ 
        firehose_path($1)
 
