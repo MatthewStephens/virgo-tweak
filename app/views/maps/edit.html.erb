@@ -1,16 +1,15 @@
-<div id="list_heading">Edit Map</div>
+<div id="list_heading"><h1>Edit Map</h1></div>
 
 <div class="tool_content">
-
 
 <%= error_messages_for :map %>
 
 <% form_for(@map) do |f| %>
-<fieldset>
+<fieldset class="maps-form maps-container">
   <%= render :partial => 'form', :object => f %>
   <div class="row">
-  <%= label_tag '' %>
-  <%= f.submit "Update", :class => 'button' %> &nbsp; or <%= link_to 'cancel', maps_path %>
+  <%= f.submit "Update", :class => 'button btn' %>
+  <%= link_to 'Cancel', maps_path, :class => 'btn' %>
   </div>
 </fieldset>
 <% end %>

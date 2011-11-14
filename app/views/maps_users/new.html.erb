@@ -1,18 +1,18 @@
-<div id="list_heading">Create a New Map User</div>
+<div id="list_heading"><h1>Create a New Map User</h1></div>
 
 <div class="tool_content">
 
 <%= error_messages_for :maps_user %>
 
 <% form_for(@maps_user) do |f| -%>
-<fieldset>
+<fieldset class="maps-user-form maps-container">
 <div class="row">
   <%= label(:maps_user, :computing_id, "Computing ID") %>
   <%= f.text_field :computing_id %>
 </div>
 <div class="row">
-  <%= label_tag '' %>
-  <%= f.submit "Create", :class => 'button' %> &nbsp; or <%= link_to 'cancel', maps_users_path %>
+  <%= f.submit "Create", :class => 'button btn' %>
+  <%= link_to 'Cancel', maps_users_path, :class => 'btn' %>
   </div>
 </fieldset>
 <% end -%>
