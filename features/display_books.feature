@@ -46,8 +46,8 @@ Feature: Display Books
 	  Then I should see "Reproduction Notes" data of "Also available on microfilm as Manuscript Division reel #M686.."
 	  
 	Scenario: reproduction notes should be joined into one line instead of split out as multiple lines
-	  Given I am on the document page for id u2594537
-	  Then I should see "Reproduction Notes" data of "Microfilm. Washington ; Library of Congress, [197-]. 1 microfilm reel ; 35 mm."
+	  Given I am on the document page for id u4375173
+	  Then I should see "Reproduction Notes" data of "Microfilm. London : British Library Reference Division, Reproduction Section, 2006. 1 microfilm reel; 35 mm."
 	  
 	Scenario: make sure related names appear correctly with MARC 710
 	  Given I am on the document page for id u4482328
