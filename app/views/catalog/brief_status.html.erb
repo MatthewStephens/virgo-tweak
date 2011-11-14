@@ -3,5 +3,5 @@
 	<% copy = holding.copies.first -%>
 	<%= holding.library.name unless holding.library.is_special_collections? %> <%= location_text(holding, copy) unless copy.current_location.suppressed? %> (<%= availability_text(copy) %>)
 <% else -%>
-	No information
+	No information available at this time.
 <% end -%>
