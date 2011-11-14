@@ -13,7 +13,15 @@ Feature: Everything (Default) Search Results Display
     Given I am on the homepage
     When I fill in "q" with "da vinci code videorecording 2006"
     And I press "search"
-		Then I should see "View Locations and Availability "
+		Then I should see "View Locations and Availability"
+		
+	Scenario: Display availability when there is one holding
+		Given I am on the brief status page for id u5395336
+		Then I should see "Alderman Stacks (Available)"
+		
+	Scenario: Suppress current location when the library is Special Collections
+		Given I am on the brief status page for id u5393523
+		Then I should see "Special Collections (Available)"
 		
   Scenario: Suppress call number display if there are multiple locations and multiple call numbers
     Given I am on the homepage
