@@ -3,7 +3,7 @@
 		<% if document.values_for(:barcode_facet).length > 1 %>
 			<dd id="availability_<%= document[:id] %>" class="availability">
       	<%= image_tag javascript_path('ext-2.2/resources/images/default/shared/loading-balls.gif'), :class=>'ajaxLoader hide' %>
-      	<%= link_to 'View Multiple Locations and Availability ', catalog_path(document[:id]) %>
+      	<%= link_to 'View Locations and Availability ', catalog_path(document[:id]) %>
 			</dd>
 		<% else %>
 			<dd id="availability_<%= document[:id] %>" class="availability">
