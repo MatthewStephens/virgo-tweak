@@ -215,7 +215,7 @@ module ApplicationHelper
   end
   
   def link_to_leo(doc, label, style="")
-    if doc.availability.leoable?
+    if doc.availability and doc.availability.leoable?
       return link_to_ilink_record(doc, label, style)
     end
   end
@@ -458,7 +458,7 @@ module ApplicationHelper
   end
   
   def display_ivy_link?(document)
-    return false unless document.availability.has_ivy_holdings?
+    return false unless document.availability and document.availability.has_ivy_holdings?
     call_numbers = document.availability.holdings.collect { |holding| holding.call_number } || []
     call_numbers.uniq!
     return true if call_numbers.size > 1 # too ambiguous, we'll assume not

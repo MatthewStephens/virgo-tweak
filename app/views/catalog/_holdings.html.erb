@@ -10,68 +10,70 @@
 	</thead>
 	<tbody>
 		
-	<% if @document.availability.holdings.size == 0 %>
+	<% if !@document.availability or @document.availability.holdings.size == 0 %>
 		<tr class="holding first even">
 			<td class="holding_data no_info" colspan="5">No information available for this item.</td>
 		</tr>
-	<% end %>
+	<% else %>
 
-	<% i = 0 %>
+		<% i = 0 %>
 
-	<% special_collections_lens? ? holdings = document.availability.special_collections_holdings : holdings = document.availability.holdings %>
+		<% special_collections_lens? ? holdings = document.availability.special_collections_holdings : holdings = document.availability.holdings %>
 
-  <% holdings.each do |holding| %>
+	  <% holdings.each do |holding| %>
         
-    <% holding.copies.each do |copy| %>
+	    <% holding.copies.each do |copy| %>
     
-        <tr class="holding<%= ' first' if (i == 0) %> <%= cycle(" even", " odd") -%>">
+	        <tr class="holding<%= ' first' if (i == 0) %> <%= cycle(" even", " odd") -%>">
     
-        <td class="holding_data library_name"><%= holding.library.name %></td>
+	        <td class="holding_data library_name"><%= holding.library.name %></td>
     
-    		<% if !holding.library.is_sas? %>
+	    		<% if !holding.library.is_sas? %>
 
-    				<td class="holding_data location_name">
-    					<%= location_text(holding, copy) %>
-    				</td>
+	    				<td class="holding_data location_name">
+	    					<%= location_text(holding, copy) %>
+	    				</td>
 				
-    				<td class="holding_data map_it">
-    					<%= link_to_map(copy) %>
-            </td>
+	    				<td class="holding_data map_it">
+	    					<%= link_to_map(copy) %>
+	            </td>
 
-    				<td class="holding_data availability">
-    					<%= availability_text(copy) %>
-    				</td>
+	    				<td class="holding_data availability">
+	    					<%= availability_text(copy) %>
+	    				</td>
 
-    				<td class="holding_data call_number">
-    					<%= holding.call_number %>
-    				</td>
+	    				<td class="holding_data call_number">
+	    					<%= holding.call_number %>
+	    				</td>
 
-  			<% else %>
+	  			<% else %>
 			
-  				<td class="holding_data section_name">
-  					<%= location_text(holding, copy) %>
-  				</td>		
+	  				<td class="holding_data section_name">
+	  					<%= location_text(holding, copy) %>
+	  				</td>		
 
-    			<td class="holding_data map">
-  					<%= link_to_map(copy) %>
-          </td>
+	    			<td class="holding_data map">
+	  					<%= link_to_map(copy) %>
+	          </td>
 
-  				<td class="holding_data availability">
-  				</td>
+	  				<td class="holding_data availability">
+	  				</td>
 
-      	  <td class="holding_data call_number">
-  					<%= sas_call_number_text(holding, copy) %>
-  				</td>
+	      	  <td class="holding_data call_number">
+	  					<%= sas_call_number_text(holding, copy) %>
+	  				</td>
 				
-  			<% end %>
+	  			<% end %>
   			
-  			</tr>
+	  			</tr>
   			
-  			<% i += 1 %>
+	  			<% i += 1 %>
   			
-  		<% end %>	         
+	  		<% end %>	         
   	  
-  <% end %> 
+	  <% end %> 
+
+	<% end %>
 		
 	</tbody>
 </table> <!-- end table.holdings -->
