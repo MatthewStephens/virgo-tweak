@@ -1,3 +1,3 @@
 <% holding = @document.availability.holdings.first -%>
 <% copy = holding.copies.first -%>
-<%= holding.library.name %> <%= location_text(holding, copy) %> (<%= availability_text(copy) %>)
+<%= holding.library.name unless holding.library.is_special_collections? %> <%= location_text(holding, copy) unless copy.current_location.suppressed? %> (<%= availability_text(copy) %>)
