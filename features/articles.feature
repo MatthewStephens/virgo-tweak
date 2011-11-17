@@ -74,16 +74,9 @@ Feature: Display Articles
 		When I fill in "author" with "jones"
 		And I press "Search"
 		Then I should get results
-		When "creationdate":"2008" is applied
+		When I follow "Online Resources"
 		Then I should get results
 		And I should see the keyword label "Author"
 		When I follow "x"
 		Then I should not see the keyword label "Author"
 
-	Scenario: Handle ampersands in facets
-	Given I am on the homepage
-	And I choose "catalog_select_articles"
-	And I fill in "q" with "global warming"
-	And I press "search"
-	And "topic":"Industrial & Systems Engineering" is applied
-	Then I should get results	
