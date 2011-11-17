@@ -25,16 +25,16 @@
   		  <%= document.value_for :published_date_display %>
 	  	<% end %>
   	</div>
+  	
+  	<div class="availability">
+      <%= render :partial=>'brief_status', :locals=>{:document=>document} %>
+    </div>
 	
   	<div class="callNumberField">
     	<% unless call_number(document).blank? %>
     		<%= video_call_number(document, '<br />') %>
     	<% end %>
   	</div>
-
-    <div class="availability">
-      <%= render :partial=>'brief_status', :locals=>{:document=>document} %>
-    </div>
       
     <div class="more_info">
       <h1><%= link_to_document document, :label => video_title(document), :counter => (counter + 1 + offset) %></h1>

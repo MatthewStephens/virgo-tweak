@@ -1453,6 +1453,7 @@ p,ul,ol,dl,blockquote{margin-bottom:1.54em;}
 .document.video_doc .format_value.vhs {background: #193;}
 .document.video_doc .format_value.book {background: #953;}
 .document.video_doc .format_value.online {background: #C63;}
+.document.video_doc .single-copy span.availability-indicator { display: block; padding: 2px 0 0 0;}
 .document.video_doc > div.more_info {
   background: #F2F4FA; 
   border: 1px solid #48B;
