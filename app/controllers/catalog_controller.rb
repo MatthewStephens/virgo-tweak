@@ -14,6 +14,7 @@ class CatalogController < ApplicationController
   before_filter :setup_call_number_search, :only=>:index
   before_filter :adjust_for_special_collections_search, :only=>:index
   before_filter :adjust_for_full_view, :only=>[:index, :show]
+  before_filter :adjust_for_article_search, :only=>:index
   before_filter :resolve_sort, :only=>:index
   before_filter :load_featured_documents, :only=>:index  
   before_filter :add_lean_query_type, :only=>[:image_load, :image, :brief_status]
@@ -21,6 +22,8 @@ class CatalogController < ApplicationController
   before_filter :recaptcha_check, :only=>:send_email_record
   before_filter :filters, :only =>:show
   before_filter :articles, :only=>[:email, :send_email_record]
+  before_filter :set_solr_document, :only=>[:status, :brief_status, :firehose, :image_load, :image, :page_turner, :fedora_metadata]
+  before_filter :set_document_availability, :only=>[:status, :brief_status]
   
   # when a request for /catalog/HIDDEN_SOLR_ID is made, this method is executed...
   rescue_from HiddenSolrID, :with => lambda {
@@ -58,31 +61,15 @@ class CatalogController < ApplicationController
   # get search results from the solr index
   # overriding from plugin to add cleanup_call_number_search and json response
   def index
-    if params[:catalog_select] == "articles"
-      # ignore advanced search stuff if there is a "q"
-      unless params[:q].blank?
-        my_params = {:q => params[:q], :catalog_select => "articles"}
-      else
-        my_params = populated_advanced_search_fields.merge(:catalog_select => "articles", :search_field => params[:search_field])
-      end
-      # ensure rss and json calls are handled
-      my_params[:format] = params[:format]
-      redirect_to articles_path(my_params) and return
-    end
     (@response, @document_list) = get_search_results(params)
     cleanup_call_number_search
     @filters = params[:f] || []
     respond_to do |format|
-      format.html { 
-        render :layout => index_layout 
-      }
+      format.html { render :layout => index_layout }
       format.json { render :json => @response.to_json}
       format.rss  { render :layout => false }
-      
     end
-    
   end
-  
   
   # displays values and pagination links for a single facet field
   # overriding from plugin to add json response
@@ -96,10 +83,6 @@ class CatalogController < ApplicationController
 
   # get item availability status
   def status
-    # go ahead and refetch the document.  we will need it for making links to virgo and for
-    # semester at sea availability text
-    @response, @document = get_solr_response_for_doc_id(params[:id], params)
-    @document.availability = Account::Availability.find(@document)
     respond_to do |format|
       format.html
       format.json {render :layout=>false}
@@ -108,8 +91,6 @@ class CatalogController < ApplicationController
   
   # just get the availability info independently of the docume
   def brief_status
-    @response, @document = get_solr_response_for_doc_id(params[:id], params)
-    @document.availability = Account::Availability.find(@document)    
     respond_to do |format|
       format.html {render :layout=>false}
       format.json {render :layout=>false}
@@ -118,7 +99,6 @@ class CatalogController < ApplicationController
   
   # display raw results from firehose
   def firehose
-    @response, @document = get_solr_response_for_doc_id(params[:id], params)
     a = Account::Availability.find(@document)
     respond_to do |format|
       format.xml  {render :xml => a.to_xml}
@@ -128,14 +108,12 @@ class CatalogController < ApplicationController
   # ajax loader page for image
   # /catalog/u1/image_load
   def image_load
-    @response, @document = get_solr_response_for_doc_id(params[:id], params)
   end
   
   # image for a single record:
   #   /catalog/u1/image.jpg
   # this is here for historical purposes, in case someone is externally referencing this url
   def image
-    @response, @document = get_solr_response_for_doc_id(params[:id], params)
     respond_to do |format|
       format.jpg {
         @document.extend UVA::Document
@@ -186,7 +164,6 @@ class CatalogController < ApplicationController
     # The id passed is the pid of the Fedora aggregation object (the book,
     # manuscript, etc. for which we want to display page images)
     # @pid = document[:id]
-    @response, @document = get_solr_response_for_doc_id(params[:id])	
     @repository = @document.value_for(:repository_address_display) || FEDORA_REST_URL 
     @pid = params[:id]
 
@@ -221,7 +198,6 @@ class CatalogController < ApplicationController
   end
   
   def fedora_metadata
-    @response, @document = get_solr_response_for_doc_id(params[:id])
     @repository = @document.value_for(:repository_address_display) || FEDORA_REST_URL 
     result = Net::HTTP.get_response(URI.parse(@repository + "/get/" + params[:pid] + "/djatoka:jp2SDef/getMetadata"))
     respond_to do |format|
@@ -231,6 +207,16 @@ class CatalogController < ApplicationController
   
   
   protected
+  
+  # fetches the solr document based on id in params
+  def set_solr_document
+    @response, @document = get_solr_response_for_doc_id(params[:id], params)
+  end
+  
+  # sets the availability for the document
+  def set_document_availability
+    @document.availability = Account::Availability.find(@document)
+  end
   
   # gets cover images for featured documents
   def load_featured_documents
@@ -312,6 +298,21 @@ class CatalogController < ApplicationController
       my_params = add_facet_param('library_facet', 'Special Collections') 
       params[:f] = my_params[:f]
     end
+  end
+  
+  # only pass q or advanced search fields (and format) to article search
+  # clean up controller reference
+  # dispatch to article search
+  def adjust_for_article_search
+    return unless params[:catalog_select] == "articles"
+    my_params = {}
+    my_params[:format] = params[:format]
+    unless params[:q].blank?
+      my_params[:q] = params[:q]
+    else
+      my_params.merge!(populated_advanced_search_fields)
+    end
+    redirect_to articles_path(my_params)    
   end
   
   # controls whether users sees show/hide metadata feature

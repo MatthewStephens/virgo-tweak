@@ -5,14 +5,13 @@ class ArticlesController < ApplicationController
   helper CatalogHelper
   helper AdvancedHelper
   
+  before_filter :adjust_params
   before_filter :delete_or_assign_search_session_params,  :only=>:index
+  before_filter :set_articles, :only=>[:index, :facet]
   
   def index
-    (@response, @document_list) = get_article_search_results(params)
       respond_to do |format|
-      format.html { 
-        render 'catalog/index' 
-      }
+      format.html { render 'catalog/index' }
       format.json { 
         params[:controller] = 'catalog'
         render :json => @response.to_json
@@ -22,12 +21,21 @@ class ArticlesController < ApplicationController
   end
 
   def facet
-    (@response, @document_list) = get_article_search_results(params)    
     render 'catalog/facet', :layout => "popup"
   end
   
   def advanced
     render 'advanced/index'
+  end
+  
+  protected
+  
+  def adjust_params
+    params[:catalog_select] = "articles"
+  end
+  
+  def set_articles
+    @response, @document_list = get_article_search_results(params)
   end
   
   def delete_or_assign_search_session_params
@@ -38,6 +46,5 @@ class ArticlesController < ApplicationController
       value.blank?
     end
   end
-  
   
 end
