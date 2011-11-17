@@ -33,8 +33,8 @@
             <% end %>
             <li><%= link_to "Sign out", logout_path %></li>
           <% else %>
-            <li class="first"><a href="<%= login_path %>" id="login">Sign in</a></li>
-            <li><%= link_to "Non-U.Va. User?", "http://virgo.lib.virginia.edu/uhtbin/cgisirsi/0/UVA-LIB/0/1/1166/X/BLASTOFF" %></li>
+            <li class="first"><%= link_to "Sign in", login_path, :id => "login"%></li>
+            <li><%= link_to "Non-U.Va. User?", patron_login_path %></li>
           <% end %>
         </ul>
       </nav> <!-- end #account_nav -->

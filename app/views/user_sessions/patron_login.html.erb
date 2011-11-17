@@ -1,9 +1,13 @@
-<% form_tag(do_patron_login_path, :method=>:post) do %>
-<fieldset>
-	<p>
-	  <%= label_tag 'login', 'Enter your Library ID'%>
-	  <%= text_field_tag 'login' %>
-	</p>
-	<%= submit_tag "Login", :class => 'button' %>
-</fieldset>
-<% end %>
+<div id="list_heading"><h1>My Account</h1></div>
+<div class="account_container tool_content">
+  <h2 class="sign-in-heading">Please sign in to view your account.</h2>
+  <% form_tag(do_patron_login_path, :method=>:post) do %>
+    <fieldset class="patron-login">
+    	<p>
+    	  <%= label_tag 'login', 'Library ID'%>
+    	  <%= text_field_tag 'login' %>
+      	<%= submit_tag "Sign in", :class => 'button btn' %>
+    	</p>
+    </fieldset>
+  <% end %>
+</div>
