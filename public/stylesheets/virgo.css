@@ -124,7 +124,7 @@ html body {background: #012251; font-family: "Helvetica Neue", Arial, sans-serif
 .account_links li, .util_links li {float: left;}
 
 .account_links {padding-top: 2px;}
-.account_links li {border-left: 1px solid #457; border-right: 1px solid transparent; color: #EEE; font-size: 14px; font-weight: 400; line-height: 15px; margin-left: 6px; padding-left: 6px; }
+.account_links li {border-left: 1px solid #457; border-right: 1px solid transparent; color: #EEE; font-size: 14px; font-weight: 300; line-height: 15px; margin-left: 6px; padding-left: 6px; }
 .account_links li.first {background: url("/images/icon-sprite.png") no-repeat scroll 0 -422px transparent; border-left: none; padding-left: 24px;}
 .account_links li a {border-bottom: 1px dotted #89a; color: #FFF; line-height: 14px; text-decoration: none;}
 .account_links li.notice-badge a {background: url("/images/notice-alert.gif") no-repeat scroll 1px 3px transparent; padding-left: 16px; }
