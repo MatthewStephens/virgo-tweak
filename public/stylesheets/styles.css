@@ -569,6 +569,10 @@ a.more_facets_link { color: #2f3e6a;}
 /* =Availability and Holdings
 -------------------------------------------------------------- */
 
+.availability-indicator { font-size: 11px; padding-left: 6px; text-transform: uppercase; }
+.availability-indicator.available {color: #283;}
+.availability-indicator.unavailable {color: #764;}
+#results .single-copy img {margin-top: 0;}
 .holding h3 {
 	clear: both;
 	float: left;
@@ -1416,17 +1420,16 @@ p,ul,ol,dl,blockquote{margin-bottom:1.54em;}
 .document.video_doc {background: #EEE; clear: both; display: block; margin-bottom: 0; position: relative; width: 727px; z-index: 10;}
 .document.video_doc.video_head_row {background: #EEF5FB; border-bottom: 1px solid #A4C6EF; border-top: 1px solid #A4C6EF; color: #5A5D5F; overflow: hidden;}
 .document.video_doc.odd {background: #FFF;}
-.document.video_doc > div {display: block; float: left; overflow: hidden; padding: 9px 7px 7px 0; vertical-align: middle;}
-.document.video_doc .title {width: 214px;}
+.document.video_doc > div {display: block; float: left; overflow: hidden; padding: 9px 9px 7px 0; vertical-align: middle;}
+.document.video_doc .title {width: 224px;}
 .document.video_doc .listItemNumber {margin-right: 0; padding: 9px 2px 7px 6px; line-height: 1.231em; width: 20px;}
 .document.video_doc .tools {padding-left: 0; width: 16px;}
 .document.video_doc .video_head.tools {padding: 8px 18px 6px 0; width: 32px;}
-.document.video_doc .format {padding: 7px 7px 4px 0; width: 90px;}
-.document.video_doc .video_head.format {padding: 9px 7px 7px 0; }
+.document.video_doc .format {padding: 7px 9px 4px 0; width: 90px;}
+.document.video_doc .video_head.format {padding: 9px 9px 7px 0; }
 .document.video_doc .year {width: 36px;}
-.document.video_doc .location {width: 106px;}
 .document.video_doc .callNumberField {width: 70px;}
-.document.video_doc .availability {padding-right: 4px; width: 104px;}
+.document.video_doc .availability {padding-right: 4px; width: 210px;}
 #results .document.video_doc .tools .folder_container {position: static; left: auto; top: auto;}
 .linked_title + .main_title {float: left;}
 .document.video_doc .format_value {

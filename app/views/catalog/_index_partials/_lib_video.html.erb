@@ -26,22 +26,15 @@
 	  	<% end %>
   	</div>
 	
-  	<div class="location">
-  	  <%= video_location_listing(document)%>
-  	</div>	
-	
   	<div class="callNumberField">
     	<% unless call_number(document).blank? %>
     		<%= video_call_number(document, '<br />') %>
     	<% end %>
   	</div>
 
-  	<% unless document.online_only? && !document.get(:url_display).nil? %>						
-      <div class="availability">
-             <%= image_tag javascript_path('ext-2.2/resources/images/default/shared/loading-balls.gif'), :class=>'ajaxLoader hide' %>
-             <%= link_to 'check availability', catalog_path(document[:id]) %>
-      </div>
-    <% end %>
+    <div class="availability">
+      <%= render :partial=>'brief_status', :locals=>{:document=>document} %>
+    </div>
       
     <div class="more_info">
       <h1><%= link_to_document document, :label => video_title(document), :counter => (counter + 1 + offset) %></h1>
