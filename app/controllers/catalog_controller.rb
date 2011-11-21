@@ -306,12 +306,12 @@ class CatalogController < ApplicationController
   def adjust_for_article_search
     return unless params[:catalog_select] == "articles"
     my_params = {}
-    my_params[:format] = params[:format]
     unless params[:q].blank?
       my_params[:q] = params[:q]
     else
-      my_params.merge!(populated_advanced_search_fields)
+      my_params = populated_advanced_search_fields.merge(:catalog_select => "articles", :search_field => params[:search_field])
     end
+    my_params[:format] = params[:format]
     my_params[:sort_key] = params[:sort_key]
     redirect_to articles_path(my_params)    
   end
