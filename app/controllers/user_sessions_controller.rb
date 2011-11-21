@@ -56,7 +56,7 @@ class UserSessionsController < ApplicationController
       if session[:login]
         user = User.find_by_login(session[:login])
       else
-        patron = get_patron(params[:login]) or render 'account/not_found' and return
+        patron = get_patron(params[:login]) or (render 'account/not_found' and return)
         unless patron.virginia_borrower?
           flash[:error] = 'UVa members should use NetBadge to authenticate'
           redirect_to catalog_index_path
