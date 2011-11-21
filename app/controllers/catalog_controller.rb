@@ -14,7 +14,6 @@ class CatalogController < ApplicationController
   before_filter :setup_call_number_search, :only=>:index
   before_filter :adjust_for_special_collections_search, :only=>:index
   before_filter :adjust_for_full_view, :only=>[:index, :show]
-  before_filter :adjust_for_article_search, :only=>:index
   before_filter :resolve_sort, :only=>:index
   before_filter :load_featured_documents, :only=>:index  
   before_filter :add_lean_query_type, :only=>[:image_load, :image, :brief_status]
@@ -61,6 +60,17 @@ class CatalogController < ApplicationController
   # get search results from the solr index
   # overriding from plugin to add cleanup_call_number_search and json response
   def index
+    if params[:catalog_select] == "articles"
+      my_params = {}
+      unless params[:q].blank?
+        my_params[:q] = params[:q]
+      else
+        my_params = populated_advanced_search_fields.merge(:catalog_select => "articles", :search_field => params[:search_field])
+      end
+      my_params[:format] = params[:format]
+      my_params[:sort_key] = params[:sort_key]
+      redirect_to articles_path(my_params) and return
+    end
     (@response, @document_list) = get_search_results(params)
     cleanup_call_number_search
     @filters = params[:f] || []
@@ -298,21 +308,6 @@ class CatalogController < ApplicationController
       my_params = add_facet_param('library_facet', 'Special Collections') 
       params[:f] = my_params[:f]
     end
-  end
-  
-  # only pass q or advanced search fields (and format) to article search
-  # clean up controller reference
-  # dispatch to article search
-  def adjust_for_article_search
-    return unless params[:catalog_select] == "articles"
-    my_params = {}
-    my_params[:format] = params[:format]
-    unless params[:q].blank?
-      my_params[:q] = params[:q]
-    else
-      my_params.merge!(populated_advanced_search_fields)
-    end
-    redirect_to articles_path(my_params)    
   end
   
   # controls whether users sees show/hide metadata feature

@@ -1,13 +1,13 @@
 <% unless document.online_only? && !document.get(:url_display).nil? -%>
   <% if params[:portal] != 'video' -%>
     <dt>Availability</dt>
-		<% if document.values_for(:barcode_facet).length > 1 -%>
+		<% if availability_on_index?(document) -%>
 			<dd id="availability_<%= document[:id] %>" class="availability">
-      	<%= link_to 'View Locations and Availability ', catalog_path(document[:id]) %>
+			<span class="single-copy"><img src="/images/loading-balls.gif" alt="loading..."></span>
 			</dd>
 		<% else -%>
 			<dd id="availability_<%= document[:id] %>" class="availability">
-			<span class="single-copy"><img src="/images/loading-balls.gif" alt="loading..."></span>
+      	<%= link_to 'View Locations and Availability ', catalog_path(document[:id]) %>
 			</dd>
 			<% unless call_number(document).blank? -%>
 			<dt>Call Number</dt>
@@ -18,7 +18,7 @@
 		<% end -%>
 	<% else -%>
 	  <span id="availability_<%= document[:id] %>" class="availability">
-	    <%= document.values_for(:barcode_facet).length > 1 ? link_to( 'Locations and Availability', catalog_path(document[:id]) ) : '<span class="single-copy"><img src="/images/loading-balls.gif" alt="loading..."></span>' %>
+	    <%= document.values_for(:barcode_facet).length > 1 ? link_to( 'View Locations &amp; Availability', catalog_path(document[:id]) ) : '<span class="single-copy"><img src="/images/loading-balls.gif" alt="loading..."></span>' %>
 	  </span>
 	<% end -%>
 <% end -%>

@@ -214,6 +214,10 @@ module ApplicationHelper
     link =~ /^http:\/\/ead\.lib\.virginia\.edu.*file=viu.*\.xml/
   end
   
+  def availability_on_index?(document)
+    document.values_for(:barcode_facet) and document.values_for(:barcode_facet).length > 1
+  end
+  
   def link_to_leo(doc, label, style="")
     if doc.availability and doc.availability.leoable?
       return link_to_ilink_record(doc, label, style)
@@ -512,7 +516,9 @@ module ApplicationHelper
   
   # display map link
   def link_to_map(copy)
-    unless copy.map.nil?
+    if copy.map.nil?
+      "<span class=\"map-indicator no-map\">N/A</span>"
+    else
       link_to "Map", copy.map.url, :class => "map-link", :target => "_blank"
     end 
   end
@@ -559,10 +565,10 @@ module ApplicationHelper
     per_page * page
   end
   
-  # determines if the given availability only has one holding
-  def one_holding?(availability)
-    return true if special_collections_lens? and availability.special_collections_holdings.size == 1
-    availability.holdings.size == 1 ? true : false
+  # determines if the given availability only has one holding with one copy
+  def one_copy?(availability)
+    special_collections_lens? ? holdings = availability.special_collections_holdings : holdings = availability.holdings
+    holdings.size == 1 and holdings[0].copies.size == 1
   end
   
   # determines if the document is a journal or magazine
@@ -877,7 +883,7 @@ module ApplicationHelper
   def sort_fields
     sort_fields = []
     Blacklight.config[:sort_fields_order].each { |key|
-      if params[:controller] == 'articles'
+      if params[:controller] == 'articles' or params[:catalog_select] == 'articles'
         my_sort_fields = Blacklight.config[:articles_sort_fields]
       else
         my_sort_fields = Blacklight.config[:sort_fields]

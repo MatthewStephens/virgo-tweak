@@ -569,9 +569,24 @@ a.more_facets_link { color: #2f3e6a;}
 /* =Availability and Holdings
 -------------------------------------------------------------- */
 
-.availability-indicator { font-size: 11px; padding-left: 6px; text-transform: uppercase; }
-.availability-indicator.available {color: #283;}
-.availability-indicator.unavailable {color: #764;}
+.availability-indicator, .map-indicator {
+  background: #FFF;
+  border: 1px solid #ACA29D;
+  color: #AFA5A0;
+  font-size: 10px;
+  font-weight: bold;
+  margin: 0 0.33em 2px 0;
+  max-width: 76px;
+  padding: 1px 4px 2px 4px;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  -webkit-border-radius: 4px 4px 4px 4px;
+  -moz-border-radius:    4px 4px 4px 4px;
+  border-radius:         4px 4px 4px 4px; }
+.availability-indicator.available {border: 1px solid #46a546; color: #46a546;}
+.map-indicator.no-map, .availability-indicator.non-circ {border: 1px solid #BFB5B0; color: #BFB5B0;}
+.holding_data .availability-indicator, .holding_data .map-indicator {line-height: 20px; margin-left: 2px;}
 #results .single-copy img {margin-top: 0;}
 .holding h3 {
 	clear: both;
@@ -664,14 +679,14 @@ a.more_facets_link { color: #2f3e6a;}
 	color: #061e42;
 	padding: 0.33em 0.5em;}
 .holdings .library_name {	width: 130px;}
-.holdings .location_name {	width: 150px;}
+.holdings .location_name {	width: 130px;}
 .holdings .map { width: 54px; }
 .holdings .map-link {
   background: url('/images/map_icon.png') no-repeat scroll 8px 0 transparent;
   text-indent: -9999px;
   display: block; }
-.holdings .num_available {	width: 100px;}
-.holdings .call_number {	width: 200px;}
+.holdings .num_available {	width: 130px;}
+.holdings .call_number {	width: 190px;}
 .holdings .no_info {
 	font-style: italic;
 	text-align: center;}
@@ -1445,15 +1460,12 @@ p,ul,ol,dl,blockquote{margin-bottom:1.54em;}
   border-radius:         4px 4px 4px 4px;
   -webkit-box-shadow: 0px 0px 3px #AAA;
   -moz-box-shadow:    0px 0px 3px #AAA;
-  box-shadow:         0px 0px 3px #AAA; 
-  -webkit-text-shadow: 0px -1px 0px #000;
-  -moz-text-shadow:    0px -1px 0px #000;
-  text-shadow:         0px -1px 0px #000; }
-.document.video_doc .format_value.dvd {background: #359;}
-.document.video_doc .format_value.vhs {background: #193;}
-.document.video_doc .format_value.book {background: #953;}
-.document.video_doc .format_value.online {background: #C63;}
-.document.video_doc .single-copy span.availability-indicator { display: block; padding: 2px 0 0 0;}
+  box-shadow:         0px 0px 3px #AAA; }
+.document.video_doc .format_value.dvd {background: #46A;}
+.document.video_doc .format_value.vhs {background: #6AA;}
+.document.video_doc .format_value.book {background: #985;}
+.document.video_doc .format_value.online {background: #A64;}
+.document.video_doc .single-copy span.availability-indicator { display: block;}
 .document.video_doc > div.more_info {
   background: #F2F4FA; 
   border: 1px solid #48B;

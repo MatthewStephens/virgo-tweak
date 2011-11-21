@@ -18,7 +18,7 @@ module NavigationHelpers
        advanced_path
 
      when /the articles advanced search page/
-       advanced_articles_path
+       advanced_articles_path(:catalog_select => 'articles')
        
      when /the document page for id (.+)/ 
        catalog_path($1)
