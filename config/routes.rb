@@ -48,8 +48,6 @@ ActionController::Routing::Routes.draw do |map|
   map.brief_status 'catalog/:id/brief_status', :controller => 'catalog', :action => 'brief_status'
   map.image_load 'catalog/:id/image_load', :controller => 'catalog', :action => 'image_load'
   map.firehose 'catalog/:id/firehose', :controller => 'catalog', :action => 'firehose'
-  map.album 'catalog/:id/album', :controller => 'catalog', :action => 'album'
-  map.album_image 'catalog/:id/album_image/:mbid.:format', :controller => 'catalog', :action => 'album_image'
   map.page_turner 'catalog/:id/page_turner', :controller => 'catalog', :action => 'page_turner'
   map.fedora_metadata 'fedora_metadata/:id/:pid.:format', :controller => 'catalog', :action => 'fedora_metadata'
   map.refworks_texts 'folder/refworks_texts', :controller => 'folder', :action => 'refworks_texts'
@@ -75,7 +73,6 @@ ActionController::Routing::Routes.draw do |map|
   )
   map.resources :maps
   map.resources :maps_users
-  map.resources :locations
   map.resources :call_number_ranges
   map.resources(:special_collections_requests,
       :member=>{:start=>:get, :non_uva=>:get}
