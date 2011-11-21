@@ -18,7 +18,7 @@
 		<% end -%>
 	<% else -%>
 	  <span id="availability_<%= document[:id] %>" class="availability">
-	    <%= document.values_for(:barcode_facet).length > 1 ? link_to( 'Locations and Availability', catalog_path(document[:id]) ) : '<span class="single-copy"><img src="/images/loading-balls.gif" alt="loading..."></span>' %>
+	    <%= document.values_for(:barcode_facet).length > 1 ? link_to( 'View Locations &amp; Availability', catalog_path(document[:id]) ) : '<span class="single-copy"><img src="/images/loading-balls.gif" alt="loading..."></span>' %>
 	  </span>
 	<% end -%>
 <% end -%>
