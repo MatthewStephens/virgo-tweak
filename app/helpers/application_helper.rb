@@ -516,7 +516,9 @@ module ApplicationHelper
   
   # display map link
   def link_to_map(copy)
-    unless copy.map.nil?
+    if copy.map.nil?
+      "<span class=\"map-indicator no-map\">N/A</span>"
+    else
       link_to "Map", copy.map.url, :class => "map-link", :target => "_blank"
     end 
   end
