@@ -48,10 +48,65 @@ Feature: User Folder
 		And I choose "catalog_select_articles"
 		And I press "search"
 		And I add ckey "pubtecumrsmas/bullmar/1984/00000035/00000003/art00022" to my folder
-		And I visit the folder page
+	  Given I am on the homepage
+	  When I fill in "q" with "A 2d. set of six sonatas for two violins"
+	  And I choose "catalog_select_catalog"
+	  And I press "search"
+	  And I add ckey "uva-lib:610693" to my folder
+	  Given I am on the homepage
+	  When I fill in "q" with "Second April"
+	  And I choose "catalog_select_catalog"
+	  And I press "search"
+	  And I add ckey "uva-lib:477191" to my folder
+	  Given I am on the homepage
+	  When "digital_collection_facet":"Holsinger Studio Collection" is applied
+	  And I add ckey "uva-lib:1051794" to my folder
+	  Given I am on the homepage
+	  When I fill in "q" with "Bentivar"
+	  And I choose "catalog_select_catalog"
+	  And I press "search"
+	  And I add ckey "uva-lib:84948" to my folder
+	  Given I am on the homepage
+	  When I fill in "q" with "Silver jubilee commemoration volume"
+	  And I choose "catalog_select_catalog"
+	  And I press "search"
+	  And I add ckey "000000635" to my folder
+	  Given I am on the homepage
+	  When I fill in "q" with "How to train your dragon"
+	  And I choose "catalog_select_catalog"
+	  And I press "search"
+	  And I add ckey "u5255974" to my folder
+	  Given I am on the homepage
+	  When I fill in "q" with "Map of Poor Mountain iron lands"
+	  And I choose "catalog_select_catalog"
+	  And I press "search"
+	  And I add ckey "uva-lib:743707" to my folder
+	  Given I am on the homepage
+	  When I fill in "q" with "Valentinian II"
+	  And I choose "catalog_select_catalog"
+	  And I press "search"
+	  And I add ckey "n1989_19_23" to my folder
+	  Given I am on the homepage
+	  When I fill in "q" with "Old times and hard times"
+	  And I choose "catalog_select_catalog"
+	  And I press "search"
+	  And I add ckey "u5408148" to my folder
+	  
+	  
+	  And I visit the folder page
 	  Then I should see ckey "u4322506" in the folder
 	  And I should see ckey "n14_1989_9" in the folder
-		And I should see ckey "pubtecumrsmas/bullmar/1984/00000035/00000003/art00022" in the folder
+	  And I should see ckey "pubtecumrsmas/bullmar/1984/00000035/00000003/art00022" in the folder
+	  And I should see ckey "uva-lib:610693" in the folder
+	  And I should see ckey "uva-lib:477191" in the folder
+	  And I should see ckey "uva-lib:1051794" in the folder
+	  And I should see ckey "uva-lib:84948" in the folder
+	  And I should see ckey "uva-lib:477191" in the folder
+	  And I should see ckey "000000635" in the folder
+	  And I should see ckey "u5255974" in the folder
+	  And I should see ckey "uva-lib:743707" in the folder
+	  And I should see ckey "n1989_19_23" in the folder
+	  And I should see ckey "u5408148" in the folder
 	      
   Scenario: Remove an item from the folder
     Given I have ckey "u5076740" in my folder
