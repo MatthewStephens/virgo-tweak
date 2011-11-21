@@ -330,11 +330,6 @@ Feature: Display Books
 	Given I am on the document page for id u5336635
 	Then I should see "Related title" data of "Architekt. Supplement."
 	
-  Scenario: Display  MARC 866 868fields
-	Given I am on the document page for id u311441
-	Then I should see "Textual Holdings" data of "no.68-146  (1991-2011)"
-
-
  Scenario: show format for dl_books
     Given I am on the document page for id uva-lib:602113
     Then I should see "Format" data of "Online; Book"	
