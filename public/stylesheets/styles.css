@@ -569,9 +569,9 @@ a.more_facets_link { color: #2f3e6a;}
 /* =Availability and Holdings
 -------------------------------------------------------------- */
 
-.availability-indicator {
+.availability-indicator, .map-indicator {
   background: #FFF;
-  border: 1px solid #AFA5A0;
+  border: 1px solid #ACA29D;
   color: #AFA5A0;
   font-size: 10px;
   font-weight: bold;
@@ -585,8 +585,8 @@ a.more_facets_link { color: #2f3e6a;}
   -moz-border-radius:    4px 4px 4px 4px;
   border-radius:         4px 4px 4px 4px; }
 .availability-indicator.available {border: 1px solid #46a546; color: #46a546;}
-/*.availability-indicator.unavailable {background: #764;}*/
-.holding_data .availability-indicator {margin-left: 2px;}
+.map-indicator.no-map, .availability-indicator.non-circ {border: 1px solid #BFB5B0; color: #BFB5B0;}
+.holding_data .availability-indicator, .holding_data .map-indicator {line-height: 20px; margin-left: 2px;}
 #results .single-copy img {margin-top: 0;}
 .holding h3 {
 	clear: both;

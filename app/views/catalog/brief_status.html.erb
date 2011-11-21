@@ -2,7 +2,7 @@
 	<% holding = @document.availability.holdings.first -%>
 	<% copy = holding.copies.first -%>
 	<span class="availability-indicator <%= availability_text(copy).downcase %>"><%= availability_text(copy) %></span>
-	<span class="holding-library-name"><%= holding.library.name unless holding.library.is_special_collections? %></span>, <span class="location-text"><%= location_text(holding, copy) unless copy.current_location.suppressed? %></span>
+	<span class="holding-library-name"><%= holding.library.name unless holding.library.is_special_collections? %></span> (<span class="location-text"><%= location_text(holding, copy) unless copy.current_location.suppressed? %></span>)
 <% else -%>
 	No information available at this time.
 <% end -%>
