@@ -4,7 +4,8 @@
   		<div class="tools">
         <%= render :partial=>'folder_control', :locals=>{:document=>document} %>
       </div>
-  		<div class="title"><span class="linked_title"><%= link_to_document document, :label => document.value_for(:linked_title_display), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view %></span><span class="main_title"><%= link_to_document document, :label => full_title(document), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view  %></span></div>
+  		<div class="title">
+  		  <span class="linked_title"><%= link_to_document document, :label => document.value_for(:linked_title_display), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view %></span><span class="main_title"><%= link_to_document document, :label => full_title(document), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view  %></span></div>
   <%- end -%>
 	<%- unless (document[:linked_title_display] rescue false) -%>
 		<div class="listItemNumber"><%= counter + 1 + offset %>.</div>

@@ -5,7 +5,8 @@
 		<%- if (document[:linked_title_display] rescue false) -%>
     	<dd class="titleField">
 				<span class="listItemNumber"><%= counter + 1 + offset %>.</span>
-				<%= link_to_document document, :label => document.value_for(:linked_title_display), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view %></dd>
+				<h2 class="document-title"><%= link_to_document document, :label => document.value_for(:linked_title_display), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view %></h2>
+			</dd>
     <%- end -%>
 	  	  
       <dd class="titleField">
