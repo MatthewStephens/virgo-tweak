@@ -214,6 +214,10 @@ module ApplicationHelper
     link =~ /^http:\/\/ead\.lib\.virginia\.edu.*file=viu.*\.xml/
   end
   
+  def availability_on_index?(document)
+    document.values_for(:barcode_facet) and document.values_for(:barcode_facet).length > 1
+  end
+  
   def link_to_leo(doc, label, style="")
     if doc.availability and doc.availability.leoable?
       return link_to_ilink_record(doc, label, style)

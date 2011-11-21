@@ -43,8 +43,6 @@ class UserSessionsController < ApplicationController
          end
        elsif (RAILS_ENV == 'cucumber' or RAILS_ENV == 'test') and !params[:login].blank?
          user = User.create(:login=>params[:login]) if user.nil?
-       elsif RAILS_ENV == 'cucumber' or RAILS_ENV == 'test' and !params[:login].blank?
-         user = User.create(:login=>params[:login]) if user.nil?
        elsif RAILS_ENV == 'development' and !params[:login].blank?
          user = User.create(:login=>params[:login]) if user.nil?
        else
@@ -58,7 +56,7 @@ class UserSessionsController < ApplicationController
       if session[:login]
         user = User.find_by_login(session[:login])
       else
-        patron = get_patron(params[:login]) or render 'account/not_found'
+        patron = get_patron(params[:login]) or (render 'account/not_found' and return)
         unless patron.virginia_borrower?
           flash[:error] = 'UVa members should use NetBadge to authenticate'
           redirect_to catalog_index_path
@@ -74,10 +72,7 @@ class UserSessionsController < ApplicationController
       session[:login] = user.login
       @user_session = UserSession.create(user, true)
       
-     # redirect to the catalog with http protocol
-      # make sure there is a session[:search] hash, if not just use an empty hash
-      # and merge in the :protocol key
-      redirect_params = {:protocol=>'http'}
+      redirect_params = {}
       if params[:redirect] == 'maps'
         redirect_to maps_url(redirect_params)
       elsif params[:redirect] == 'special_collections_user'
