@@ -563,10 +563,10 @@ module ApplicationHelper
     per_page * page
   end
   
-  # determines if the given availability only has one holding
-  def one_holding?(availability)
-    return true if special_collections_lens? and availability.special_collections_holdings.size == 1
-    availability.holdings.size == 1 ? true : false
+  # determines if the given availability only has one holding with one copy
+  def one_copy?(availability)
+    special_collections_lens? ? holdings = availability.special_collections_holdings : holdings = availability.holdings
+    holdings.size == 1 and holdings[0].copies.size == 1
   end
   
   # determines if the document is a journal or magazine
