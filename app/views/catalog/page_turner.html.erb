@@ -1,10 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title><%= @document.value_for(:title_display).nil? ? "Document Viewer" : truncate(@document.value_for(:title_display), 80, "...") %> - Virgo - University of Virginia Library</title>
+  <meta name="description" content="Virgo, the online catalog of University of Virginia Library.  Books, articles, maps, digital materials, and more.">
+  <meta name="author" content="University of Virginia Library">
+  <meta name="keywords" content="University of Virginia, UVa, Virginia, Library, UVa Library, University of Virginia Library, Research, Virgo, VIRGO, catalog, articles, books, journals" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 
 	<%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js' %>
@@ -34,20 +37,23 @@
 
   <div id="container">
 		<div class="page_turner_head">
-			<% unless @document[:title_display].nil? %>
-				<h1><%= @document.value_for(:title_display) %></h1>
-			<% end %>
-			<% unless @document[:author_display].nil? %>
-				<h2><%= @document.values_for(:author_display).join("; ") %></h2>
-			<% end %>
-			<% unless @document[:year_display].nil? %>
-				<h3><%= ("[" + @document[:year_display] + "]") %></h3>
-			<% end %>
+		  <div class="page_turner_title">
+    		<% unless @document[:title_display].nil? %>
+    			<h1><%= @document.value_for(:title_display) %></h1>
+    		<% end %>
+    		<% unless @document[:author_display].nil? %>
+    			<h2><%= @document.values_for(:author_display).join("; ") %></h2>
+    		<% end %>
+    		<% unless @document[:year_display].nil? %>
+    			<h3><%= ("[" + @document[:year_display] + "]") %></h3>
+    		<% end %>
+			</div>
 			<div class="page_turner_nav">
-				<a id="return_to_search" href="/catalog/<%= @document[:id] %>">&laquo; Return to Item Details</a>	
+				<a id="return_to_search" href="/catalog/<%= @document[:id] %>">&laquo; Return to Item Details</a>
+				<a id="page_permalink" href="#">Permalink</a>	
+				<a id="lock_zoom" href="#">Lock Zoom</a>	
 				
 				<span class="page_turner_prev">&laquo; Previous</span>
-
 				<% if @image_pids %>
 					<span class="page_turner_select">
 						<select>
@@ -56,11 +62,10 @@
 							<% end %>
 						</select>
 					</span>
-				<% end %>
-				
+				<% end %>				
 				<span class="page_turner_next">Next &raquo;</span>
 				
-				<a id="page_permalink" href="#">Permalink</a>				
+				<a id="hide_header" href="#">Hide</a>	
 			</div>
 		</div>
 		<div class="page_container">
@@ -68,18 +73,26 @@
 			<div id="page_viewer"><!-- OpenLayers loads here --></div>
 
 			<% if @image_pids %>
-				<ul class="page_thumbs">
-			<% @image_pids.each_with_index do |page, i| %>
-			  <li id="<%= page %>" class="page_thumb previewThumbImg <%= 'thumb_select' if page == start_page %>">
-			    <span class="jp2kPreview"><%= image_tag "/images/page_default.gif", :alt => "loading page image", :class => "page_default" %></span>
-					<p class="page_title"><%= @image_titles[i] %></p>
-					<p class="page_download">
-					  <a href="<%= @repository + "/objects/" + page + "/methods/djatoka:StaticSDef/getStaticImage" %>" target="_blank">Download</a>
-					  <span class="terms-link"><%= link_to "Terms of Use",  "http://www2.lib.virginia.edu/small/using/use_of_materials_policy.html", :target => "_blank" %></span>
-					</p>
-			  </li>
-			<% end %>
-				</ul>
+				<% start_page_index =  @image_pids.index(start_page) %>
+			  <div class="page_thumbs">
+  				<ul class="page_thumbs_list">
+  			<% @image_pids.each_with_index do |page, i| %>
+  			  <% %>
+  			  <li id="<%= page %>" class="page_thumb previewThumbImg <%= 'thumb_select' if page == start_page %>">
+  			    <span class="jp2kPreview"><%= image_tag "/images/page_default.gif", :alt => "loading page image", :class => "page_default" %></span>
+  					<p class="page_title"><%= @image_titles[i] %></p>
+  					<p class="page_download">
+  					  <a href="<%= @repository + "/objects/" + page + "/methods/djatoka:StaticSDef/getStaticImage" %>" target="_blank">Download</a>
+  					  <span class="terms-link"><%= link_to "Terms of Use",  "http://www2.lib.virginia.edu/small/using/use_of_materials_policy.html", :target => "_blank" %></span>
+  					</p>
+  			  </li>
+  			<% end %>
+  				</ul>
+  				<div class="page_thumbs_nav">
+  				  Image <span class="thumbs-current-num"><%= start_page_index %></span> of <span class="thumbs-total"><%= @image_pids.length %></span>
+  				  <a id="hide_thumbs" href="#">Hide</a>	
+  				</div>
+				</div>
 			<% end %>
 		</div> <!--! end .page_container -->
   </div> <!--! end #container -->
