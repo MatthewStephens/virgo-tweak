@@ -66,7 +66,9 @@
 			<% #------------ Variant title -------------%>
 			<% unless document.marc_display.variant_title.empty? %>
 			<dt>Variant title</dt>
-			<dd><%= document.marc_display.variant_title.join(' ') %></dd>		
+			<% document.marc_display.variant_title.each do |v| %>
+			<dd><%= v %></dd>	
+			<% end %>
 			<% end %>
 			
 			<% #------------ Abbreviated title -------------%>
@@ -339,14 +341,6 @@
 			<% unless document.marc_display.publication_history.empty? %>
 			<dt>Publication history</dt>
 			<% document.marc_display.publication_history.each do |v| %>
-			<dd><%= v %></dd>
-			<% end %>
-			<% end %>
-			
-			<% #------------ Textual Holdings(Marc field 866) ---------------%>
-			<% unless document.marc_display.textual_holdings.empty? %>
-			<dt>Textual Holdings</dt>		
-			<% document.marc_display.textual_holdings.each do |v| %>
 			<dd><%= v %></dd>
 			<% end %>
 			<% end %>
