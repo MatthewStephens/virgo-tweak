@@ -40,6 +40,7 @@
 
 	    				<td class="holding_data availability">
 	    					<%= availability_text(copy) %>
+	    					<%= '<span class="availability-indicator non-circ">Non-Circ.</span>' if !copy.circulates? %>
 	    				</td>
 
 	    				<td class="holding_data call_number">
