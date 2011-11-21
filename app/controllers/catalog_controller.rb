@@ -312,6 +312,7 @@ class CatalogController < ApplicationController
     else
       my_params.merge!(populated_advanced_search_fields)
     end
+    my_params[:sort_key] = params[:sort_key]
     redirect_to articles_path(my_params)    
   end
   
