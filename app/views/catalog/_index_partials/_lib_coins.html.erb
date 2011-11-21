@@ -5,7 +5,10 @@
   		<dl class="metadata hd">
   			<% document.title_type_fields.each do |k,v| %>
   			<dt class="hide">Title: </dt>
-  			<dd class="titleField"><span class="listItemNumber"><%= counter + 1 + offset %>.</span><%= link_to_document document, :label => :title_display, :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view %></dd>
+  			<dd class="titleField">
+  			  <span class="listItemNumber"><%= counter + 1 + offset %>.</span>
+  			  <h2 class="document-title"><%= link_to_document document, :label => :title_display, :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view %></h2>
+  			</dd>
   			<% end %>
   		</dl>
 		

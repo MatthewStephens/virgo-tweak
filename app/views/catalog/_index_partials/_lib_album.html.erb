@@ -21,7 +21,10 @@
 				
 			  <% document.has_value?(:subtitle_display) ? subtitle = separator + document.value_for(:subtitle_display) rescue "" : subtitle = " " %>
 			  
-			  <dd class="titleField"><span class="listItemNumber"><%= counter + 1 + offset %>.</span><span><%= link_to_document document, :label => flag == 0 ? title + part + medium + subtitle : linked_title + part + medium + subtitle, :counter => counter + 1 + offset, :bookmarks_view => bookmarks_view %></span></dd>
+			  <dd class="titleField">
+			    <span class="listItemNumber"><%= counter + 1 + offset %>.</span>
+			    <h2 class="document-title"><%= link_to_document document, :label => flag == 0 ? title + part + medium + subtitle : linked_title + part + medium + subtitle, :counter => counter + 1 + offset, :bookmarks_view => bookmarks_view %></h2>
+			  </dd>
 			  <% flag = 1 %>
 			<% end %>
 		</dl>
