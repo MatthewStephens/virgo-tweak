@@ -883,7 +883,7 @@ module ApplicationHelper
   def sort_fields
     sort_fields = []
     Blacklight.config[:sort_fields_order].each { |key|
-      if params[:controller] == 'articles'
+      if params[:controller] == 'articles' or params[:catalog_select] == 'articles'
         my_sort_fields = Blacklight.config[:articles_sort_fields]
       else
         my_sort_fields = Blacklight.config[:sort_fields]
