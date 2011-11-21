@@ -1,0 +1,25 @@
+<tr class="document" id="<%= document[:id] %>">
+  <td><!--number --></td>
+	<td><%= link_to 'Remove', folder_path(document[:id]), :method => :delete, :confirm => 'Remove star from this item?', :class => "remove-star" %></td>
+	<td class="title">
+		<% flag = 0 %>
+		<% document.title_type_fields.each do |k,titles| %>
+		<% title = document.value_for :title_display rescue "Title not available" %>
+		<% linked_title = document.value_for :linked_title_display rescue "" %>
+		<% document.has_value?(:part_display) ? part = " " + document.value_for(:part_display) rescue "" : part = " " %> 
+		<% if document.has_value?(:medium_display) %>
+			<% medium =  (document.value_for :medium_display).match(/^\[/) ? "" + document.value_for(:medium_display) : " ["+ document.value_for(:medium_display) + "]" %>
+			<% else %>
+			<% medium = " "%>
+		<% end %>				
+		<% medium.blank? or medium.end_with?("]") ? separator = " : " : separator = " " %>
+		<% document.has_value?(:subtitle_display) ? subtitle = separator + document.value_for(:subtitle_display) rescue "" : subtitle = " " %>
+		<%= link_to_document document, :label => flag == 0 ? title + part + medium + subtitle : linked_title + part + medium + subtitle %>
+		<% end %>
+	</td>
+	<td class="author"><span class="starred-author"><% document.author_type_fields.each do |k,v| %><%= document.value_for k %><% end %></span></td>
+	<td class="format"><%= document.value_for :format_facet %></td>
+	<td class="year"><%= document.value_for :published_display, '<br/>' %></td>
+	<td class="type">Album</td>
+	<td class="access"><%= link_to 'Check availability', catalog_path(document[:id]) %></td>
+</tr>
