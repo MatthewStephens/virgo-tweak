@@ -968,24 +968,6 @@ module ApplicationHelper
     return format
   end
   
-  # gets the location for a document, truncated for video view
-  def video_location_listing(document)
-    loc = location_listing(document)
-    loc = loc.first if loc.kind_of?(Array)
-    
-    location = case loc
-      when /Clemons Robertson.+/i then "Robertson"
-      when /Law.+/i then "Law"
-      when /Semester at Sea.+/i then "Semester at Sea"
-      when /Item is on hold--Ask at Robertson.+/i then "On Hold - Robertson"
-      when /Special Collections.+/i then "Special Collections"
-      when /Fine Arts.+/i then "Fine Arts"
-      else loc
-    end
-    
-    return location
-  end
-  
   def video_title(document)
     return full_title(document).gsub(/\[video[ ,-]*recording\]/i, '')
   end

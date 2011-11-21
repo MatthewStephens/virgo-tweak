@@ -1,22 +1,27 @@
-<% unless document.online_only? && !document.get(:url_display).nil? %>      
+<% unless document.online_only? && !document.get(:url_display).nil? -%>
+  <% if params[:portal] != 'video' -%>
     <dt>Availability</dt>
-		<% if document.values_for(:barcode_facet).length > 1 %>
+		<% if document.values_for(:barcode_facet).length > 1 -%>
 			<dd id="availability_<%= document[:id] %>" class="availability">
-      	<%= image_tag javascript_path('ext-2.2/resources/images/default/shared/loading-balls.gif'), :class=>'ajaxLoader hide' %>
       	<%= link_to 'View Locations and Availability ', catalog_path(document[:id]) %>
 			</dd>
-		<% else %>
+		<% else -%>
 			<dd id="availability_<%= document[:id] %>" class="availability">
-			<span class="single-copy">&nbsp;</span>
+			<span class="single-copy"><img src="/images/loading-balls.gif" alt="loading..."></span>
 			</dd>
-			<% unless call_number(document).blank? %>
+			<% unless call_number(document).blank? -%>
 			<dt>Call Number</dt>
 			<dd class="callNumberField">
-				<%= call_number(document, '<br />') %>
+				<%= call_number(document, '<br />') -%>
 			</dd>
-			<% end %>
-		<% end %>
-<% end %>
+			<% end -%>
+		<% end -%>
+	<% else -%>
+	  <span id="availability_<%= document[:id] %>" class="availability">
+	    <%= document.values_for(:barcode_facet).length > 1 ? link_to( 'Locations and Availability', catalog_path(document[:id]) ) : '<span class="single-copy"><img src="/images/loading-balls.gif" alt="loading..."></span>' %>
+	  </span>
+	<% end -%>
+<% end -%>
 
 
 
