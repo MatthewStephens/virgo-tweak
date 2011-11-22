@@ -1,0 +1,17 @@
+<tr class="document" id="<%= document[:id] %>">
+  <td><!--number --></td>
+	<td><%= link_to 'Remove', folder_path(document[:id]), :method => :delete, :confirm => 'Remove star from this item?', :class => "remove-star" %></td>
+	<td class="title"><%= link_to_document document, :label => full_title(document, true) %></td>
+	<td class="author"><% authors = document.author_type_fields %><% authors.each do |k,v| %><%= document.value_for k %><% end %></td>
+	<td class="format"><%= document.value_for :format_facet %></td>    
+	<td class="year"><% document.value_for(:format_facet) == 'Journal/Magazine; Online' ? year_display="n/a" : year_display = document.value_for(:published_date_display) %><%= year_display %></td>			
+	<td class="type"></td>
+	<td class="access"><% if !document.get(:url_display).nil? %>
+	    <% if document[:url_display].length > 1 %>
+		<%= link_to_document document, :label => "View list of available content" %>
+		<% else %>
+		<%= link_to_online_access(document, "", "View full text from Hathi Trust") %>
+		<% end %>
+		<% end %>
+	</td>
+</tr>

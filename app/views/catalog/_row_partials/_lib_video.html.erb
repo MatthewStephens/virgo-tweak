@@ -1,0 +1,18 @@
+<tr class="document" id="<%= document[:id] %>">
+  <td><!--number --></td>
+	<td><%= link_to 'Remove', folder_path(document[:id]), :method => :delete, :confirm => 'Remove star from this item?', :class => "remove-star" %></td>
+	<td class="title">
+		 <%- if (document[:linked_title_display] rescue false) -%><%= link_to_document document, :label => document.value_for(:linked_title_display) %><%- end -%>
+		 <%- unless (document[:linked_title_display] rescue false) -%><%= link_to_document document, :label => video_title(document) %><% end %>
+	</td>
+	<td class="author"><span class="starred-author"> 
+		<% authors = document.author_type_fields %>
+		<% authors.each do |k,v| %>
+			<%= document.value_for k %>
+		<% end %>
+	</td>
+	<td class="format"><%= video_format(document) %> </td>
+	<td class="year"><% unless journal?(document) %><%= document.value_for :published_date_display %><% end %></td>
+	<td class="type">Viedo</td>
+	<td class="access"><%= link_to 'check availability', catalog_path(document[:id]) %></td>
+</tr>
