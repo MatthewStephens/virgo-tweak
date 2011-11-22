@@ -22,6 +22,7 @@
 			<%= ("z: " + params[:z] + ",") if params[:z] -%>
 			<%= ("x: " + params[:x] + ",") if params[:x] -%>
 			<%= ("y: " + params[:y] + ",") if params[:y] -%>			
+			<%= ("lock: " + ( params[:lock] ? params[:lock] : 'false' ) + ",") -%>			
 			repo: '<%= @repository %>',
 			id: '<%= @document[:id] %>',
 			pid: '<%= start_page %>'
@@ -51,7 +52,7 @@
 			<div class="page_turner_nav">
 				<a id="return_to_search" href="/catalog/<%= @document[:id] %>">&laquo; Return to Item Details</a>
 				<a id="page_permalink" href="#">Permalink</a>	
-				<a id="lock_zoom" href="#">Lock Zoom</a>	
+				<button id="lock_zoom" class="<%= params[:lock] == 'true' ? 'lock-active' : 'lock-inactive' %>">Set Default Zoom</button>	
 				
 				<span class="page_turner_prev">&laquo; Previous</span>
 				<% if @image_pids %>
@@ -65,7 +66,7 @@
 				<% end %>				
 				<span class="page_turner_next">Next &raquo;</span>
 				
-				<a id="hide_header" href="#">Hide</a>	
+				<button id="hide_header">Hide</button>	
 			</div>
 		</div>
 		<div class="page_container">
@@ -88,10 +89,10 @@
   			  </li>
   			<% end %>
   				</ul>
-  				<div class="page_thumbs_nav">
-  				  Image <span class="thumbs-current-num"><%= start_page_index %></span> of <span class="thumbs-total"><%= @image_pids.length %></span>
-  				  <a id="hide_thumbs" href="#">Hide</a>	
-  				</div>
+				</div>
+				<div class="page_thumbs_nav">
+				  <span class="page_thumbs_info">Image <span class="thumbs-current-num"><%= start_page_index %></span> of <span class="thumbs-total"><%= @image_pids.length %></span></span>
+				  <button id="hide_thumbs">Hide</button>	
 				</div>
 			<% end %>
 		</div> <!--! end .page_container -->

@@ -58,14 +58,16 @@ $(document).ready(function() {
     map.setCenter(new OpenLayers.LonLat(lon, lat));
     
     if(PageTurner.z) {
-      // Zoom to set extent if included in permalink, then forget zoom value
+      // Zoom to set extent if included in permalink, 
+      // then forget zoom value unless Zoom Lock is on.
       map.zoomTo(PageTurner.z);
-      PageTurner.z = null;
+      if(PageTurner.lock != "true") {
+        PageTurner.z = null;
+      }
     } else {
       map.zoomToMaxExtent();
     }
   }
-  
   
   /* =Thumbnail clicking
    *
@@ -142,6 +144,55 @@ $(document).ready(function() {
     $('.page_thumbs').scrollTop( $('.page_thumbs').scrollTop() + $('.thumb_select').position().top - 200 );
   });
   
+  /* =Show/Hide Panels
+  -------------------------------------------------------------- */
+  
+  $('#hide_header').click(function() {
+    var button = $(this);
+    $('.page_turner_title').toggle('slide', function(){
+      $('#container').toggleClass('title-closed');
+      if( $('#container.title-closed').length ) {
+        button.html("Show");
+      } else {
+        button.html("Hide");
+      }
+      $(window).resize();
+    });
+    return false;
+  });
+  $('#hide_thumbs').click(function() {
+    var button = $(this);
+    $('.page_thumbs').toggle('slide', function(){
+      $('#container').toggleClass('thumbs-closed');
+      if( $('#container.thumbs-closed').length ) {
+        button.html("Show");
+      } else {
+        button.html("Hide");
+      }
+      $(window).resize();
+    });
+    return false;
+  });
+  
+  /* =Zoom Lock
+  -------------------------------------------------------------- */
+
+  $('#lock_zoom.lock-inactive').live('click', function() {
+    var lock_button = $(this);
+    lock_button.toggleClass('lock-active').toggleClass('lock-inactive');
+    lock_button.html("Unset Default Zoom");
+    PageTurner.lock = 'true';
+    PageTurner.z = map.getZoom() ? map.getZoom() : 0;
+  });
+  
+  $('#lock_zoom.lock-active').live('click', function() {
+    var lock_button = $(this);
+    lock_button.toggleClass('lock-active').toggleClass('lock-inactive');
+    lock_button.html("Set Default Zoom");
+    PageTurner.lock = 'false';
+    PageTurner.z = null;
+  });
+  
   
   /* =Window resize
    *
@@ -203,14 +254,15 @@ $(document).ready(function() {
   function updateLink(event){    
     var base = window.location.href.split('?')[0];    
     var zoom = map.getZoom() ? map.getZoom() : 0;
+    var lock = PageTurner.lock == 'true' ? 'true' : 'false';
     
     var mapCenter = map.getCenter();
     var lon = mapCenter ? mapCenter.lon : 0;
-    var lat = mapCenter ? mapCenter.lat : 0;    
+    var lat = mapCenter ? mapCenter.lat : 0;
     
     var page = $('.thumb_select').attr('id');
     
-    pageLink =  base + "?x=" + lon + "&y=" + lat + "&z=" + zoom + "&page=" + page;  
+    pageLink =  base + "?x=" + lon + "&y=" + lat + "&z=" + zoom + "&lock=" + lock + "&page=" + page;  
     
     $('#page_permalink').attr('href', pageLink);
   }
