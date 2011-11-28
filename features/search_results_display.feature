@@ -11,7 +11,7 @@ Feature: Everything (Default) Search Results Display
     
   Scenario: Display availability link if there are multiple copies
     Given I am on the homepage
-    When I fill in "q" with "da vinci code videorecording 2006"
+    When I fill in "q" with "da vinci code videorecording 2005"
     And I press "search"
 		Then I should see "View Locations and Availability"
 		
