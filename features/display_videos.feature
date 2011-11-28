@@ -8,11 +8,11 @@ Feature: Display Videos
     When I fill in "q" with "boston legal"
     And I press "search"
     Then I should get ckey u4679968 in the results
-	  And the index display for "u4679968" should have a title of "Boston legal. Season two [videorecording]"
+	 And the index display for "u4679968" should have a title of "Boston legal. Season two [videorecording]"
 	 
 	Scenario: Display variant title
 	  Given I am on the document page for id u4855921
-	  Then I should see "Variant title" data of "Title on set box: Documentaries of Louis Malle"
+	  Then I should see "Variant title" data of "Title on set box:"
 	  
 	Scenario: Display title, part, medium and subtitle
 	  Given I am on the document page for id u4354753
