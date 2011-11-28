@@ -1,0 +1,12 @@
+<tr class="document" id="<%= document[:id] %>">
+  <td><!--number --></td>
+	<td><%= link_to 'Remove', folder_path(document[:id]), :method => :delete, :confirm => 'Remove star from this item?', :class => "remove-star" %></td>
+	<td class="title">
+		<% document.title_type_fields.each do |k,v| %><%= link_to_document document, :label => :title_display %><% end %>
+	</td>
+	<td class="author"><span class="starred-author"></td>
+	<td class="format"><%= document.value_for :format_facet %></td>
+	<td class="year"></td>
+	<td class="type"></td>
+	<td class="access"> <%= link_to 'View Complete Record', document.value_for(:url_display) %></td>
+</tr>
