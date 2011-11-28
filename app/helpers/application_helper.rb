@@ -215,7 +215,7 @@ module ApplicationHelper
   end
   
   def availability_on_index?(document)
-    document.values_for(:barcode_facet) and document.values_for(:barcode_facet).length > 1
+    document.values_for(:barcode_facet) and document.values_for(:barcode_facet).length == 1
   end
   
   def link_to_leo(doc, label, style="")
