@@ -336,7 +336,7 @@ Feature: Display Books
 
  Scenario: show location for dl_books
     Given I am on the document page for id uva-lib:602113
-    Then I should see "Location" data of "Special Collections SC-STKS-F"
+    Then I should see "Location" data of "Special Collections FOLIO"
     
  Scenario: show Call number for dl_books
     Given I am on the document page for id uva-lib:602113
