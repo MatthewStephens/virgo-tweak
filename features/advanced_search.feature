@@ -104,6 +104,22 @@ Feature: Advanced Search Results
     When I click the "Refine search" link
     Then I should see "1900" in "publication_date_start"
     And I should see "1950" in "publication_date_end"
+
+	Scenario: Refine advanced search should repopulate sort field
+		Given I am on the advanced search page
+		And I fill in "author" with "Smith"
+		And I select "Title" from "sort_key"
+		And I press "advanced_search"
+		And I click the "Refine search" link
+		Then I should see select list "select#sort_key" with "Title" selected
+		
+	Scenario: Refine advanced search should repopulate op field
+		Given I am on the advanced search page
+		And I fill in "author" with "Smith"
+		And I select "any" from "op"
+		And I press "advanced_search"
+		And I click the "Refine search" link
+		Then I should see select list "select#op" with "any" selected
     
   Scenario: Perform advanced search and then select additional facets from search results
     Given I am on the advanced search page

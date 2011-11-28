@@ -675,6 +675,8 @@ module ApplicationHelper
       end
     end
     my_params[:catalog_select] = 'articles' if params[:controller] == 'articles'
+    my_params[:sort_key] = params[:sort_key]
+    my_params[:op] = params[:op]
 		my_params
   end
 

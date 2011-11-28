@@ -3,7 +3,7 @@
 <% unless params[:catalog_select] == 'articles' %>
   <div class="adv_search_filter">
     <label for="op" id="txt1">Find items that match</label>
-    <%= select_tag(:op, options_for_select({'all'=>'AND','any'=>'OR'}.sort,'all')) %> 
+    <%= select_tag(:op, options_for_select({'all'=>'AND','any'=>'OR'}.sort,label_tag_default_for(:op))) %> 
     <span id="txt2">of the fields below.</span>
   </div>
 <% end %>
@@ -18,7 +18,7 @@
 
 <div class="adv_search_sort">
   <%= label_tag(:sort_key, "Sort results by", :class => "adv_sort_label") %> 
-  <%= select_tag(:sort_key, options_for_select(sort_fields,'')) %>
+  <%= select_tag(:sort_key, options_for_select(sort_fields, label_tag_default_for(:sort_key))) %>
   <%= hidden_field_tag(:search_field, BlacklightAdvancedSearch.config[:url_key]) %>
 </div>
 
