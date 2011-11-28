@@ -31,7 +31,7 @@ class ArticlesController < ApplicationController
   protected
   
   def adjust_params
-    params[:catalog_select] = "articles"
+    params[:catalog_select] = "articles" unless params[:catalog_select] == "all"
   end
   
   def set_articles
