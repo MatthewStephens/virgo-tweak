@@ -112,7 +112,7 @@ module Account::Common
       @current_location.code =~ /INTRANSIT/
     end
     def circulates?
-      @circulate == "Y"
+      @circulate =~ /Y|M/
     end
     def special_collections_display?
       @current_location.code =~ /DEC-IND-RM|SC-IN-PROC/
