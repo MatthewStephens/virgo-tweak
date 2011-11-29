@@ -79,4 +79,13 @@ Feature: Display Articles
 		And I should see the keyword label "Author"
 		When I follow "x"
 		Then I should not see the keyword label "Author"
+		
+	Scenario: Advanced search sorting
+		Given I am on the articles advanced search page
+		When I fill in "author" with "jones"	
+		And I select "Date" from "sort_key"
+		And I press "Search"
+		Then I should see select list "select#sort_key" with "Date" selected
+		When I follow "Refine search"
+		Then I should see select list "select#sort_key" with "Date" selected
 
