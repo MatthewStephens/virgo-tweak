@@ -13,6 +13,6 @@
 	</td>
 	<td class="format"><%= video_format(document) %> </td>
 	<td class="year"><% unless journal?(document) %><%= document.value_for :published_date_display %><% end %></td>
-	<td class="type">Viedo</td>
+	<td class="type">Catalog</td>
 	<td class="access"><%= link_to 'check availability', catalog_path(document[:id]) %></td>
 </tr>

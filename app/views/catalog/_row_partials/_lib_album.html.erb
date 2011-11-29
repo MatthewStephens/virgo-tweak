@@ -20,6 +20,6 @@
 	<td class="author"><span class="starred-author"><% document.author_type_fields.each do |k,v| %><%= document.value_for k %><% end %></span></td>
 	<td class="format"><%= document.value_for :format_facet %></td>
 	<td class="year"><%= document.value_for :published_display, '<br/>' %></td>
-	<td class="type">Album</td>
+	<td class="type">Catalog</td>
 	<td class="access"><%= link_to 'Check availability', catalog_path(document[:id]) %></td>
 </tr>

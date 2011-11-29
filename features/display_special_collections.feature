@@ -92,6 +92,16 @@ Feature: Display Special Collections Lens
     # request on the form where you select your items
     And I press "Request"
     Then I should see "You must select at least one item"
+
+	Scenario: Allow individual copies to be selected (even if they are all the same)
+		Given I am in the Special Collections lens
+		And I am on the status page for id u844859
+		And I follow "Request this Item"
+		And I follow "UVa login"
+		And I check "location_plus_call_number[STACKS][X030078851][]"
+		And I check "location_plus_call_number[STACKS][X030078852][]"
+		And I press "Request"
+	  Then I should see "Request successfully submitted"
     
   Scenario: Show success message when multiple items are selected
     Given I am in the Special Collections lens

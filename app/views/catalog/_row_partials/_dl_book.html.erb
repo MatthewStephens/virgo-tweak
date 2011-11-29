@@ -5,6 +5,6 @@
 	<td class="author"><span class="starred-author"><%= document.value_for :author_display %></span></td>
 	<td class="format"><%= document.value_for :format_facet%></td>
 	<td class="year"><%= document.value_for(:year_display) %></td>
-	<td class="type"> <% unless document.value_for(:genre_facet) == 'n/a' %><% document.values_for(:genre_facet).each do |v| %><%= v %><% end %><% end %></td>
+	<td class="type">Catalog</td>
 	<td class="access"><%= link_to "Access online", document.dl_jp2k_applet_viewer(document[:id]) %></td>
 </tr>
