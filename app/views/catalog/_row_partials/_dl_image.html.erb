@@ -3,9 +3,9 @@
 	<td><%= link_to 'Remove', folder_path(document[:id]), :method => :delete, :confirm => 'Remove star from this item?', :class => "remove-star" %></td>
 	<td class="title"><% heading_title = get_heading_title(document.value_for(:main_title_display), document.value_for(:series_title_display), document.value_for(:title_display)) %><%= link_to_document document, :label => heading_title %></td>
 	<td class="author"><span class="starred-author"><%= document.value_for :author_display %></span></td>
-	<td class="format">Digital Image</td> 
+	<td class="format"></td> 
 	<td class="year"><% document.value_for(:year_display).blank? ? year_display="n/a" : year_display = document.value_for(:year_display) %><%= year_display %></td>
-	<td class="type"></td>
+	<td class="type">Catalog</td>
 	<td class="access"><% if image_url_exists? document.dl_image_default_preview_src -%>
 			<% document.values_for(:media_resource_id_display).each_with_index do |media_id, index| -%>
 			<% class_att = index > 0 ? 'hide' : nil -%>
