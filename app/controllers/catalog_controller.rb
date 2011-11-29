@@ -181,7 +181,7 @@ class CatalogController < ApplicationController
     @exemplar_id = get_exemplar(@document.fedora_url, @pid) 
 
     # get list of pids for images belonging to this item
-    response=sparql_query_others(@document.fedora_url, @pid, "hasCatalogRecordIn", :supp => "dc:title")
+    response=sparql_query_others(@document.fedora_url, @pid, "hasCatalogRecordIn", :supp => "dc:title", :desc => "dc:description")
     media_ids = Array.new
     media_ids = get_pids_from_sparql(response)
     if media_ids == []
@@ -198,7 +198,8 @@ class CatalogController < ApplicationController
     #params[:pages]=@media_ids
     @image_pids=[]
     @image_titles=[]
-    media_ids.each { |m| @image_pids << m[:pid]; @image_titles << m[:title]; }
+    @image_descriptions=[]
+    media_ids.each { |m| @image_pids << m[:pid]; @image_titles << m[:title]; @image_descriptions << m[:description]; }
     @pid_string = String.new
     @caption_string= String.new
     @image_pids.each { |p| @pid_string << "#{p};" }

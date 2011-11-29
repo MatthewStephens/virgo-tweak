@@ -262,7 +262,7 @@ $(document).ready(function() {
     
     var selected = $('.thumb_select');
     var page = selected.attr('id');
-    var page_index = selected.index();
+    var page_index = selected.index() + 1;
     
     pageLink =  base + "?x=" + lon + "&y=" + lat + "&z=" + zoom + "&lock=" + lock + "&page=" + page;  
     

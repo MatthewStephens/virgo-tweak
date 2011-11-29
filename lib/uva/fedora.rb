@@ -49,6 +49,7 @@ module UVA::Fedora
   def get_pids_from_sparql(response)
     require 'nokogiri'
     optional="supp"
+    desc="desc"
    
     doc=Nokogiri::XML(response)
     errs=doc.errors
@@ -63,8 +64,10 @@ module UVA::Fedora
       set=Hash.new
       obj=n.xpath("./*[local-name()='object']/@uri").to_s.gsub(/info:fedora\//, '') 
       title=n.xpath("./*[local-name()='#{optional}']/text()[1]").to_s
+      description=n.xpath("./*[local-name()='#{desc}']/text()[1]").to_s
       set[:pid]= obj
       set[:title]= title
+      set[:description]= description
       sorted_pid_list << set
     end
 
@@ -89,6 +92,7 @@ module UVA::Fedora
     options[:type] ||= false
     options[:limit] ||= "10000"
     options[:supp] ||= false
+    options[:desc] ||= false
 
     # runs a SPARQL query on fedora objects to get pid(s) for objects mentioning pid
     # type passes a content model to Resource Index, limit sets number of results
@@ -106,15 +110,18 @@ module UVA::Fedora
     # to query an items own RDF triples and select any values for hasExemplar 
     # (triple should contain pid of another item which has a JP2K stream)
 
-    if options[:supp] == false then terms="$object" else terms="$object $supp" end
+    terms="$object" 
+    terms << " $supp" if options[:supp]
+    terms << " $desc" if options[:desc]
 
-    query = "select #{terms} from <#ri> where  {
+    query = "SELECT #{terms} FROM <#ri> WHERE  {
       $object <fedora-model:state> <fedora-model:Active> . "
 
-    unless options[:type]==false then query << "$object <fedora-model:hasModel> <info:fedora/#{options[:type]}> . " end
-    unless options[:supp]==false then query << "$object <#{options[:supp]}> $supp . " end
-
-    query << "$object <http://fedora.lib.virginia.edu/relationships##{relationship}> <info:fedora/#{pid}> } ORDER BY $object limit #{options[:limit]}"
+    query << "$object <fedora-model:hasModel> <info:fedora/#{options[:type]}> . " if options[:type]
+    query << "$object <#{options[:supp]}> $supp . " if options[:supp]
+    query << "$object <http://fedora.lib.virginia.edu/relationships##{relationship}> <info:fedora/#{pid}> . "
+    query << "OPTIONAL { $object <#{options[:desc]}> $desc . } " if options[:desc] 
+    query << "} ORDER BY $object limit #{options[:limit]}"
 
     url = "/risearch?type=tuples&lang=sparql&format=Sparql&query=#{URI.escape(query)}"
 
