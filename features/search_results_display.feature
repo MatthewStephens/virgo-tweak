@@ -17,11 +17,11 @@ Feature: Everything (Default) Search Results Display
 		
 	Scenario: Display availability when there is one holding
 		Given I am on the brief status page for id u5395336
-		Then I should see "Alderman Stacks (Available)"
+		Then I should see "Available Alderman (Stacks)"
 		
 	Scenario: Suppress current location when the library is Special Collections
 		Given I am on the brief status page for id u5393523
-		Then I should see "Special Collections (Available)"
+		Then I should see "Available (Special Collections)"
 		
 	Scenario: Display call number
 		Given I am on the homepage

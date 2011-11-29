@@ -226,7 +226,7 @@ $(document).ready(function() {
 	
 	var scrollTimer;
 	
-  $('.page_thumbs').scroll(function() {
+  $('.page_thumbs_list').scroll(function() {
     if(scrollTimer) {
       clearTimeout(scrollTimer);
       scrollTimer = null;
@@ -252,7 +252,7 @@ $(document).ready(function() {
    * on current map info.  Responds to map-changing events.
   -------------------------------------------------------------- */
   function updateLink(event){    
-    var base = window.location.href.split('?')[0];    
+    var base = window.location.href.split('?')[0];
     var zoom = map.getZoom() ? map.getZoom() : 0;
     var lock = PageTurner.lock == 'true' ? 'true' : 'false';
     
@@ -260,11 +260,16 @@ $(document).ready(function() {
     var lon = mapCenter ? mapCenter.lon : 0;
     var lat = mapCenter ? mapCenter.lat : 0;
     
-    var page = $('.thumb_select').attr('id');
+    var selected = $('.thumb_select');
+    var page = selected.attr('id');
+    var page_index = selected.index();
     
     pageLink =  base + "?x=" + lon + "&y=" + lat + "&z=" + zoom + "&lock=" + lock + "&page=" + page;  
     
     $('#page_permalink').attr('href', pageLink);
+    
+    // Update Image number in sidebar
+    $('.thumbs-current-num').html(page_index);
   }
   
   
