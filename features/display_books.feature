@@ -77,10 +77,11 @@ Feature: Display Books
     Scenario: related names should include 240 o
 	  Given I am on the document page for id u2114442
       Then I should see a related name "Beethoven, Ludwig van, 1770-1827. Symphonies; arr."
-    
-    Scenario: related names should include 240 f
-	  Given I am on the document page for id u2140007
-      Then I should see a related name "Beethoven, Ludwig van, 1770-1827. Works. 1949"
+  
+ # data has changed.  Unable to locate comparable example  
+ #   Scenario: related names should include 240 f
+ #	  Given I am on the document page for id u2140007
+ #     Then I should see a related name "Beethoven, Ludwig van, 1770-1827. Works. 1949"
     
     Scenario: related names should include 240 l,s
 	  Given I am on the document page for id u3785251
