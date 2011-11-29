@@ -16,6 +16,11 @@ Then /^the result display should have the full text view link of (.+)$/i do |val
   response.should have_tag("a[href*=?]", /^.*#{value}.*$/)
 end
 
+Then /^the result display for ckey (.+) should have the call number "([^\"]*)"$/ do |ckey, value|
+  string = "div#Doc#{ckey} div dl.metadata dd.callNumberField"
+  response.should have_tag(string, :text => /^.*#{value}.*$/)
+end
+
 Then /^the result display for ckey (.+) should not have the call number "([^\"]*)"$/ do |ckey, value|
   string = "div#Doc#{ckey} div dl.metadata dd.callNumberField"
   response.should_not have_tag(string, :text => /^.*#{value}.*$/)

@@ -11,7 +11,7 @@ Feature: Everything (Default) Search Results Display
     
   Scenario: Display availability link if there are multiple copies
     Given I am on the homepage
-    When I fill in "q" with "da vinci code videorecording 2005"
+    When I fill in "q" with "da vinci code videorecording 2006"
     And I press "search"
 		Then I should see "View Locations and Availability"
 		
@@ -22,6 +22,12 @@ Feature: Everything (Default) Search Results Display
 	Scenario: Suppress current location when the library is Special Collections
 		Given I am on the brief status page for id u5393523
 		Then I should see "Special Collections (Available)"
+		
+	Scenario: Display call number
+		Given I am on the homepage
+		When I fill in "q" with "william w pusey lexington"
+		And I press "search"
+		Then the result display for ckey u3900120 should have the call number "MSS 9154-b"
 		
   Scenario: Suppress call number display if there are multiple locations and multiple call numbers
     Given I am on the homepage
