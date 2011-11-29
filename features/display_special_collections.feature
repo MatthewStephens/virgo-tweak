@@ -68,6 +68,7 @@ Feature: Display Special Collections Lens
     And I am on the status page for id u507022
     And I follow "Request this Item"
     And I follow "UVa login"
+		Then I should see "Call number of requested item:"
     And I press "Request"
     Then I should see "Request successfully submitted"
     
@@ -76,6 +77,7 @@ Feature: Display Special Collections Lens
     And I am on the status page for id u3572181
     And I follow "Request this Item"
     And I follow "UVa login"
+		Then I should see "There are multiple copies of this item. Please consult the item record for description of differences, where applicable, and use the checkboxes to select the copy or copies you wish to receive."
     And I press "Request"
     Then I should see "You must select at least one item"
   

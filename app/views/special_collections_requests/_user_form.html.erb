@@ -1,3 +1,10 @@
+<div>
+<% if one_copy?(@special_collections_request.document.availability) %>
+	Call number of requested item:
+<% else %>
+	There are multiple copies of this item. Please consult the item record for description of differences, where applicable, and use the checkboxes to select the copy or copies you wish to receive. 
+<% end %>
+</div>
 <% @special_collections_request.document.availability.special_collections_holdings.each do |holding| %>
 	<% holding.copies.each do |copy| %>
 		<% barcode = copy.barcode %>
