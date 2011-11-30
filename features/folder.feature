@@ -142,3 +142,12 @@ Feature: User Folder
  	  And I visit the folder page
  	  Then I should see the Starred Items tools
 
+	Scenario: Cite article from folder
+		Given I am on the homepage
+		When I fill in "q" with "pickral odum benthic detritus"
+		And I choose "catalog_select_articles"
+		And I press "search"
+		And I add ckey "pubtecumrsmas/bullmar/1984/00000035/00000003/art00022" to my folder
+		And I visit the folder page
+		And I follow "Cite"
+		Then I should see "Odum, William E."

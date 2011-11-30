@@ -21,4 +21,13 @@
 <% end %>
 
 <% end %>
+
+<% @articles.each do |article| %>
+	<h4>MLA</h4>
+	<%= article.display.creator %> "<%= article.display.title %>." <i><%= article.additional_data.journal %></i> <%= article.additional_data.volume %>.<%= article.additional_data.issue %> (<%= article.search.creation_date %>): <%= article.additional_data.start_page %>-<%= article.additional_data.end_page %>.
+		
+	<h4>APA</h4>
+	<%= article.display.creator %> (<%= article.search.creation_date %>). "<%= article.display.title %>." <i><%= article.additional_data.journal %></i>, <%= article.additional_data.volume %> (<%= article.additional_data.issue %>), <%= article.additional_data.start_page %>-<%= article.additional_data.end_page %>.
+	
+<% end %>
 </div>

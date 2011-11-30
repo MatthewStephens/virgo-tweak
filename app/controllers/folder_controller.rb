@@ -58,7 +58,7 @@ class FolderController < ApplicationController
   end
   
   def citation
-    redirect_to :controller => 'catalog', :action => 'citation', :id => session_folder_document_ids, :show_max_per_page => 'true'
+    redirect_to :controller => 'catalog', :action => 'citation', :id => session_folder_document_ids, :show_max_per_page => 'true', :article_id => session_folder_article_ids
   end
   
   def email

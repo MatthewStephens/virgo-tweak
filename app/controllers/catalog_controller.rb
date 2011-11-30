@@ -20,7 +20,7 @@ class CatalogController < ApplicationController
   before_filter :adjust_for_bookmarks_view, :only=>:update
   before_filter :recaptcha_check, :only=>:send_email_record
   before_filter :filters, :only =>:show
-  before_filter :articles, :only=>[:email, :send_email_record]
+  before_filter :articles, :only=>[:email, :send_email_record, :citation]
   before_filter :set_solr_document, :only=>[:status, :brief_status, :firehose, :image_load, :image, :page_turner, :fedora_metadata]
   before_filter :set_document_availability, :only=>[:status, :brief_status]
   
