@@ -159,3 +159,6 @@ button {background: none; border: none; cursor: pointer; font-family: Arial, Hel
 .olControlPanZoom { opacity: 0.8; }
 #zoomBox {border: 2px dotted #FFCC44;}
 .olLayerDiv div, .olLayerDiv div img {width: auto !important; height: auto !important;}
+
+/* IE7 Fixes */
+.ie7 #hide_header, .ie7 #hide_thumbs { display: inline; float: none; line-height: 16px; margin-left: -10px; padding-left: 0; text-align: right; vertical-align: middle;}

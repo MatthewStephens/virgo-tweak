@@ -1,5 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]--> 
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]--> 
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]--> 
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en"> <!--<![endif]-->
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title><%= @document.value_for(:title_display).nil? ? "Document Viewer" : truncate(@document.value_for(:title_display), 80, "...") %> - Virgo - University of Virginia Library</title>
