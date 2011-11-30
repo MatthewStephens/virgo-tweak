@@ -63,6 +63,19 @@ module UVA::ArticlesHelper
     end
   end
   
+  class AdditionalData
+    include HappyMapper
+    register_namespace 'sear', 'http://www.exlibrisgroup.com/xsd/jaguar/search'
+    register_namespace 'prim', 'http://www.exlibrisgroup.com/xsd/primo/primo_nm_bib'
+    tag 'addata'
+    namespace 'prim'
+    element :journal, String, :tag => "jtitle"
+    element :volume, String
+    element :issue, String
+    element :start_page, String, :tag => "spage"
+    element :end_page, String, :tag => "epage"
+  end
+  
   class GetIt
     include HappyMapper
     register_namespace 'sear', 'http://www.exlibrisgroup.com/xsd/jaguar/search'
@@ -93,6 +106,7 @@ module UVA::ArticlesHelper
     tag 'DOC'
     namespace 'sear'
     has_one :display, Display, :tag => "display", :deep => "true"
+    has_one :additional_data, AdditionalData, :tag => "addata", :deep => "true"
     has_one :search, Search, :tag => "search", :deep => "true"
     has_many :links, Link, :tag => "LINKS"
     has_many :get_its, GetIt, :tag => "GETIT"
