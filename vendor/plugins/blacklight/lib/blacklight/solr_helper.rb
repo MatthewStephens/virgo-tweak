@@ -40,6 +40,13 @@ module Blacklight::SolrHelper
     end
     return val
   end
+  
+  # returns an Array of parameter keys which are valid for passing from the 
+  # controller on to the solr search request. Used by #solr_search_params.
+  # This allows for overriding this method to add other parameters to the whitelist.
+  def extra_controller_params_whitelist
+    [:qt, :q, :facets,  :page, :per_page, :phrase_filters, :f, :fq, :fl, :sort, :qf, :df]
+  end
 
  # returns a params hash for searching solr.
   # The CatalogController #index action uses this.
@@ -123,7 +130,7 @@ module Blacklight::SolrHelper
     # seems to put arguments in here that aren't really expected to turn
     # into solr params. 
     ###
-    solr_parameters.deep_merge!(extra_controller_params.slice(:qt, :q, :facets,  :page, :per_page, :phrase_filters, :f, :fq, :fl, :sort, :qf, :df ).symbolize_keys   )
+    solr_parameters.deep_merge!(extra_controller_params.slice( *extra_controller_params_whitelist).symbolize_keys   )
 
 
 
@@ -198,7 +205,7 @@ module Blacklight::SolrHelper
     
       solr_response = Blacklight.solr.find(  self.solr_search_params(extra_controller_params) )
   
-      document_list = solr_response.docs.collect {|doc| SolrDocument.new(doc)}  
+      document_list = solr_response.docs.collect {|doc| SolrDocument.new(doc, solr_response)}  
 
       Rails.logger.debug("Solr fetch: #{self.class}#get_search_results (#{'%.1f' % ((Time.now.to_f - bench_start.to_f)*1000)}ms)")
     
@@ -223,7 +230,7 @@ module Blacklight::SolrHelper
   def get_solr_response_for_doc_id(id=nil, extra_controller_params={})
     solr_response = Blacklight.solr.find solr_doc_params(id, extra_controller_params)
     raise InvalidSolrID.new if solr_response.docs.empty?
-    document = SolrDocument.new(solr_response.docs.first)
+    document = SolrDocument.new(solr_response.docs.first, solr_response)
     [solr_response, document]
   end
   
@@ -238,7 +245,7 @@ module Blacklight::SolrHelper
       'spellcheck' => 'false'
     }
     solr_response = Blacklight.solr.find( self.solr_search_params(solr_params.merge(extra_controller_params)) )
-    document_list = solr_response.docs.collect{|doc| SolrDocument.new(doc) }
+    document_list = solr_response.docs.collect{|doc| SolrDocument.new(doc, solr_response) }
     [solr_response,document_list]
   end
   
@@ -351,7 +358,7 @@ module Blacklight::SolrHelper
   # a facet paginator with the right limit. 
   def facet_limit_for(facet_field)
     limits_hash = facet_limit_hash
-    return nil unless limits_hash
+    return nil if limits_hash.blank?
         
     limit = limits_hash[facet_field]
 
@@ -374,7 +381,7 @@ module Blacklight::SolrHelper
   # Used by SolrHelper#solr_search_params to add limits to solr
   # request for all configured facet limits.
   def facet_limit_hash
-    Blacklight.config[:facet][:limits]           
+    Blacklight.config[:facet][:limits] || {}
   end
 
   def max_per_page

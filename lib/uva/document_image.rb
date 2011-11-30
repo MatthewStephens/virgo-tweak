@@ -9,7 +9,7 @@ module UVA
     end
     
     def has_image?
-      File.exists?(file_path) ? true : false
+      File.exists?(file_path)
     end
     
     def file_path

@@ -44,8 +44,8 @@ class CatalogController < ApplicationController
   # When RSolr::RequestError is raised, this block is executed.
   # The index action will more than likely throw this one.
   # Example, when the standard query parser is used, and a user submits a "bad" query.
-  rescue_from RSolr::RequestError do |error|
-    # when solr (RSolr) throws an error (RSolr::RequestError), this method is executed.
+  rescue_from RSolr::Error::InvalidRubyResponse do |error|
+    # when solr (RSolr) throws an error, this method is executed.
     flash[:notice] = "Sorry, I don't understand your search."
     notify_about_exception(error)
     redirect_to catalog_index_path

@@ -92,5 +92,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources(:reserves, :only=>[:index])
   map.reserve_course 'reserves/:computing_id/:key', :controller => 'reserves', :action => 'course'
+  
+  map.resources :folder, :only => [:index, :create, :update, :destroy], :collection => {:clear => :delete }
 
 end

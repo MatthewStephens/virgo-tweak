@@ -462,6 +462,18 @@ Blacklight.configure(:shared) do |config|
   
   # the number of bookmarks to display per page
   config[:bookmarks_per_page] = 20
+
+
+
+  # Email uses the semantic fields mappings below to generate the body
+  # of an email.
+  SolrDocument.use_extension( Blacklight::Solr::Document::Email )
+
+  # SMS uses the semantic fiels mappings below to generate the body of
+  # an SMS email.
+  SolrDocument.use_extension( Blacklight::Solr::Document::Sms )
+
+
   
 end
 

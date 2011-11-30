@@ -561,7 +561,7 @@ module ApplicationHelper
     page = params[:page].to_i - 1
     page = 0 if page < 1
     per_page = params[:per_page].to_i rescue 0
-    per_page = Blacklight.config[:bookmarks_per_page] if per_page = 0
+    per_page = Blacklight.config[:bookmarks_per_page] if per_page == 0
     per_page * page
   end
   

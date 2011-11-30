@@ -71,9 +71,7 @@ module ApplicationHelper
   def render_head_content
     render_stylesheet_includes +
     render_js_includes +
-    ( respond_to?(:extra_head_content) ?
-        extra_head_content.join("\n") :
-      "")
+    render_extra_head_content
   end
   
   ##
@@ -82,11 +80,11 @@ module ApplicationHelper
   # See #render_head_content for instructions on local code or plugins
   # adding stylesheets. 
   def render_stylesheet_includes
-    return "" unless respond_to?(:stylesheet_links)
+    return "".html_safe unless respond_to?(:stylesheet_links)
     
     stylesheet_links.collect do |args|
       stylesheet_link_tag(*args)
-    end.join("\n")
+    end.join("\n").html_safe
   end
   
 
@@ -96,11 +94,20 @@ module ApplicationHelper
   # See #render_head_content for instructions on local code or plugins
   # adding js files. 
   def render_js_includes
-    return "" unless respond_to?(:javascript_includes)    
+    return "".html_safe unless respond_to?(:javascript_includes)    
   
     javascript_includes.collect do |args|
       javascript_include_tag(*args)
-    end.join("\n")
+    end.join("\n").html_safe
+  end
+
+  ## 
+  # Assumes controller has a #extra_head_content method
+  #
+  def render_extra_head_content
+    return "".html_safe unless respond_to?(:extra_head_content)
+
+    extra_head_content.join("\n").html_safe
   end
 
   # Create <link rel="alternate"> links from a documents dynamically
@@ -129,16 +136,24 @@ module ApplicationHelper
         seen.add(spec[:content_type]) if options[:unique]
       end
     end
-    return html
+    return html.html_safe
+  end
+
+  def render_opensearch_response_metadata
+    render :partial => 'catalog/opensearch_response_metadata'
   end
 
   def render_body_class
-    ['blacklight-' + @controller.controller_name, 'blacklight-' + [@controller.controller_name, @controller.action_name].join('-')].join " "
+    extra_body_classes.join " "
   end
   
   # collection of items to be rendered in the @sidebar
   def sidebar_items
     @sidebar_items ||= []
+  end
+
+  def extra_body_classes
+    @extra_body_classes ||= ['blacklight-' + @controller.controller_name, 'blacklight-' + [@controller.controller_name, @controller.action_name].join('-')]
   end
   
   #
@@ -167,8 +182,23 @@ module ApplicationHelper
     render :partial=>'catalog/document_list'
   end
 
-  def render_document_functions_partial document=@document, options={}
-    render :partial=>'catalog/document_functions', :locals => {:document => document }
+  
+  # Save function area for search results 'index' view, normally
+  # renders next to title. Includes just 'Folder' by default.
+  def render_index_doc_actions(document, options={})   
+    content_tag("div", :class=>"documentFunctions") do
+      "#{render(:partial => 'bookmark_control', :locals => {:document=> document}.merge(options))}
+       #{render(:partial => 'folder_control', :locals => {:document=> document}.merge(options))}"
+    end
+  end
+  
+  # Save function area for item detail 'show' view, normally
+  # renders next to title. By default includes 'Folder' and 'Bookmarks'
+  def render_show_doc_actions(document=@document, options={})
+    content_tag("div", :class=>"documentFunctions") do
+      "#{render(:partial => 'bookmark_control', :locals => {:document=> document}.merge(options))}
+       #{render(:partial => 'folder_control', :locals => {:document=> document}.merge(options))}"
+    end
   end
   
   # used in the catalog/_index_partials/_default view
@@ -179,6 +209,10 @@ module ApplicationHelper
   # used in the _index_partials/_default view
   def index_field_labels
     Blacklight.config[:index_fields][:labels]
+  end
+
+  def spell_check_max
+    Blacklight.config[:spell_max] || 0
   end
 
   def render_index_field_label args
@@ -197,7 +231,7 @@ module ApplicationHelper
     @document[Blacklight.config[:show][:heading]] || @document.id
   end
   def render_document_heading
-    '<h1>' + document_heading + '</h1>'
+    content_tag(:h1, document_heading)
   end
   
   # Used in the show view for setting the main html document title
@@ -248,16 +282,26 @@ module ApplicationHelper
 
   def render_field_value value=nil
     value = [value] unless value.is_a? Array
-    return value.map { |v| html_escape v }.join field_value_separator 
+    return value.map { |v| html_escape v }.join(field_value_separator).html_safe
   end  
 
   def field_value_separator
     ', '
   end
   
-  # currently only used by the render_document_partial helper method (below)
+  # Return a normalized partial name that can be used to contruct view partial path
   def document_partial_name(document)
-    document[Blacklight.config[:show][:display_type]]
+    # .to_s is necessary otherwise the default return value is not always a string
+    # using "_" as sep. to more closely follow the views file naming conventions
+    # parameterize uses "-" as the default sep. which throws errors
+    display_type = document[Blacklight.config[:show][:display_type]]
+    if display_type
+      if display_type.respond_to?(:join)
+        "#{display_type.join(" ").gsub("-"," ")}".parameterize("_").to_s
+      else
+        "#{display_type.gsub("-"," ")}".parameterize("_").to_s
+      end
+    end
   end
 
   # given a doc and action_name, this method attempts to render a partial template
@@ -290,16 +334,14 @@ module ApplicationHelper
   # options consist of:
   # :suppress_link => true # do not make it a link, used for an already selected value for instance
   def render_facet_value(facet_solr_field, item, options ={})    
-    link_to_unless(options[:suppress_link], item.value, add_facet_params_and_redirect(facet_solr_field, item.value), :class=>"facet_select label") + " " + render_facet_count(item.hits)
+    (link_to_unless(options[:suppress_link], item.value, add_facet_params_and_redirect(facet_solr_field, item.value), :class=>"facet_select label") + " " + render_facet_count(item.hits)).html_safe
   end
 
   # Standard display of a SELECTED facet value, no link, special span
   # with class, and 'remove' button.
   def render_selected_facet_value(facet_solr_field, item)
-    '<span class="selected label">' +
-    render_facet_value(facet_solr_field, item, :suppress_link => true) +
-    '</span>' +
-    link_to("[remove]", remove_facet_params(facet_solr_field, item.value, params), :class=>"remove")
+    content_tag(:span, render_facet_value(facet_solr_field, item, :suppress_link => true), :class => "selected label") +
+      link_to("[remove]", remove_facet_params(facet_solr_field, item.value, params), :class=>"remove")
   end
 
   # Renders a count value for facet limits. Can be over-ridden locally
@@ -393,8 +435,8 @@ module ApplicationHelper
   def render_document_index_label doc, opts
     label = nil
     label ||= doc.get(opts[:label]) if opts[:label].instance_of? Symbol
-    label ||= opts[:label] if opts[:label].instance_of? String
     label ||= opts[:label].call(doc, opts) if opts[:label].instance_of? Proc
+    label ||= opts[:label] if opts[:label].is_a? String
     label ||= doc.id
   end
 
@@ -486,7 +528,7 @@ module ApplicationHelper
       end
 
       href_attr = "href=\"#{url}\"" unless href
-      "<a #{href_attr}#{tag_options}>#{h(name) || h(url)}</a>"
+      "<a #{href_attr}#{tag_options}>#{h(name) || h(url)}</a>".html_safe
     end
   end
 
@@ -516,7 +558,7 @@ module ApplicationHelper
     if data
       data.each_pair do |key, value|
         submit_function << "var d = document.createElement('input'); d.setAttribute('type', 'hidden'); "
-        submit_function << "d.setAttribute('name', '#{key}'); d.setAttribute('value', '#{value}'); f.appendChild(d);"
+        submit_function << "d.setAttribute('name', '#{key}'); d.setAttribute('value', '#{escape_javascript(value.to_s)}'); f.appendChild(d);"
       end
     end
     unless method == :post
@@ -557,7 +599,10 @@ module ApplicationHelper
     end
     val
   end
-  
-  
-  
+
+
+  def render_document_unapi_microformat(document, options={})
+    render(:partial=>'catalog/unapi_microformat',  :locals => {:document=> document}.merge(options))
+  end
+
 end
