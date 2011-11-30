@@ -23,6 +23,8 @@
 <% end %>
 
 <% @articles.each do |article| %>
+	<h1><%= article.display.title %></h1>
+
 	<h4>MLA</h4>
 	<%= article.display.creator %> "<%= article.display.title %>." <i><%= article.additional_data.journal %></i> <%= article.additional_data.volume %>.<%= article.additional_data.issue %> (<%= article.search.creation_date %>): <%= article.additional_data.start_page %>-<%= article.additional_data.end_page %>.
 		
