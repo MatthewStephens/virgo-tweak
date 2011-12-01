@@ -87,7 +87,7 @@
   					<p class="page_title"><%= @image_titles[i] %></p>
   					<p class="page_description"><%= @image_descriptions[i] %></p>
   					<p class="page_download">
-  					  <a href="#{@repository}/objects/#{page}/methods/djatoka:StaticSDef/getStaticImage" target="_blank">Download</a>
+  					  <a href="<%= @repository + "/objects/" + page + "/methods/djatoka:StaticSDef/getStaticImage" %>" target="_blank">Download</a>
   					  <span class="terms-link"><%= link_to "Terms of Use",  "http://www2.lib.virginia.edu/small/using/use_of_materials_policy.html", :target => "_blank" %></span>
   					</p>
   			  </li>
