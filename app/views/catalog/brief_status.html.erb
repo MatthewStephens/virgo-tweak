@@ -1,4 +1,4 @@
-<% if @document.availability -%>
+<% if @document.availability and @document.availability.holdings.size > 0 -%>
 	<% holding = @document.availability.holdings.first -%>
 	<% copy = holding.copies.first -%>
 	<span class="availability-indicator <%= availability_text(copy).downcase %>"><%= availability_text(copy) %></span>
