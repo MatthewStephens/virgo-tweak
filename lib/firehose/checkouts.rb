@@ -1,13 +1,13 @@
 require 'happymapper'
 require 'open-uri'
 
-module Account::Checkouts  
+module Firehose::Checkouts  
 
   def get_checkouts(computing_id)
     uri = URI.parse("#{FIREHOSE_URL}/users/#{computing_id}/checkouts")
     begin
       str = uri.read
-      return Account::Common::User.parse(str, :single=>true, :use_default_namespace => true)
+      return Firehose::Common::User.parse(str, :single=>true, :use_default_namespace => true)
     rescue
       return
     end
@@ -20,8 +20,8 @@ module Account::Checkouts
     when Net::HTTPSuccess, Net::HTTPRedirection
       return
     else
-      error = Account::Common::FirehoseViolation.parse(res.body, :single => true, :use_default_namespace => true)
-      raise Account::Common::RenewError.new(error.message)
+      error = Firehose::Common::FirehoseViolation.parse(res.body, :single => true, :use_default_namespace => true)
+      raise Firehose::Common::RenewError.new(error.message)
     end
   end  
   
@@ -32,8 +32,8 @@ module Account::Checkouts
     when Net::HTTPSuccess, Net::HTTPRedirection
       return
     else
-      error = Account::Common::FirehoseViolation.parse(res.body, :single => true, :use_default_namespace => true)
-      raise Account::Common::RenewError.new(error.message)
+      error = Firehose::Common::FirehoseViolation.parse(res.body, :single => true, :use_default_namespace => true)
+      raise Firehose::Common::RenewError.new(error.message)
     end
   end
   

@@ -1,13 +1,13 @@
 require 'happymapper'
 require 'open-uri'
 
-module Account::Libraries
+module Firehose::Libraries
   
   def get_library_list
     uri = URI.parse("#{FIREHOSE_URL}/list/libraries")
     begin
       str = uri.read
-      Account::Common::LibraryList.parse(str, :single=>true, :use_default_namespace => true)
+      Firehose::Common::LibraryList.parse(str, :single=>true, :use_default_namespace => true)
     rescue
       return
     end

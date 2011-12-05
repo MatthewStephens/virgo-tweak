@@ -1,7 +1,6 @@
 class ReservesController < ApplicationController
 
-  include Account::Reserves
-  include Account::Common
+  include Firehose::Reserves
   include Blacklight::SolrHelper
   include UVA::SolrHelper
   

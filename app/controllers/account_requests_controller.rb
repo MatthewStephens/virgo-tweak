@@ -1,10 +1,9 @@
 class AccountRequestsController < ApplicationController
 
-  include Account::Libraries
-  include Account::Patron
-  include Account::Holds
-  include Account::Checkouts
-  include Account::Common
+  include Firehose::Libraries
+  include Firehose::Patron
+  include Firehose::Holds
+  include Firehose::Checkouts
   include Blacklight::SolrHelper
   include UVA::SolrHelper
   
@@ -64,7 +63,7 @@ class AccountRequestsController < ApplicationController
   end
   
   def verify_hold_request
-    @document.availability = Account::Availability.find(@document)
+    @document.availability = Firehose::Availability.find(@document)
     if !@document.availability.might_be_holdable?
       flash[:error] = @document.availability.holdability_error
       render 'error', :layout => params[:popup].blank? ? "application" : "popup"

@@ -1,4 +1,4 @@
-module Account::Common
+module Firehose::Common
   
   class Library
     include HappyMapper
@@ -97,7 +97,7 @@ module Account::Common
       @current_periodical
     end
     def last_checkout_f
-      Account::Common.date_string(@last_checkout)
+      Firehose::Common.date_string(@last_checkout)
     end
     def available?
       @current_location.code !~ /CHECKEDOUT|MISSING|INTRANSIT|GBP|ON-ORDER|CIRC-HOLD|LAW-HOLD|IN-PROCESS|BINDERY|PRESERVATN|CATALOGING/i
@@ -182,13 +182,13 @@ module Account::Common
     element :priority, Integer
     
     def date_notified_f
-      Account::Common.date_string(@date_notified)
+      Firehose::Common.date_string(@date_notified)
     end
     def date_placed_f
-      Account::Common.date_string(@date_placed)
+      Firehose::Common.date_string(@date_placed)
     end
     def date_recalled_f
-      Account::Common.date_string(@date_recalled)
+      Firehose::Common.date_string(@date_recalled)
     end
   end
   
@@ -247,16 +247,16 @@ module Account::Common
       @renewability.value == "yes" ? true : false
     end
     def date_charged_f
-      Account::Common.date_string(@date_charged)
+      Firehose::Common.date_string(@date_charged)
     end
     def date_due_f
-      Account::Common.date_string(@date_due)
+      Firehose::Common.date_string(@date_due)
     end
     def date_recalled_f
-      Account::Common.date_string(@date_recalled)
+      Firehose::Common.date_string(@date_recalled)
     end
     def date_renewed_f
-      Account::Common.date_string(@date_renewed)
+      Firehose::Common.date_string(@date_renewed)
     end
     def overdue?
       @overdue

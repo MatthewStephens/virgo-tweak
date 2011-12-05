@@ -1,21 +1,21 @@
 require 'happymapper'
 require 'open-uri'
 
-module Account::Holds
+module Firehose::Holds
 
 
   def get_holds(computing_id)
     uri = URI.parse("#{FIREHOSE_URL}/users/#{computing_id}/holds")
     begin
       str = uri.read
-      return Account::Common::User.parse(str, :single=>true, :use_default_namespace => true)
+      return Firehose::Common::User.parse(str, :single=>true, :use_default_namespace => true)
     rescue
       return
     end
   end
   
   def place_hold(computing_id, ckey, library_id, call_number="")
-    ckey = Account::Common.ckey_converter(ckey)
+    ckey = Firehose::Common.ckey_converter(ckey)
     params = { "computingId" => computing_id,
                "catalogId" => ckey,
                "pickupLibraryId" => library_id }
@@ -25,8 +25,8 @@ module Account::Holds
     when Net::HTTPSuccess, Net::HTTPRedirection
       return
     else
-      error = Account::Common::FirehoseViolation.parse(res.body, :single => true, :use_default_namespace => true)
-      raise Account::Common::HoldError.new(error.message)
+      error = Firehose::Common::FirehoseViolation.parse(res.body, :single => true, :use_default_namespace => true)
+      raise Firehose::Common::HoldError.new(error.message)
     end
   end
     

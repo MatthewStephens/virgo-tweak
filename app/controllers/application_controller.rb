@@ -4,7 +4,7 @@ require_dependency 'vendor/plugins/blacklight/app/controllers/application_contro
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  include Account::Patron
+  include Firehose::Patron
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   before_filter :notices_update

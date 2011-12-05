@@ -1,9 +1,9 @@
 class AccountController < ApplicationController
 
-  include Account::Patron
-  include Account::Checkouts
-  include Account::Holds
-  include Account::Reserves
+  include Firehose::Patron
+  include Firehose::Checkouts
+  include Firehose::Holds
+  include Firehose::Reserves
   before_filter :verify_login, :except => "select"
 
   def index

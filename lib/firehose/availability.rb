@@ -1,7 +1,7 @@
 require 'happymapper'
 require 'open-uri'
 
-class Account::Availability
+class Firehose::Availability
   
   attr_accessor :document
   attr_accessor :_raw_xml
@@ -140,19 +140,19 @@ class Account::Availability
       # get library
       library = (@_summary_libraries.select {|library| library.name == parts[0] }).first
       if library.nil?
-        library = Account::Common::Library.new
+        library = Firehose::Common::Library.new
         library.name = parts[0]
         @_summary_libraries << library
       end
       # get location
       location = (library.summary_locations.select{ |location| location.name == parts[1] }).first
       if location.nil?
-        location = Account::Common::HomeLocation.new
+        location = Firehose::Common::HomeLocation.new
         location.name = parts[1]
         library.summary_locations << location
       end
       # add summary
-      location.summaries << Account::Common::Summary.new(parts[2], parts[3])
+      location.summaries << Firehose::Common::Summary.new(parts[2], parts[3])
     end
   end
   
@@ -193,11 +193,11 @@ class Account::Availability
   
   def self.find(document)
     ckey = document.value_for :id
-    ckey = Account::Common.ckey_converter(ckey)
+    ckey = Firehose::Common.ckey_converter(ckey)
     uri = URI.parse("#{FIREHOSE_URL}/items/#{ckey}")
     begin
       xml = uri.read
-      ret = Account::Availability.new(document, Account::Common::CatalogItem.parse(xml, :single=>true, :use_default_namespace => true), xml)
+      ret = Firehose::Availability.new(document, Firehose::Common::CatalogItem.parse(xml, :single=>true, :use_default_namespace => true), xml)
       return ret
     rescue
       RAILS_DEFAULT_LOGGER.info("bad thing!")

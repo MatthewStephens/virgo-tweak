@@ -23,7 +23,7 @@ class SpecialCollectionsRequestsController < ApplicationController
   # pulls up the items and allows a person to construct a request
   def new
     response, document = get_solr_response_for_doc_id(params[:id], params)
-    document.availability = Account::Availability.find(document)
+    document.availability = Firehose::Availability.find(document)
     @special_collections_request.document = document
   end
   
@@ -61,7 +61,7 @@ class SpecialCollectionsRequestsController < ApplicationController
   def edit
     @special_collections_request = SpecialCollectionsRequest.find(params[:id])
     response, document = get_solr_response_for_doc_id(@special_collections_request.document_id)
-    document.availability = Account::Availability.find(document)
+    document.availability = Firehose::Availability.find(document)
     @special_collections_request.document = document   
   end
   

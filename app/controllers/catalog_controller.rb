@@ -5,7 +5,7 @@ class CatalogController < ApplicationController
   include UVA::Document
   include UVA::Fedora
   include UVA::SolrHelper
-  include Account::Holds
+  include Firehose::Holds
   include BlacklightAdvancedSearch::AdvancedSearchFields
   include UVA::ArticlesHelper
   
@@ -110,7 +110,7 @@ class CatalogController < ApplicationController
   
   # display raw results from firehose
   def firehose
-    a = Account::Availability.find(@document)
+    a = Firehose::Availability.find(@document)
     respond_to do |format|
       format.xml  {render :xml => a.to_xml}
     end
@@ -227,7 +227,7 @@ class CatalogController < ApplicationController
   
   # sets the availability for the document
   def set_document_availability
-    @document.availability = Account::Availability.find(@document)
+    @document.availability = Firehose::Availability.find(@document)
   end
   
   # gets cover images for featured documents
