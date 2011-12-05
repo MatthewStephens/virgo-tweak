@@ -4,6 +4,7 @@ class AccountRequestsController < ApplicationController
   include Firehose::Patron
   include Firehose::Holds
   include Firehose::Checkouts
+  include Firehose::Common
   include Blacklight::SolrHelper
   include UVA::SolrHelper
   
