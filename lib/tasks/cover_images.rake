@@ -2,7 +2,7 @@ namespace :cover_images do
   
   task :harvest, :do_solr_updates, :date_string, :needs => :environment do |t, args|
      args.with_defaults(:do_solr_updates => false, :date_string => Date.today.strftime('%Y%m%d'))
-     UVA::DocumentImageLoader.new(args[:do_solr_updates], args[:date_string])
+     CoverImage::Loader.new(args[:do_solr_updates], args[:date_string])
    end
    
   # task to clean out old image requests

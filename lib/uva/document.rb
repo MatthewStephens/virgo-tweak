@@ -93,12 +93,12 @@ module UVA
     #end
     
     def image_path
-      doc_image = UVA::DocumentImage.new(self)
+      doc_image = CoverImage::Image.new(self)
       return doc_image.url_path
     end
     
     def has_image?
-      doc_image = UVA::DocumentImage.new(self)
+      doc_image = CoverImage::Image.new(self)
       return doc_image.has_image?
     end
     
