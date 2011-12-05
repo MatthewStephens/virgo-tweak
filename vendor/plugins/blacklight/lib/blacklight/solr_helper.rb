@@ -212,7 +212,6 @@ module Blacklight::SolrHelper
   # Returns a two-element array (aka duple) with first the solr response object,
   # and second an array of SolrDocuments representing the response.docs
   def get_search_results(user_params = params || {}, extra_controller_params = {})
-
     # In later versions of Rails, the #benchmark method can do timing
     # better for us. 
     bench_start = Time.now
@@ -289,7 +288,7 @@ module Blacklight::SolrHelper
     # override any field-specific default in the solr request handler. 
     solr_params[:"f.#{facet_field}.facet.limit"] = 
       if solr_params["facet.limit"] 
-        solr_params["facet.limit"] + 1
+        solr_params["facet.limit"].to_i + 1
       elsif respond_to?(:facet_list_limit)
         facet_list_limit.to_s.to_i + 1
       else

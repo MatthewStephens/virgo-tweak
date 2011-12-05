@@ -6,6 +6,7 @@ class AccountRequestsController < ApplicationController
   include Account::Checkouts
   include Account::Common
   include Blacklight::SolrHelper
+  include UVA::SolrHelper
   
   before_filter :solr_lookup, :only=>[:start_hold, :create_hold, :renew]
   before_filter :verify_account

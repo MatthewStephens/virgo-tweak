@@ -3,6 +3,7 @@
 class FolderController < ApplicationController
   
   include UVA::ArticlesHelper
+  include UVA::SolrHelper
   
   before_filter :resolve_sort, :only=>:index
   before_filter :articles, :only=>[:index, :csv]

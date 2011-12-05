@@ -89,5 +89,17 @@ module UVA::ScopeHelper
     return if sort_key.blank?
     Blacklight.config[:sort_fields][sort_key][1] rescue return
   end
+  
+  # adds the value and/or field to params[:f]
+  def add_facet_param(field, value, my_params = params)
+    included = my_params[:f][field].include?(value) ? true : false rescue false
+    p = my_params.dup.symbolize_keys!
+    unless included
+      p[:f]||={}
+      p[:f][field]||=[]
+      p[:f][field].push(value)
+    end
+    p
+  end
 
 end

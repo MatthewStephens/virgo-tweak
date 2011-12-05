@@ -4,6 +4,7 @@ class CatalogController < ApplicationController
   
   include UVA::Document
   include UVA::Fedora
+  include UVA::SolrHelper
   include Account::Holds
   include BlacklightAdvancedSearch::AdvancedSearchFields
   include UVA::ArticlesHelper

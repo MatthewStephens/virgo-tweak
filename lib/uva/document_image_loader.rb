@@ -1,6 +1,7 @@
 module UVA
   class DocumentImageLoader
     include Blacklight::SolrHelper
+    include UVA::SolrHelper
 
     def initialize(do_solr_updates, date_string)
       do_solr_updates ? docs = solr_add_docs(date_string) : docs = hourly_updates

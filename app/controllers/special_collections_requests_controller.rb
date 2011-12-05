@@ -4,6 +4,7 @@
 class SpecialCollectionsRequestsController < ApplicationController
 
   include Blacklight::SolrHelper
+  include UVA::SolrHelper
 
   before_filter :verify_admin, :except => [:new, :create, :start, :non_uva]
   before_filter :bypass_login, :only => [:start]

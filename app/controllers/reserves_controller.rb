@@ -3,6 +3,7 @@ class ReservesController < ApplicationController
   include Account::Reserves
   include Account::Common
   include Blacklight::SolrHelper
+  include UVA::SolrHelper
   
   def index
     if params[:computing_id]
