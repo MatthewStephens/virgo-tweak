@@ -1,4 +1,4 @@
-module Blacklight::Utils
+module UVA::Utils
   
   class << self 
     
