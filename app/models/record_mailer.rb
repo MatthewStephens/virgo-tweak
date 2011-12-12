@@ -1,4 +1,5 @@
-require_dependency 'vendor/plugins/blacklight/app/models/record_mailer.rb'
+require "#{Blacklight.models_dir}/record_mailer"
+
 class RecordMailer < ActionMailer::Base
   
   helper :application
