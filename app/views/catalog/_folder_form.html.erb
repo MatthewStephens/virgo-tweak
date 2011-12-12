@@ -1,5 +1,5 @@
 <div class="folder_container">
-<% form_tag("/folder", :name => "folder#{document[:id]}", :class => 'addFolderForm') do -%>
+<%= form_tag("/folder", :name => "folder#{document[:id]}", :class => 'addFolderForm') do -%>
 	<% if document.doc_type == :article %>
 		<%= hidden_field_tag(:article_id, h(document.id), :id => "id#{document.id}") %>
   <% else %>
