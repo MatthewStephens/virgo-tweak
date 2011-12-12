@@ -1,12 +1,14 @@
-require_dependency 'vendor/plugins/blacklight/app/helpers/application_helper.rb'
 require 'fastercsv'
+require 'lib/uva/fedora'
+require 'lib/uva/scope_helper'
+require 'uva/advanced_search/advanced_search_fields'
 
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
    
   ############# local methods - not included in the Blacklight plugin (see overrides afterwards)
   include UVA::Fedora  
-  include BlacklightAdvancedSearch::AdvancedSearchFields
+  include UVA::AdvancedSearch::AdvancedSearchFields
   include UVA::ScopeHelper
 
   
@@ -33,14 +35,14 @@ module ApplicationHelper
   # a <span> within the <a href> tags in order for the ajax loading to work correctly
   #
   def link_to_document_from_cover(doc, opts={:span => "", :label=>Blacklight.config[:index][:show_link].to_sym, :counter => nil, :bookmarks_view => false})
-    span_open = "<span class=\"#{opts[:span]}\" title=\"#{doc[:id]}\">\n"
-    span_close = "</span>\n"
-    val = link_to_document(doc, opts={:label=>Blacklight.config[:index][:show_link].to_sym, :counter => opts[:counter], :bookmarks_view => opts[:bookmarks_view]})
-    val.insert(val.index(">") + 1, span_open)
+    #span_open = "<span class=\"#{opts[:span]}\" title=\"#{doc[:id]}\">\n"
+    #span_close = "</span>\n"
+    #val = link_to_document(doc, opts={:label=>Blacklight.config[:index][:show_link].to_sym, :counter => opts[:counter], :bookmarks_view => opts[:bookmarks_view]})
+    #val.insert(val.index(">") + 1, span_open)
     # unforunately, the :plugin setting doesn't work when referencing an image
     # in the /javascript path, so a hardcoded path like this will have to do for now
-    val.insert(val.rindex("<"), (image_tag javascript_path('ext-2.2/resources/images/default/shared/blue-loading.gif'), :class=>'ajaxLoader', :width=>'16', :height=>'16', :alt => 'Loading') + span_close)
-    val 
+    #val.insert(val.rindex("<"), (image_tag javascript_path('ext-2.2/resources/images/default/shared/blue-loading.gif'), :class=>'ajaxLoader', :width=>'16', :height=>'16', :alt => 'Loading') + span_close.html_safe)
+    #val
   end
    
   # gets the location for a document, or "Multiple Locations" if there is more than 1
@@ -265,9 +267,9 @@ module ApplicationHelper
       else   
         label = parts[1]||online_access_verb(document) + " online"
       end
-      out += link_to(label, url, :target => '_blank') + separator
+      out += link_to(label, url, :target => '_blank') + separator.html_safe
     end
-    out
+    out.html_safe
   end
       
   # returns the list of facets from the config/initializers file
@@ -389,7 +391,7 @@ module ApplicationHelper
 	  dl_entries.gsub!(/(<dd>)<author_link>([^<]*)<\/author_link>(<\/dd>)/) {|match| $1 + link_to($2, catalog_index_path({:focus=>'author', :q=>$2})) + $3}
 	  dl_entries.gsub!(/(<dt>)<titlecase>([^<]*)<\/titlecase>(<\/dt>)/) {|match| $1 + $2.titlecase + $3}
 	  # Return HTML string
-	  return dl_entries
+	  return dl_entries.html_safe
   end
 
   # Returns a string containing the title suitable for display as the heading for the item
@@ -440,7 +442,7 @@ module ApplicationHelper
   def special_collections_request_link(document, limit=0)
     if display_special_collections_request_link?(document.availability) && (limit == 0 or document.availability.holdings.size > limit)
       link = link_to "&rarr; Request this Item &larr;", start_special_collections_request_path(@document[:id])
-      return "<div class=\"specialCollectionsRequestLink\">#{link}</div>"
+      return "<div class=\"specialCollectionsRequestLink\">#{link}</div>".html_safe
     end
   end
   
@@ -454,10 +456,10 @@ module ApplicationHelper
       link2 = ''
       # only show Ivy link if there are Ivy holdings
       if display_ivy_link?(document)
-        link2 = link_to_ilink_record(document, 'Request Item from Ivy&nbsp;&nbsp;&middot;&nbsp;&nbsp;', 'recall')
+        link2 = link_to_ilink_record(document, 'Request Item from Ivy&nbsp;&nbsp;&middot;&nbsp;&nbsp;'.html_safe, 'recall')
       end
       link3 = link_to_leo(document, 'Request LEO delivery (faculty/SCPS)', 'recall')
-      return "<div class=\"recallAndLeo\">#{link1}#{link2}#{link3}#{sas_only_text(document)}</div>"
+      return "<div class=\"recallAndLeo\">#{link1}#{link2}#{link3}#{sas_only_text(document)}</div>".html_safe
     end
   end
   
@@ -585,7 +587,7 @@ module ApplicationHelper
 
   # remove a populated advanced search field
   def remove_advanced_search_field(key, source_params=params)
-    p = source_params.dup.symbolize_keys!
+    p = source_params.dup
     # need to dup the facet values too,
     # if the values aren't dup'd, then the values
     # from the session will get remove in the show view...
@@ -812,7 +814,7 @@ module ApplicationHelper
     else
       raise 'Invalid label argument'
     end
-    link_to_with_data(label, catalog_path(doc[:id]), {:method => :put, :data => {:counter => opts[:counter], :bookmarks_view => opts[:bookmarks_view]}})
+    link_to_with_data(label, catalog_path(doc[:id]), {:method => :put, :data => {:counter => opts[:counter], :bookmarks_view => opts[:bookmarks_view]}}).html_safe
   end
 
   # overriding from the Blacklight plugin so that we can switch facets depending on the portal
@@ -843,9 +845,9 @@ module ApplicationHelper
      (collection.empty?? 'entry' : collection.first.class.name.underscore.sub('_', ' '))
   
     case collection.size
-      when 0; "<span class='no-items'>No #{entry_name.pluralize} found. Need help? <a class=\"no-items-ask\" href=\"http://www2.lib.virginia.edu/askalibrarian\">Ask a librarian</a>.</span>"
-      when 1; "<strong>1</strong> result #{combined_sort}"
-      else;   "<strong>#{total_num}</strong> results #{combined_sort}"
+      when 0; "<span class='no-items'>No #{entry_name.pluralize} found. Need help? <a class=\"no-items-ask\" href=\"http://www2.lib.virginia.edu/askalibrarian\">Ask a librarian</a>.</span>".html_safe
+      when 1; "<strong>1</strong> result #{combined_sort}".html_safe
+      else;   "<strong>#{total_num}</strong> results #{combined_sort}".html_safe
     end
   end
 
@@ -1030,7 +1032,7 @@ module ApplicationHelper
     else
       parts = [all_label, all_link, articles_label, articles_link, music_label, music_link, video_label, video_link]
     end
-    "<span class=\"search-toggle-label\">Switch to:</span> #{link_to parts[0] + ' Results', parts[1], :class => parts[0].downcase.gsub(/ /,'').gsub(/\+/,'-') + '-search'} <span class=\"divider\">|</span>#{link_to parts[2] + ' Results', parts[3], :class => parts[2].downcase + '-search'} <span class=\"divider\">|</span> #{link_to parts[4] + ' Results', parts[5], :class => parts[4].downcase + '-search'} <span class=\"divider\">|</span> #{link_to parts[6] + ' Results', parts[7], :class => parts[6].downcase + '-search'}"
+    "<span class=\"search-toggle-label\">Switch to:</span> #{link_to parts[0] + ' Results', parts[1], :class => parts[0].downcase.gsub(/ /,'').gsub(/\+/,'-') + '-search'} <span class=\"divider\">|</span>#{link_to parts[2] + ' Results', parts[3], :class => parts[2].downcase + '-search'} <span class=\"divider\">|</span> #{link_to parts[4] + ' Results', parts[5], :class => parts[4].downcase + '-search'} <span class=\"divider\">|</span> #{link_to parts[6] + ' Results', parts[7], :class => parts[6].downcase + '-search'}".html_safe
   end
   
   # presents apprpriate links for changing search scope
@@ -1049,16 +1051,16 @@ module ApplicationHelper
     else
       parts = [all_label, all_link, articles_label, articles_link]
     end
-    "<li>#{link_to( 'Search ' + parts[0], parts[1] )}</li><li>#{link_to( 'Search ' + parts[2], parts[3] )}</li><li>#{link_to "Start&nbsp;over", catalog_index_path(:portal => session[:search][:portal]||"all")}</li>"
+    "<li>#{link_to( 'Search ' + parts[0], parts[1] )}</li><li>#{link_to( 'Search ' + parts[2], parts[3] )}</li><li>#{link_to "Start&nbsp;over".html_safe, catalog_index_path(:portal => session[:search][:portal]||"all")}</li>".html_safe
   end
   
   # catalog items and articles paginate differently
   def pagination_links
-  	if params[:controller] == 'articles'
-  		will_paginate @response, :separator=>''
-  	else
-  	  will_paginate @response.docs, :separator=>''
-  	end
+  	#if params[:controller] == 'articles'
+  	#	will_paginate @response, :separator=>''
+  	#else
+  	#  will_paginate @response.docs, :separator=>''
+  	#end
   end
 
   # used on combined view to view more results
