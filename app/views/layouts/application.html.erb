@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--[if lt IE 7 ]> <html class="no-js ie6"> <![endif]--> 
 <!--[if IE 7 ]>    <html class="no-js ie7"> <![endif]--> 
 <!--[if IE 8 ]>    <html class="no-js ie8"> <![endif]--> 
@@ -63,7 +63,7 @@
       <% end %>
       
       <aside id="sidebar" class="grid_6 alpha omega">
-        <%= sidebar_items.join('') %>
+        <%= sidebar_items.join('').html_safe %>
       </aside>
   
       <article id="content" role="main" class="grid_18 alpha omega">       
