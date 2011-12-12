@@ -1,12 +1,15 @@
 # Catalog controller base class is included in the Blacklight plugin.  Overriding all sorts of methods for
 # custom behavior.  Once folder logic is included in the plugin, we can remove several methods.
+require 'lib/uva/fedora'
+require 'lib/firehose/holds'
+require 'lib/firehose/availability'
+require 'lib/uva/advanced_search/advanced_search_fields'
+require 'lib/uva/articles_helper'
 class CatalogController < ApplicationController
-  
-  include UVA::Document
   include UVA::Fedora
-  include UVA::SolrHelper
+  include Blacklight::Catalog
   include Firehose::Holds
-  include BlacklightAdvancedSearch::AdvancedSearchFields
+  include UVA::AdvancedSearch::AdvancedSearchFields
   include UVA::ArticlesHelper
   
   # the featured_documents are used when there are no queries or filters applied
@@ -17,29 +20,29 @@ class CatalogController < ApplicationController
   before_filter :adjust_for_full_view, :only=>[:index, :show]
   before_filter :resolve_sort, :only=>:index
   before_filter :load_featured_documents, :only=>:index  
-  before_filter :add_lean_query_type, :only=>[:image_load, :image, :brief_status]
+  before_filter :add_lean_query_type, :only=>[:image_load, :image, :brief_availability]
   before_filter :adjust_for_bookmarks_view, :only=>:update
   before_filter :recaptcha_check, :only=>:send_email_record
   before_filter :filters, :only =>:show
   before_filter :articles, :only=>[:email, :send_email_record, :citation]
-  before_filter :set_solr_document, :only=>[:status, :brief_status, :firehose, :image_load, :image, :page_turner, :fedora_metadata]
-  before_filter :set_document_availability, :only=>[:status, :brief_status]
+  before_filter :set_solr_document, :only=>[:availability, :brief_availability, :firehose, :image_load, :image, :page_turner, :fedora_metadata]
+  before_filter :set_document_availability, :only=>[:availability, :brief_availability]
   
   # when a request for /catalog/HIDDEN_SOLR_ID is made, this method is executed...
   rescue_from HiddenSolrID, :with => lambda {
     flash[:notice] = "Sorry, you seem to have encountered an error."
-    redirect_to catalog_index_path
+    redirect_to catalog_index_path and return
   }
 
   # when a path is requested that should result in a redirect, this method is executed  
-  rescue_from RedirectNeeded do |redirect| 
-    redirect_to redirect.message
+  rescue_from UVA::RedirectNeeded do |redirect| 
+    redirect_to redirect.message and return
   end
   
   # too many of these are showing up in ExceptionNotification emails, ususally generated
   # by a bot crawling the site.  This is here to keep the email volume lower.
   rescue_from ActionController::InvalidAuthenticityToken, :with => lambda {
-    redirect_to catalog_index_path
+    redirect_to catalog_index_path and return
   }
   
   # When RSolr::RequestError is raised, this block is executed.
@@ -49,13 +52,13 @@ class CatalogController < ApplicationController
     # when solr (RSolr) throws an error, this method is executed.
     flash[:notice] = "Sorry, I don't understand your search."
     notify_about_exception(error)
-    redirect_to catalog_index_path
+    redirect_to catalog_index_path and return
   end
   
   # some googlebot keeps doing an OPTIONS request on status, and status doesn't allow that.
   # trying to reduce exception emails
   rescue_from ActionController::MethodNotAllowed, :with => lambda {
-    redirect_to catalog_index_path
+    redirect_to catalog_index_path and return
   }
   
   # get search results from the solr index
@@ -93,7 +96,8 @@ class CatalogController < ApplicationController
   end
 
   # get item availability status
-  def status
+  def availability
+    Rails.logger.info("molly, in status")
     respond_to do |format|
       format.html
       format.json {render :layout=>false}
@@ -101,7 +105,7 @@ class CatalogController < ApplicationController
   end
   
   # just get the availability info independently of the docume
-  def brief_status
+  def brief_availability
     respond_to do |format|
       format.html {render :layout=>false}
       format.json {render :layout=>false}
@@ -128,7 +132,7 @@ class CatalogController < ApplicationController
     respond_to do |format|
       format.jpg {
         @document.extend UVA::Document
-        redirect_to @document.image_path
+        redirect_to @document.image_path and return
       }
     end
   end
@@ -161,9 +165,9 @@ class CatalogController < ApplicationController
       end
       RecordMailer.deliver(email) unless flash[:error]
       if @articles.size == 0 && @documents.size == 1
-        redirect_to catalog_path(@documents.first.id)
+        redirect_to catalog_path(@documents.first.id) and return
       else
-        redirect_to folder_index_path
+        redirect_to folder_index_path and return
       end
     else
       flash[:error] = "You must enter a recipient in order to send this message"
@@ -245,16 +249,13 @@ class CatalogController < ApplicationController
       opts={
         :page=>1,
         :per_page=>200, # load plenty to match up with the ids_for_docs_with_cached_covers output
-        :solr=>{
-          :fl=>%W(id format_facet library_facet),
-          :sort=>[{:date_received_facet=>:descending}]
-        },
+        :fl=>%W(id format_facet library_facet),
+        :sort=>"date_received_facet desc",
         :phrase_filters=>phrase_filters,
         :qt => 'search'
       }
       featured_response, document_list = get_search_results(opts)
-      @featured_documents = featured_response.docs.select do |doc|
-        doc.extend UVA::Document
+      @featured_documents = document_list.select do |doc|
         doc.has_image?
       end
         
@@ -354,7 +355,7 @@ class CatalogController < ApplicationController
   # provides cutom error message for when a bad id is selected
   def invalid_solr_id_error
     flash[:notice] = "Sorry, you seem to have encountered an error."
-    redirect_to catalog_index_path
+    redirect_to catalog_index_path and return
   end
   
   # grabs the facet filters from the session
@@ -384,9 +385,19 @@ class CatalogController < ApplicationController
       my_params[field] = params[:q]
       my_params[:search_field] = 'advanced'
       my_params.delete(:q)
-      redirect_to catalog_index_path(my_params)
+      redirect_to catalog_index_path(my_params) and return
     end
   end
+  
+  # Returns a list of Searches from the ids in the user's history.
+  def searches_from_history
+    session[:history].blank? ? [] : Search.find(session[:history]) rescue []
+  end
+  
+  def extra_head_content
+    return ""
+  end
+  
   
   private
   

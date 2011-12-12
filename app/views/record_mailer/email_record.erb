@@ -26,7 +26,7 @@ Full View: <%= document.value_for :url_display %>
 <% else -%>
 <%= document.value_for(:title_display, ";", "")  %> <%= document.value_for(:subtitle_display, ";", "") %> 
 <%= document.marc_display.responsibility_statement unless (document.to_marc.nil? or document.marc_display.responsibility_statement.nil?) %>
-<%= render :partial => 'catalog/status', :locals => { :document => document }  %>
+<%= render :partial => 'catalog/availability', :locals => { :document => document }  %>
 <% end -%><% # end of case %>
 <% end -%><% #end of else-fullrecord %>
 
