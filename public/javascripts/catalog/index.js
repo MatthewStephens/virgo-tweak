@@ -46,7 +46,7 @@ $(document).ready(function() {
 	$('.single-copy').each(function(index) {
 		var item_availability = $(this);
 		var item_id = item_availability.parent().attr('id').split('availability_')[1];
-		item_availability.load('/catalog/' + item_id + '/brief_status');		
+		item_availability.load('/catalog/' + item_id + '/brief_availability');		
 	});
 
 	
