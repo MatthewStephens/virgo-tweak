@@ -31,7 +31,7 @@
             <td class="title"><%= link_to(title, catalog_path("u#{checkout.catalog_item.key}")) %></td>
             <td class="author"><%= checkout.catalog_item.authors %></td>
             <td class="item-status"><%= "overdue" if checkout.overdue? %> <%= "recalled" if checkout.recalled? %></td>
-            <td class="date<%= " account-notice-container" if checkout.overdue? or checkout.recalled? %>"><%= checkout.date_due_f %><%= "<span class='account-notice overdue'>overdue</span>" if checkout.overdue? %><%= "<span class='account-notice recalled'>recalled</span>" if checkout.recalled? %></td>
+            <td class="date<%= " account-notice-container" if checkout.overdue? or checkout.recalled? %>"><%= checkout.date_due_f %><%= "<span class='account-notice overdue'>overdue</span>".html_safe if checkout.overdue? %><%= "<span class='account-notice recalled'>recalled</span>".html_safe if checkout.recalled? %></td>
             <td class="location"><%= holding.library.name %></td>
             <td class="call-number"><%= holding.call_number %></td>
             <td><%= link_to("Renew", renew_path(checkout.catalog_item.key, checkout.key)) if checkout.renewable? %></td>
