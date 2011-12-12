@@ -11,11 +11,12 @@
   	  <% else %>
   	    <% link = catalog_index_path %>
   	  <% end %>
-  			<% form_tag link, :method=>:get, :class=>'sort', :id => "sort_form" do %>
-  			  <%=label_tag(:sort_key, "Sort by " + select_tag(:sort_key, options_for_select(sort_fields, h(params[:sort_key])), :onchange => 'this.form.submit()')	  
-  			  )%>
-  	      	<%= search_as_hidden_fields(:omit_keys => [:page, :sort_key]) %>			
-  	      	<noscript><%= submit_tag 'sort results' %></noscript>
+				<%= form_tag link, :method => :get, :class => 'sort', :id => 'sort_form' do %>
+					<%= label_tag(:sort_key) do %>
+						Sort by <%= select_tag(:sort_key, options_for_select(sort_fields, h(params[:sort_key])), :onchange => 'this.form.submit()') %>
+					<% end %>
+      		<%= search_as_hidden_fields(:omit_keys => [:page, :sort_key]) %>			
+  	      <noscript><%= submit_tag 'sort results' %></noscript>
   			<% end %>
   		<% end %>
   	</div>
@@ -29,9 +30,11 @@
         <% else %>
           <% link = catalog_index_path %>
         <% end %>
-    		<% form_tag link, :method=>:get, :class=>'per_page' do %>
-    			<%= label_tag(:per_page, "Show " + select_tag(:per_page, options_for_select(['20', '50', '100'], h(params[:per_page])), :title => "Number of results to display per page", :onchange => 'this.form.submit()') + " per page") %>
-    	    	<%= search_as_hidden_fields(:omit_keys => [:page, :per_page]) %>
+    		<%= form_tag link, :method=>:get, :class=>'per_page' do %>
+    			<%= label_tag(:per_page) do %>
+						Show <%= select_tag(:per_page, options_for_select(['20', '50', '100'], h(params[:per_page])), :title => "Number of results to display per page", :onchange => 'this.form.submit()') %> per page
+					<% end %>
+    	    <%= search_as_hidden_fields(:omit_keys => [:page, :per_page]) %>
      			<noscript><%= submit_tag 'update' %></noscript>
     		<% end %>
     	<% end %>
