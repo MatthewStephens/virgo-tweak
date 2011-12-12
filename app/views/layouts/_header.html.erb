@@ -29,7 +29,7 @@
           <% if current_user %>
             <li class="first"><%= link_to "My Account (" + current_user.login + ")", account_index_path %></li>
             <% if session[:notice_count] and session[:notice_count] > 0 %>
-              <li class="notice-badge"><%= link_to(session[:notice_count], notices_account_path) %></li>
+              <li class="notice-badge"><%= link_to(session[:notice_count], notices_account_index_path) %></li>
             <% end %>
             <li><%= link_to "Sign out", logout_path %></li>
           <% else %>
