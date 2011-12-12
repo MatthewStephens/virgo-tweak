@@ -1,98 +1,75 @@
-ActionController::Routing::Routes.draw do |map|
+Rails.application.routes.draw do 
+
+  Blacklight.add_routes(self)
   
-   Blacklight::Routes.build map
-
-  # The priority is based upon order of creation: first created -> highest priority.
-
-  # Sample of regular route:
-  #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   map.resources :products
-
-  # Sample resource route with options:
-  #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
-
-  # Sample resource route with sub-resources:
-  #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
+  root :to => "catalog#index"
   
-  # Sample resource route with more complex sub-resources
-  #   map.resources :products do |products|
-  #     products.resources :comments
-  #     products.resources :sales, :collection => { :recent => :get }
-  #   end
+  match 'catalog/:id/image', :to => 'catalog#image', :as => 'image' 
+  match 'catalog/:id/brief_availability', :to => 'catalog#brief_availability', :as => 'brief_availability'
+  match 'catalog/:id/image_load', :to => 'catalog#image_load', :as => 'image_load'
+  match 'catalog/:id/firehose', :to => 'catalog#firehose', :as => 'firehose'
+  match 'catalog/:id/page_turner', :to => 'catalog#page_turner', :as => 'page_turner'
+  match 'fedora_metadata/:id/:pid.:format', :to => 'catalog#fedora_metadata', :as => 'fedora_metadata'
+  match 'folder/refworks_texts', :to => 'folder#refworks_texts', :as => 'refworks_texts'
+  match 'folder/article_destroy', :to => 'folder#article_destroy', :as => 'folder_article_destroy'
+  match 'folder/csv', :to => 'folder#csv', :as => 'csv'
+  match 'folder/citation', :to => 'folder#citation', :as => 'citation'
+  match 'folder/email', :to => 'folder#email', :as => 'email'
+  match 'folder/endnote', :to => 'folder#endnote', :as => 'endnote'
+  match 'advanced', :to => 'advanced#index', :as => 'advanced'
+  match 'login', :to => 'user_sessions#new', :as => 'login'
+  match 'logout', :to => 'user_sessions#destroy', :as => 'logout'
+  match 'logged_out', :to => 'user_sessions#logged_out', :as => 'logged_out'
+  match 'patron_login', :to => 'user_sessions#patron_login', :as => 'patron_login'
+  match 'do_patron_login', :to => 'user_sessions#do_patron_login', :as => 'do_patron_login'
+  match 'account_requests/:id/renew/:checkout_key', :to => 'account_requests#renew', :as => 'renew'
+  match 'account_requests/new_all', :to => 'account_requests#renew_all', :as => 'renew_all'
+  match 'reserves/:computing_id/:key', :to => 'reserves#course', :as => 'reserve_course'
 
-  # Sample resource route within a namespace:
-  #   map.namespace :admin do |admin|
-  #     # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
-  #     admin.resources :products
-  #   end
+  resources :account, :only => [:index] do
+    member do
+      get :not_found
+    end
+    collection do
+      get :checkouts
+      get :holds
+      get :reserves
+      get :notices
+      get :select
+    end
+  end
 
-  # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  # map.root :controller => "welcome"
+  resources :maps
+  resources :maps_users
+  resources :call_number_ranges
 
-  # See how all your routes lay out with "rake routes"
+  resources :special_collections_requests do
+    member do
+      get :start
+      get :non_uva
+    end
+  end
 
-  # Install the default routes as the lowest priority.
-  # Note: These default routes make all actions in every controller accessible via GET requests. You should
-  # consider removing the them or commenting them out if you're using named routes and resources.
-  #map.connect ':controller/:action/:id'
-  #map.connect ':controller/:action/:id.:format'
+  resources :articles, :only => [:index] do
+    collection do
+      get :facet
+      get :advanced
+    end
+  end
 
-  map.image 'catalog/:id/image', :controller => 'catalog', :action => 'image'
-  map.brief_status 'catalog/:id/brief_status', :controller => 'catalog', :action => 'brief_status'
-  map.image_load 'catalog/:id/image_load', :controller => 'catalog', :action => 'image_load'
-  map.firehose 'catalog/:id/firehose', :controller => 'catalog', :action => 'firehose'
-  map.page_turner 'catalog/:id/page_turner', :controller => 'catalog', :action => 'page_turner'
-  map.fedora_metadata 'fedora_metadata/:id/:pid.:format', :controller => 'catalog', :action => 'fedora_metadata'
-  map.refworks_texts 'folder/refworks_texts', :controller => 'folder', :action => 'refworks_texts'
-  map.folder_article_destroy 'folder/article_destroy', :controller => 'folder', :action => 'article_destroy'
-  map.csv 'folder/csv', :controller => 'folder', :action => 'csv'
+  resources :account_reqeusts, :only => [] do
+    member do
+      get :start_hold
+      post :create_hold
+    end
+  end
+
+  resources :reserves, :only => [:index]
+
+  resources :folder, :only => [:index, :create, :update, :destroy] do
+    collection do
+      delete :clear
+    end
+  end
   
-  map.citation 'folder/citation', :controller => 'folder', :action => 'citation'
-  map.email 'folder/email', :controller => 'folder', :action => 'email'
-  map.endnote 'folder/endnote', :controller => 'folder', :action => 'endnote'
-
-  map.advanced 'advanced', :controller => 'advanced', :action => 'index'
-
-  map.logged_out 'logged_out', :controller => 'user_sessions', :action => 'logged_out'
-
-  map.patron_login 'patron_login', :controller => 'user_sessions', :action => 'patron_login'
-  map.do_patron_login 'do_patron_login', :controller => 'user_sessions', :action => 'do_patron_login'
-
-  map.resources(:account,
-      :only => [:index],
-      # /resources/checkouts
-      :collection => {:checkouts => :get, :holds => :get, :reserves => :get, :notices => :get, :select => :get},
-      :member => {:not_found => :get}
-  )
-  map.resources :maps
-  map.resources :maps_users
-  map.resources :call_number_ranges
-  map.resources(:special_collections_requests,
-      :member=>{:start=>:get, :non_uva=>:get}
-  )
-
-  map.resources(:articles,
-                  :only => [:index],
-                  :collection =>{:facet=>:get, :advanced=>:get})
-
-  map.catalog_facet "catalog/facet/:id.:format", :controller=>'catalog', :action=>'facet'
-
-  map.renew 'account_requests/:id/renew/:checkout_key', :controller => 'account_requests', :action => 'renew'
-  map.renew_all 'account_requests/renew_all', :controller => 'account_requests', :action => 'renew_all'
-  map.resources(:account_requests, 
-                :only => [],
-                :member=>{:start_hold=>:get, :create_hold=>:post} )
-
-  map.resources(:reserves, :only=>[:index])
-  map.reserve_course 'reserves/:computing_id/:key', :controller => 'reserves', :action => 'course'
-  
-  map.resources :folder, :only => [:index, :create, :update, :destroy], :collection => {:clear => :delete }
-
 end
