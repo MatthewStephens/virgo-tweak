@@ -12,9 +12,9 @@
     <div class="limitsMenu">
     <div class="side_bar_heading facet">
     <% if params[:controller] == 'articles' %>
-	    <%= link_to facet_field_labels[solr_fname], facet_articles_path(:id => display_facet.name, :params => params_for_facet_values.merge("facet.limit" => 500, "width" => 490)), :class=>'more_facets_link' %>
+	    <%= link_to facet_field_labels[solr_fname], facet_articles_path(:id => display_facet.name) + "?" + params_for_facet_values.merge("facet.limit" => 500, "width" => 490).to_query, :class=>'more_facets_link' %>
     <% else %>
-		  <%= link_to facet_field_labels[solr_fname], catalog_facet_path(:id => display_facet.name, :params => params_for_facet_values.merge("facet.limit" => 500, "width" => 490)), :class=>'more_facets_link'  %>
+		  <%= link_to facet_field_labels[solr_fname], catalog_facet_path(:id => display_facet.name) + "?" + params_for_facet_values.merge("facet.limit" => 500, "width" => 490).to_query, :class=>'more_facets_link'  %>
 		<% end %>
 		</div>
     <div class="side_bar_content">
