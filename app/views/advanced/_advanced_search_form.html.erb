@@ -8,13 +8,7 @@
   </div>
 <% end %>
       
-<%= render 'advanced/advanced_search_fields' %>      
-
-
-<% unless (search_context_str = render_search_to_s( advanced_search_context)).blank? %>
-  <h4>Within search</h4>
-  <%= search_context_str %>
-<% end %>
+<%= render 'advanced/advanced_search_fields' %>
 
 <div class="adv_search_sort">
   <%= label_tag(:sort_key, "Sort results by", :class => "adv_sort_label") %> 
