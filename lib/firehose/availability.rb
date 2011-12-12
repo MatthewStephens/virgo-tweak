@@ -1,5 +1,6 @@
 require 'happymapper'
 require 'open-uri'
+require 'lib/firehose/common'
 
 class Firehose::Availability
   
