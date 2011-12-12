@@ -3,8 +3,7 @@
 # request queue.
 class SpecialCollectionsRequestsController < ApplicationController
 
-  include Blacklight::SolrHelper
-  include UVA::SolrHelper
+  include UVA::SolrHelperOverride
 
   before_filter :verify_admin, :except => [:new, :create, :start, :non_uva]
   before_filter :bypass_login, :only => [:start]

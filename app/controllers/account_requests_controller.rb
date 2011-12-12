@@ -5,8 +5,7 @@ class AccountRequestsController < ApplicationController
   include Firehose::Holds
   include Firehose::Checkouts
   include Firehose::Common
-  include Blacklight::SolrHelper
-  include UVA::SolrHelper
+  include UVA::SolrHelperOverride
   
   before_filter :solr_lookup, :only=>[:start_hold, :create_hold, :renew]
   before_filter :verify_account
@@ -15,7 +14,7 @@ class AccountRequestsController < ApplicationController
   
   rescue_from RenewError do |error| 
     flash[:notice] = "Sorry, you seem to have encountered an error: #{error}"
-    redirect_to checkouts_account_path
+    redirect_to checkouts_account_index_path
   end
   
   rescue_from HoldError do |error| 
@@ -37,14 +36,14 @@ class AccountRequestsController < ApplicationController
     do_renew_all(current_user.login)
     flash[:notice] = "Items successfully renewed."
     notices_update(true)
-    redirect_to checkouts_account_path
+    redirect_to checkouts_account_index_path
   end
   
   def renew
     do_renew(current_user.login, params[:checkout_key])
     flash[:notice] = "Item successfully renewed."
     notices_update(true)
-    redirect_to checkouts_account_path
+    redirect_to checkouts_account_index_path
   end
   
   protected
@@ -59,7 +58,7 @@ class AccountRequestsController < ApplicationController
     selected = @account.checkouts.select{ |checkout| checkout.key == params[:checkout_key] }
     unless selected.size > 0
       flash[:error] = "Selected item is not eligible for renewal."
-      redirect_to checkouts_account_path
+      redirect_to checkouts_account_index_path
     end
   end
   

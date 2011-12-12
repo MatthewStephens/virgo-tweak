@@ -1,3 +1,7 @@
+require 'lib/firehose/patron'
+require 'lib/firehose/checkouts'
+require 'lib/firehose/holds'
+require 'lib/firehose/reserves'
 class AccountController < ApplicationController
 
   include Firehose::Patron

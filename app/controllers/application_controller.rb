@@ -1,11 +1,14 @@
-require_dependency 'vendor/plugins/blacklight/app/controllers/application_controller.rb'
-
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
+require 'firehose/patron'
+require 'lib/uva/solr_helper_override'
 
 class ApplicationController < ActionController::Base
+  include Blacklight::Controller
   include Firehose::Patron
+  include UVA::SolrHelperOverride
   helper :all # include all helpers, all the time
+  helper_method :user_session, :current_user, :new_user_session_path, :destroy_user_session_path
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   before_filter :notices_update
 
@@ -37,4 +40,35 @@ class ApplicationController < ActionController::Base
   
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+  
+  # The following methos are required by blacklight in order to interact with the user.
+
+  def current_user_session
+    user_session
+  end
+
+  def user_session
+    return @current_user_session if defined?(@current_user_session)
+    @current_user_session = UserSession.find
+  end
+  
+  def current_user
+    return @current_user if defined?(@current_user)
+    @current_user = user_session && user_session.record
+  end
+
+  def new_user_session_path
+    return login_path
+  end
+
+  def destroy_user_session_path
+    return logout_path
+  end
+  
+  #over-ride this one locally to change what layout BL controllers use, usually
+  #by defining it in your own application_controller.rb
+  def layout_name
+    'application'
+  end
+  
 end

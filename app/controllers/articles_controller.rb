@@ -10,7 +10,8 @@ class ArticlesController < ApplicationController
   before_filter :set_articles, :only=>[:index, :facet]
   
   def index
-      respond_to do |format|
+    Rails.logger.info("molly, articles index")
+    respond_to do |format|
       format.html { render 'catalog/index' }
       format.json { 
         params[:controller] = 'catalog'

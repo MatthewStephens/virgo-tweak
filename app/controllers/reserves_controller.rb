@@ -1,8 +1,7 @@
 class ReservesController < ApplicationController
 
   include Firehose::Reserves
-  include Blacklight::SolrHelper
-  include UVA::SolrHelper
+  include UVA::SolrHelperOverride
   
   def index
     if params[:computing_id]

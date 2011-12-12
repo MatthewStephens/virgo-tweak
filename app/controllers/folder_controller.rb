@@ -1,9 +1,12 @@
 # Once Folder controller is added to the Blacklight plugin, it should be removed from here.
 # This is the "Marked List" functionality.
+
+require "#{Blacklight.controllers_dir}/folder_controller"
+require 'lib/uva/articles_helper'
+
 class FolderController < ApplicationController
-  
   include UVA::ArticlesHelper
-  include UVA::SolrHelper
+  include UVA::SolrHelperOverride
   
   before_filter :resolve_sort, :only=>:index
   before_filter :articles, :only=>[:index, :csv]
