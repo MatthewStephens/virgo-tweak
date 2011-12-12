@@ -84,13 +84,13 @@
 		</span>
 	<% end %>
 
-	<%=link_to "Start&nbsp;over", catalog_index_path(:portal => session[:search][:portal]||"all"), :id=>"startOverLink" %>
+	<%=link_to "Start&nbsp;over".html_safe, catalog_index_path(:portal => session[:search][:portal]||"all"), :id=>"startOverLink" %>
 	
 	
 	<% unless params[:catalog_select] == 'all' %>
 	
   	<% if advanced_search_case? %>
-  	  <%=link_to "Refine&nbsp;search", advanced_path(refine_search_hash), :id => "refineSearchLink" %>
+  	  <%=link_to "Refine&nbsp;search".html_safe, advanced_path(refine_search_hash), :id => "refineSearchLink" %>
   	<% end %>
 		
   	<div id="resultLine">
