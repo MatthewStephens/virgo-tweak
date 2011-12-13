@@ -1,7 +1,8 @@
 # Feedback controller base class is included in the Blacklight plugin
 # Overriding from plugin to include reCaptcha validation for feedback submission.
+require "#{Blacklight.controllers_dir}/feedback_controller"
+
 class FeedbackController < ApplicationController
-  include Blacklight::Feedback
   protected
   
   # validates the incoming params
