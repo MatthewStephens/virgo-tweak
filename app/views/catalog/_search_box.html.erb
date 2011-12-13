@@ -6,8 +6,7 @@
       <%= label_tag 'SI', 'Search VIRGO', :class => 'visuallyhidden' %>
       <%= text_field_tag('q', h(params[:q]), :class => "search_home", :id => "SI", :placeholder => "Search for books, articles, digital materials, and more.", :autofocus => "autofocus") %>
     </div>
-    <%= search_as_hidden_fields(:omit_keys => [:q, :search_field, :qt, :f, :page]) %>
-    <%= render :partial=>'catalog/hidden_filters' %>
+    <%= search_as_hidden_fields(:omit_keys => [:q, :search_field, :qt, :page]) %>
     <button id="main_search_submit" class="search_submit grid_3 omega" type="submit">Search</button>
   </div>
 
