@@ -12,7 +12,7 @@ jQuery(function(){
 		var libItemAvail=$('#physicalAvailability');
 		if(libItemAvail.length > 0){
 			var id = libItemAvail.attr('title');
-			$.get('/catalog/' + id + '/status', function(data){
+			$.get('/catalog/' + id + '/availability', function(data){
 				libItemAvail.hide();
 				libItemAvail.html(data);
 				if($('#__GBS_Button0 > a').length > 0 && $("#physicalAvailability:contains('only available to Semester At Sea')").length > 0) {
