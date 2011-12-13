@@ -1,4 +1,4 @@
-<%- BlacklightAdvancedSearch.search_field_list(params).each do |field_def| -%>
+<%- search_field_list(params).each do |field_def| -%>
 <div class="advsearch_field<%= ' range_field' if field_def[:range]  %>">
   <% if field_def[:range] %>
     <h4><%= field_def[:display_label] %></h4>

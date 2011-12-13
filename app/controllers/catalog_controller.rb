@@ -3,12 +3,14 @@
 require 'lib/uva/fedora'
 require 'lib/firehose/holds'
 require 'lib/firehose/availability'
+require 'lib/uva/advanced_search/controller'
 require 'lib/uva/advanced_search/advanced_search_fields'
 require 'lib/uva/articles_helper'
 class CatalogController < ApplicationController
   include UVA::Fedora
   include Blacklight::Catalog
   include Firehose::Holds
+  include UVA::AdvancedSearch::Controller
   include UVA::AdvancedSearch::AdvancedSearchFields
   include UVA::ArticlesHelper
   
@@ -97,7 +99,6 @@ class CatalogController < ApplicationController
 
   # get item availability status
   def availability
-    Rails.logger.info("molly, in status")
     respond_to do |format|
       format.html
       format.json {render :layout=>false}
@@ -131,7 +132,6 @@ class CatalogController < ApplicationController
   def image
     respond_to do |format|
       format.jpg {
-        @document.extend UVA::Document
         redirect_to @document.image_path and return
       }
     end

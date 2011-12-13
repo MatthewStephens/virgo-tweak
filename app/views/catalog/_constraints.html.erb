@@ -19,7 +19,7 @@
         <% populated_advanced_search_fields.each_pair do |key, value| %>
         <span class="appliedFilter">
           <span class="first">          		
-            <span class="queryName"><%= Blacklight.label_for_search_field(key) %></span>
+            <span class="queryName"><%= label_for_search_field(key) %></span>
             <span><%= h(value)%></span>
           </span>		  		  		 
           <% if params[:controller] == 'articles' %> 

@@ -1,15 +1,18 @@
 # This module gets added on to CatalogController, mainly to override
 # Blacklight::SolrHelper methods like #solr_search_params
 
+require 'lib/uva/advanced_search/advanced_query_parser'
+
 module UVA::AdvancedSearch
 
   module Controller
 
-     def self.included(base)
-        base.send :include, BlacklightAdvancedSearch::Controller
-        base.send :include, UVACustomizations
-        
-        module UVACustomizations
+    def self.included(base)
+      base.send :include, BlacklightAdvancedSearch::Controller
+      base.send :include, UVACustomizations
+    end 
+    
+    module UVACustomizations
 
       # the only reason I'm overriding this method is to add the check for @advanced_query.range_queries.length > 0
       # this method should get added into the solr_search_params_logic
@@ -25,14 +28,13 @@ module UVA::AdvancedSearch
           req_params[:f_inclusive])
           # Set this as a controller instance variable, not sure if some views/helpers depend on it. Better to leave it as a local variable
           # if not, more investigation later.       
-          @advanced_query = BlacklightAdvancedSearch::QueryParser.new(req_params, BlacklightAdvancedSearch.config )
+          @advanced_query = UVA::AdvancedSearch::QueryParser.new(req_params, BlacklightAdvancedSearch.config )
           deep_merge!(solr_parameters, @advanced_query.to_solr )
           if @advanced_query.keyword_queries.length > 0 or @advanced_query.range_queries.length > 0
             # force :qt if set
             solr_parameters[:qt] = BlacklightAdvancedSearch.config[:qt] if BlacklightAdvancedSearch.config[:qt]
             solr_parameters[:defType] = "lucene"
           end
-      
         end
       end
       

@@ -1,7 +1,5 @@
 module Blacklight::Solr::Document::MarcExport
 
-require_dependency 'vendor/plugins/blacklight/lib/blacklight/solr/document/marc_export.rb'
-
   def self.register_export_formats(document)
     document.will_export_as(:xml)
     document.will_export_as(:json)

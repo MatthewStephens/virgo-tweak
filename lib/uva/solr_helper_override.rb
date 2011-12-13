@@ -1,5 +1,3 @@
-require 'lib/uva/search_fields_override'
-
 module UVA
   
   class RedirectNeeded < RuntimeError; end
@@ -10,17 +8,14 @@ module UVA
     # set up alias method chains so that we can use the methods provided by the plugin but add behaviors
     def self.included(base)
       base.send :include, Blacklight::SolrHelper
+      base.send :include, UVACustomizations
+
       base.solr_search_params_logic << :show_only_public_records
       base.solr_search_params_logic << :add_music_portal
       base.solr_search_params_logic << :add_max_per_page
       base.solr_search_params_logic << :add_facet_limit
-      base.send :include, UVACustomizations
-      base.send :include, Blacklight::SearchFields
-      base.send :include, UVA::SearchFieldsOverride
-      base.class_eval do
-        alias_method_chain :get_solr_response_for_doc_id, :customizations
-        alias_method_chain :solr_doc_params, :customizations
-      end
+
+
     end
   
     class HiddenSolrID < RuntimeError; end
@@ -49,30 +44,28 @@ module UVA
     end
   
     module UVACustomizations
-      
-      # do what the plugin does, then wrap in UVA-ness and check to see if it's shadowed
-      def get_solr_response_for_doc_id_with_customizations(id=nil, extra_controller_params={})
-        solr_response, document = get_solr_response_for_doc_id_without_customizations(id, extra_controller_params)
-        #document.extend UVA::Document
+            
+      # overriding from plugin to test for shadowedness
+      def get_solr_response_for_doc_id(id=nil, extra_controller_params={})
+        solr_response = find solr_doc_params(id).merge(extra_controller_params)
+        raise Blacklight::Exceptions::InvalidSolrID.new if solr_response.docs.empty?
+        document = SolrDocument.new(solr_response.docs.first, solr_response)
         raise HiddenSolrID if document.hidden?
         [solr_response, document]
       end
-    
+      
       # do what the plugin does but swap out qt if it's specified
-      def solr_doc_params_with_customizations(id=nil)
-        my_params = solr_doc_params_without_customizations(id)
-        my_params[:qt] = params[:qt] unless params[:qt].blank? rescue false
-        my_params
-      end
-    
-      # wrap a solr response and document list in UVA-ness
-      def uva_document!(solr_response, document_list)
-        document_list.each{|d|d.extend UVA::Document} # all methods in lib/uva/document.rb are available now 
-        [solr_response, document_list]
+      def solr_doc_params(id=nil)
+        id ||= params[:id]
+        params[:qt].blank? ? qt = :document : qt = params[:qt]
+        # just to be consistent with the other solr param methods:
+        {
+          :qt => qt,
+          :id => id # this assumes the document request handler will map the 'id' param to the unique key field
+        }
       end
       
-      
-      
+        
       ##
       # Take the user-entered query, and put it in the solr params, 
       # including config's "search field" params for current search field. 
@@ -87,7 +80,6 @@ module UVA
         # this legacy behavior at some point. It does not seem to be currently
         # rspec'd. 
         solr_parameters[:qt] = user_parameters[:qt] if user_parameters[:qt]
-        test
         search_field_def = search_field_def_for_key(user_parameters[:search_field])
         if (search_field_def)     
           solr_parameters[:qt] = search_field_def[:qt] if search_field_def[:qt]      

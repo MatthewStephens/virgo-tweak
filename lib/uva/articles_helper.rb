@@ -1,4 +1,5 @@
 require 'happymapper'
+require 'lib/uva/scope_helper'
 
 module UVA
   
@@ -148,6 +149,7 @@ module UVA
       attr_accessor :per_page, :response, :params
     
       include HappyMapper
+      include UVA::ScopeHelper
       register_namespace 'sear', 'http://www.exlibrisgroup.com/xsd/jaguar/search'
       register_namespace 'prim', 'http://www.exlibrisgroup.com/xsd/primo/primo_nm_bib'
       tag 'JAGROOT'
@@ -226,7 +228,8 @@ module UVA
     # extract populated advanced search fields and make URL pieces
     def get_advanced_search_queries(extra_controller_params={})
       queries = []
-      BlacklightAdvancedSearch.search_field_list(extra_controller_params).each do |field_def|
+      fields = BlacklightAdvancedSearch.config[:article_search_fields].collect  {|obj| normalize_config(obj)}
+      fields.each do |field_def|
         key = field_def[:key].to_sym
         primo_key = field_def[:primo_key]
         if field_def[:range]
@@ -302,7 +305,7 @@ module UVA
       url += get_paging(extra_controller_params)
       url += get_sort(extra_controller_params)
       url += get_scope(extra_controller_params)
-      RAILS_DEFAULT_LOGGER.info("primo request url: #{url}")
+      Rails.logger.info("primo request url: #{url}")
       url
     end
   
@@ -310,7 +313,7 @@ module UVA
       url = PRIMO_URL
       url += "&query=rid,exact,#{article_id}"
       url += get_scope(extra_controller_params)
-      RAILS_DEFAULT_LOGGER.info("primo request url: #{url}")
+      Rails.logger.info("primo request url: #{url}")
       url
     end
   
@@ -335,7 +338,7 @@ module UVA
     end
   
     def get_article_search_results(extra_controller_params={})
-      RAILS_DEFAULT_LOGGER.info("primo encoded is #{URI.encode(build_articles_url(extra_controller_params)).inspect}")
+      Rails.logger.info("primo encoded is #{URI.encode(build_articles_url(extra_controller_params)).inspect}")
       uri = URI.parse(URI.encode(build_articles_url(extra_controller_params)))
       content = uri.read
       response = Response.custom_parse(content, extra_controller_params)

@@ -1,16 +1,50 @@
-require "lib/uva/digital_library_image_document"
-require "blacklight/solr/document"
-require "lib/cover_image/image"
+require 'lib/uva/digital_library_image_document'
+require 'blacklight/solr/document'
+require 'lib/cover_image/image'
 
 class SolrDocument
   
   include Blacklight::Solr::Document
+  
   attr_accessor :availability
   
-  def self.extended(base)
-    raise "This is not a solr doc - it's nil" if base.nil?
-    base.extend DigitalLibraryImageDocument if base.doc_type==:dl_image || base.doc_type==:dl_jp2k || base.doc_type==:dl_book
+  #DublinCore uses the semantic field mappings below to assemble an OAI-compliant Dublin Core document
+  #SolrDocument.use_extension( Blacklight::Solr::Document::DublinCore)
+  extension_parameters[:marc_source_field] = :marc_display
+  extension_parameters[:marc_format_type] = :marcxml
+
+  use_extension( Blacklight::Solr::Document::Marc) do |document|
+    document.key?( :marc_display  )
   end
+
+  use_extension( UVA::DigitalLibraryImageDocument) do |document|
+    document.doc_type==:dl_image || document.doc_type==:dl_jp2k
+  end
+
+  def initialize(doc, solr_response=nil)
+    super(doc, solr_response)
+    will_export_as(:json, "application/json")
+  end
+  
+  # This document is also exportable as a json
+  def export_as_json
+    to_marc.to_hash.to_json
+  end
+  
+  def export_as_marcxml
+    to_marc.to_xml
+  end
+
+  # Semantic mappings of solr stored fields. Fields may be multi or
+  # single valued. See Blacklight::Solr::Document::ExtendableClassMethods#field_semantics
+  # and Blacklight::Solr::Document#to_semantic_values
+  # Recommendation: Use field names from Dublin Core
+  field_semantics.merge!(
+                        :title => "title_display",
+                        :author => "author_display",
+                        :language => "language_facet"
+                        )
+
           
   def image_path
     doc_image = CoverImage::Image.new(self)
@@ -28,7 +62,6 @@ class SolrDocument
   #
   def marc_display
     if self.respond_to?(:to_marc) and self.to_marc
-    #if self.has?(:marc_display)
       @marc_display||=UVA::VirgoMarcRecord.new(self.export_as_marcxml, :xml)
       @marc_display
     end

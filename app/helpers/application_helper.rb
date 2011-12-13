@@ -3,6 +3,7 @@ require 'lib/uva/fedora'
 require 'lib/uva/scope_helper'
 require 'uva/advanced_search/advanced_search_fields'
 
+
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
    
@@ -10,7 +11,7 @@ module ApplicationHelper
   include UVA::Fedora  
   include UVA::AdvancedSearch::AdvancedSearchFields
   include UVA::ScopeHelper
-
+  include UVA::SearchFieldsHelper
   
   # Slices the @featured_documents up into to arrays/"rows"
   # This makes it easy to do "rows" in the view.
@@ -155,7 +156,7 @@ module ApplicationHelper
     title += "</span><span class=\"documentForm\">" if style
     title += form(document)
     title += "</span>" if style
-    title
+    title.html_safe
   end
     
   
@@ -451,7 +452,7 @@ module ApplicationHelper
     if !special_collections_lens?
       link1 = ''
       if document.availability and document.availability.might_be_holdable?
-        link1 = link_to('Request Unavailable Item&nbsp;&nbsp;&middot;&nbsp;&nbsp;', start_hold_account_request_path(document[:id], :popup => "true"), :class => 'recall initiate-request')
+        link1 = link_to('Request Unavailable Item&nbsp;&nbsp;&middot;&nbsp;&nbsp;'.html_safe, start_hold_account_request_path(document[:id], :popup => "true"), :class => 'recall initiate-request')
       end
       link2 = ''
       # only show Ivy link if there are Ivy holdings
@@ -486,13 +487,14 @@ module ApplicationHelper
     	  end
       end
     end
+    out.html_safe
   end
   
   # show text when it's a sas item
   def sas_availability_text(document, library, sas_counter)
     if library.is_sas?
       if document.availability.has_non_sas_items? and sas_counter == 0 
-        return "<div class=\"holding\">This item is also available to Semester at Sea participants.</div>"
+        return "<div class=\"holding\">This item is also available to Semester at Sea participants.</div>".html_safe
       end
     end
   end
@@ -512,14 +514,14 @@ module ApplicationHelper
   def sas_call_number_text(holding, copy)
     return if !holding.library.is_sas?
     if !copy.pending?
-      return "<span class=\"holdingCallNumber\">#{holding.call_number}</span>"
+      return "<span class=\"holdingCallNumber\">#{holding.call_number}</span>".html_safe
     end
   end
   
   # display map link
   def link_to_map(copy)
     if copy.map.nil?
-      "<span class=\"map-indicator no-map\">N/A</span>"
+      "<span class=\"map-indicator no-map\">N/A</span>".html_safe
     else
       link_to "Map", copy.map.url, :class => "map-link", :target => "_blank"
     end 
@@ -630,8 +632,7 @@ module ApplicationHelper
  # find advanced search
   def advanced_search_case?
     return true if params[:f_inclusive] && ! params[:f_inclusive].empty?
-    return true if ! populated_advanced_search_fields.empty?
-    return false
+    ! populated_advanced_search_fields.empty?
   end
 
   def refine_search_hash
@@ -873,13 +874,12 @@ module ApplicationHelper
   # overriding from Blacklight plugin to add logic for cleaning up the portal references
   def add_facet_params(field, value)
     p = params.dup
-    p[:f]||={}
-    p[:f][field] ||= []
+    p[:f] = (p[:f] || {}).dup # the command above is not deep in rails3, !@#$!@#$
+    p[:f][field] = (p[:f][field] || []).dup
     p[:f][field].push(value)
     scrunge_portal(p) 
     scrunge_page(p)
     p
-   
   end
 
 
@@ -923,7 +923,7 @@ module ApplicationHelper
       end
 
       href_attr = "href=\"#{url}\"" unless href
-      "<a #{href_attr}#{tag_options}>#{name || h(url)}</a>"
+      "<a #{href_attr}#{tag_options}>#{name || h(url)}</a>".html_safe
     end
   end
 
@@ -943,16 +943,7 @@ module ApplicationHelper
   # we want it to say 'Virgo'
   def application_name
     'VIRGO'
-  end
-
-  # overriding from Blacklight plugin to pass along params
-  def search_fields
-    Blacklight.search_field_options_for_select(params)
-  end
-  
-  
-
-  
+  end  
   
   ############# end methods overridden
   
@@ -975,7 +966,7 @@ module ApplicationHelper
       format = format + '<span class="format_value ' + class_name + '">' + val_name + '</span>'
     end
 
-    return format
+    return format.html_safe
   end
   
   def video_title(document)
