@@ -41,9 +41,9 @@ class UserSessionsController < ApplicationController
          else
            user = User.find_or_create_by_login(request.env['REMOTE_USER']) if user.nil?
          end
-       elsif (RAILS_ENV == 'cucumber' or RAILS_ENV == 'test') and !params[:login].blank?
+       elsif (Rails.env == 'cucumber' or Rails.env == 'test') and !params[:login].blank?
          user = User.create(:login=>params[:login]) if user.nil?
-       elsif RAILS_ENV == 'development' and !params[:login].blank?
+       elsif Rails.env == 'development' and !params[:login].blank?
          user = User.create(:login=>params[:login]) if user.nil?
        else
          # Create the temp/demo user if the above methods didn't work
