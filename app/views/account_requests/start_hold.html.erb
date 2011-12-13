@@ -3,7 +3,7 @@
 <div id="content_area">
 
   <div id="request_container">
-    <% form_tag(create_hold_account_request_path) do %>
+    <%= form_tag(create_hold_account_request_path) do %>
   
       <p class="request-call-select">
       <% if @document.availability.holdable_call_numbers.count == 1 %>
@@ -14,7 +14,7 @@
       </p>
     
       <p class="request-delivery-select"> 
-        <%= label_tag "library_id", "Deliver to: #{select_tag("library_id", options_for_select(@library_list.names_and_ids))}" %>
+        <%= label_tag "library_id", "Deliver to: #{select_tag("library_id", options_for_select(@library_list.names_and_ids))}".html_safe %>
       </p>
       <%= hidden_field_tag(:id, params[:id]) %>
   
