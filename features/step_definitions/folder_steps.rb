@@ -1,13 +1,13 @@
 Then /^I should see an add to folder form for ckey "([^\"]*)"$/ do |arg1|
-  response.should have_tag("form.addFolderForm input", :id=>"id#{arg1}")
+  response.should have_selector("form.addFolderForm input", :id=>"id#{arg1}")
 end
 
 Then /^I (should|should not) see ckey "([^\"]*)" in the folder$/ do |comparator, arg1|
   case comparator
     when "should"
-      response.should have_tag("tr", :id => "#{arg1}")
+      response.should have_selector("tr", :id => "#{arg1}")
     when "should not"
-      response.should_not have_tag("tr", :id => "#{arg1}")
+      response.should_not have_selector("tr", :id => "#{arg1}")
     end
 end
 
@@ -34,8 +34,8 @@ end
 Then /^I (should|should not) see the Starred Items tools$/ do |comparator|
   case comparator
     when "should"
-      response.should have_tag("ul#markedListTools")
+      response.should have_selector("ul#markedListTools")
     when "should not"
-      response.should_not have_tag("ul#markedListTools")
+      response.should_not have_selector("ul#markedListTools")
     end
 end 

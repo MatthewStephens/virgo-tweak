@@ -7,7 +7,7 @@ Feature: Display Articles
 		Given I am on the homepage
 		And I choose "catalog_select_articles"
 		And I fill in "q" with "global warming"
-		And I press "search"
+		And I press "Search"
 		Then I should get at least 150000 results
 		And I should see the keyword label "Keyword"
 		And I should see the keyword value "global warming"
@@ -16,8 +16,8 @@ Feature: Display Articles
 		Given I am on the homepage
 		And I choose "catalog_select_articles"
 		And I fill in "q" with "benthic detritus odom"
-		And I press "search"
-		And I follow "Articles"
+		And I press "Search"
+		And I follow "articles"
 		Then I should get at least 5 results
 		And I should see the filter label "Format"
 		And I should see the filter value "articles"
@@ -26,7 +26,7 @@ Feature: Display Articles
 		Given I am on the homepage
 		And I choose "catalog_select_articles"
 		And I fill in "q" with "global warming"
-		And I press "search"
+		And I press "Search"
 		Then the page number should be 1
 		When I follow "Next »"
 		Then the page number should be 2
@@ -39,7 +39,7 @@ Feature: Display Articles
 		Given I am on the homepage
 		And I choose "catalog_select_articles"
 		And I fill in "q" with "global warming"
-		And I press "search"
+		And I press "Search"
 		When I select "Date" from "sort_key"
 		And I press "sort results"
 		Then I should see select list "select#sort_key" with "Date" selected			
@@ -74,7 +74,7 @@ Feature: Display Articles
 		When I fill in "author" with "jones"
 		And I press "Search"
 		Then I should get results
-		When I follow "Online Resources"
+		When I follow "Online resources"
 		Then I should get results
 		And I should see the keyword label "Author"
 		When I follow "x"
@@ -86,6 +86,6 @@ Feature: Display Articles
 		And I select "Date" from "sort_key"
 		And I press "Search"
 		Then I should see select list "select#sort_key" with "Date" selected
-		When I follow "Refine search"
+		When I follow "refineSearchLink"
 		Then I should see select list "select#sort_key" with "Date" selected
 

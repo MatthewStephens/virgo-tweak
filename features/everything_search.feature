@@ -7,6 +7,7 @@ Feature: Everything (Default) Search Result Relevancy
 	  Given I am on the homepage
     When I fill in "q" with "Buddhism"
     And I press "Search"
+		Then print
 	  Then I should get results
     Then I should get at least 6500 results
 	  Then I should get at most 13000 results

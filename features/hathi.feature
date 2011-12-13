@@ -7,7 +7,7 @@ Feature: Display Hathi materials
 		Given I am on the homepage
 		When "library_facet":"Hathi Trust Digital Library" is applied
 		And I fill in "q" with "transactions metallurgical"
-		And I press "search"
+		And I press "Search"
 		Then I should get ckey 000046596 in the results
 
   Scenario: View Hathi item

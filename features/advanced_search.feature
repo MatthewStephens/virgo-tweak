@@ -53,7 +53,7 @@ Feature: Advanced Search Results
   Scenario:  Author search shouldn't be problematic if the author's name is a stopword
     Given I am on the advanced search page
     When I fill in "author" with "Will Eisner"
-    And I press "search"
+    And I press "Search"
     Then I should get ckey u4474645 in the results
     
   Scenario: Make sure range fields have appropriate label and value
@@ -62,7 +62,7 @@ Feature: Advanced Search Results
     And I fill in "publication_date_end" with "2005"
     And I press "advanced_search"
     Then I should get results
-    Then I should see the keyword label "Year Published"
+	  Then I should see the keyword label "Year Published"
     And I should see the keyword value "2000 - 2005"
     
   Scenario: Make sure range values can be removed
@@ -92,8 +92,8 @@ Feature: Advanced Search Results
     And I fill in "author" with "Emerson"
     And I press "advanced_search"
     Then I should get results
-    And I click the "Refine search" link
-    Then I should see "Emerson" in "author"
+    And I click the "refineSearchLink" link
+		Then the "author" field within "body" should contain "Emerson"
     
   Scenario: Refine advanced search should repopulate range field
     Given I am on the advanced search page
@@ -101,16 +101,16 @@ Feature: Advanced Search Results
     And I fill in "publication_date_end" with "1950"
     And I press "advanced_search"
     Then I should get results
-    When I click the "Refine search" link
-    Then I should see "1900" in "publication_date_start"
-    And I should see "1950" in "publication_date_end"
-
+    When I click the "refineSearchLink" link
+		Then the "publication_date_start" field within "body" should contain "1900"
+		Then the "publication_date_end" field within "body" should contain "1950"
+		
 	Scenario: Refine advanced search should repopulate sort field
 		Given I am on the advanced search page
 		And I fill in "author" with "Smith"
 		And I select "Title" from "sort_key"
 		And I press "advanced_search"
-		And I click the "Refine search" link
+		And I click the "refineSearchLink" link
 		Then I should see select list "select#sort_key" with "Title" selected
 		
 	Scenario: Refine advanced search should repopulate op field
@@ -118,7 +118,7 @@ Feature: Advanced Search Results
 		And I fill in "author" with "Smith"
 		And I select "any" from "op"
 		And I press "advanced_search"
-		And I click the "Refine search" link
+		And I click the "refineSearchLink" link
 		Then I should see select list "select#op" with "any" selected
     
   Scenario: Perform advanced search and then select additional facets from search results
@@ -143,7 +143,7 @@ Feature: Advanced Search Results
     And I check "Alderman"
     And I press "advanced_search"
     And I fill in "q" with "corgi"
-    And I press "search"
+    And I press "Search"
     Then I should get at least 10 results
     Then I should get at most 20 results
   

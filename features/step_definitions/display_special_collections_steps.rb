@@ -1,5 +1,5 @@
 Then /^I should see a request button for item (.+)/i do |num|
-  response.should have_tag("input#special_collections_request_submit_#{num}", :value => "Request")
+  response.should have_selector("input#special_collections_request_submit_#{num}", :value => "Request")
 end
 
 Then /^I should see one filter for Special Collections/i do
@@ -18,4 +18,14 @@ Given /^I am logged in as a Special Collections administrator$/ do
   superuser = SpecialCollectionsUser.create(:id => user.id, :computing_id => user.login)
   visit user_sessions_path(:user_session => {:login => login, :password => "password"}), :post
   visit special_collections_requests_path
+end
+
+
+When /^I am in the Special Collections lens$/ do
+  visit root_path
+  h = build_request_hash
+  h[:controller] = 'catalog'
+  h[:action] = 'index'
+  h[:special_collections] = 'true'
+  visit url_for(h)
 end

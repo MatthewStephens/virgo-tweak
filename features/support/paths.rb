@@ -29,8 +29,8 @@ module NavigationHelpers
      when /the image page for id (.+)/ 
        image_load_path($1)
 
-     when /the status page for id (.+)/ 
-       status_catalog_path($1)
+     when /the availability page for id (.+)/ 
+       availability_path($1)
        
      when /the brief status page for id (.+)/ 
       brief_status_path($1)
@@ -48,16 +48,16 @@ module NavigationHelpers
         account_index_path
         
      when /the notices page/
-        notices_account_path
+        notices_account_index_path
 
      when /the checkouts page/
-        checkouts_account_path
+        checkouts_account_index_path
       
      when /the holds page/
-        holds_account_path
+        holds_account_index_path
         
      when /the reserves page/
-        reserves_account_path
+        reserves_account_index_path
      
      when /the original catalog and article search page/
        catalog_index_path

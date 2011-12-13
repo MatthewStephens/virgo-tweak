@@ -67,25 +67,25 @@ Feature: Display Accounts
     Then I should see 5 items
 
 	Scenario: Make sure user is logged in before initiating a hold/recall
-		Given I am on the status page for id u4215764
+		Given I am on the availability page for id u4215764
 		And I follow "Request Unavailable Item"
 	  Then I should see "Please sign in with NetBadge to request this item."
 	
 	Scenario: Make sure user initiating hold/recall has a SIRSI account
 		Given I am logged in as "fakeuser"
-		And I am on the status page for id u4215764
+		And I am on the availability page for id u4215764
 		And I follow "Request Unavailable Item"
 		Then I should see "No Account Found"
 		
 	Scenario: Make sure user initiating hold/recall is not barred
 		Given I am viewing the stubbed account page for barred mst3k
-		And I am on the status page for id u4215764
+		And I am on the availability page for id u4215764
 		And I follow "Request Unavailable Item"
 		Then I should see "Your library account is temporarily suspended due to overdue or recalled materials"
 		
 	Scenario: User initiating hold/recall should see request form
 		Given I am logged in as "mjb7q"
-		And I am on the status page for id u4215764
+		And I am on the availability page for id u4215764
 		And I follow "Request Unavailable Item"
 		Then I should see "Request this Item"
 		And I should see "PR6057 .A623 O43 2004"
@@ -93,7 +93,7 @@ Feature: Display Accounts
 		
 	Scenario: User should be able to submit hold/recall and see flash message
 		Given I am logged in as "mjb7q"
-		And I am on the status page for id u4215764
+		And I am on the availability page for id u4215764
 		And I follow "Request Unavailable Item"
 		And I press "Place Request"
 		Then I should see "Request Complete"
