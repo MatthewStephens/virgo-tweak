@@ -82,33 +82,25 @@
 			<% #------------ Related title ------------- %>
 			<% unless document.marc_display.related_title.empty? %>
 			<dt>Related title</dt>
-			<% document.marc_display.related_title.each do |v| %>
-			<dd><%= v %></dd>
-			<% end %>
+			<dd><%= document.marc_display.related_title %></dd>
 			<% end %>
 			
 			<% #------------- Title history note ------------- %>
 			<% unless document.marc_display.title_history_note.empty? %>
 			<dt>Title history note</dt>
-			<% document.marc_display.title_history_note.each do |v| %>
-			<dd><%= v %></dd>
-			<% end %>
+			<dd><%= document.marc_display.title_history_note %></dd>
 			<% end %>
 
       <% #------------ Previous title -------------------%>
       <% unless document.marc_display.previous_title.empty? %>
       <dt>Previous title</dt>
-      <% document.marc_display.previous_title.each do |v| %>
-      <dd><%= v %></dd>
-			<% end %>
+      <dd><%= document.marc_display.previous_title %></dd>
 			<% end %>
 			
 			<% #----------- Later title -----------------------%>
 			<% unless document.marc_display.later_title.empty? %>
 			<dt>Later title</dt>
-			<% document.marc_display.later_title.each do |v| %>
-			<dd><%= v %></dd>
-			<% end %>
+			<dd><%= document.marc_display.later_title %></dd>
 			<% end %>
 
       <% #------------ Organization and arrangement -------%>
@@ -291,9 +283,7 @@
 			<% #------------ Reproduction note ------------- %>
 			<% unless document.marc_display.reproduction_note.empty? %>
 			<dt>Reproduction Notes</dt>
-			<% document.marc_display.reproduction_note.each do |v| %>
-			<dd><%= v %></dd>
-			<% end %>
+			<dd><%= document.marc_display.reproduction_note %></dd>
 			<% end %>
 					
 			<% #------------ Location of originals  ------------- %>
@@ -332,9 +322,7 @@
 			<% #------------ Frequency (journals) -------------%>
 			<% unless document.marc_display.journal_frequency.empty? %>
 			<dt>Frequency (journals)</dt>
-			<% document.marc_display.journal_frequency.each do |v| %>
-			<dd><%= v %></dd>
-			<% end %>
+			<dd><%= document.marc_display.journal_frequency.html_safe %></dd>
 			<% end %>
 			
 			<% #------------ Publication history ---------------%>
