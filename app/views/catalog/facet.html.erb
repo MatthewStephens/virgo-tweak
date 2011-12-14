@@ -10,9 +10,29 @@
     <div class="facetSort">
     <% complete_param = complete ? "true" : "false" %>
     <% if params[:controller] == 'articles' %>
-      <% link = facet_articles_path(:id => params[:id], :params => params_for_facet_values.merge("facet.limit" => facet_limit, "width" => 490, :facet_sort => facet_sort_inverse_value(params[:id]), :complete => complete_param )) %>
+      <% link = 
+					facet_articles_path(
+						params_for_facet_values.merge(
+							:id => params[:id], 
+							"facet.limit" => facet_limit, 
+							"width" => 490, 
+							:facet_sort => facet_sort_inverse_value(params[:id]), 
+							:complete => complete_param
+						)
+					) 
+			-%>
     <% else %>
-    <% link = catalog_facet_path(:id => params[:id], :params => params_for_facet_values.merge("facet.limit" => facet_limit, "width" => 490, :facet_sort => facet_sort_inverse_value(params[:id]), :complete => complete_param )) %>
+    	<% link = 
+				catalog_facet_path(
+					params_for_facet_values.merge(
+						:id => params[:id], 
+						"facet.limit" => facet_limit, 
+						"width" => 490, 
+						:facet_sort => facet_sort_inverse_value(params[:id]), 
+						:complete => complete_param 
+					)
+				) 
+			-%>
     <% end %>
     Sort by:
     <span class="current-sort"><%= current_facet_sort %></span>
