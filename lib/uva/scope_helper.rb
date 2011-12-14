@@ -93,7 +93,7 @@ module UVA::ScopeHelper
   # adds the value and/or field to params[:f]
   def add_facet_param(field, value, my_params = params)
     included = my_params[:f][field].include?(value) ? true : false rescue false
-    p = my_params.dup.symbolize_keys!
+    p = my_params.dup
     unless included
       p[:f]||={}
       p[:f][field]||=[]
