@@ -14,8 +14,6 @@ module UVA
       base.solr_search_params_logic << :add_music_portal
       base.solr_search_params_logic << :add_max_per_page
       base.solr_search_params_logic << :add_facet_limit
-
-
     end
   
     class HiddenSolrID < RuntimeError; end
@@ -42,7 +40,7 @@ module UVA
     def add_facet_limit solr_parameters, user_parameters
       solr_parameters["facet.limit"] = user_parameters["facet.limit"] if user_parameters["facet.limit"]
     end
-  
+
     module UVACustomizations
             
       # overriding from plugin to test for shadowedness
@@ -63,6 +61,26 @@ module UVA
           :qt => qt,
           :id => id # this assumes the document request handler will map the 'id' param to the unique key field
         }
+      end
+      
+      # overriding b/c of broken bit in plugin
+      def add_sorting_paging_to_solr(solr_parameters, user_params)
+        # Omit empty strings and nil values.             
+        # Apparently RSolr takes :per_page and converts it to Solr :rows,
+        # so we let it. 
+        [:page, :per_page, :sort].each do |key|
+          solr_parameters[key] = user_params[key] unless user_params[key].blank?      
+        end
+        if solr_parameters[:sort].blank?
+          # this part is broken in the plugin
+          first_sort_field_key = Blacklight.config[:sort_fields_order].first
+          default_sort_field = Blacklight.config[:sort_fields][first_sort_field_key]          
+          solr_parameters[:sort] = default_sort_field.last unless default_sort_field.last.blank?
+        end
+
+        # limit to MaxPerPage (100). Tests want this to be a string not an integer,
+        # not sure why.     
+        solr_parameters[:per_page] = solr_parameters[:per_page].to_i > self.max_per_page ? self.max_per_page.to_s : solr_parameters[:per_page]      
       end
       
         
