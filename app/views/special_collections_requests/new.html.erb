@@ -2,13 +2,19 @@
 
 <div class="tool_content spec_coll">
 	
-<%= error_messages_for :special_collections_request %>
+<% if @special_collections_request.errors.any? %>
+  <ul>
+    <% @special_collections_request.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <div id="returnToItem">
-<%= link_to "&larr; Return to item record", catalog_path(params[:id]) %>
+<%= link_to "&larr; Return to item record".html_safe, catalog_path(params[:id]) %>
 </div>
 
-<% form_for(@special_collections_request) do |f| -%>
+<%= form_for(@special_collections_request) do |f| -%>
 <div id="special_collections_content">
 <fieldset>
   <%= render :partial => 'user_form', :object => f %>

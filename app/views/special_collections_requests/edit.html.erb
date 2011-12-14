@@ -2,7 +2,14 @@
 
 <div class="tool_content spec_coll">
 	
-<%= error_messages_for :special_collections_request %>
+<% if @special_collections_request.errors.any? %>
+  <ul>
+    <% @special_collections_request.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 
 <div id="returnToItem">
 <%= link_to '&larr; Return to request list', special_collections_requests_path %>
