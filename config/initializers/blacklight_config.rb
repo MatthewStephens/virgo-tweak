@@ -302,7 +302,6 @@ Blacklight.configure(:shared) do |config|
     }
   }
   
-  
   config[:music_search_fields] ||= []
   config[:music_search_fields] << {
     :display_label => 'Keywords', 
@@ -313,84 +312,12 @@ Blacklight.configure(:shared) do |config|
       :pf => "$pf_music"
     }
   }
-  config[:music_search_fields] << {
-    :display_label => 'Author', 
-    :key => 'music_author',
-    :qt => 'search',    
-    :solr_local_parameters => {
-      :qf => "$qf_author",
-      :pf => "$pf_author"
-    }
-  }
-  config[:music_search_fields] << {
-    :display_label => 'Title',
-    :key => 'music_title',
-    :qt => 'search',    
-    :solr_local_parameters => {
-      :qf => "$qf_title",
-      :pf => "$pf_title"
-    }
-  }
-  config[:music_search_fields] << {
-    :display_label => 'Journal Title', 
-    :qt => 'search', 
-    :key => 'music_journal',
-    :solr_local_parameters => {
-      :qf => "$qf_journal_title",
-      :pf => "$pf_journal_title"
-    }
-  }
-  config[:music_search_fields] << {
-    :display_label => 'Subject', 
-    :key => 'music_subject',
-    :qt => 'search',    
-    :solr_local_parameters => {
-      :qf => "$qf_subject",
-      :pf => "$pf_subject"
-    }
-  }
-  config[:music_search_fields] << {
-    :display_label => 'Call Number', 
-    :key => 'music_call_number',
-    :qt => 'search',    
-    :solr_local_parameters => {
-      :qf => "$qf_call_number",
-      :pf => "$pf_call_number"
-    }
-  }
-  
+
   config[:video_search_fields] ||= []
   config[:video_search_fields] << {
     :display_label => 'Keywords', 
     :key => 'video_search',
     :qt => 'search',    
-  }
-  config[:video_search_fields] << {
-    :display_label => 'Title', 
-    :key => 'video_title',
-    :qt => 'search',    
-    :solr_local_parameters => {
-      :qf => "$qf_title",
-      :pf => "$pf_title"
-    }
-  }
-  config[:video_search_fields] << {
-    :display_label => 'Subject', 
-    :key => 'video_subject',
-    :qt => 'search',
-    :solr_local_parameters => {
-      :qf => "$qf_subject",
-      :pf => "$pf_subject"
-    }
-  }
-  config[:video_search_fields] << {
-    :display_label => 'Call Number', 
-    :key => 'video_call_number',
-    :qt => 'search',    
-    :solr_local_parameters => {
-      :qf => "$qf_call_number",
-      :pf => "$pf_call_number"
-    }
   }
   
   config[:extra_search_fields] ||= []
