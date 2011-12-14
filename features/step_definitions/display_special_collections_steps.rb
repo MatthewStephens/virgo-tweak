@@ -1,14 +1,10 @@
 Then /^I should see a request button for item (.+)/i do |num|
-  response.should have_selector("input#special_collections_request_submit_#{num}", :value => "Request")
+  page.should have_selector("input#special_collections_request_submit_#{num}", :value => "Request")
 end
 
 Then /^I should see one filter for Special Collections/i do
   filter_text = response.body.scan(/<span class=\"filterValue\">Special Collections<\/span>/)
   filter_text.size.should == 1
-end
-
-Then /^printme/i do
-  puts response.body
 end
 
 Given /^I am logged in as a Special Collections administrator$/ do

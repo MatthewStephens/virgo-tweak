@@ -5,34 +5,34 @@ Feature: Display Special Collections Lens
 	
   Scenario: do not display non-Special Collections holdings on availability
     Given I am in the Special Collections lens
-  	And I am on the status page for id u2243187
+  	And I am on the availability page for id u2243187
   	Then I should not see a library "Alderman"
     
   Scenario: Do not show request link if the item has no holdings
     Given I am in the Special Collections lens
-    And I am on the status page for id holsinger:1
+    And I am on the availability page for id holsinger:1
     Then I should not see "Request this Item"
     
   Scenario: Do not show request link if the item is only in SC-IVY
     Given I am in the Special Collections lens
-    And I am on the status page for id u5492
+    And I am on the availability page for id u5492
     Then I should not see "Request this Item"
 
 	Scenario: Do not show request link if the item has home location SC-IVY and is IN-PROCESS
 		Given I am in the Special Collections lens
-		And I am on the status page for id u1896264
+		And I am on the availability page for id u1896264
 		Then I should not see "Request this Item"
     
   Scenario: Present login options
     Given I am in the Special Collections lens
-    And I am on the status page for id u3572181
+    And I am on the availability page for id u3572181
     And I follow "Request this Item"
     Then I should see "UVa login"
     And I should see "Non-UVa login"
     
   Scenario: Allow non-UVa login
     Given I am in the Special Collections lens
-    And I am on the status page for id u3572181
+    And I am on the availability page for id u3572181
     And I follow "Request this Item"
     And I follow "Non-UVa login"
     And I fill in "user_id" with "A61221042"
@@ -41,7 +41,7 @@ Feature: Display Special Collections Lens
     
   Scenario: Require that a user_id be entered for non-UVa login
     Given I am in the Special Collections lens
-    And I am on the status page for id u3572181
+    And I am on the availability page for id u3572181
     And I follow "Request this Item"
     And I follow "Non-UVa login"
     And I press "Request"
@@ -49,7 +49,7 @@ Feature: Display Special Collections Lens
 
   Scenario: If a user picks a non-UVa login, don't let them enter a UVa ID
     Given I am in the Special Collections lens
-    And I am on the status page for id u3572181
+    And I am on the availability page for id u3572181
     And I follow "Request this Item"
     And I follow "Non-UVa login"
     And I fill in "user_id" with "mpc3c"
@@ -58,14 +58,14 @@ Feature: Display Special Collections Lens
     
   Scenario: Allow UVa login
     Given I am in the Special Collections lens
-    And I am on the status page for id u3572181
+    And I am on the availability page for id u3572181
     And I follow "Request this Item"
     And I follow "UVa login"
     Then I should see "Request for Papers of Henry James"
     
   Scenario: Allow items with a single selection to work without checking a checkbox
     Given I am in the Special Collections lens
-    And I am on the status page for id u507022
+    And I am on the availability page for id u507022
     And I follow "Request this Item"
     And I follow "UVa login"
 		Then I should see "Call number of requested item:"
@@ -74,7 +74,7 @@ Feature: Display Special Collections Lens
     
   Scenario: For multiple-selection items, complain if no option is selected (UVa-login)
     Given I am in the Special Collections lens
-    And I am on the status page for id u3572181
+    And I am on the availability page for id u3572181
     And I follow "Request this Item"
     And I follow "UVa login"
 		Then I should see "There are multiple copies of this item. Please consult the item record for description of differences, where applicable, and use the checkboxes to select the copy or copies you wish to receive."
@@ -83,7 +83,7 @@ Feature: Display Special Collections Lens
   
   Scenario: For multiple-selection items, complain if no option is selected (non UVa-login)
     Given I am in the Special Collections lens
-    And I am on the status page for id u3572181
+    And I am on the availability page for id u3572181
     And I follow "Request this Item"
     And I follow "Non-UVa login"
     And I fill in "user_id" with "A61221042"
@@ -95,7 +95,7 @@ Feature: Display Special Collections Lens
 
 	Scenario: Allow individual copies to be selected (even if they are all the same)
 		Given I am in the Special Collections lens
-		And I am on the status page for id u844859
+		And I am on the availability page for id u844859
 		And I follow "Request this Item"
 		And I follow "UVa login"
 		And I check "location_plus_call_number[STACKS][X030078851][]"
@@ -105,7 +105,7 @@ Feature: Display Special Collections Lens
     
   Scenario: Show success message when multiple items are selected
     Given I am in the Special Collections lens
-    And I am on the status page for id u3572181
+    And I am on the availability page for id u3572181
     And I follow "Request this Item"
     And I follow "UVa login"
     And I check "location_plus_call_number[BARR-VAULT][X004958781][]"
@@ -116,13 +116,13 @@ Feature: Display Special Collections Lens
   Scenario:  Do not show Special Collections library facet twice
     Given I am in the Special Collections lens
     And I fill in "q" with "Papers of Henry James"
-    And I press "search"
+    And I press "Search"
     Then I should see one filter for Special Collections
     
 	Scenario: Display location notes without Z39.50
 	  Given I am in the Special Collections lens
 	  Given I am logged in as "xw5d"
-	  And I am on the status page for id u3811764
+	  And I am on the availability page for id u3811764
 	  And I follow "Request this Item"
 		And I check "location_plus_call_number_ARCHV-STKS_X030080645_"
 	  And I press "Request"
@@ -134,7 +134,7 @@ Feature: Display Special Collections Lens
 	Scenario: Display name from LDAP
 		Given I am in the Special Collections lens
 	  Given I am logged in as "mpc3c"
-	  And I am on the status page for id u2434648
+	  And I am on the availability page for id u2434648
 	  And I follow "Request this Item"
 	  And I press "Request"
 	  Then I should see "Request successfully submitted"
@@ -144,7 +144,7 @@ Feature: Display Special Collections Lens
 	Scenario: If no name in LDAP, display name from SIRSI
    	Given I am in the Special Collections lens
 	  Given I am logged in as "A61221042"
-	  And I am on the status page for id u2434648
+	  And I am on the availability page for id u2434648
 	  And I follow "Request this Item"
 	  And I press "Request"
 	  Then I should see "Request successfully submitted"

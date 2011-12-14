@@ -12,7 +12,7 @@ Feature: Display roman coins from the UVA art museum
   Scenario: Search Gallienus
 	Given I am on the homepage
     When I fill in "q" with "Gallienus 1991.17.69"
-    And I press "search"
+    And I press "Search"
     Then I should get ckey n1991_17_69 in the results
 
   Scenario: format coins display properly 
