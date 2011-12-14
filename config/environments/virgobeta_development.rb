@@ -38,6 +38,10 @@ Virgo::Application.configure do
   FIREHOSE_URL = "http://firehose.lib.virginia.edu:8080/firehose2"
   PRIMO_URL = "http://primo4.hosted.exlibrisgroup.com:1701/PrimoWebServices/xservice/search/brief?institution=UVA&onCampus=true"
   
+  FEDORA_REST_URL = 'http://fedora.lib.virginia.edu'
+  FEDORA_USERNAME = 'fedoraAdmin'
+  FEDORA_PASSWORD = 'aro2def'
+  
 end
 
 

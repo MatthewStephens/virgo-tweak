@@ -52,9 +52,6 @@ module Virgo
 #    LIBRARY_THING_API_KEY = '73d3097200e332adbe542b6eb7fdb162'
 #    LAST_FM_API_KEY = 'b25b959554ed76058ac220b7b2e0a026'
     
-#    FEDORA_REST_URL = 'http://fedora.lib.virginia.edu'
-#    Fedora_username = 'fedoraAdmin'
-#    Fedora_password = 'aro2def'
     
   end
 end
