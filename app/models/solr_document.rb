@@ -18,7 +18,7 @@ class SolrDocument
   end
 
   use_extension( UVA::DigitalLibraryImageDocument) do |document|
-    document.doc_type==:dl_image || document.doc_type==:dl_jp2k
+    document.doc_type==:dl_image || document.doc_type==:dl_jp2k || document.doc_type==:dl_book
   end
 
   def initialize(doc, solr_response=nil)
