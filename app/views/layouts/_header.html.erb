@@ -19,7 +19,7 @@
           <img src="/images/uva_lib_logo.png" width="200" height="15" alt="University of Virginia Library" />
         </a>
         <div class="portal_status">
-      	  <%= session[:special_collections] ? "<span class='specialCollectionsHeader'>&nbsp;&nbsp;Special Collections</span><span class='returnToGeneral'><a href='/?special_collections=false'>View Full Collection</a></span>" : "" -%>
+      	  <%= session[:special_collections] ? "<span class='specialCollectionsHeader'>&nbsp;&nbsp;Special Collections</span><span class='returnToGeneral'><a href='/?special_collections=false'>View Full Collection</a></span>".html_safe : "" -%>
       	</div>
       </div> <!-- end #uva_lib_logo -->
     
