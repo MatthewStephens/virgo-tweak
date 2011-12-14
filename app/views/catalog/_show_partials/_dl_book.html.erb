@@ -95,7 +95,7 @@
     <% #------------ Staff Notes ------------- %>
     <% unless @document.value_for(:note_display) == 'n/a' %>
       <dt>Note</dt>
-      <% @document.value_for(:note_display).each do |v| %>
+      <% @document.values_for(:note_display).each do |v| %>
         <dd><%= v %></dd>
       <% end %>
     <% end %>
@@ -108,7 +108,7 @@
 	
 	<% unless @document.value_for(:location_facet) == 'n/a' %>
       <dt>Location</dt>
-      <% @document.value_for(:location_facet).each do |v| %>
+      <% @document.values_for(:location_facet).each do |v| %>
         <dd><%= v %></dd>
       <% end %>
     <% end %>
@@ -133,7 +133,7 @@
 	<% #------------ Call number ------------- %>
 	<% unless @document.value_for(:call_number_display) == 'n/a' %>
 		<dt>Call Number</dt>
-		<% @document.value_for(:call_number_display).each do |v| %>
+		<% @document.values_for(:call_number_display).each do |v| %>
 			<dd><%= v %></dd>
 		<% end %>
 	<% end %>
