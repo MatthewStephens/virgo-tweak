@@ -1,6 +1,7 @@
 # special collections requests are for patrons in special collections to make requests for
 # viewing items.  Also used by special collections administrators to view and process the
 # request queue.
+require 'uva/ldap'
 class SpecialCollectionsRequestsController < ApplicationController
 
   include UVA::SolrHelperOverride
