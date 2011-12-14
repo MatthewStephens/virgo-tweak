@@ -442,7 +442,7 @@ module ApplicationHelper
   # makes a link to the special collections request if appropriate
   def special_collections_request_link(document, limit=0)
     if display_special_collections_request_link?(document.availability) && (limit == 0 or document.availability.holdings.size > limit)
-      link = link_to "&rarr; Request this Item &larr;", start_special_collections_request_path(@document[:id])
+      link = link_to "&rarr; Request this Item &larr;".html_safe, start_special_collections_request_path(@document[:id])
       return "<div class=\"specialCollectionsRequestLink\">#{link}</div>".html_safe
     end
   end
