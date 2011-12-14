@@ -106,7 +106,7 @@ module UVA
       require 'uri'
   
       # Set up REST client
-      resource = RestClient::Resource.new repo_url, :user => Fedora_username, :password => Fedora_password
+      resource = RestClient::Resource.new repo_url, :user => FEDORA_USERNAME, :password => FEDORA_PASSWORD
     
       # Search the Fedora repository's Resource Index (using a SPARQL query)
       # to query an items own RDF triples and select any values for hasExemplar 
@@ -141,7 +141,7 @@ module UVA
       require 'uri'
   
       # Set up REST client
-      resource = RestClient::Resource.new repo_url, :user => Fedora_username, :password => Fedora_password
+      resource = RestClient::Resource.new repo_url, :user => FEDORA_USERNAME, :password => FEDORA_PASSWORD
     
       # Search the Fedora repository's Resource Index (using a SPARQL query)
       # to query an items own RDF triples and select any values for hasExemplar 
