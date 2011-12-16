@@ -7,7 +7,7 @@ Feature: User Folder
 	  Given I am on the homepage
     When I fill in "q" with "calamity jane the woman and the legend"
     And I choose "catalog_select_catalog"
-    And I press "search"
+    And I press "Search"
 	  And I should get ckey u4322506 in the results
  	  And I should see an add to folder form for ckey "u4322506"
  	  
@@ -19,14 +19,14 @@ Feature: User Folder
 		Given I am on the homepage
 		When I fill in "q" with "pickral odum benthic detritus"
 		And I choose "catalog_select_articles"
-		And I press "search"
+		And I press "Search"
 		Then I should see an add to folder form for ckey "idpubtecumrsmas/bullmar/1984/00000035/00000003/art00022"
  	  
  	Scenario: Adding an item to the folder should produce a status message
  	  Given I am on the homepage
  	  When I fill in "q" with "calamity jane the woman and the legend"
  	  And I choose "catalog_select_catalog"
- 	  And I press "search"
+ 	  And I press "Search"
  	  And I add ckey "u4322506" to my folder
  	  Then I should see "Added to Starred Items"
  	  
@@ -34,29 +34,29 @@ Feature: User Folder
     Given I am on the homepage
     When I fill in "q" with "calamity jane the woman and the legend"
     And I choose "catalog_select_catalog"
-    And I press "search"
+    And I press "Search"
     And I add ckey "u4322506" to my folder
     And I visit the folder page
 	  Then I should see ckey "u4322506" in the folder
 	  Given I am on the homepage
 	  When I fill in "q" with "Appius Claudius Pulcher"
 	  And I choose "catalog_select_catalog"
-	  And I press "search"
+	  And I press "Search"
 	  And I add ckey "n14_1989_9" to my folder
 		Given I am on the homepage
 		When I fill in "q" with "pickral odum benthic detritus"
 		And I choose "catalog_select_articles"
-		And I press "search"
+		And I press "Search"
 		And I add ckey "pubtecumrsmas/bullmar/1984/00000035/00000003/art00022" to my folder
 	  Given I am on the homepage
 	  When I fill in "q" with "A 2d. set of six sonatas for two violins"
 	  And I choose "catalog_select_catalog"
-	  And I press "search"
+	  And I press "Search"
 	  And I add ckey "uva-lib:610693" to my folder
 	  Given I am on the homepage
 	  When I fill in "q" with "Second April"
 	  And I choose "catalog_select_catalog"
-	  And I press "search"
+	  And I press "Search"
 	  And I add ckey "uva-lib:477191" to my folder
 	  Given I am on the homepage
 	  When "digital_collection_facet":"Holsinger Studio Collection" is applied
@@ -64,32 +64,32 @@ Feature: User Folder
 	  Given I am on the homepage
 	  When I fill in "q" with "Bentivar"
 	  And I choose "catalog_select_catalog"
-	  And I press "search"
+	  And I press "Search"
 	  And I add ckey "uva-lib:84948" to my folder
 	  Given I am on the homepage
 	  When I fill in "q" with "Silver jubilee commemoration volume"
 	  And I choose "catalog_select_catalog"
-	  And I press "search"
+	  And I press "Search"
 	  And I add ckey "000000635" to my folder
 	  Given I am on the homepage
 	  When I fill in "q" with "How to train your dragon"
 	  And I choose "catalog_select_catalog"
-	  And I press "search"
+	  And I press "Search"
 	  And I add ckey "u5255974" to my folder
 	  Given I am on the homepage
 	  When I fill in "q" with "Map of Poor Mountain iron lands"
 	  And I choose "catalog_select_catalog"
-	  And I press "search"
+	  And I press "Search"
 	  And I add ckey "uva-lib:743707" to my folder
 	  Given I am on the homepage
 	  When I fill in "q" with "Valentinian II"
 	  And I choose "catalog_select_catalog"
-	  And I press "search"
+	  And I press "Search"
 	  And I add ckey "n1989_19_23" to my folder
 	  Given I am on the homepage
 	  When I fill in "q" with "Old times and hard times"
 	  And I choose "catalog_select_catalog"
-	  And I press "search"
+	  And I press "Search"
 	  And I add ckey "u5408148" to my folder
 	  
 	  
@@ -146,7 +146,7 @@ Feature: User Folder
 		Given I am on the homepage
 		When I fill in "q" with "pickral odum benthic detritus"
 		And I choose "catalog_select_articles"
-		And I press "search"
+		And I press "Search"
 		And I add ckey "pubtecumrsmas/bullmar/1984/00000035/00000003/art00022" to my folder
 		And I visit the folder page
 		And I follow "Cite"

@@ -52,7 +52,7 @@ Then /^I should get ckey (.+) in the results$/i do |ckey|
 end
 
 Then /^I should not get ckey (.+) in the results$/i do |ckey|
-  page.should_not have_selector("a[href*=?]", /^.*#{ckey}.*$/)
+  page.should_not have_selector("a[href*=\"#{ckey}\"]")
 end
 
 Then /^I should get ckey (.+) in the first (\d+) results$/i do |ckey, max_num|
@@ -173,18 +173,16 @@ end
 def get_num_results_for_query(query) 
   visit root_path
   fill_in "q", :with => query 
-  click_button "search"
+  click_button "Search"
   results = get_num_results(response)
 end
 
 def build_request_hash
   #If there are existing QUERY_STRING or REQUEST_URI values, we don't want to lose them  
-  if @env == nil 
-    # do nothing
-  elsif @env['QUERY_STRING'] =~ /\&/
-    request_params = @env['QUERY_STRING'].split('&')
-  elsif @env['REQUEST_URI'] =~ /\?/
-    request_params = request.env['REQUEST_URI'].split('?')[1].split('&')
+  if page.current_url =~ /\&/
+    request_params = page.current_url.split('&')
+  elsif page.current_url =~ /\?/
+    request_params = page.current_url.split('?')[1].split('&')
   end
   h = {}
   # split up request_params to make key and value pairs.  symbolize the key.

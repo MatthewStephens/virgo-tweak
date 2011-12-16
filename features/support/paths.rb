@@ -32,8 +32,8 @@ module NavigationHelpers
      when /the availability page for id (.+)/ 
        availability_path($1)
        
-     when /the brief status page for id (.+)/ 
-      brief_status_path($1)
+     when /the brief availability page for id (.+)/ 
+      brief_availability_path($1)
     
      when /the firehose page for id (.+)/ 
        firehose_path($1)

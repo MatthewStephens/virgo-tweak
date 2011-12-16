@@ -6,7 +6,7 @@ Feature: Display Videos
 	Scenario: Search "boston legal" without quotes
 	  Given I am on the homepage
     When I fill in "q" with "boston legal"
-    And I press "search"
+    And I press "Search"
     Then I should get ckey u4679968 in the results
 	 And the index display for "u4679968" should have a title of "Boston legal. Season two [videorecording]"
 	 

@@ -3,7 +3,7 @@ Then /^I should see a request button for item (.+)/i do |num|
 end
 
 Then /^I should see one filter for Special Collections/i do
-  filter_text = response.body.scan(/<span class=\"filterValue\">Special Collections<\/span>/)
+  filter_text = page.body.scan(/<span class=\"filterValue\">Special Collections<\/span>/)
   filter_text.size.should == 1
 end
 

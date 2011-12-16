@@ -117,7 +117,8 @@ end
 # use tableish to parse dl; format will be [[dt, dd, dd], [dt2, dd, dd, dd]]
 # then turn that into a hash of format { dt => [dd, dd], dt2 => [dd, dd, dd]}
 def details_hash
-  rows = find("div#details dl").all('dt,dd')
+  rows = find("div#details dl").all('dt,dd') rescue []
+  rows = find("div#results div div dl:nth-of-type(2)").all('dt,dd') if rows.empty?
   hash = {}
   current_dt = ''
   rows.each do |row|

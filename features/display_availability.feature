@@ -115,7 +115,7 @@ Feature: Display Availability
         
   Scenario: Display summary holding text
     When I am on the availability page for id u1614058
-    Then I should see a summary text "no.1875-2051,2053-2065  (2007:Nov.5-2011:July 3),"
+    Then I should see a summary text "no.1875-2039  (2007:Nov.5-2011:Jan.3),"
     
   Scenario: Display summary holding note
     When I am on the availability page for id u1614058

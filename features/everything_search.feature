@@ -7,7 +7,6 @@ Feature: Everything (Default) Search Result Relevancy
 	  Given I am on the homepage
     When I fill in "q" with "Buddhism"
     And I press "Search"
-		Then print
 	  Then I should get results
     Then I should get at least 6500 results
 	  Then I should get at most 13000 results
@@ -15,7 +14,7 @@ Feature: Everything (Default) Search Result Relevancy
   Scenario: Search "String quartets Parts" and variants
 	  Given I am on the homepage
     When I fill in "q" with "String quartets Parts"
-    And I press "search"
+    And I press "Search"
     Then I should get at least 900 results
     And I should get the same number of results as a search for "(string Quartets parts)"
     And I should get more results than a search for ""String Quartets parts""
@@ -23,14 +22,14 @@ Feature: Everything (Default) Search Result Relevancy
   Scenario: Search "french beans food scares" without quotes
 	  Given I am on the homepage
     When I fill in "q" with "french beans food scares"
-    And I press "search"
+    And I press "Search"
     Then I should get ckey u4416306 in the results
     And I should get ckey u4416306 in the first 1 results
 
   Scenario: Search "united states in the air" without quotes
 	  Given I am on the homepage
 	  When I fill in "q" with "united states in the air"
-	  And I press "search"
+	  And I press "Search"
 	  And I should get ckey u4823821 in the first 2 results
 	
   Scenario: Search "thomas jefferson library personal copy" without quotes
@@ -38,13 +37,13 @@ Feature: Everything (Default) Search Result Relevancy
 	  When "library_facet":"Special Collections" is applied
 	  Then I should get at least 300000 results
     When I fill in "q" with "thomas jefferson library personal copy"
-	  And I press "search"
+	  And I press "Search"
     Then I should get at most 500 results
     
   Scenario: Single-word searches should give precedence to exact matches
     Given I am on the homepage
     When I fill in "q" with "nature"
-    And I press "search"
+    And I press "Search"
     Then I should get ckey u2583402 in the results
     And I should get ckey u503598 in the results
     And I should get ckey u503599 in the results
@@ -54,7 +53,7 @@ Feature: Everything (Default) Search Result Relevancy
   Scenario: Greater precision for known item searching: columbia law review
     Given I am on the homepage
     When I fill in "q" with "columbia law review"
-    And I press "search"
+    And I press "Search"
     Then I should get ckey 008894325 in the first 2 results
   
   Scenario: Additive facets
@@ -62,7 +61,7 @@ Feature: Everything (Default) Search Result Relevancy
     When "library_facet":"Blandy Experimental Farm" is applied
     And "author_facet":"Darwin, Charles, 1809-1882" is applied
     And I fill in "q" with "geology"
-    And I press "search"
+    And I press "Search"
     Then I should get exactly 3 results
  
 # Pending until I can actually find something with more than 3 call numbers    
@@ -70,19 +69,19 @@ Feature: Everything (Default) Search Result Relevancy
 #  Given I am on the homepage
 #  When I fill in "q" with "The parliamentary debates (Hansard)"
 #    And I select "Title" from "focus"
-#    And I press "search"
+#    And I press "Search"
 #  Then I should see multiple call numbers
   
   Scenario: Do not display "HIDDEN" records in search results
     Given I am on the homepage
     When I fill in "q" with "Rail-truck intermodal transportation research, 1982"
-    And I press "search"
+    And I press "Search"
     Then I should not get ckey u63 in the results
    
   Scenario: Do not display "HIDDEN_OVERRIDE" records in search results
     Given I am on the homepage
     When I fill in "q" with "nationalism and sexuality : respectability and abnormal sexuality in modern europe"
-    And I press "search"
+    And I press "Search"
     Then I should not get ckey u200 in the results  
 
   Scenario: Music library searches
@@ -91,7 +90,7 @@ Feature: Everything (Default) Search Result Relevancy
 	  Then I should get at least 84000 results
 	  And  I should get at most 120000 results
     When I fill in "q" with "calexico"
-    And I press "search"
+    And I press "Search"
     Then I should get at least 3 results
 
   Scenario:  Portal stickiness
@@ -100,7 +99,7 @@ Feature: Everything (Default) Search Result Relevancy
     Then I should be in the Music Search portal
     When "recording_format_facet":"CD" is applied
     Then I should be in the Music Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be in the Music Search portal
     
   Scenario:  switch Portal 
@@ -111,7 +110,7 @@ Feature: Everything (Default) Search Result Relevancy
     Then I should be in the Music Search portal
     When I follow "Catalog + Article Results"
     Then I should be in the Catalog + Article Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be on the original catalog and article search page
     
   Scenario:  switch Portal 
@@ -122,7 +121,7 @@ Feature: Everything (Default) Search Result Relevancy
     Then I should be in the Music Search portal
     When I follow "Article Results"
     Then I should be in the Article Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be on the original catalog and article search page
     
   Scenario:  switch Portal 
@@ -133,7 +132,7 @@ Feature: Everything (Default) Search Result Relevancy
     Then I should be in the Video Search portal
     When I follow "Article Results"
     Then I should be in the Article Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be on the original catalog and article search page
     
   Scenario:  switch Portal 
@@ -144,177 +143,177 @@ Feature: Everything (Default) Search Result Relevancy
     Then I should be in the Video Search portal
     When I follow "Catalog + Article Results"
     Then I should be in the Catalog + Article Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be on the original catalog and article search page
     
-  Scenario:  Start over should return user to the main page of selected portal or view 
+  Scenario:  startOverLink should return user to the main page of selected portal or view 
     Given I am on the homepage
     And I choose "catalog_select_all"
     And I fill in "q" with "nature"
-    And I press "search"
+    And I press "Search"
     Then I should be in the Catalog + Article Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be on the original catalog and article search page
     
-  Scenario:  Start over should return user to the main page of selected portal or view 
+  Scenario:  startOverLink should return user to the main page of selected portal or view 
     Given I am on the homepage
     And I choose "catalog_select_all"
     And I fill in "q" with "nature"
-    And I press "search"
+    And I press "Search"
     Then I should be in the Catalog + Article Search portal
     When I follow "Article Results"
     Then I should be in the Article Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be on the original catalog and article search page
     
-  Scenario:  Start over should return user to the main page of selected portal or view 
+  Scenario:  startOverLink should return user to the main page of selected portal or view 
     Given I am on the homepage
     And I choose "catalog_select_all"
     And I fill in "q" with "nature"
-    And I press "search"
+    And I press "Search"
     Then I should be in the Catalog + Article Search portal
     When I follow "Music Results"
     Then I should be in the Music Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be in the Music Search portal
     
-   Scenario:  Start over should return user to the main page of selected portal or view 
+   Scenario:  startOverLink should return user to the main page of selected portal or view 
     Given I am on the homepage
     And I choose "catalog_select_all"
     And I fill in "q" with "nature"
-    And I press "search"
+    And I press "Search"
     Then I should be in the Catalog + Article Search portal
     When I follow "Video Results"
     Then I should be in the Video Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be in the Video Search portal
     
-  Scenario:  Start over should return user to the main page of selected portal or view 
+  Scenario:  startOverLink should return user to the main page of selected portal or view 
     Given I am on the homepage
     And I choose "catalog_select_catalog"
     And I fill in "q" with "nature"
-    And I press "search"
+    And I press "Search"
     Then I should be in the Catalog Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be on the original catalog and article search page
     
-  Scenario:  Start over should return user to the main page of selected portal or view 
+  Scenario:  startOverLink should return user to the main page of selected portal or view 
     Given I am on the homepage
     And I choose "catalog_select_catalog"
     And I fill in "q" with "nature"
-    And I press "search"
+    And I press "Search"
     Then I should be in the Catalog Search portal
     When I follow "Article Results"
     Then I should be in the Article Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be on the original catalog and article search page
     
-  Scenario:  Start over should return user to the main page of selected portal or view 
+  Scenario:  startOverLink should return user to the main page of selected portal or view 
     Given I am on the homepage
     And I choose "catalog_select_catalog"
     And I fill in "q" with "nature"
-    And I press "search"
+    And I press "Search"
     Then I should be in the Catalog Search portal
     When I follow "Music Results"
     Then I should be in the Music Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be in the Music Search portal
     
-  Scenario:  Start over should return user to the main page of selected portal or view 
+  Scenario:  startOverLink should return user to the main page of selected portal or view 
     Given I am on the homepage
     And I choose "catalog_select_catalog"
     And I fill in "q" with "nature"
-    And I press "search"
+    And I press "Search"
     Then I should be in the Catalog Search portal
     When I follow "Video Results"
     Then I should be in the Video Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be in the Video Search portal
     
-  Scenario:  Start over should return user to the main page of selected portal or view 
+  Scenario:  startOverLink should return user to the main page of selected portal or view 
     Given I am on the homepage
     And I choose "catalog_select_articles"
     And I fill in "q" with "nature"
-    And I press "search"
+    And I press "Search"
     Then I should be in the Article Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be on the original catalog and article search page
     
-  Scenario:  Start over should return user to the main page of selected portal or view 
+  Scenario:  startOverLink should return user to the main page of selected portal or view 
     Given I am on the homepage
     And I choose "catalog_select_articles"
     And I fill in "q" with "nature"
-    And I press "search"
+    And I press "Search"
     Then I should be in the Article Search portal
     When I follow "Catalog Results"
     Then I should be in the Catalog Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be on the original catalog and article search page
     
-  Scenario:  Start over should return user to the main page of selected portal or view 
+  Scenario:  startOverLink should return user to the main page of selected portal or view 
     Given I am on the homepage
     And I choose "catalog_select_articles"
     And I fill in "q" with "nature"
-    And I press "search"
+    And I press "Search"
     Then I should be in the Article Search portal
     When I follow "Music Results"
     Then I should be in the Music Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be in the Music Search portal
     
-  Scenario:  Start over should return user to the main page of selected portal or view 
+  Scenario:  startOverLink should return user to the main page of selected portal or view 
     Given I am on the homepage
     And I choose "catalog_select_articles"
     And I fill in "q" with "nature"
-    And I press "search"
+    And I press "Search"
     Then I should be in the Article Search portal
     When I follow "Video Results"
     Then I should be in the Video Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be in the Video Search portal
     
-  Scenario:  Start over should return user to the main page of selected portal or view 
+  Scenario:  startOverLink should return user to the main page of selected portal or view 
     Given I am on the homepage
     When I follow "Music Search"
     Then I should be in the Music Search portal
     When I fill in "q" with "nature"
-    And I press "search"
+    And I press "Search"
     Then I should be in the Music Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be in the Music Search portal
     
-  Scenario:  Start over should return user to the main page of selected portal or view 
+  Scenario:  startOverLink should return user to the main page of selected portal or view 
     Given I am on the homepage
     When I follow "Music Search"
     Then I should be in the Music Search portal
     When I fill in "q" with "nature"
-    And I press "search"
+    And I press "Search"
     Then I should be in the Music Search portal
     When I follow "Video Results"
     Then I should be in the Video Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be in the Video Search portal
     
-  Scenario:  Start over should return user to the main page of selected portal or view 
+  Scenario:  startOverLink should return user to the main page of selected portal or view 
     Given I am on the homepage
     When I follow "Video Search"
     Then I should be in the Video Search portal
     When I fill in "q" with "nature"
-    And I press "search"
+    And I press "Search"
     Then I should be in the Video Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be in the Video Search portal
     
-  Scenario:  Start over should return user to the main page of selected portal or view 
+  Scenario:  startOverLink should return user to the main page of selected portal or view 
     Given I am on the homepage
     When I follow "Video Search"
     Then I should be in the Video Search portal
     When I fill in "q" with "nature"
-    And I press "search"
+    And I press "Search"
     Then I should be in the Video Search portal
     When I follow "Music Results"
     Then I should be in the Music Search portal
-    When I follow "Start over"
+    When I follow "startOverLink"
     Then I should be in the Music Search portal
     
     
@@ -324,7 +323,7 @@ Feature: Everything (Default) Search Result Relevancy
     Then I should be in the Music Search portal
     And I should see the facet "Recordings and scores"
     When I fill in "q" with "Tim O'Brien"
-    And I press "search"
+    And I press "Search"
     Then I should see the facet "Recordings and scores"
     
   Scenario: Additive facets
@@ -339,76 +338,76 @@ Feature: Everything (Default) Search Result Relevancy
   Scenario: Display print and online versions in proximity in search results
     Given I am on the homepage
     When I fill in "q" with "germanic review"
-    And I press "search"
+    And I press "Search"
     Then I should get ckey u4487286 followed by ckey u461865
     Given I am on the homepage
     When I fill in "q" with "representations"
-    And I press "search"
+    And I press "Search"
     Then I should get ckey u4500425 followed by ckey u141067
   
   Scenario: Display Digital Library objects
     Given I am on the homepage
     When I fill in "q" with "The psychology of perspective and Renaissance art"
-    And I press "search"
+    And I press "Search"
     Then I should get ckey uva-lib:32444 in the results
   
 # having trouble getting this to work -- will investigate later
   Scenario: Encode query onto xtf.lib.virginia.edu links
 #  Given I am on the homepage
 #  When I fill in "q" with "Job Dundy"
-#    And I press "search"
+#    And I press "Search"
 #  Then the result display should have the full text view link of #http://xtf.lib.virginia.edu/xtf/view?docId=modern_english/uvaGenText/tei/BibNarr.xml&query=Job Dundy
  
 	
   Scenario: DVD call number search
     Given I am on the homepage
     When I fill in "q" with "Video .DVD05885"
-    And I press "search"
+    And I press "Search"
     Then I should get ckey u4372110 in the results
   
   Scenario: Author search should produce hits by the actual author in early results
     Given I am on the homepage
     When I fill in "q" with "hofmann michael"
-    And I press "search"
+    And I press "Search"
     Then I should see 10 results for the author Hofmann, Michael
     
   Scenario: If user inputs call number with quotes, preserve quotes
     Given I am on the homepage
     When I fill in "q" with "'mss 13'"
-    And I press "search"
+    And I press "Search"
     Then I should see the keyword value "'mss 13'"
     
   Scenario: If user inputs call number without quotes, don't display them
     Given I am on the homepage
     When I fill in "q" with "mss 13"
-    And I press "search"
+    And I press "Search"
     Then I should see the keyword value "mss 13"
     
   Scenario:  Uniform title search
     Given I am on the homepage
     When I fill in "q" with "holy bible 1748"
-    And I press "search"
+    And I press "Search"
     Then I should get ckey u2057213 in the results
   
   Scenario: Make sure keyword label defaults to "Keywords" if no focus is selected
     Given I am on the homepage
     When I fill in "q" with "women"
     And I choose "catalog_select_catalog"
-    And I press "search"
+    And I press "Search"
     Then I should see the keyword label "Keyword"
   
   Scenario: Make sure keyword label defaults to "Keywords" if no focus is selected in the Music portal
     Given I am on the homepage
     When I follow "Music Search"
     When I fill in "q" with "Sibelius"
-    And I press "search"
+    And I press "Search"
     Then I should see the keyword label "Keyword"
     
   Scenario: Return user to search results after logging in
     Given I am on the homepage
     When I fill in "q" with "edwin dugger"
     And I choose "catalog_select_catalog"
-    And I press "search"
+    And I press "Search"
     Then I should get ckey u29037 in the results
     When I click the "Sign in" link
     Then I should be logged in
@@ -418,7 +417,7 @@ Feature: Everything (Default) Search Result Relevancy
     Given I am on the homepage
     When I fill in "q" with "william pusey"
     And I choose "catalog_select_catalog"
-    And I press "search"
+    And I press "Search"
     Then I should get results
 		When I follow "Next »"
     And I follow "Alderman"
@@ -428,7 +427,7 @@ Feature: Everything (Default) Search Result Relevancy
     Given I am on the homepage
     When I fill in "q" with "red rain"
     And I choose "catalog_select_catalog"
-    And I press "search"
+    And I press "Search"
     When "library_facet":"Education" is applied
     Then I should get exactly 2 results
     And I should get ckey u2958712 in the first 1 results
@@ -442,7 +441,7 @@ Feature: Everything (Default) Search Result Relevancy
     Given I am on the homepage
     When I fill in "q" with "william w pusey"
     And I choose "catalog_select_catalog"
-    And I press "search"
+    And I press "Search"
     And "library_facet":"Special Collections" is applied
     Then I should get ckey u3900118 in the first 1 results
     When I select "Title" from "sort_key"
@@ -456,7 +455,7 @@ Feature: Everything (Default) Search Result Relevancy
     Given I am on the homepage
     When I fill in "q" with "william webb pusey"
     And I choose "catalog_select_catalog"
-    And I press "search"
+    And I press "Search"
     Then I should get ckey u3900118 in the first 1 results
     And I should get ckey u3900120 in the first 2 results
     When I select "100" from "per_page"
@@ -470,7 +469,7 @@ Feature: Everything (Default) Search Result Relevancy
     And "format_facet":"Thesis/Dissertation" is applied
     And I select "Author" from "sort_key"
     And I press "sort results"
-    Then I should get ckey u1659100 in the first 1 results
+	  Then I should get ckey u1659100 in the first 1 results
     And I should get ckey u1651581 in the first 2 results
     When I select "100" from "per_page"
     And I press "update"
@@ -486,13 +485,13 @@ Feature: Everything (Default) Search Result Relevancy
     Given I am on the homepage
     When "source_facet":"Digital Library" is applied
     When I fill in "q" with "parkways and park roads"
-    And I press "search"
+    And I press "Search"
     Then I should not get ckey uva-lib:151436 in the results
   
   Scenario:  Make sure microform journals are included in search results
     Given I am on the homepage
     When I fill in "q" with "utne reader"
-    And I press "search"
+    And I press "Search"
     Then I should get ckey u1851372 in the results
     
   Scenario: Make sure EADs don't get back into the index
@@ -510,7 +509,7 @@ Feature: Everything (Default) Search Result Relevancy
     Given I am on the homepage
     When I fill in "q" with "lariope"
     And I choose "catalog_select_catalog"
-    And I press "search"
+    And I press "Search"
     Then I should see no results
     Then I should not see "per page"
     Then I should not see "RSS"
@@ -532,7 +531,7 @@ Feature: Everything (Default) Search Result Relevancy
   #   Given a SOLR index with Stanford MARC data
   #   And I go to the home page
   #   When I fill in "q" with "waffle"
-  #   And I press "search"
+  #   And I press "Search"
   #   Then I should get ckey 6720427 before ckey 7763651
   #   And I should get ckey 4535360 before ckey 7763651
   #   And I should get ckey 2716658 before ckey 6546657

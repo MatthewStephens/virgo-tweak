@@ -12,13 +12,13 @@ Feature: Vernacular Script Display
 	Scenario: Display Chinese language fields in search results
 	 Given I am on the homepage
      When I fill in "q" with "Taiwan cinema"
-     And I press "search"
+     And I press "Search"
      Then I should get ckey u4802090 in the results
 
 	Scenario: Search for Chinese titles
 	 Given I am on the homepage
      When I fill in "q" with "台灣電影百年史話"
-     And I press "search"
+     And I press "Search"
      Then I should get ckey u4802090 in the results
 	 And the result display for ckey u4802090 should have a title of "台灣電影百年史話"
 	 And the result display for ckey u4802090 should have a title of "Taiwan dian ying bai nian shi hua"
