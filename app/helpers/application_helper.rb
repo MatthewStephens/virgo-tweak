@@ -1,6 +1,7 @@
 require 'fastercsv'
 require 'lib/uva/fedora'
 require 'lib/uva/scope_helper'
+require 'lib/uva/utils'
 require 'uva/advanced_search/advanced_search_fields'
 
 
@@ -201,7 +202,7 @@ module ApplicationHelper
    
   # used by the digital library/image collection views
   def image_url_exists?(image_src)
-    Blacklight::Utils.valid_image_url?(image_src)
+    UVA::Utils.valid_image_url?(image_src)
   end
    
   # returns the url for bookmarking this document in delicious
@@ -627,6 +628,10 @@ module ApplicationHelper
     end
     body = JSON.parse(response.body_str)
     body["id"]    
+  end
+
+  def zotero_span(document)
+    "<span class=\"Z3988\" title=\"#{document.export_as_openurl_ctx_kev(document.get(:format_facet) || '')}&amp;rft_id=http%3A%2F%2F#{request.host}%2Fcatalog%2F#{document.id}\" ><!-- COinS --></span>".html_safe
   end
 
  # find advanced search
