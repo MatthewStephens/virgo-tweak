@@ -41,7 +41,7 @@
       <h1><%= link_to_document document, :label => video_title(document), :counter => (counter + 1 + offset) %></h1>
       <div class="cover_summary <%= 'cover_only' if document.get(:description_note_display).nil? %>">
           <%= link_to_document_from_cover document, :span => "coverImage book", :counter => (counter + 1 + offset), :bookmakrs_view => bookmarks_view  %>
-          <%= truncate(document.get(:description_note_display), 800, ' [...]') if !document.get(:description_note_display).nil? %>
+          <%= truncate(document.get(:description_note_display), :length => 800, :omission => ' [...]') if !document.get(:description_note_display).nil? %>
  		  </div>
       <dl class="more_info_meta">
         <% #------------ Authors ------------- %>
