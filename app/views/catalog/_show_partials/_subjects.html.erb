@@ -6,7 +6,7 @@
   	<h2>Related Subjects</h2>
 	<ul>
   	  <% document.values_for(:subject_facet).each do |f| %>
-  	    <% f_display = f.gsub(/\s*--\s*/, ' &#8212; ') %>
+  	    <% f_display = f.gsub(/\s*--\s*/, ' &#8212; ').html_safe %>
   		  <li><%= link_to f_display, add_facet_params('subject_facet', f).merge(:action=>nil) %></li>
   		<% end %>
   	</ul>
