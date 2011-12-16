@@ -21,7 +21,7 @@ module UVA::Utils
     
     def fetch_url(url)
       begin
-        RAILS_DEFAULT_LOGGER.info "***** URL IS: #{url}"
+        Rails.logger.info "***** URL IS: #{url}"
         url = URI.parse(url)
         http = Net::HTTP.new(url.host,url.port)
         http.use_ssl = url.port==443
