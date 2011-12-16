@@ -17,8 +17,8 @@ module CoverImage::Sources
       base_uri = URI.parse(base_url)
       keys[:isbn].each do |isbn|
         image_url = base_uri.to_s + isbn.to_s
-        binary = Blacklight::Utils.valid_image_url?(image_url)
-        content_vals = Blacklight::Utils.content_vals(image_url)
+        binary = UVA::Utils.valid_image_url?(image_url)
+        content_vals = UVA::Utils.content_vals(image_url)
         next if ! binary
         data << {
           :source_data=>binary,

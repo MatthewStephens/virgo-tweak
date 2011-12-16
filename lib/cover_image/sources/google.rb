@@ -25,8 +25,8 @@ module CoverImage::Sources
         puts("following thumbnail url #{item['thumbnail_url']}")
         next if item['thumbnail_url'].to_s.empty?
         # might be able to change the zoom param in the thumbnail_url to 0 for larger images
-        binary = Blacklight::Utils.valid_image_url?(item['thumbnail_url'])
-        content_vals = Blacklight::Utils.content_vals(item['thumbnail_url'])
+        binary = UVA::Utils.valid_image_url?(item['thumbnail_url'])
+        content_vals = UVA::Utils.content_vals(item['thumbnail_url'])
         next if ! binary # sometimes google returns an error page!
         data << {
           :source_data=>binary,

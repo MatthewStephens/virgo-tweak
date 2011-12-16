@@ -18,9 +18,9 @@ module CoverImage::Sources
       keys[:isbn].each do |isbn|
         url = "http://syndetics.com/index.aspx?isbn=#{isbn}/mc.jpg" #"&client=sirsi&type=rw12"
         puts("searching for image at #{url}")
-        next unless (binary = Blacklight::Utils.valid_image_url?(url))
+        next unless (binary = UVA::Utils.valid_image_url?(url))
         puts("success on image at #{url}")
-        content_vals = Blacklight::Utils.content_vals(url)
+        content_vals = UVA::Utils.content_vals(url)
         data << {
           :source_data=>binary,
           :source_url=>url,

@@ -57,14 +57,14 @@ module CoverImage::Sources
           doc.search("//album/image[@size='#{size}']").detect do |v|
             h = v.inner_html
             next if h.to_s.empty?
-            binary = Blacklight::Utils.valid_image_url?(h, 100)
+            binary = UVA::Utils.valid_image_url?(h, 100)
             if binary
               doc_data[:source_url]=h
               doc_data[:source_data]=binary
             else
               next
             end
-            content_vals = Blacklight::Utils.content_vals(h)
+            content_vals = UVA::Utils.content_vals(h)
             doc_data[:content_type] = content_vals[:content_type]
             doc_data[:image_size] = content_vals[:image_size]
           end
