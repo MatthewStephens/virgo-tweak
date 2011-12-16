@@ -13,7 +13,7 @@
 			</ul>
 			<ul class="action_list_menu">
 				<% if @document.respond_to?(:export_as_openurl_ctx_kev) %>
-  				<li class="Z3988-container"><span class="Z3988" title="<%= @document.export_as_openurl_ctx_kev(@document.get(:format_facet) || '') %>" ><!-- COinS --></span></li>
+  				<li class="Z3988-container"><%= zotero_span(@document) %></li>
 				<% end %>
 				
 				<% if (@document.respond_to?(:export_as_mla_citation_txt) || @document.respond_to?(:export_as_apa_citation_txt)) %>
