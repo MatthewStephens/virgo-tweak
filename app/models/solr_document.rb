@@ -16,11 +16,11 @@ class SolrDocument
   use_extension( Blacklight::Solr::Document::Marc) do |document|
     document.key?( :marc_display  )
   end
-
+  
   use_extension( UVA::DigitalLibraryImageDocument) do |document|
     document.doc_type==:dl_image || document.doc_type==:dl_jp2k || document.doc_type==:dl_book
   end
-
+  
   def initialize(doc, solr_response=nil)
     super(doc, solr_response)
     will_export_as(:json, "application/json")
@@ -29,11 +29,7 @@ class SolrDocument
   # This document is also exportable as a json
   def export_as_json
     to_marc.to_hash.to_json
-  end
-  
-  def export_as_marcxml
-    to_marc.to_xml
-  end
+  end  
 
   # Semantic mappings of solr stored fields. Fields may be multi or
   # single valued. See Blacklight::Solr::Document::ExtendableClassMethods#field_semantics
