@@ -42,7 +42,9 @@ body {margin: 0; padding: 0;}
 }
 #left_column li,
 #right_column li {
+  line-height: 1.15em;
 	list-style-type: none;
+	margin-bottom: 1em;
 }
 #right_column {
 	width: 248px;
