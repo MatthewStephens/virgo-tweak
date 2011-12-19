@@ -7,7 +7,7 @@
 <div class="tool_content spec_coll">
 	
 <div class="dateSelector">
-<% form_tag(special_collections_requests_path, :method => :get) do %>
+<%= form_tag(special_collections_requests_path, :method => :get) do %>
   Select a date: <%= date_select('range', 'date', :order => [:month, :day, :year])%>
   <%= submit_tag "Go" %>
 <% end %>
