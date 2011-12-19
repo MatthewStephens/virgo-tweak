@@ -109,8 +109,8 @@ Then /^I should see the filter value "([^\"]*)"$/ do |arg1|
   page.should have_selector("span.filterValue", :text => arg1)
 end
 
-Then /^the page number should be (\d+)$/ do |page|
-  page.should have_selector("div.pagination span.current", :text => page)
+Then /^the page number should be (\d+)$/ do |arg1|
+  page.should have_selector("nav.pagination span.current", :text => arg1)
 end
 
 Then /^I should be in the (.+) portal$/ do |portal|
