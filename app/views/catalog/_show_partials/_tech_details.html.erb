@@ -6,7 +6,7 @@
 		<% end %>
     <li>
       <a href="" onclick="$('#marc_view_switch').toggle();return false;">Staff View</a>
-      <%- if document.respond_to?(:marc) -%>
+      <%- if document.respond_to?(:export_as_marcxml) -%>
       <div id="marc_view_switch" style="display:none;">
         <%= render "catalog/marc_view"  %>
       </div>
