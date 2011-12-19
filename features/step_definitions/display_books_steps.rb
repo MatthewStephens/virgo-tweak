@@ -78,8 +78,8 @@ end
 # this doesn't really test that the subfield and value are paired together
 # it just tests that both are present
 Then /^subfield "([^\"]*)" should have a value of "([^\"]*)"$/ do |arg1, arg2|
-  page.should have_selector("span.tag", arg1)
-  page.should have_selector("span.control_field_values", arg2)
+  page.should have_selector("span.tag", :text => arg1)
+  page.should have_selector("span.control_field_values", :text => arg2)
 end
 
 Then /^I should see the title "([^\"]*)"$/ do |arg1|
