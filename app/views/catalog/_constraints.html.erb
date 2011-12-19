@@ -102,7 +102,7 @@
   		<% end %>
   		</span>
 		
-      <%= pagination_links unless (@response.response['numFound'] < 1 or @response.docs.size < 1) %>
+      <%= pagination_links(@response) unless (@response.response['numFound'] < 1 or @response.docs.size < 1) %>
 		
   	</div>
 	

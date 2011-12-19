@@ -1051,12 +1051,8 @@ module ApplicationHelper
   end
   
   # catalog items and articles paginate differently
-  def pagination_links
-  	#if params[:controller] == 'articles'
-  	#	will_paginate @response, :separator=>''
-  	#else
-  	#  will_paginate @response.docs, :separator=>''
-  	#end
+  def pagination_links(response, options={}, &block)
+	  paginate paginate_params(response), options, &block
   end
 
   # used on combined view to view more results
