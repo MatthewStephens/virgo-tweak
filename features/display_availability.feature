@@ -65,7 +65,7 @@ Feature: Display Availability
 
   Scenario: show firehose results
     When I am on the firehose page for id u4899865
-    Then I should see "VIDEO .DVDTV000406 PT. 000001"
+    Then I should see "Olmos, Edward James"
     
   Scenario: Do not show link to Virgo request when in special collections lens
     Given I am in the Special Collections lens
