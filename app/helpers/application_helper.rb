@@ -37,14 +37,14 @@ module ApplicationHelper
   # a <span> within the <a href> tags in order for the ajax loading to work correctly
   #
   def link_to_document_from_cover(doc, opts={:span => "", :label=>Blacklight.config[:index][:show_link].to_sym, :counter => nil, :bookmarks_view => false})
-    #span_open = "<span class=\"#{opts[:span]}\" title=\"#{doc[:id]}\">\n"
-    #span_close = "</span>\n"
-    #val = link_to_document(doc, opts={:label=>Blacklight.config[:index][:show_link].to_sym, :counter => opts[:counter], :bookmarks_view => opts[:bookmarks_view]})
-    #val.insert(val.index(">") + 1, span_open)
+    span_open = "<span class=\"#{opts[:span]}\" title=\"#{doc[:id]}\">\n"
+    span_close = "</span>\n"
+    val = link_to_document(doc, opts={:label=>Blacklight.config[:index][:show_link].to_sym, :counter => opts[:counter], :bookmarks_view => opts[:bookmarks_view]})
+    val.insert(val.index(">") + 1, span_open)
     # unforunately, the :plugin setting doesn't work when referencing an image
     # in the /javascript path, so a hardcoded path like this will have to do for now
-    #val.insert(val.rindex("<"), (image_tag javascript_path('ext-2.2/resources/images/default/shared/blue-loading.gif'), :class=>'ajaxLoader', :width=>'16', :height=>'16', :alt => 'Loading') + span_close.html_safe)
-    #val
+    val.insert(val.rindex("<"), (image_tag javascript_path('ext-2.2/resources/images/default/shared/blue-loading.gif'), :class=>'ajaxLoader', :width=>'16', :height=>'16', :alt => 'Loading') + span_close.html_safe)
+    val.html_safe
   end
    
   # gets the location for a document, or "Multiple Locations" if there is more than 1
