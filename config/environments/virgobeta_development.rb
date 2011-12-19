@@ -35,7 +35,7 @@ Virgo::Application.configure do
   FEEDBACK_NOTIFICATION_FROM = 'virgo-feedback@virginia.edu'
   FEEDBACK_NOTIFICATION_SUBJECT = 'Virgo Feedback (dev)'
 
-  FIREHOSE_URL = "http://firehose.lib.virginia.edu:8080/firehose2"
+  FIREHOSE_URL = "http://webservice.lib.virginia.edu:8080/firehose2"
   PRIMO_URL = "http://primo4.hosted.exlibrisgroup.com:1701/PrimoWebServices/xservice/search/brief?institution=UVA&onCampus=true"
   
   FEDORA_REST_URL = 'http://fedora.lib.virginia.edu'
