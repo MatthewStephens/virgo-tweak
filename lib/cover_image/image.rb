@@ -13,7 +13,7 @@ module CoverImage
     end
     
     def file_path
-      File.join(RAILS_ROOT, 'public', 'images', 'bookcovers', path_parts)
+      File.join(Rails.root.to_s, 'public', 'images', 'bookcovers', path_parts)
     end
     
     def url_path
