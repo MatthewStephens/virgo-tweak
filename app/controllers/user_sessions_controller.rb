@@ -83,6 +83,7 @@ class UserSessionsController < ApplicationController
         redirect_to start_hold_account_request_url(redirect_params)
       else
         redirect_params.merge!(session[:search] || {})
+        redirect_params[:controller] = "catalog" # remove reference to articles controller
         redirect_to root_url(redirect_params)
       end
    end

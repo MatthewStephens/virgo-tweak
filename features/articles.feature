@@ -45,7 +45,15 @@ Feature: Display Articles
 		Then I should see select list "select#sort_key" with "Date" selected			
 		When I select "Relevancy" from "sort_key"
 		And I press "sort results"
-		Then I should see select list "select#sort_key" with "Relevancy" selected			
+		Then I should see select list "select#sort_key" with "Relevancy" selected		
+		
+	Scenario: Logging in after an article search should work
+		Given I am on the homepage
+		And I choose "catalog_select_articles"
+		And I fill in "q" with "global warming"
+		And I press "Search"
+		And I follow "Sign in"
+		Then I should get at least 150000 results	
 		
 	Scenario: Use query term from articles advanced search
 		Given I am on the articles advanced search page
