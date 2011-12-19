@@ -100,7 +100,7 @@ module Firehose::Common
       Firehose::Common.date_string(@last_checkout)
     end
     def available?
-      @current_location.code !~ /CHECKEDOUT|MISSING|INTRANSIT|GBP|ON-ORDER|CIRC-HOLD|LAW-HOLD|IN-PROCESS|BINDERY|PRESERVATN|CATALOGING/i
+      @current_location.code !~ /CHECKEDOUT|MISSING|INTRANSIT|GBP|ON-ORDER|CIRC-HOLD|LAW-HOLD|SERV-HOLD|IN-PROCESS|BINDERY|PRESERVATN|CATALOGING/i
     end
     def reserve?
       @current_location.code =~ /RESV|RESERVE|RSRV/i
