@@ -27,13 +27,16 @@ Full View: <%= document.value_for :url_display %>
 <%= document.value_for(:title_display, ";", "")  %> <%= document.value_for(:subtitle_display, ";", "") %> 
 <%= document.marc_display.responsibility_statement unless (document.to_marc.nil? or document.marc_display.responsibility_statement.nil?) %>
 <%= render :partial => 'catalog/availability', :locals => { :document => document }  %>
-<% end -%><% # end of case %>
-<% end -%><% #end of else-fullrecord %>
+<% end -%>
+<% # end of case -%>
+<% end -%>
+<% #end of else-fullrecord -%>
 
 URL of page:
 <%= catalog_path(document.id, :only_path => false, :host => @host) %>
 --------------------------------------------------------------------
-<% end -%><% # end of%>
+<% end -%>
+<% # end of @documents.each -%>
 <% @articles.each do |article| -%>
 <%= article.display.title %>
 <% unless article.display.creator.blank? -%>
