@@ -4,7 +4,7 @@
 
 <%= error_messages_for :map %>
 
-<% form_for(@map) do |f| -%>
+<%= form_for(@map) do |f| -%>
 <fieldset class="maps-form maps-container">
   <%= render :partial => 'form', :object => f %>
     <div class="row">
