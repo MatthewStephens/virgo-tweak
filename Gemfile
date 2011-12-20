@@ -22,7 +22,7 @@ gem 'will_paginate'
 gem 'unhappymapper', '0.4.1'
 gem 'fastercsv'
 
-group :development, :virgobeta_development do
+group :development, :virgobeta_development, :test, :cucumber, :virgobeta_test do
 	gem 'rcov'
 end
 
@@ -35,7 +35,7 @@ group :test, :cucumber, :virgobeta_test do
 	gem 'gherkin'
 	gem 'webrat'
 	gem 'rspec', '>2.0.0'
-	gem 'rspec-rails'
+	gem 'rspec-rails', '>2.0.0'
 	gem 'launchy'	
 end
 
