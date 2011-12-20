@@ -26,7 +26,7 @@ group :development, :virgobeta_development, :test, :cucumber, :virgobeta_test do
 	gem 'rcov'
 end
 
-group :test, :cucumber, :virgobeta_test do
+group :development, :test, :cucumber, :virgobeta_test do
 	gem 'database_cleaner'
 	gem 'fakeweb'
 	gem 'mocha'
