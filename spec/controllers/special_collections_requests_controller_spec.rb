@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require 'spec_helper'
 
 # to do - remove dependencies on document (:id => "u4967160"), "u850", and user id "mpc3c"
 
@@ -79,6 +79,9 @@ describe SpecialCollectionsRequestsController do
         controller.stubs(:uva_id?).returns(false)
         patron = mock()
         patron.stubs(:display_name).returns("")
+        patron.stubs(:last_name).returns("")
+        patron.stubs(:first_name).returns("")
+        patron.stubs(:middle_name).returns("")
         controller.stubs(:get_patron).returns(patron)
         get :new, :id => "u4967160", :user_id => "blahblah"
         flash[:error].should == "Unable to locate your patron record.  Please verify your login information and try again."
@@ -88,6 +91,9 @@ describe SpecialCollectionsRequestsController do
         login_user
         patron = mock()
         patron.stubs(:display_name).returns("Clown, Bozo")
+        patron.stubs(:last_name).returns("Clown")
+        patron.stubs(:first_name).returns("Bozo")
+        patron.stubs(:middle_name).returns("")
         patron.stubs(:overdue_count).returns(0)
         patron.stubs(:recalled_count).returns(0)
         controller.stubs(:get_patron).returns(patron)

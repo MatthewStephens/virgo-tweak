@@ -171,7 +171,7 @@ class SpecialCollectionsRequestsController < ApplicationController
     first_name = patron.first_name rescue ""
     middle_name = patron.middle_name rescue ""
     unless last_name.blank?
-      name = "" + last_name + ", " + first_name + " " + middle_name
+      name = ("" + last_name + ", " + first_name + " " + middle_name).strip
     else
       name = patron.display_name rescue ""
     end

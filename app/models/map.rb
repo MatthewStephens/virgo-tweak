@@ -7,7 +7,7 @@ class Map < ActiveRecord::Base
   
   def self.find_best_map(holding, copy)
     # library and call number match
-    maps = Map.all :joins => [:library, :call_number_ranges], :conditions => ["libraries.name = ?", holding.library.code]
+    maps = Map.all :joins => [:library, :call_number_ranges], :conditions => ["libraries.name = ?", holding.library.name]
     hits = CallNumberRange.location_and_call_number_match(holding, copy, maps)
     return hits[0] unless hits.empty?
     # whole library match

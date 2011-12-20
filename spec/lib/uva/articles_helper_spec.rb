@@ -1,9 +1,23 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
+require 'spec_helper'
 
 describe UVA::ArticlesHelper do
   
   class FakeArticlesHelper
     include UVA::ArticlesHelper
+    include UVA::SearchFieldsHelper
+    # add in a #config method that includes search field config
+    # that will be used by SearchFields
+    def config
+      {:search_fields => [{:key => 'keyword', :primo_key => 'any', :display_label => 'Keyword'},
+                                    {:key => 'author',  :primo_key =>  'creator', :display_label => 'Author'},
+                                    {:key => 'title', :primo_key =>  'title', :display_label => 'Title'},
+                                    {:key => 'journal', :primo_key =>  'jtitle', :display_label => 'Journal Title'},
+                                    {:key => 'publication_date', :primo_key => 'creationdate', :display_label => 'Year Published', :range => 'true'}
+                        ],
+      :default_qt => "search"
+      }
+    end
+    
   end
   
   describe "article requests" do
