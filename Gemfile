@@ -26,6 +26,10 @@ group :development, :virgobeta_development, :test, :cucumber, :virgobeta_test do
 	gem 'rcov'
 end
 
+group :virgobeta_development
+	gem 'newrelic_rpm'
+end
+
 group :development, :test, :cucumber, :virgobeta_test do
 	gem 'database_cleaner'
 	gem 'fakeweb'
