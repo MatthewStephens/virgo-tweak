@@ -26,7 +26,7 @@ group :development, :virgobeta_development, :test, :cucumber, :virgobeta_test do
 	gem 'rcov'
 end
 
-group :virgobeta_development
+group :virgobeta_development do
 	gem 'newrelic_rpm'
 end
 
