@@ -30,8 +30,8 @@ class ApplicationController < ActionController::Base
   end
   
   def notices_update(force_update=false)
-    return if current_user.nil?
     if !session[:notices_expiration] or session[:notices_expiration] < Time.now or force_update
+      return if current_user.nil?
       user = get_patron(current_user.login)
       return if !user
       half_hour = 1800
