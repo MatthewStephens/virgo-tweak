@@ -8,7 +8,7 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 # Wrap error messages with a span of class "fieldWithErrors"
 ActionView::Base.field_error_proc = Proc.new { |html_tag, instance|
-  "<span class=\"fieldWithErrors\">#{html_tag}</span>" }
+  "<span class=\"fieldWithErrors\">#{html_tag}</span>".html_safe }
 
 module Virgo
   class Application < Rails::Application
