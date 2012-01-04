@@ -58,7 +58,7 @@ class CallNumberRange < ActiveRecord::Base
     out = []
     maps.each do |map|
       map.call_number_ranges.each do |raw_range|
-        out << map if raw_range.location == location_code and raw_range.call_number_range == ""
+        out << map if raw_range.location == location_code
       end
     end
     out
