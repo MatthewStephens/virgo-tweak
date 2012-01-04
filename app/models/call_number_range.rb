@@ -40,34 +40,31 @@ class CallNumberRange < ActiveRecord::Base
 
   # given a call number and a list of map guides, returns a list of map guides where the given call number is 
   # bounded by the call number range in the given map guides
-  def self.call_number_match(call_number, maps)
+  def self.call_number_match(call_number, raw_ranges)
     return if call_number.blank?
     out = []
-    maps.each do |map|
-      map.call_number_ranges.each do |raw_range|
-        call_number_range = raw_range.call_number_range.split(/\-/)
-        out << map if call_number_range.length == 1 and call_number.match(/^#{call_number_range.first}/) rescue()
-        next if call_number_range.length != 2
-        out << map if self.bounded?(call_number_range.first, call_number, true) and self.bounded?(call_number_range.second, call_number,false)
-      end
+    raw_ranges.each do |raw_range|
+      call_number_range = raw_range.call_number_range.split(/\-/)
+      out << raw_range if call_number_range.length == 1 and call_number.match(/^#{call_number_range.first}/) rescue()
+      next if call_number_range.length != 2
+      out << raw_range if self.bounded?(call_number_range.first, call_number, true) and self.bounded?(call_number_range.second, call_number,false)
     end
     return out
   end  
   
-  def self.location_match(location_code, maps)
+  def self.location_match(location_code, raw_ranges)
     out = []
-    maps.each do |map|
-      map.call_number_ranges.each do |raw_range|
-        out << map if raw_range.location == location_code
-      end
+    raw_ranges.each do |raw_range|
+      out << raw_range if raw_range.location == location_code
     end
     out
   end
   
-  def self.location_and_call_number_match(holding, copy, maps)
-    call_number_matches = call_number_match(holding.call_number, maps) || []
+  def self.location_and_call_number_match(holding, copy)
+    ranges = CallNumberRange.joins(:map => :library).where('libraries.name = ?', holding.library.name) || []
+    call_number_matches = call_number_match(holding.call_number, ranges) || []
     location_and_call_number_matches = location_match(copy.current_location.code, call_number_matches)
-    location_matches = location_match(copy.current_location.code, maps)
+    location_matches = location_match(copy.current_location.code, ranges)
     
     return location_and_call_number_matches unless location_and_call_number_matches.empty?
     return location_matches unless location_matches.empty?
