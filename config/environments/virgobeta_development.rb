@@ -42,6 +42,8 @@ Virgo::Application.configure do
   FEDORA_USERNAME = 'fedoraAdmin'
   FEDORA_PASSWORD = 'aro2def'
   
+  GC.enable_stats
+  
 end
 
 
