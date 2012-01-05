@@ -7,7 +7,7 @@
 <div class="account_container">
   <div class="vcard">
     <h2><span class="fn"><%= @user_patron.display_name %></span> (<span class="uid"><%= @user_patron.computing_id %></span>)</h2>
-    <p class="title"><%= "#{@user_patron.title} &ndash; " unless @user_patron.title.blank? %><%= @user_patron.profile %></p>
+    <p class="title"><%= "#{@user_patron.title} &ndash; ".html_safe unless @user_patron.title.blank? %><%= @user_patron.profile %></p>
     <p class="org"><%= @user_patron.organizational_unit %></p>
     <p class="adr"><%= @user_patron.physical_delivery %></p>
     <p class="email"><%= @user_patron.email %></p>
@@ -29,7 +29,7 @@
         <li><%= link_to "Request interlibrary loan", "http://guides.lib.virginia.edu/requests" %></li>
       <% end %>
       <% if @user_patron.can_make_reserves? %>
-        <li><%= link_to "Place course reserve request (Print &amp; Collab)", "http://www2.lib.virginia.edu/faculty/course_materials.html" %></li>
+        <li><%= link_to "Place course reserve request (Print &amp; Collab)".html_safe, "http://www2.lib.virginia.edu/faculty/course_materials.html" %></li>
       <% end %>
       <li><%= link_to "Request a purchase (books, videos, etc.)", "https://www.lib.virginia.edu/purchaserequest" %></li>
       <li><%= link_to "Request scanning of Special Collections materials", "http://tracksys.lib.virginia.edu/request" %></li>
