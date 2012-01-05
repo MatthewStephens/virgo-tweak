@@ -2,8 +2,14 @@
 
 <div class="tool_content">
 
-<%= error_messages_for :maps_user %>
-
+<% if @maps_user.errors.any? %>
+  <ul>
+    <% @maps_user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+	
 <%= form_for(@maps_user) do |f| -%>
 <fieldset class="maps-user-form maps-container">
 <div class="row">
