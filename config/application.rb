@@ -48,10 +48,5 @@ module Virgo
     ENV['RECAPTCHA_PUBLIC_KEY']  = '6Ld3LwkAAAAAAJn9mbxRLerYjUVZFHdjFsYLKsCp'
     ENV['RECAPTCHA_PRIVATE_KEY'] = '6Ld3LwkAAAAAAMVxlk5cAzoBCVDp-eQxidkffNFd'
     
-    # API KEYS FOR UVA #
-#    LIBRARY_THING_API_KEY = '73d3097200e332adbe542b6eb7fdb162'
-#    LAST_FM_API_KEY = 'b25b959554ed76058ac220b7b2e0a026'
-    
-    
   end
 end

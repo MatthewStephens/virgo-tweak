@@ -24,6 +24,10 @@ Virgo::Application.configure do
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 
+  # API KEYS FOR UVA #
+  LIBRARY_THING_API_KEY = '73d3097200e332adbe542b6eb7fdb162'
+  LAST_FM_API_KEY = 'b25b959554ed76058ac220b7b2e0a026'
+
   FEEDBACK_NOTIFICATION_RECIPIENTS = %W(mpc3c@virginia.edu)
   FEEDBACK_NOTIFICATION_FROM = 'virgo-feedback@virginia.edu'
   FEEDBACK_NOTIFICATION_SUBJECT = 'Virgo Feedback (dev)'
