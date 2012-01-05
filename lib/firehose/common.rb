@@ -89,7 +89,6 @@ module Firehose::Common
     element :circulate, String
     has_one :current_location, CurrentLocation, :tag => "currentLocation"
     has_one :home_location, HomeLocation, :tag => "homeLocation"
-    attr_accessor :map
     def shadowed?
       @shadowed
     end
@@ -116,6 +115,9 @@ module Firehose::Common
     end
     def special_collections_display?
       @current_location.code =~ /DEC-IND-RM|SC-IN-PROC/
+    end
+    def map(holding)
+      Map.find_best_map(holding, self) if self.available?
     end
   end  
     
