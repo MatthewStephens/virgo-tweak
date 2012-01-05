@@ -6,7 +6,7 @@ class MapsController < ApplicationController
   
   # list all of the maps
   def index
-    @maps = Map.find(:all)
+    @maps = Map.joins(:library).order('name, description')
   end
   
   # start a new map
