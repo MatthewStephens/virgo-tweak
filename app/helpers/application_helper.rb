@@ -1065,7 +1065,7 @@ module ApplicationHelper
       link = catalog_index_path(base_params)
       label = 'catalog'
     end
-    link_to "See all #{label} results &rarr;", link, :class => style
+    link_to "See all #{label} results &rarr;".html_safe, link, :class => style
   end
 
 end
