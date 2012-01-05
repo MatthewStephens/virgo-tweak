@@ -1,5 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
-
+require 'spec_helper'
 require "rake"
 
 describe "blacklight:delete_old_searches" do

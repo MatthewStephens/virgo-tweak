@@ -8,7 +8,7 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 # Wrap error messages with a span of class "fieldWithErrors"
 ActionView::Base.field_error_proc = Proc.new { |html_tag, instance|
-  "<span class=\"fieldWithErrors\">#{html_tag}</span>" }
+  "<span class=\"fieldWithErrors\">#{html_tag}</span>".html_safe }
 
 module Virgo
   class Application < Rails::Application
@@ -45,13 +45,8 @@ module Virgo
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
     
-#    ENV['RECAPTCHA_PUBLIC_KEY']  = '6Ld3LwkAAAAAAJn9mbxRLerYjUVZFHdjFsYLKsCp'
-#    ENV['RECAPTCHA_PRIVATE_KEY'] = '6Ld3LwkAAAAAAMVxlk5cAzoBCVDp-eQxidkffNFd'
-    
-    # API KEYS FOR UVA #
-#    LIBRARY_THING_API_KEY = '73d3097200e332adbe542b6eb7fdb162'
-#    LAST_FM_API_KEY = 'b25b959554ed76058ac220b7b2e0a026'
-    
+    ENV['RECAPTCHA_PUBLIC_KEY']  = '6Ld3LwkAAAAAAJn9mbxRLerYjUVZFHdjFsYLKsCp'
+    ENV['RECAPTCHA_PRIVATE_KEY'] = '6Ld3LwkAAAAAAMVxlk5cAzoBCVDp-eQxidkffNFd'
     
   end
 end

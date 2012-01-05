@@ -1,8 +1,8 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
+require 'spec_helper'
 
-describe Account::Availability do
+describe Firehose::Availability do
   
-  class FakeAvailability < Account::Availability
+  class FakeAvailability < Firehose::Availability
     def initialize(document, catalog_item)
       @document, @_catalog_item = document, catalog_item
       @_summary_libraries = []

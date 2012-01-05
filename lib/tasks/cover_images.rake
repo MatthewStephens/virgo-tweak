@@ -1,3 +1,5 @@
+require 'lib/cover_image/loader'
+
 namespace :cover_images do
   
   task :harvest, :do_solr_updates, :date_string, :needs => :environment do |t, args|

@@ -1,7 +1,16 @@
+require 'lib/uva/search_fields_helper'
+require 'lib/uva/solr_helper_override'
+require 'lib/cover_image/finder'
+require 'lib/cover_image/sources/google'
+require 'lib/cover_image/sources/last_fm'
+require 'lib/cover_image/sources/library_thing'
+require 'lib/cover_image/sources/music_brainz'
+require 'lib/cover_image/sources/syndetics'
 module CoverImage
   class Loader
     include Blacklight::SolrHelper
-    include UVA::SolrHelper
+    include UVA::SearchFieldsHelper
+    include UVA::SolrHelperOverride
 
     def initialize(do_solr_updates, date_string)
       do_solr_updates ? docs = solr_add_docs(date_string) : docs = hourly_updates
@@ -46,7 +55,7 @@ module CoverImage
     
     # harvest an image for this doc
     def harvest!(doc_image)
-      if images = find(doc_image.doc)
+      if images = image_find(doc_image.doc)
         puts("found image for #{doc_image.doc[:id]}")
         FileUtils.mkdir_p File.dirname(doc_image.file_path)
         File.open(doc_image.file_path, File::CREAT|File::WRONLY) {|f| f.puts images.first[:source_data] }
@@ -54,7 +63,7 @@ module CoverImage
     end
 
     # dispatch to the appropriate finder
-    def find(doc)
+    def image_find(doc)
       return find_bookcovers(doc) if doc.doc_type==:lib_catalog
       mbids = music_brainz_ids(doc)
       return find_albumcovers(mbids) if doc.doc_type==:lib_album && !mbids.nil?

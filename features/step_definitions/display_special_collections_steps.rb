@@ -8,11 +8,12 @@ Then /^I should see one filter for Special Collections/i do
 end
 
 Given /^I am logged in as a Special Collections administrator$/ do
+  visit logout_path
   login = "BigWig"
   email = "bigwig@bigwig.com"
   user = User.find_or_create_by_login(:login => login, :email =>email, :password => "password", :password_confirmation => "password")
   superuser = SpecialCollectionsUser.create(:id => user.id, :computing_id => user.login)
-  visit user_sessions_path(:user_session => {:login => login, :password => "password"}), :post
+  visit login_path(:login => login)
   visit special_collections_requests_path
 end
 

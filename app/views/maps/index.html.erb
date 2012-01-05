@@ -25,7 +25,7 @@
     <% end %>
     
     <h3>Add a Call Number Range <span class="optional">optional</span></h3>
-		<% form_tag(call_number_ranges_path) do %>
+		<%= form_tag(call_number_ranges_path) do %>
 		  <%= label_tag 'location', 'Location' %>
 			<%= select_tag :location, options_for_select(Location.find(:all, :order=>:value).collect{ |c| [c.value, c.value]}.insert(0, ""))   %>
 			<%= label_tag 'call_number_range', 'Range' %>

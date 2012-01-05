@@ -41,10 +41,8 @@ class UserSessionsController < ApplicationController
          else
            user = User.find_or_create_by_login(request.env['REMOTE_USER']) if user.nil?
          end
-       elsif (Rails.env == 'cucumber' or Rails.env == 'test') and !params[:login].blank?
-         user = User.create(:login=>params[:login]) if user.nil?
-       elsif Rails.env == 'development' and !params[:login].blank?
-         user = User.create(:login=>params[:login]) if user.nil?
+       elsif (Rails.env == 'cucumber' or Rails.env == 'test' or Rails.env == 'development') and !params[:login].blank?
+         user = User.find_or_create_by_login(:login=>params[:login]) if user.nil?
        else
          # Create the temp/demo user if the above methods didn't work
          user = User.create(:login=>'demo_' + User.count.to_s) if user.nil? 
@@ -85,6 +83,7 @@ class UserSessionsController < ApplicationController
         redirect_to start_hold_account_request_url(redirect_params)
       else
         redirect_params.merge!(session[:search] || {})
+        redirect_params[:controller] = "catalog" # remove reference to articles controller
         redirect_to root_url(redirect_params)
       end
    end

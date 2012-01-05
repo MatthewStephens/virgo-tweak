@@ -16,6 +16,9 @@ module NavigationHelpers
        
      when /the advanced search page/
        advanced_path
+       
+    when /the feedback page/
+      feedback_path
 
      when /the articles advanced search page/
        advanced_articles_path(:catalog_select => 'articles')

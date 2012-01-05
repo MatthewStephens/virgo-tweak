@@ -1,22 +1,13 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require 'spec_helper'
 
 describe ApplicationController do
   
-  class FakeController < ApplicationController
+  controller do
     before_filter :verify_map_user
     def index
-      render "blahblahblah"
+      render :text => "blahblahblah"
     end
-  end
-
-  controller_name :fake
-  
-  before(:each) do
-    ActionController::Routing::Routes.draw do |map|
-      map.resources :fake
-    end
-  end
-  
+  end  
   
   describe "verify_map_user" do
     
@@ -24,7 +15,7 @@ describe ApplicationController do
       controller.stubs(:current_user).returns nil
       get :index
       flash[:error].should == 'You must be logged in to manage maps. <a href="/login?redirect=maps">Log in</a>'
-      response.should redirect_to(root_path)
+      response.should redirect_to('/')
     end
     
     it "should set a flash error and redirect to root path if the user is not a maps user" do
@@ -33,7 +24,7 @@ describe ApplicationController do
       MapsUser.stubs(:find_by_computing_id).returns(nil)
       get :index
       flash[:error].should == 'You are not authorized to manage maps.'
-      response.should redirect_to(root_path)
+      response.should redirect_to('/')
     end
     
     it "should not produce an error if it is a valid maps user" do

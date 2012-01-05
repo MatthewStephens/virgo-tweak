@@ -1,10 +1,10 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require 'spec_helper'
 
 describe MapsController do
   before(:each) do
     user = User.create(:login => 'mst3k')
     controller.stubs(:current_user).returns user
-    maps_user = mock("MapsUser")
+    maps_user = MapsUser.create(:id => user.id)
     MapsUser.stubs(:find_by_computing_id).returns maps_user
   end
   
@@ -23,6 +23,13 @@ describe MapsController do
     end
   end
   
+  describe "destroy action" do
+    it "should delete the map" do
+      @map = Map.create(:url => "http://mymap.com", :description => "test map", :library_id => "ald")
+      lambda {delete :destroy, :id => @map.id}.should change(Map, :count).by(-1)
+    end
+  end
+  
   describe "new action" do
     it "should set a new map" do
       get :new
@@ -36,7 +43,7 @@ describe MapsController do
       assigns[:map].should_not be_nil
     end
     it "should save successfully" do
-      post :create, :map=>{:url=>"http://www.mymap.com", :description=>"test map"}
+      post :create, :map=>{:url=>"http://www.mymap.com", :description=>"test map", :library_id => "ald"}
       flash[:notice].should == 'Map succesfully created'
       response.should redirect_to maps_path
     end
@@ -62,7 +69,7 @@ describe MapsController do
   
   describe "update action" do
     before(:each) do
-      @map = Map.create(:url => "http://mymap.com", :description => "test map")
+      @map = Map.create(:url => "http://mymap.com", :description => "test map", :library_id => "ald")
       Map.stubs(:find).returns(@map)
     end
     it "should fetch the map" do
@@ -81,12 +88,7 @@ describe MapsController do
     end
   end
   
-  describe "destroy action" do
-    it "should delete the map" do
-      @map = Map.create(:url => "http://mymap.com", :description => "test map")
-      lambda {delete :destroy, :id => @map.id}.should change(Map, :count).by(-1)
-    end
-  end
+
   
 
 end

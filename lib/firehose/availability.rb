@@ -14,7 +14,6 @@ class Firehose::Availability
     @_summary_libraries = []
     set_summary_holdings
     weed_holdings
-    set_maps
   end
   
   def to_xml
@@ -93,14 +92,6 @@ class Firehose::Availability
     end
     # if everything was shadowed, pitch it
     @_catalog_item.holdings.delete_if { |holding| holding.copies.size == 0 }    
-  end
-  
-  def set_maps
-    @_catalog_item.holdings.each do |holding|
-      holding.copies.each do |copy|
-        copy.map = Map.find_best_map(holding, copy) if copy.available?
-      end
-    end
   end
   
   def finalize_holdings(order, hold_map)

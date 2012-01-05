@@ -1,10 +1,10 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require 'spec_helper'
 
 describe MapsUsersController do
   before(:each) do
     user = User.create(:login => 'mst3k')
     controller.stubs(:current_user).returns user
-    maps_user = mock("MapsUser")
+    maps_user = MapsUser.create(:id => user.id)
     MapsUser.stubs(:find_by_computing_id).returns maps_user
   end
   
@@ -22,6 +22,13 @@ describe MapsUsersController do
         get :index
         assigns[:maps_users].should_not be_nil
       end
+    end
+  end
+  
+  describe "destroy action" do
+    it "should delete the maps user" do
+      @maps_user = MapsUser.create(:computing_id => "mst3k")
+      lambda {delete :destroy, :id => @maps_user.id}.should change(MapsUser, :count).by(-1)
     end
   end
   
@@ -44,12 +51,7 @@ describe MapsUsersController do
     end
   end
   
-  describe "destroy action" do
-    it "should delete the maps user" do
-      @maps_user = MapsUser.create(:computing_id => "mst3k")
-      lambda {delete :destroy, :id => @maps_user.id}.should change(MapsUser, :count).by(-1)
-    end
-  end
+
   
 
   

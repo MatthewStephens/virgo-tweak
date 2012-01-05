@@ -5,7 +5,7 @@
 </div>
 
 <div class="tool_content">
-<% form_tag send_email_record_catalog_path, :id => 'email_form', :method => :post do %>
+<%= form_tag send_email_record_catalog_path, :id => 'email_form', :method => :post do %>
   <%= label_tag(:to, "Email") %>
   <%= text_field_tag :to %>
   <%= label_tag(:message, "Message") %>

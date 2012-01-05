@@ -10,7 +10,7 @@
   </ul>
 <% end %>
 
-<% form_tag do %>
+<%= form_tag do %>
   <fieldset>
     <%= label_tag 'Your Name' %> <%= text_field_tag :name, h(params[:name]) %>
     <%= label_tag 'Your Email' %> <%= text_field_tag :email, h(params[:email]) %>

@@ -1,24 +1,15 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require 'spec_helper'
+require 'rsolr'
 
 describe CatalogController do
   
   describe "redirect needed" do    
     it "should redirect to the provided message if there is a RedirectNeeded exception" do
-      controller.should_receive(:get_search_results).and_raise(UVA::Document::RedirectNeeded.new("http://www.google.com"))
+      controller.should_receive(:get_search_results).and_raise(UVA::RedirectNeeded.new("http://www.google.com"))
       get :index
       response.should redirect_to "http://www.google.com"
     end
   end
-  
-  describe "rsolr error" do
-    it "should set a notice and redirect to catalog index" do
-       controller.should_receive(:get_search_results).and_raise(RSolr::RequestError)
-       get :index
-       flash[:notice].should == "Sorry, I don't understand your search."
-       response.should redirect_to catalog_index_path
-    end
-  end
-  
   
   describe "index action" do
     
@@ -51,11 +42,11 @@ describe CatalogController do
     describe "call number search" do
       it "should remove quotes after they have been added" do
         get :index, :q => 'MSS 123', :search_field => 'call_number'
-        params[:q].should == 'MSS 123'
+        controller.params[:q].should == 'MSS 123'
       end
       it "should add the quotes back in if they were there to begin with" do
         get :index, :q => '"MSS 123"', :search_field => 'call_number'
-        params[:q].should == '"MSS 123"'
+        controller.params[:q].should == '"MSS 123"'
       end
     end
   
@@ -161,31 +152,16 @@ describe CatalogController do
     end
   end
   
-  describe "status" do
+  describe "availability" do
     doc_id = "u3954069"
     it "should get the availability" do
-      get :status, :id => doc_id
+      get :availability, :id => doc_id
       assigns[:document].availability.should_not be_nil
     end
-    it "should render status.html.erb" do
-      get :status, :id => doc_id
-      response.should render_template(:status)
+    it "should render availability.html.erb" do
+      get :availability, :id => doc_id
+      response.should render_template(:availability)
     end
-  end
-  
-  describe "firehose" do
-    doc_id = "u3954069"
-    before(:each) do
-      record = mock("blah")
-      record.stubs(:to_xml).returns("blah_as_xml")
-      firehose = mock(Account::Availability)
-      firehose.stubs(:to_xml).returns(record)
-      Account::Availability.stubs(:find).returns(firehose)
-    end
-    it "should give an xml response" do
-      get :firehose, :id => doc_id, :format => 'xml'
-      response.should be_success
-    end      
   end
   
   describe "image_load" do
@@ -200,7 +176,7 @@ describe CatalogController do
     end
     it "should set a lean query type" do
       get :image_load, :id => doc_id
-      params[:qt].should == :document_lean
+      controller.params[:qt].should == :document_lean
     end
   end
   
@@ -221,11 +197,7 @@ describe CatalogController do
     it "should get documents" do
       get :endnote, :id => doc_ids
       assigns[:documents].should_not be_nil
-    end
-    it "should render endnote.html.erb" do
-      get :endnote, :id => doc_ids
-      response.should render_template(:endnote)
-    end      
+    end    
   end
 
   describe "email" do
@@ -263,6 +235,20 @@ describe CatalogController do
     end
   end
     
+  describe "firehose" do
+    doc_id = "u3954069"
+    before(:each) do
+      record = mock("blah")
+      record.stubs(:to_xml).returns("blah_as_xml")
+      firehose = mock(Firehose::Availability)
+      firehose.stubs(:to_xml).returns(record)
+      Firehose::Availability.stubs(:find).returns(firehose)
+    end
+    it "should give an xml response" do
+      get :firehose, :id => doc_id, :format => 'xml'
+      response.should be_success
+    end      
+  end
   
   
 end

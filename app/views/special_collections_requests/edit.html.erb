@@ -15,7 +15,7 @@
 <%= link_to '&larr; Return to request list', special_collections_requests_path %>
 </div>
 
-<% form_for(@special_collections_request) do |f| -%>
+<%= form_for(@special_collections_request) do |f| -%>
 <fieldset>
   <%= render :partial => 'user_form', :object => f %>
   <p>

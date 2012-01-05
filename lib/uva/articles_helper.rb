@@ -189,6 +189,16 @@ module UVA
         p
       end
     
+      # for kaminari
+      def rows(extra_controller_params={})
+        per_page
+      end
+      
+      # for kaminari
+      def start
+        params[:start]
+      end
+      
       def self.custom_parse(content, extra_controller_params)
         # HappyMapper parsing
         response = Response.parse(content, :single=>true)

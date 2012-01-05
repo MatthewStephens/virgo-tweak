@@ -6,10 +6,8 @@ class Map < ActiveRecord::Base
   validates_presence_of :url, :description, :library_id
   
   def self.find_best_map(holding, copy)
-    # library and call number match
-    maps = Map.all :joins => [:library, :call_number_ranges], :conditions => ["libraries.name = ?", holding.library.code]
-    hits = CallNumberRange.location_and_call_number_match(holding, copy, maps)
-    return hits[0] unless hits.empty?
+    ranges = CallNumberRange.location_and_call_number_match(holding, copy)
+    return ranges[0].map unless ranges.empty?
     # whole library match
     hits = Map.all(:joins => 'INNER JOIN libraries on maps.library_id = libraries.id LEFT JOIN call_number_ranges on call_number_ranges.map_id = maps.id', 
                     :conditions => ["libraries.name = ? AND call_number_range IS NULL", holding.library.code])

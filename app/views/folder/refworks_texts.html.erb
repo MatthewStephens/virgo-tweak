@@ -2,7 +2,7 @@
 
 <div id="refworks_export">
   <h2>Now exporting to Refworks.  If you are not redirected to Refworks, please click the button below to export again.</h2>
-  <% form_tag "http://www.refworks.com/express/expressimport.asp?vendor=#{application_name}&filter=MARC%20Format&encoding=65001", :name => "refworks" do %>
+  <%= form_tag "http://www.refworks.com/express/expressimport.asp?vendor=#{application_name}&filter=MARC%20Format&encoding=65001", :name => "refworks" do %>
   <%= hidden_field_tag "ImportData", render_refworks_texts(@documents) %>
   <%= submit_tag "Export to Refworks" %>
   <% end %>

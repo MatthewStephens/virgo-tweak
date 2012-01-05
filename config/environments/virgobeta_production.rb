@@ -56,6 +56,10 @@ Virgo::Application.configure do
     :sender_address => %{"Error" <mpc3c@virginia.edu>},
     :exception_recipients => %w{mpc3c@virginia.edu}
 
+  # API KEYS FOR UVA #
+  LIBRARY_THING_API_KEY = '73d3097200e332adbe542b6eb7fdb162'
+  LAST_FM_API_KEY = 'b25b959554ed76058ac220b7b2e0a026'
+
   FEEDBACK_NOTIFICATION_RECIPIENTS = %W(virgo-feedback@virginia.edu)
   FEEDBACK_NOTIFICATION_FROM = 'virgo-feedback@virginia.edu'
   FEEDBACK_NOTIFICATION_SUBJECT = 'Virgo Feedback (production)'
