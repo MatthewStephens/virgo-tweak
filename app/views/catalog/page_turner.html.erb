@@ -6,7 +6,7 @@
 <!--[if gt IE 9]><!--> <html lang="en"> <!--<![endif]-->
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title><%= @document.value_for(:title_display).nil? ? "Document Viewer" : truncate(@document.value_for(:title_display), 80, "...") %> - Virgo - University of Virginia Library</title>
+  <title><%= @document.value_for(:title_display).nil? ? "Document Viewer" : truncate(@document.value_for(:title_display), :length => 80, :separator => "...") %> - Virgo - University of Virginia Library</title>
   <meta name="description" content="Virgo, the online catalog of University of Virginia Library.  Books, articles, maps, digital materials, and more.">
   <meta name="author" content="University of Virginia Library">
   <meta name="keywords" content="University of Virginia, UVa, Virginia, Library, UVa Library, University of Virginia Library, Research, Virgo, VIRGO, catalog, articles, books, journals" />

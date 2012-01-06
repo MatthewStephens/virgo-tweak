@@ -77,13 +77,12 @@ class SolrDocument
       types = [
         [:hathi, has?(:source_facet, 'Hathi Trust Digital Library')],
         [:lib_album, has?(:format_facet, /Musical Recording/i)],
-        [:dl_book, has?(:content_model_facet, 'digital_book')],
+        [:dl_book, (has?(:content_model_facet, 'digital_book') or has?(:content_model_facet, 'jp2k'))],
         [:lib_catalog, has?(:source_facet, 'Library Catalog')],
         [:lib_coins, has?(:source_facet, 'U.Va. Art Museum')],
         [:dl_image, has?(:content_model_facet, 'media')],
         [:dl_text, has?(:content_model_facet, 'text')],
         [:dl_text, has?(:content_model_facet, 'finding aid')],
-        [:dl_jp2k, has?(:content_model_facet, 'jp2k')],
         [:dl_manuscript, has?(:content_model_facet, 'manuscript')],
         [:default, true]
       ]
