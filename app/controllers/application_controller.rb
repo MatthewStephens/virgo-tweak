@@ -13,7 +13,6 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   helper_method :user_session, :current_user, :new_user_session_path, :destroy_user_session_path
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  before_filter :notices_update
 
   include ExceptionNotification::Notifiable
   include UVA::ScopeHelper

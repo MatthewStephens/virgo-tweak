@@ -9,6 +9,7 @@ class AccountController < ApplicationController
   include Firehose::Holds
   include Firehose::Reserves
   before_filter :verify_login, :except => "select"
+  before_filter :notices_update
 
   def index
     @user_patron = get_patron(current_user.login) or render :not_found

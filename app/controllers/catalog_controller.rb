@@ -15,6 +15,7 @@ class CatalogController < ApplicationController
   include UVA::ArticlesHelper
   
   # the featured_documents are used when there are no queries or filters applied
+  before_filter :notices_update, :only=>[:index, :show]
   before_filter :adjust_for_advanced_search, :only=>:index
   before_filter :adjust_for_portal, :only=>:index
   before_filter :setup_call_number_search, :only=>:index
