@@ -12,6 +12,7 @@ class AccountRequestsController < ApplicationController
   include Firehose::Common
   include UVA::SolrHelperOverride
   
+  before_filter :notices_update
   before_filter :solr_lookup, :only=>[:start_hold, :create_hold, :renew]
   before_filter :verify_account
   before_filter :verify_hold_request, :only=>[:start_hold, :create_hold]
