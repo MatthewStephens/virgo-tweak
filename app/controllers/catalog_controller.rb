@@ -212,9 +212,9 @@ class CatalogController < ApplicationController
     @image_titles=[]
     @image_descriptions=[]
     media_ids.each { |m| 
-      @image_pids << m[:pid]; 
-      @image_titles << m[:title]; 
-      @image_descriptions << m[:description]; 
+      @image_pids << m[:pid]
+      @image_titles << m[:title]
+      @image_descriptions << m[:description]
     }
     @pid_string = String.new
     @caption_string= String.new

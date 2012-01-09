@@ -54,9 +54,9 @@ module UVA
 
     def dl_jp2k_applet_viewer(media_id, *focus_id)
         if ! focus_id.empty?
-          "#{ENV['RAILS_RELATIVE_URL_ROOT']}/catalog/#{media_id}/page_turner?focus=#{focus_id}"
+          "#{ENV['RAILS_RELATIVE_URL_ROOT']}/catalog/#{media_id}/view?focus=#{focus_id}"
         else
-          "#{ENV['RAILS_RELATIVE_URL_ROOT']}/catalog/#{media_id}/page_turner"
+          "#{ENV['RAILS_RELATIVE_URL_ROOT']}/catalog/#{media_id}/view"
         end
       end
 
