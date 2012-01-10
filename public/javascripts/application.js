@@ -325,5 +325,11 @@ jQuery(document).ready(function($) {
 	});
 	
 	init();
+	
+	// send along tokens so that session doesn't go poof
+	$(document).ajaxSend(function(e, xhr, options) {
+	  var token = $("meta[name='csrf-token']").attr("content");
+	  xhr.setRequestHeader("X-CSRF-Token", token);
+	});
 
 });
