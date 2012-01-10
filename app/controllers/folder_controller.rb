@@ -8,6 +8,7 @@ class FolderController < ApplicationController
   include UVA::ArticlesHelper
   include UVA::SolrHelperOverride
   
+  before_filter :max_per_page_params, :only=>[:index, :refworks_texts, :csv]
   before_filter :resolve_sort, :only=>:index
   before_filter :articles, :only=>[:index, :csv]
     
@@ -15,6 +16,7 @@ class FolderController < ApplicationController
   def create
     add_to_folder_session(params[:id], session_folder_document_ids)
     add_to_folder_session(params[:article_id], session_folder_article_ids)
+    
     respond_to do |format|
       format.js { render :json => session_folder_document_ids }
       format.html { redirect_to :back }
@@ -49,12 +51,10 @@ class FolderController < ApplicationController
   end
  
   def refworks_texts
-    params[:show_max_per_page] = 'true'
     @response, @documents = get_solr_response_for_field_values("id", session_folder_document_ids)
   end
   
   def csv
-    params[:show_max_per_page] = 'true'
     @response, @documents = get_solr_response_for_field_values("id", session_folder_document_ids)
     respond_to do |format|
       format.csv
@@ -91,6 +91,10 @@ class FolderController < ApplicationController
  
   def articles
     @articles = get_articles_by_ids(session_folder_article_ids)
+  end
+  
+  def max_per_page_params
+    params[:show_max_per_page] = 'true'
   end
    
 end
