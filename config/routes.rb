@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   match 'catalog/:id/status', :to => 'catalog#availability', :as => 'status'
   match 'catalog/:id/image_load', :to => 'catalog#image_load', :as => 'image_load'
   match 'catalog/:id/firehose', :to => 'catalog#firehose', :as => 'firehose', :defaults => { :format => 'xml'}
+  match 'catalog/:id/view', :to => 'catalog#page_turner', :as => 'view'
   match 'catalog/:id/page_turner', :to => 'catalog#page_turner', :as => 'page_turner'
   match 'fedora_metadata/:id/:pid.:format', :to => 'catalog#fedora_metadata', :as => 'fedora_metadata'
   match 'folder/refworks_texts', :to => 'folder#refworks_texts', :as => 'refworks_texts'

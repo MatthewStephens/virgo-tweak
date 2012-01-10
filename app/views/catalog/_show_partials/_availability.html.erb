@@ -33,7 +33,7 @@
   	<% end %>
 
   	<% #--------- Digital Book Object  ------------- %>
-  	<% if document.has?(:content_model_facet, 'digital_book') %>
+  	<% if document.has?(:content_model_facet, 'digital_book') or document.has?(:content_model_facet, 'jp2k') %>
   	    <div id="onlineAvailability" class="holding">
 					<h3><%= online_access_verb(document) %> Online</h3>
 					<div class="onlineHolding">
@@ -84,7 +84,7 @@
     </script>
 	<% end %>
 		
-	<% unless document.online_only? or document.has?(:content_model_facet, 'digital_book') %>
+	<% unless document.online_only? or document.has?(:content_model_facet, 'digital_book') or document.has?(:content_model_facet, 'jp2k') %>
 	<div id="physicalAvailability" title="<%= document.id %>">
 		<%= image_tag 'ajax-loader.gif', :alt => "Loading availability", :class => "availability_loader" %>
 	</div>

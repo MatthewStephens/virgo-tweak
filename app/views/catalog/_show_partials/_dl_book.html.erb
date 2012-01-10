@@ -103,7 +103,7 @@
     <% #------------ Location ------------- %>
     <% unless @document.value_for(:location_display) == 'n/a' %>
       <dt>Location</dt>
-      <dd><%= @document.value_for :format_facet %></dd>
+      <dd><%= @document.value_for :location_display %></dd>
     <% end %>
 	
 	<% unless @document.value_for(:location_facet) == 'n/a' %>
@@ -136,6 +136,14 @@
 		<% @document.values_for(:call_number_display).each do |v| %>
 			<dd><%= v %></dd>
 		<% end %>
+	<% end %>
+	
+	<% if document.has?(:content_model_facet, 'jp2k') %>
+		<dt class="show_detail">Download</dt>
+		<dd class="show_detail">
+			<%= link_to "Full-size Image",  document.fedora_url + "/objects/" + document[:id].to_s + "/methods/djatoka:StaticSDef/getStaticImage", :target => "_blank" %>
+			<span class="terms-link">[<%= link_to "Terms of Use",  "http://www2.lib.virginia.edu/small/using/use_of_materials_policy.html", :target => "_blank" %>]</span>
+		</dd>
 	<% end %>
 
   </dl>	
