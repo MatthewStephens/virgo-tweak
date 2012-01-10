@@ -90,10 +90,10 @@ class AccountRequestsController < ApplicationController
     if current_user.nil?
       if params[:id]
         ckey = params[:id].slice(1..(params[:id].length - 1))      
-        flash[:error] = "<p>Please <a class='btn small' href='/login?redirect=recall&id=#{params[:id]}'>sign in with NetBadge</a> to request this item.</p><p>Don't have a U.Va. account?  Request this item from <a class='btn small' href='http://virgo.lib.virginia.edu/uhtbin/cgisirsi/uva/0/0/5?searchdata1=#{ckey}{CKEY}'>Virgo Classic</a>.</p>".html_safe
+        flash[:error] = "<p>Please <a class='btn small' href='/login?redirect=recall&id=#{params[:id]}'>sign in with NetBadge</a> to request this item.</p><p>Don't have a U.Va. account?  Sign in as a <a class='btn small' href='/patron_login?redirect=recall&id=#{params[:id]}'>non-U.Va. user</a>.</p>".html_safe
         redirect_to catalog_path(params[:id]) and return
       else
-        flash[:error] = "<p>Please <a class='btn small' href='/login'>sign in with NetBadge</a>.</p><p>Don't have a U.Va. account?  Sign into <a class='btn small' href='http://virgo.lib.virginia.edu/uhtbin/cgisirsi/0/UVA-LIB/0/1/1166/X/BLASTOFF'>Virgo Classic</a>.</p>".html_safe
+        flash[:error] = "<p>Please <a class='btn small' href='/login'>sign in with NetBadge</a>.</p><p>Don't have a U.Va. account?  Sign into as a <a class='btn small' href='/patron_login'>non-U.Va. user</a>.</p>".html_safe
         redirect_to catalog_path and return
       end
     end

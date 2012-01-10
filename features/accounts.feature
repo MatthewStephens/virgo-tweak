@@ -91,6 +91,15 @@ Feature: Display Accounts
 		And I should see "PR6057 .A623 O43 2004"
 		And I should see the library list
 		
+	Scenario: Virginia Borrower should be able to initiate hold/recall if not already logged in
+		Given I am on the availability page for id u4215764
+		And I follow "Request Unavailable Item"
+		And I follow "non-U.Va. user"
+		And I fill in "login" with "A61221042"
+		And I press "Sign in"
+		Then I should see "Request this Item"
+		And I should see "PR6057 .A623 O43 2004"
+		And I should see the library list		
 	Scenario: User should be able to submit hold/recall and see flash message
 		Given I am logged in as "mjb7q"
 		And I am on the availability page for id u4215764

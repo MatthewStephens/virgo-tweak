@@ -53,6 +53,7 @@ class UserSessionsController < ApplicationController
    def do_patron_login
       if session[:login]
         user = User.find_by_login(session[:login])
+        do_redirect(user)
       else
         patron = get_patron(params[:login]) or (render 'account/not_found' and return)
         unless patron.virginia_borrower?
