@@ -45,7 +45,7 @@ Feature: Display Accounts
     Given I am viewing the stubbed account page for mst3k
     Then I should see the full name "Timothy Scott Stevens"
     And I should see the user id "tss6n"
-    And I should see the working title "Systems Engineer &ndash; Employee"
+    And I should see the working title "Systems Engineer – Employee"
     And I should see the organization "Lb-Info Technology"
     And I should see the address "PO Box 400112"
     And I should see the email "tss6n@Virginia.EDU"

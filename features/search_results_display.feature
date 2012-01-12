@@ -97,9 +97,9 @@ Feature: Everything (Default) Search Results Display
     
   Scenario: Display publication date if it's not a Journal or Magazine
     Given I am on the homepage
-    When I fill in "q" with "Time"
+    When I fill in "q" with "da vinci code"
     And I press "Search"
-    Then I should see a publication date of 1972 for ckey u5147849
+    Then I should see a publication date of 2004 for ckey u4215497
   
   Scenario: Do not display publication date if it's a Journal or Magazine
     Given I am on the homepage

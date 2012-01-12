@@ -19,7 +19,7 @@ Feature: Advanced Search Results
     Given I am on the advanced search page
     When I fill in "journal" with "time"
     And I press "advanced_search"
-    Then I should get ckey u504272 in the first 8 results
+    Then I should get ckey u504272 in the first 10 results
     And I should see the keyword label "Journal Title"
     And I should not see the filter label "Format"
     
