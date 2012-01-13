@@ -2,15 +2,15 @@
 
 <div class="tool_content">
 
-<%= link_to '&larr; Return to maps', maps_path, :class => 'maps-return' %>
+  <%= link_to '&larr; Return to maps'.html_safe, maps_path, :class => 'maps-return' %>
 
-<div class="maps-container">
-<h2>Existing Users <%= link_to 'Add a new map user', new_maps_user_path, :class => 'btn' %></h2>
-<ul class="user-list">
-<% for maps_user in @maps_users -%>
-  <li><%= maps_user.computing_id %> [<%= link_to "Delete", maps_user_url(maps_user), :method => :delete, :confirm => 'Are you sure you want to delete this map user? You cannot undo this.' %>]</li>
-<% end %>
-</ul>
-</div>
+  <div class="maps-container">
+    <h2>Existing Users <%= link_to 'Add a new map user', new_maps_user_path, :class => 'btn' %></h2>
+    <ul class="user-list">
+    <% for maps_user in @maps_users -%>
+      <li><%= maps_user.computing_id %> <%= button_to "Delete", maps_user_url(maps_user), :method => :delete, :confirm => 'Are you sure you want to delete this map user? You cannot undo this.', :class => 'btn small' %></li>
+    <% end %>
+    </ul>
+  </div>
 
 </div>
