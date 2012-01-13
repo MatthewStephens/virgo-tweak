@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   # ensures that the current user is allowed to administer maps
   def verify_map_user
     if current_user.nil?
-      flash[:error] = 'You must be logged in to manage maps. <a href="/login?redirect=maps">Log in</a>'
+      flash[:error] = 'You must be logged in to manage maps. <a href="/login?redirect=maps">Log in</a>'.html_safe
       redirect_to root_path
     elsif MapsUser.find_by_computing_id(current_user[:login]).nil?
       flash[:error] = 'You are not authorized to manage maps.'
