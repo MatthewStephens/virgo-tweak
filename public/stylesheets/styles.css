@@ -1574,6 +1574,8 @@ h2.error-heading {width: 400px;}
 .maps-container .btn {font-weight: normal; margin-right: 2em;}
 .maps-container h2 {border-bottom: 1px solid #BBB; font-weight: bold;}
 .maps-container h2 .btn {margin-left: 2em;}
+.maps-container form.button_to {display: inline; margin-top: 0;}
+.maps-container form.button_to div {display: inline; }
 .maps-container .maps-button-heading {display: inline; font-size: 16px; margin-right: 2em;}
 .maps-container .user-list li { border-bottom: 1px dotted #AAA; font-size: 1.2em; padding: 0.8em 0.33em; }
 .map-listing { border-bottom: 1px solid #CCC; border-top: 1px solid #A4C6EF;}
