@@ -324,8 +324,13 @@ module Firehose::Common
       @profile.downcase == "undergraduate"
     end
     def virginia_borrower?
-      return false if @profile.blank?
-      @profile.downcase == "virginia borrower"
+      # RESEARCHERS don't have a profile, but they shouldn't have a U.Va. computing id
+      if @profile.blank?
+        return false if @profile =~ /^[A-Z]{2,3}$/i
+        return false if @profile =~ /^[A-Z]{2,3}[0-9][A-Z]{1,2}$/i
+        return true
+      end
+      @profile =~ /^Virginia Borrower|Other VA Faculty|Alumni$/i
     end
     def barred?
       @barred
