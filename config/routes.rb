@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       get :holds
       get :reserves
       get :notices
+      get :renew
       get :select
     end
   end

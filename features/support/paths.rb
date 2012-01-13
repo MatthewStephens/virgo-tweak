@@ -65,6 +65,9 @@ module NavigationHelpers
      when /the original catalog and article search page/
        catalog_index_path
        
+     when /the account renew page/
+       renew_account_index_path
+       
      
 
     # Add more mappings here.

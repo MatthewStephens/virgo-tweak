@@ -1,6 +1,10 @@
 <div id="list_heading"><h1>My Account</h1></div>
 <div class="account_container">
   <h2 class="sign-in-heading">Please sign in to view your account.</h2>
-  <%= link_to "U.Va. Users (NetBadge)", login_path, :class => "sign-in-select" %>
-  <%= link_to "Non-U.Va. Users (Virgo Classic)", patron_login_path, :class => "sign-in-select" %>
+	<% login = "/login" %>
+	<% login += "?redirect=#{params[:redirect]}" unless params[:redirect].blank? %>
+	<% patron_login = "/patron_login" %>
+	<% patron_login += "?redirect=#{params[:redirect]}" unless params[:redirect].blank? %>
+  <%= link_to "U.Va. Users (NetBadge)", login.html_safe, :class => "sign-in-select" %>
+  <%= link_to "Non-U.Va. Users (Virgo Classic)", patron_login.html_safe, :class => "sign-in-select" %>
 </div>

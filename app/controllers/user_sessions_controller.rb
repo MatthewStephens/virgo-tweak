@@ -82,6 +82,8 @@ class UserSessionsController < ApplicationController
       elsif params[:redirect] == 'recall'
         redirect_params[:id] = params[:id]
         redirect_to start_hold_account_request_url(redirect_params)
+      elsif params[:redirect] == 'checkouts'
+        redirect_to checkouts_account_index_path(redirect_params)
       else
         redirect_params.merge!(session[:search] || {})
         redirect_params[:controller] = "catalog" # remove reference to articles controller
