@@ -1,9 +1,9 @@
+require 'lib/uva/solr_helper_override'
 require 'lib/firehose/patron'
 require 'lib/firehose/checkouts'
 require 'lib/firehose/holds'
 require 'lib/firehose/reserves'
 class AccountController < ApplicationController
-
   include Firehose::Patron
   include Firehose::Checkouts
   include Firehose::Holds

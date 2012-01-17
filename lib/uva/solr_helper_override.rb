@@ -5,9 +5,7 @@ module UVA
   module SolrHelperOverride
 
     # set up search_params_logic, which will get sent with every search  
-    # set up alias method chains so that we can use the methods provided by the plugin but add behaviors
     def self.included(base)
-      base.send :include, Blacklight::SolrHelper
       base.send :include, UVACustomizations
 
       base.solr_search_params_logic << :show_only_public_records
@@ -98,6 +96,7 @@ module UVA
         # this legacy behavior at some point. It does not seem to be currently
         # rspec'd. 
         solr_parameters[:qt] = user_parameters[:qt] if user_parameters[:qt]
+        # overriding from plugin, where this is hard-coded as Blacklight.search_field_def_for_key
         search_field_def = search_field_def_for_key(user_parameters[:search_field])
         if (search_field_def)     
           solr_parameters[:qt] = search_field_def[:qt] if search_field_def[:qt]      

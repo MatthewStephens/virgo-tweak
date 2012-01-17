@@ -3,6 +3,7 @@ require 'lib/firehose/patron'
 require 'lib/firehose/holds'
 require 'lib/firehose/checkouts'
 require 'lib/firehose/common'
+require 'lib/uva/solr_helper_override'
 class AccountRequestsController < ApplicationController
 
   include Firehose::Libraries
@@ -10,6 +11,7 @@ class AccountRequestsController < ApplicationController
   include Firehose::Holds
   include Firehose::Checkouts
   include Firehose::Common
+  include Blacklight::SolrHelper
   include UVA::SolrHelperOverride
   
   before_filter :notices_update

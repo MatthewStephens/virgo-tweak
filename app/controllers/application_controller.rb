@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
   include Blacklight::Controller
   include Firehose::Patron
   include UVA::SearchFieldsHelper
-  include UVA::SolrHelperOverride
   helper :all # include all helpers, all the time
   helper_method :user_session, :current_user, :new_user_session_path, :destroy_user_session_path
   protect_from_forgery # See ActionController::RequestForgeryProtection for details

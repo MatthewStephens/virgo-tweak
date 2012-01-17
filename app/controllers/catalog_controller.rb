@@ -6,6 +6,7 @@ require 'lib/firehose/availability'
 require 'lib/uva/advanced_search/controller'
 require 'lib/uva/advanced_search/advanced_search_fields'
 require 'lib/uva/articles_helper'
+require 'lib/uva/solr_helper_override'
 class CatalogController < ApplicationController
   include UVA::Fedora
   include Blacklight::Catalog
@@ -13,6 +14,7 @@ class CatalogController < ApplicationController
   include UVA::AdvancedSearch::Controller
   include UVA::AdvancedSearch::AdvancedSearchFields
   include UVA::ArticlesHelper
+  include UVA::SolrHelperOverride
   
   # the featured_documents are used when there are no queries or filters applied
   before_filter :notices_update, :only=>[:index, :show]
