@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     member do
       get :start
       get :non_uva
+      get :show, :defaults => { :format => 'pdf'}
     end
   end
 

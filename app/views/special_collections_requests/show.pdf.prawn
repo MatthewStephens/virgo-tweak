@@ -55,7 +55,9 @@ lefts.each_with_index do |left, index|
     
       pdf.bounding_box([-15, 140], :width => widths[index], :height => 20) do
         pdf.move_down 10
-        pdf. padded_box(5) do
+			 	pdf.bounding_box [pdf.bounds.left + 5, pdf.bounds.top - 5],
+			    :width  => pdf.bounds.width - (5 * 2), 
+			    :height => pdf.bounds.height - (5 * 2) do
           pdf.font_size(10) do
             pdf.text "REQUEST: #{@date}"
           end
