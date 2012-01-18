@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   match 'account_requests/:id/renew/:checkout_key', :to => 'account_requests#renew', :as => 'renew'
   match 'account_requests/new_all', :to => 'account_requests#renew_all', :as => 'renew_all'
   match 'reserves/:computing_id/:key', :to => 'reserves#course', :as => 'reserve_course'
+  match 'special_collections_requests/:id/new', :to => 'special_collections_requests#new', :as => 'new_special_collections_request'
 
   resources :account, :only => [:index] do
     member do
@@ -47,7 +48,7 @@ Rails.application.routes.draw do
   resources :maps_users
   resources :call_number_ranges
 
-  resources :special_collections_requests do
+  resources :special_collections_requests, :except => [:new] do
     member do
       get :start
       get :non_uva
