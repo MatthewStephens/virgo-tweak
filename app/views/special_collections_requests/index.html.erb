@@ -45,7 +45,7 @@
     <%= request.document.value_for(:author_display)%>
     </td>
     <td><%= request.created_at.strftime("%I:%M%p")%></td>
-    <td><%= request.processed_at.strftime("%I:%M%p") rescue '&nbsp;'%></td>	
+    <td><%= request.processed_at.strftime("%I:%M%p") rescue '&nbsp;'.html_safe %></td>	
     <td><%= link_to("View", edit_special_collections_request_path(request.id))%></td>
   </tr>  
 <% end -%>

@@ -12,7 +12,7 @@
 
 
 <div id="returnToItem">
-<%= link_to '&larr; Return to request list', special_collections_requests_path %>
+<%= link_to '&larr; Return to request list'.html_safe, special_collections_requests_path %>
 </div>
 
 <%= form_for(@special_collections_request) do |f| -%>

@@ -73,7 +73,7 @@ module ApplicationHelper
     return '' if location_listing(document) == 'Multiple locations'
     return '' if document.online_only?
     return 'Multiple call numbers' if values.size > 3
-    values.join(sep)
+    values.join(sep).html_safe
   end
   
   # return first call number along with how many call numbers there are
