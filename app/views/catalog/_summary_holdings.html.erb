@@ -6,7 +6,7 @@
 	  <h3><%= library.name %></h3>
 	  <% library.summary_locations.each do |location| -%>
 	    <div class="holdingGroup">
-	    <div class="homeLocation"><%= location.name %>:</div>
+	    <div class="homeLocation"><%= location.name + ":" unless location.name.blank? %></div>
 	    <% location.summaries.each do |summary| -%>
 	      <% unless summary.text.blank? -%>
 	        <div class="summaryText"><%= summary.text %><%= "," unless summary == location.summaries.last %></div>
