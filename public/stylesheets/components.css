@@ -56,8 +56,8 @@ ul#appliedFiltersList,
 #mainContent .suggestions h2{margin:0;padding:0;}
 .suggestions{border:dotted 1px gray;padding:.5em;background-color:lightyellow;}
 #resultLine { background: #f5f5f5; clear: both; margin: 10px 0; overflow: hidden; padding: 8px 11px 8px 8px; width: 708px;}
-#resultLine span {float: left; line-height: 22px;}
-#resultLine a {float: left; line-height: 22px;}
+#resultLine span {float: left; line-height: 23px;}
+#resultLine a {float: left; line-height: 23px;}
 #resultLine .current-page {float: left; width: 100px;}
 #resultLine .current-page strong {font-weight: bold;}
 #resultLine .pagination {float: left; padding: 0 20px; width: 560px;}
@@ -162,18 +162,17 @@ COMPONENETS
 /* Generic pagination navigation. Used at least by search results. */ 
 .pagination{width:auto;
 text-align:center; padding:20px; white-space:nowrap;}
-.pagination span,
-.pagination a{display:-moz-inline-box;display:inline-block;padding:0 7px;border-right:1px solid #666;}
+.pagination .page { padding: 0 0.75em; border-right: 1px solid #BBB; }
+.pagination .page.gap { border: none; padding: 0 0.5em; }
+.pagination .page.current { background: #000; border: none; color:#fff; }
 .pagination .previous-off,
 .pagination .next-off{color:#888888;font-weight:bold;}
-.pagination a.next_page,
-.pagination span.next_page,
-.pagination a.prev_page,
-.pagination span.prev_page{font-weight:bold;}
-.pagination a.next_page{border-right:0;}
-.pagination span.current{color:#fff;background-color:#000;}
+.pagination .next, .pagination .prev {font-weight:bold;}
+.pagination .first, .pagination .prev { padding-right: 1.5em;}
+.pagination .last, .pagination .next { padding-left: 1.5em;}
 .pagination a,
-.pagination a:visited{text-decoration:none;}
+.pagination a:visited,
+.pagination a:link {text-decoration:none !important;}
 .pagination a:hover{text-decoration:none;background-color:#D1DFFD;}
 .pagination span.disabled{display:none;}
 /* Generic image thumbnails  */

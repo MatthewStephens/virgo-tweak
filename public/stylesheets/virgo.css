@@ -458,7 +458,9 @@ a.start-over {background: url('/images/icon-sprite.png') no-repeat scroll 0 -280
   padding: 5px 15px;
   width: 695px; }
 .folder-page #list_heading {margin: 0;}
-.folder-page #main #content {padding-left: 0; padding-right: 24px;}
+.folder-page #main #content {padding-left: 0; padding-right: 0; width: 727px; }
+.folder-page #main #content .notice {margin: 1em 1em 0; }
+.folder-page #main #content .dataTables_wrapper { width: 716px; }
 #catalogShow .resultNav.top {
   background: #F7F3EA;
   border-bottom: 1px solid #C4B18D;
