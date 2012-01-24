@@ -28,11 +28,11 @@ Feature: Display Articles
 		And I fill in "q" with "global warming"
 		And I press "Search"
 		Then the page number should be 1
-		When I follow "Next »"
+		When I follow "Next ›"
 		Then the page number should be 2
-		When I follow "Next »"
+		When I follow "Next ›"
 		Then the page number should be 3
-		When I follow "« Previous"
+		When I follow "‹ Previous"
 		Then the page number should be 2
 		
 	Scenario: Sorting

@@ -419,7 +419,7 @@ Feature: Everything (Default) Search Result Relevancy
     And I choose "catalog_select_catalog"
     And I press "Search"
     Then I should get results
-		When I follow "Next »"
+		When I follow "Next ›"
     And I follow "Alderman"
     Then I should get results
     
