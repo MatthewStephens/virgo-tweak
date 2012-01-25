@@ -18,7 +18,7 @@
 		<% end -%>
 	<% else -%>
 	  <span id="availability_<%= document[:id] %>" class="availability">
-	    <%= availability_on_index?(document) ? '<span class="single-copy"><img src="/images/loading-balls.gif" alt="loading..."></span>' : link_to( 'View Locations &amp; Availability'.html_safe, catalog_path(document[:id]) ) %>
+	    <%= availability_on_index?(document) ? '<span class="single-copy"><img src="/images/loading-balls.gif" alt="loading..."></span>'.html_safe : link_to( 'View Locations &amp; Availability'.html_safe, catalog_path(document[:id]) ) %>
 	  </span>
 	<% end -%>
 <% end -%>
