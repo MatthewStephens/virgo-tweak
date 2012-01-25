@@ -34,12 +34,20 @@ Feature: Display Accounts
     Then I should see "No Account Found"
 
 	Scenario: Virginia Borrower login
-		Given I am logged in as virginia borrower "a61221042"
+		Given I am logged in as virginia borrower "VATEST" with pin "TEST"
 		And I am on my account page
 		Then I should see "Virginia Borrower"
 		And I should not see "Request LEO delivery"
 		And I should not see "Request interlibrary loan"
 		And I should not see "Place course reserve request"
+		
+	Scenario: Virginia borrower PIN must be correct
+		Given I am logged in as virginia borrower "FACTEST" with pin "fakepin"
+		Then I should see "Incorrect user or pin"
+		
+	Scenario: Virginia borrow must not leave PIN blank
+		Given I am logged in as virginia borrower "FACTEST" with pin ""
+		Then I should see "Incorrect user or pin"
     
   Scenario: Account page
     Given I am viewing the stubbed account page for mst3k
@@ -95,7 +103,8 @@ Feature: Display Accounts
 		Given I am on the availability page for id u4215764
 		And I follow "Request Unavailable Item"
 		And I follow "non-U.Va. user"
-		And I fill in "login" with "A61221042"
+		And I fill in "login" with "VATEST"
+		And I fill in "pin" with "TEST"
 		And I press "Sign in"
 		Then I should see "Request this Item"
 		And I should see "PR6057 .A623 O43 2004"
@@ -116,8 +125,9 @@ Feature: Display Accounts
 	Scenario: A user who is not logged in requesting account/renew should be presented with a login option
 		Given I am on the account renew page
 		Then I should see "Please sign in to view your account."
-		When I follow "Non-U.Va. Users (Virgo Classic)"
-		And I fill in "login" with "A61221042"
+		When I follow "Non-U.Va. Users (Library ID)"
+		And I fill in "login" with "VATEST"
+		And I fill in "pin" with "TEST"
 		And I press "Sign in"
 		Then I should see "Checked-out Items"
 		

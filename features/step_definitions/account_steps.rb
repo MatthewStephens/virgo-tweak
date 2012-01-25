@@ -2,8 +2,8 @@ Given /^I am logged in as "([^\"]*)"$/ do |login|
   visit login_path(:login => login)
 end
 
-Given /^I am logged in as virginia borrower "([^\"]*)"$/ do |login|
-  visit do_patron_login_path(:login => login)
+Given /^I am logged in as virginia borrower "([^\"]*)" with pin "([^\"]*)"$/ do |login, pin|
+  visit do_patron_login_path(:login => login, :pin => pin)
 end
 
 Given /^I am viewing the stubbed account page for mst3k$/ do

@@ -297,6 +297,7 @@ module Firehose::Common
     element :status_id, Integer, :tag => "statusId"
     element :telephone, String
     element :title, String
+    element :pin, String
     has_many :groups, String, :tag => "group"
     has_many :holds, Hold, :tag =>"hold"    
     def sorted_holds

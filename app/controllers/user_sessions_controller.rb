@@ -56,9 +56,9 @@ class UserSessionsController < ApplicationController
         do_redirect(user)
       else
         patron = get_patron(params[:login]) or (render 'account/not_found' and return)
-        unless patron.virginia_borrower?
-          flash[:error] = 'UVa members should use NetBadge to authenticate'
-          redirect_to catalog_index_path
+        unless check_pin(patron, params[:pin])
+          flash[:error] = 'Incorrect user or pin'
+          redirect_to patron_login_path and return
         else 
            user = User.find_or_create_by_login(params[:login])
            do_redirect(user) and return

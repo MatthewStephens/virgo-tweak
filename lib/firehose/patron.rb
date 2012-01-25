@@ -15,6 +15,10 @@ module Firehose
       end
     end
 
+    def check_pin(patron, pin)
+      patron.pin == pin
+    end
+
   end
 
 end

@@ -6,6 +6,8 @@
     	<p>
     	  <%= label_tag 'login', 'Library ID'%>
     	  <%= text_field_tag 'login' %>
+				<%= label_tag 'PIN', 'PIN' %>
+				<%= text_field_tag 'pin' %>
 				<%= hidden_field_tag 'redirect', params[:redirect] if params[:redirect] %>
 				<%= hidden_field_tag 'id', params[:id] if params[:id] %>
       	<%= submit_tag "Sign in", :class => 'button btn' %>
