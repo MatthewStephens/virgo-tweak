@@ -8,7 +8,7 @@ class AccountController < ApplicationController
   include Firehose::Checkouts
   include Firehose::Holds
   include Firehose::Reserves
-  before_filter :verify_login, :except => [:renew, :select]
+  before_filter :verify_login, :except => [:renew, :review, :select]
   before_filter :notices_update
 
   def index
@@ -38,6 +38,11 @@ class AccountController < ApplicationController
   def renew
     redirect_to checkouts_account_index_path and return if current_user
     redirect_to select_account_index_path(:redirect => "checkouts") and return
+  end
+  
+  def review
+    redirect_to account_index_path and return if current_user
+    redirect_to select_account_index_path(:redirect => "account") and return
   end
   
   def select

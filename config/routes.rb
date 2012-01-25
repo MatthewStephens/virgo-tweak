@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   match 'patron_login', :to => 'user_sessions#patron_login', :as => 'patron_login'
   match 'do_patron_login', :to => 'user_sessions#do_patron_login', :as => 'do_patron_login'
   match 'account_requests/:id/renew/:checkout_key', :to => 'account_requests#renew', :as => 'renew'
-  match 'account_requests/new_all', :to => 'account_requests#renew_all', :as => 'renew_all'
+  match 'account_requests/renew_all', :to => 'account_requests#renew_all', :as => 'renew_all'
   match 'reserves/:computing_id/:key', :to => 'reserves#course', :as => 'reserve_course'
   match 'special_collections_requests/:id/new', :to => 'special_collections_requests#new', :as => 'new_special_collections_request'
 
@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       get :reserves
       get :notices
       get :renew
+      get :review
       get :select
     end
   end
