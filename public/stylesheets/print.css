@@ -1,6 +1,13 @@
 
 /* Hide elements on printed page */
-#PanelContainer, #topNav, #headerInner, #globalUtilNav, #search, #availableFilters, #noSearchMessage, .tools, #footer .links, #returnToSearch, .pagination, .btnRemove, #startOverLink, .hide, #results dd.availability, #previousNext, .resultNav, .technicalDetails, #uva_lib_banner, #virgo_banner, #ask_a_librarian, #tabs, #searchForm, #search_toggle, #sub1, .show_details, #right_text, #footer_divider, .recallAndLeo, .map_it, #footer img, #appliedParams img, #availability img, .previewThumbImg {display:none;}
+#PanelContainer, #topNav, #headerInner, #globalUtilNav, #search, #availableFilters, 
+#noSearchMessage, .tools, #footer .links, #returnToSearch, .pagination, .btnRemove, 
+#startOverLink, .hide, #results dd.availability, #previousNext, .resultNav, .technicalDetails, 
+#uva_lib_banner, #virgo_banner, #ask_a_librarian, #tabs, #searchForm, #search_toggle, #sub1, 
+.show_details, #right_text, #footer_divider, .recallAndLeo, .map_it, #footer img, 
+#appliedParams img, #availability img, .previewThumbImg, .skip_nav, .remove-star,
+.folder-page .access, .folder-page .availability, .starred-availability-heading, 
+.starred-info, .folder-page .notice, .visuallyhidden, #SelectClearAll {display:none;}
 
 /* Basic Fonts */
 * {font:normal normal normal 10pt/14pt Georgia,"Times New Roman",Times,serif;}
@@ -56,8 +63,10 @@ dd.titleField, dl.metadata.hd {display:block; overflow:hidden; width:100%; margi
 #availability h2 {display: none;}
 #availability h2, #availability > div {margin:1em 0;}
 #details dl dt, #details dl dd {display: block !important;}
+.folder-page h1 {font-size: 16px; margin-bottom: 1em;}
 .holdings {width: 100%;}
-.holdings td {height: 1.67em;}
-.holdings thead tr {border-bottom: 1px dotted #CCC;}
-.holdings th {font-style: italic;height:1.67em;}
+.holdings td, .account-listing td {height: 1.67em;}
+.holdings thead tr, .account-listing thead tr {border-bottom: 1px dotted #CCC;}
+.holdings th, .account-listing th  {font-style: italic;height:1.67em;}
+.account-listing tbody td {border-bottom: 1px dotted #DDD; margin-bottom: 0.67em; padding: 0.67em 0;}
 .dataTables_filter {display: none;}
