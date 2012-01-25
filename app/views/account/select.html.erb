@@ -6,5 +6,5 @@
 	<% patron_login = "/patron_login" %>
 	<% patron_login += "?redirect=#{params[:redirect]}" unless params[:redirect].blank? %>
   <%= link_to "U.Va. Users (NetBadge)", login.html_safe, :class => "sign-in-select" %>
-  <%= link_to "Non-U.Va. Users (Virgo Classic)", patron_login.html_safe, :class => "sign-in-select" %>
+  <%= link_to "Non-U.Va. Users (Library ID)", patron_login.html_safe, :class => "sign-in-select" %>
 </div>
