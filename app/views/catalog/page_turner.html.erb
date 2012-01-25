@@ -50,7 +50,7 @@
     			<h2><%= @document.values_for(:author_display).join("; ") %></h2>
     		<% end %>
     		<% unless @document[:year_display].nil? %>
-    			<h3><%= ("[" + @document[:year_display] + "]") %></h3>
+    			<h3><%= ("[" + @document.value_for(:year_display) + "]") %></h3>
     		<% end %>
 			</div>
 			<div class="page_turner_nav">
