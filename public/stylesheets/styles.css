@@ -1497,9 +1497,11 @@ p,ul,ol,dl,blockquote{margin-bottom:1.54em;}
 #accountIndex .account_container h2 {color: #333; margin-bottom: 0; margin-top: 0;}
 .account_container h2 {color: #444; font-size: 18px; margin-bottom: 1em; margin-top: 0.33em; padding-bottom: 0.33em;}
 .account_container h2 a {text-decoration: underline;}
-.patron-login {text-align: center;}
-.patron-login label {display: inline; font-weight: bold; font-size: 14px; padding-right: 6px;}
-.patron-login input {padding: 4px 4px 5px;}
+.patron-login {margin: 0 auto; text-align: right; width: 400px;}
+.tool_content .patron-login label {clear: both; display: block; float: left; font-weight: bold; font-size: 14px; padding: 4px 8px 5px; width: 100px;}
+.patron-login input {float: left; padding: 4px 4px 5px; width: 250px;}
+.patron-login .login-submit {text-align: center; }
+.login-submit .btn { clear: both; float: none; width: auto; }
 #accountIndex .vcard {color: #555; font-size: 15px; margin-top: 0.67em; }
 #accountIndex .vcard p {margin: 0; padding-bottom: 0.25em;}
 #accountIndex .user-status {line-height: 20px; margin-top: 1em;}
@@ -1513,7 +1515,8 @@ p,ul,ol,dl,blockquote{margin-bottom:1.54em;}
 #accountIndex .account-tasks h2 {border-bottom: 1px solid #DDD; color: #604927; margin-bottom: 0.67em; width: 40%;}
 #account_menu ul { border-top: 1px dotted #DAD5CA; margin: 40px 10px 10px 21px; padding: 0;}
 #account_menu li {border-bottom: 1px dotted #DAD5CA; margin: 0; padding-left: 0; }
-#account_menu li a {display: block; font-size: 15px; line-height: 3em; padding: 0 0.5em; text-align: right; -webkit-transition: background 200ms ease-in-out;
+#account_menu li a {display: block; font-size: 15px; line-height: 3em; padding: 0 0.5em; text-align: right; 
+-webkit-transition: background 200ms ease-in-out;
 -moz-transition: background 200ms ease-in-out;
 -o-transition: background 200ms ease-in-out;
 transition: background 200ms ease-in-out; }
