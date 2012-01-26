@@ -76,6 +76,7 @@ class SolrDocument
     @doc_type||=(
       types = [
         [:hathi, has?(:source_facet, 'Hathi Trust Digital Library')],
+        [:dl_video, (has?(:source_facet, 'UVA Library Digital Repository') and has?(:format_facet, 'Video'))],
         [:lib_album, has?(:format_facet, /Musical Recording/i)],
         [:dl_book, (has?(:content_model_facet, 'digital_book') or has?(:content_model_facet, 'jp2k'))],
         [:lib_catalog, has?(:source_facet, 'Library Catalog')],

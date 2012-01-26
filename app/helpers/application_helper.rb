@@ -273,6 +273,30 @@ module ApplicationHelper
     end
     out.html_safe
   end
+
+    # parses :url_display for Kaltura video URLs
+  def show_streaming_thumbnails(document, options = {})
+    return if document.get(:url_display).nil?
+    link_text = options[:text] || ""
+    limit = options[:limit] || 100
+    height = options[:height] || 80
+    width = options[:width] || 80
+    quality = options[:quality] || 72
+    out = ""
+    document.values_for(:url_display).first(limit).each do |string|
+      out += '<div class="streaming-thumbnail">'
+      parts = string.split('||')
+      url = parts[0]
+      kaltura_id = url.split('entry_id/')[1]
+      unless link_text.blank?
+        label = link_text
+      else   
+        label = parts[1]||online_access_verb(document) + " online"
+      end
+      out += link_to(image_tag("http://cdn.kaltura.com/p/0/thumbnail/entry_id/#{kaltura_id}/width/#{width}/height/#{height}/type/1/quality/#{quality}") + '<span class="image-caption">'.html_safe + label + '</span>'.html_safe, url, :target => '_blank') + '</div>'.html_safe
+    end
+    out.html_safe
+  end
       
   # returns the list of facets from the config/initializers file
   def facet_list

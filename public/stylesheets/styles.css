@@ -1605,3 +1605,12 @@ h2.error-heading {width: 400px;}
 .tool_content .map-guides input[type="submit"] {margin-top: 0;}
 .map-name .map-url {font-size: 13px; font-weight: normal; padding-left: 1em;}
 .map-tools {float: left; line-height: 32px; text-align: right; width:30%;}
+
+/* Kaltura Videos */
+
+.streaming-gallery { margin: 1em; overflow: hidden; }
+.streaming-gallery-heading {font-size: 18px; font-weight: bold; margin: 0.5em 1em 0.75em;}
+.streaming-thumbnail { background: #F5F5F5; border: 1px solid #E8E8E8; padding: 0.75em 0.67em; text-align: center;}
+.streaming-thumbnail img { border: 1px solid #DDD; display: block; margin-bottom: 0.67em;}
+.streaming-thumbnail .image-caption {font-size: 12px; }
+.show-page .streaming-thumbnail { float: left; margin: 0 2em 2em 0; width: 120px; }

@@ -1,0 +1,63 @@
+<div class="document clearFix" id="Doc<%= document[:id] %>">
+  <div class="details">
+    <dl class="metadata hd">
+			<dt class="hide">Title: </dt>
+		<%- if (document[:linked_title_display] rescue false) -%>
+    	<dd class="titleField">
+				<span class="listItemNumber"><%= counter + 1 + offset %>.</span>
+				<h2 class="document-title"><%= link_to_document document, :label => document.value_for(:linked_title_display), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view %></h2>
+			</dd>
+    <%- end -%>
+	  	  
+      <dd class="titleField">
+				<%- unless (document[:linked_title_display] rescue false) -%>
+					<span class="listItemNumber"><%= counter + 1 + offset %>.</span>
+				<%- end -%>
+	      <h2 class="document-title"><%= link_to_document document, :label => full_title(document), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view  %></h2>
+	    </dd>
+     </dl>	
+
+		  <div class="previewThumbImg">		  
+ 		  	<%= show_streaming_thumbnails(document, :text => 'Watch', :limit => 1) %>
+ 			</div>
+
+		<dl class="metadata">
+  		
+		  <% authors = document.author_type_fields %>
+			<% authors.each do |k,v| %>
+			<dt>Author</dt>
+			<dd class="authorField">
+				<%= document.value_for k %>
+			</dd>
+			<% end %>
+
+			<dt>Format</dt>
+			<dd class="formatField">
+		 	<%= document.value_for :format_facet %> 			
+			</dd>
+		
+		  <% unless journal?(document) %>
+			<dt>Publication Date</dt>
+			<dd class="formatField">
+				<%= document.value_for :published_date_display %>
+			</dd>
+			<% end %>
+		
+			<% if !document.get(:url_display).nil? %>
+  		  <dt>Online Versions</dt>
+  		  <dd class="onlineAccessField"><%= link_to_online_access(document) %></dd>
+  		<% end %>
+
+			<%= render :partial=>'brief_availability', :locals=>{:document=>document} %>
+
+		</dl>
+		
+	</div>
+	
+  <div class="tools">
+    <%= render :partial=>'catalog/folder_control', :locals=>{:document=>document} %>
+  </div>
+
+</div>
+
+	
