@@ -190,6 +190,10 @@ Feature: Display Books
   Scenario: show related resources" for MARC 856, Indicator 1 = " ", Indicator 2 = "7"
     Given I am on the document page for id u1749045
     Then I should see "Related resources" data of "GUIDE TO THE COLLECTION AVAILABLE ONLINE"    
+
+	Scenario: show related resources and make sure label uses subfields 3 and z
+		Given I am on the document page for id u3712091
+		Then I should see "Related resources" data of "V. 1, PDF version: Adobe Acrobat Reader required"
         
   Scenario: show related resources for MARC 856, Indicator 1 = "7", Indicator 2 = " "
     Given I am on the document page for id u2645641

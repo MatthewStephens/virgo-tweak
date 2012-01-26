@@ -4,27 +4,27 @@ Feature: Display Accounts
   I want to see accurate account information
   
   Scenario: View account
-    Given I am logged in as "mpc3c"
+    Given I am logged in as "FACTEST"
     And I am on my account page
     Then I should see a full name
   
   Scenario: View checkouts
-    Given I am logged in as "mpc3c"
+    Given I am logged in as "FACTEST"
     And I am on the checkouts page
     Then I should see how many items I have checked out
     
   Scenario: View holds and recalls
-    Given I am logged in as "mpc3c"
+    Given I am logged in as "FACTEST"
     And I am on the holds page
     Then I should see how many requested items I have
     
   Scenario: View reserves
-    Given I am logged in as "mpc3c"
+    Given I am logged in as "FACTEST"
     And I am on the reserves page
     Then I should see how many reserves I have
     
   Scenario: View notices
-    Given I am logged in as "mpc3c"
+    Given I am logged in as "FACTEST"
     And I am on the notices page
     Then I should see how many notices I have
     
@@ -118,7 +118,7 @@ Feature: Display Accounts
 		Then I should see "Request Complete"
 		
 	Scenario: A logged-in user requesting account/renew should see checkouts
-		Given I am logged in as "mpc3c"
+		Given I am logged in as "FACTEST"
 		And I am on the account renew page
 		Then I should see "Checked-out Items"
 		
