@@ -575,29 +575,32 @@ class UVA::VirgoMarcRecord
       unless valid_indicator2_values.include? indicator2 
         return Array.new
       end
-      vals = extract_from_856('4', indicator2, 'z', 'u')
+      vals = extract_from_856('4', indicator2)
       return vals unless vals.empty?      
-      vals = extract_from_856(' ', indicator2, 'z', 'u')
+      vals = extract_from_856(' ', indicator2)
       return vals unless vals.empty?
-      vals = extract_from_856(indicator1, indicator2, 'z', 'u')
+      vals = extract_from_856(indicator1, indicator2)
       vals
     end
     
-    def extract_from_856(indicator1, indicator2, subfield_label, subfield_value)
+    def extract_from_856(indicator1, indicator2)
        rr_marcfields = self.fields.select do |x|
           x.tag == '856' and x.indicator1 == indicator1 and x.indicator2 == indicator2
         end
         # create an array of hashes
+        result = []
         rr_marcfields.collect do |y|
+          h = {}
           # for each subfield, "inject" a label and value into a new hash (h) - returns a single hash
-          y.subfields.inject({}) do |h,subfield|
-            # labels often end with a colon, so strip that out.  example: "Reel guide:"
-            h["label"] = subfield.value.sub(/:$/, '') if subfield.code == subfield_label
-            h["value"] = subfield.value if subfield.code == subfield_value
-            h["label"] = h["value"] if h["label"].blank?
-            h
-    		  end
+          subfield_label_3 = y.subfields.select{ |subfield| subfield.code == "3"}.first.value rescue ""
+          subfield_label_z = y.subfields.select{ |subfield| subfield.code == "z"}.first.value rescue ""
+          subfield_value = y.subfields.select{ |subfield| subfield.code == "u"}.first.value rescue ""
+          h["label"] = (subfield_label_3 + " " + subfield_label_z).strip
+          h["value"] = subfield_value
+          h["label"] = h["value"] if h["label"].blank?
+    		  result << h
         end
+        result
      end
      
     def extract_from_field_with_indicator(field_number, indicator1,  subfields)
