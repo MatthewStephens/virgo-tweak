@@ -1583,7 +1583,7 @@ h2.error-heading {width: 400px;}
 .library-map-container {clear: both; padding: 1em 0;}
 .library-map-container .map-listing {display: none;}
 .library-map-container.open .map-listing {display: block;}
-.library-name {background: #013; color: #FFF; font-size: 18px; padding: 0.5em; }
+.library-name {background: #246; color: #FFF; font-size: 18px; padding: 0.5em; }
 .library-name .toggle-library-maps { color: #FFF; cursor: pointer;  float: right; font-size: 12px; font-weight: normal; line-height: 20px; padding-right: 1em; }
 .map-listing { border-bottom: 1px solid #CCC; border-top: 1px solid #A4C6EF;}
 .map-listing h3 {font-size: 15px; padding: 1em 0 0.67em;}
