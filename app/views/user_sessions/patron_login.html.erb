@@ -3,15 +3,19 @@
   <h2 class="sign-in-heading">Please sign in to view your account.</h2>
   <%= form_tag(do_patron_login_path, :method=>:post) do %>
     <fieldset class="patron-login">
-    	<p>
+    	<p class="login-field">
     	  <%= label_tag 'login', 'Library ID'%>
     	  <%= text_field_tag 'login' %>
-				<%= label_tag 'PIN', 'PIN' %>
+    	</p>
+      <p class="login-field">
+				<%= label_tag 'pin', 'PIN' %>
 				<%= text_field_tag 'pin' %>
+      </p>
+      <p class="login-submit">
 				<%= hidden_field_tag 'redirect', params[:redirect] if params[:redirect] %>
 				<%= hidden_field_tag 'id', params[:id] if params[:id] %>
       	<%= submit_tag "Sign in", :class => 'button btn' %>
-    	</p>
+      </p>
     </fieldset>
   <% end %>
 </div>

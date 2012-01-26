@@ -1,3 +1,7 @@
+<% @add_to_html_head = capture do %>
+  <%= javascript_include_tag 'maps.js' %>
+<% end %>
+
 <div id="list_heading"><h1>Maps</h1></div>
 
 <div class="tool_content">
@@ -6,35 +10,47 @@
   <h3 class="maps-button-heading">Administration:</h3> <%= link_to 'Add a New Map', new_map_path, :class => 'btn' %><%= link_to 'Edit Maps Users', maps_users_path, :class => 'btn' %>
 </div>
 
-<% for map in @maps -%>
-  <div id="map_<%= map.id %>" class="maps-container map-listing">
-    <div class="map-entry">
-	    <h2 class="map-name"><%= h map.library.name %>: <%= h map.description %> <a class="map-url" href="<%= h map.url %>">Map Image</a></h2>
-      <div class="map-tools"><%= button_to 'Edit', edit_map_path(map.id), :class => 'btn', :method => :get %><%= button_to "Delete", map_url(map), :method => :delete, :confirm => 'Are you sure you want to delete this map and its call numbers? This action cannot be undone.', :class => 'btn' %></div>
-    </div>
-    
-  	<div class="map-guides">    
-    <% unless map.call_number_ranges.empty? %>
-      <h3>Call Number Ranges</h3>
-      <% map.call_number_ranges.each do |range| %>
-        <div class="range-listing <%= cycle 'odd', 'even' %>">
-          <span><%= h range.location %>&nbsp;&nbsp;&mdash;&nbsp;&nbsp;<%= h range.call_number_range %></span>
-          <span class="range-remove"><%= button_to "remove", call_number_range_path(range.id), :method => :delete, :confirm => 'Are you sure you want to delete this entry?', :class => 'btn small' %></span>
-        </div>
-      <% end %>
-    <% end %>
-    
-    <h3>Add a Call Number Range <span class="optional">optional</span></h3>
-		<%= form_tag(call_number_ranges_path) do %>
-		  <%= label_tag 'location', 'Location' %>
-			<%= select_tag :location, options_for_select(Location.find(:all, :order=>:value).collect{ |c| [c.value, c.value]}.insert(0, ""))   %>
-			<%= label_tag 'call_number_range', 'Range' %>
-			<%= text_field_tag(:call_number_range) %>
-			<%= hidden_field_tag(:map_id, map.id) %>
-			<%= submit_tag "Add", :class => "btn small" %>
-		<% end %>
-		</div>
-  </div>
-<% end -%>
+<div class="expand-contract">
+  <span class="expand-contract-label">Toggle Libraries:</span>
+  <button class="btn small">Show All</button>
+</div>
 
+<% libraries = Library.find(:all, :order => :name) -%>
+<% libraries.each do |library| -%>
+  <% if library.maps.length > 0 -%>
+    <div id="library-<%= library.id %>" class="library-map-container">
+      <h1 class="library-name"><%= library.name.capitalize %> (<%= library.maps.length%>) <span class="toggle-library-maps">Show</span></h1>
+      <% library.maps.each do |map| -%>
+        <div id="map_<%= map.id %>" class="maps-container map-listing">
+          <div class="map-entry">
+      	    <h2 class="map-name"><%= h map.library.name %>: <%= h map.description %> <a class="map-url" href="<%= h map.url %>">Map Image</a></h2>
+            <div class="map-tools"><%= button_to 'Edit', edit_map_path(map.id), :class => 'btn', :method => :get %><%= button_to "Delete", map_url(map), :method => :delete, :confirm => 'Are you sure you want to delete this map and its call numbers? This action cannot be undone.', :class => 'btn' %></div>
+          </div>
+    
+        	<div class="map-guides">    
+          <% unless map.call_number_ranges.empty? %>
+            <h3>Call Number Ranges</h3>
+            <% map.call_number_ranges.each do |range| %>
+              <div class="range-listing <%= cycle 'odd', 'even' %>">
+                <span><%= h range.location %>&nbsp;&nbsp;&mdash;&nbsp;&nbsp;<%= h range.call_number_range %></span>
+                <span class="range-remove"><%= button_to "remove", call_number_range_path(range.id), :method => :delete, :confirm => 'Are you sure you want to delete this entry?', :class => 'btn small' %></span>
+              </div>
+            <% end %>
+          <% end %>
+    
+          <h3>Add a Call Number Range <span class="optional">optional</span></h3>
+      		<%= form_tag(call_number_ranges_path) do %>
+      		  <%= label_tag 'location', 'Location' %>
+      			<%= select_tag :location, options_for_select(Location.find(:all, :order=>:value).collect{ |c| [c.value, c.value]}.insert(0, ""))   %>
+      			<%= label_tag 'call_number_range', 'Range' %>
+      			<%= text_field_tag(:call_number_range) %>
+      			<%= hidden_field_tag(:map_id, map.id) %>
+      			<%= submit_tag "Add", :class => "btn small" %>
+      		<% end %>
+      		</div>
+        </div>
+      <% end -%>
+    </div>
+  <% end -%>
+<% end -%>
 </div>

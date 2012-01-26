@@ -35,7 +35,7 @@ Feature: Display Special Collections Lens
     And I am on the availability page for id u3572181
     And I follow "Request this Item"
     And I follow "Non-UVa login"
-    And I fill in "user_id" with "A61221042"
+    And I fill in "user_id" with "VATEST"
     And I press "Request"
     Then I should see "Request for Papers of Henry James"
     
@@ -86,7 +86,7 @@ Feature: Display Special Collections Lens
     And I am on the availability page for id u3572181
     And I follow "Request this Item"
     And I follow "Non-UVa login"
-    And I fill in "user_id" with "A61221042"
+    And I fill in "user_id" with "VATEST"
     # request on the form where you enter your id
     And I press "Request"
     # request on the form where you select your items
@@ -121,7 +121,7 @@ Feature: Display Special Collections Lens
     
 	Scenario: Display location notes without Z39.50
 	  Given I am in the Special Collections lens
-	  Given I am logged in as "xw5d"
+	  Given I am logged in as "factest"
 	  And I am on the availability page for id u3811764
 	  And I follow "Request this Item"
 		And I check "location_plus_call_number_ARCHV-STKS_X030080645_"
@@ -143,13 +143,13 @@ Feature: Display Special Collections Lens
 		
 	Scenario: If no name in LDAP, display name from SIRSI
    	Given I am in the Special Collections lens
-	  Given I am logged in as "A61221042"
+	  Given I am logged in as "VATEST"
 	  And I am on the availability page for id u2434648
 	  And I follow "Request this Item"
 	  And I press "Request"
 	  Then I should see "Request successfully submitted"
 	  Given I am logged in as a Special Collections administrator
-		Then I should see "BRICKHOUSE, E N"
+		Then I should see "Smith, Harley P."
    
    
    
