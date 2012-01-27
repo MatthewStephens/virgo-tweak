@@ -6,7 +6,11 @@
         <li class="account-home-nav"><%= link_to("My Account", account_index_path) %></li>
         <% end %>
         <li class="checkouts-nav"><%= link_to("Checked-out Items (#{user.checkout_count})", checkouts_account_index_path) %></li>
-        <li class="holds-nav"><%= link_to("Requests (#{user.hold_count})", holds_account_index_path) %></li>
+        <li class="holds-nav"><%= link_to("Requests (#{user.hold_count})", holds_account_index_path) %>
+          <ul>
+            <li><%= link_to("ILL/LEO Requests", "https://uva.hosts.atlas-sys.com/illiad/illiad.dll") %></li>
+          </ul>
+        </li>
         <% if user.can_make_reserves? %>
           <li class="reserves-nav"><%= link_to("Course Reserves (#{user.reserve_count})", reserves_account_index_path) %></li>
         <% end %>

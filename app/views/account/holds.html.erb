@@ -3,7 +3,7 @@
 <%- end -%>
 <div id="list_heading"><h1>My Account</h1></div>
 <div class="account_container">
-  <h2>Requested Items: <span class="account-total"><%= @user_holds.hold_count %></span>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<%= link_to "ILL/LEO Requests", "http://www2.lib.virginia.edu/leo", :class => "renew-all-link" %></h2>
+  <h2>Requested Items: <span class="account-total"><%= @user_holds.hold_count %></span>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<%= link_to "ILL/LEO Requests", "https://uva.hosts.atlas-sys.com/illiad/illiad.dll", :class => "renew-all-link" %></h2>
 
   <% if @user_holds.holds.count > 0 %>
   <table id="requests_listing" class="account-listing">
