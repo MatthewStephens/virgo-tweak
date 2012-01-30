@@ -60,8 +60,9 @@ class AccountRequestsController < ApplicationController
     ckey = params[:id]
     ckey = "u#{ckey}" unless ckey.start_with?("u")
     # this shouldn't be needed, but we were ending up with id and :id
-    params.delete(:id)
-    @response, @document = get_solr_response_for_doc_id(ckey, params)
+    my_params = params.dup
+    my_params.delete(:id)
+    @response, @document = get_solr_response_for_doc_id(ckey, my_params)
   end
   
   def verify_renew_request
