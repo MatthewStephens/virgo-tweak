@@ -7,7 +7,7 @@
     <p class="request-title"><%= full_title(@document, true) %></p>
     <p>Your request will be processed by library staff by the next business day.</p>
 	<p>  Questions?  Please <a href="http://www2.lib.virginia.edu/askalibrarian" target="_top">contact a librarian</a>.</p>
-    <p class="request-return"><%= link_to '&larr; Return to item details', catalog_path(params[:id]), :target => "_top" %></p>
+    <p class="request-return"><%= link_to '&larr; Return to item details'.html_safe, catalog_path(params[:id]), :target => "_top" %></p>
   </div>
 
 </div>
