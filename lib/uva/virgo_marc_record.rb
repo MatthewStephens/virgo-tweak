@@ -595,7 +595,7 @@ class UVA::VirgoMarcRecord
           subfield_label_3 = y.subfields.select{ |subfield| subfield.code == "3"}.first.value rescue ""
           subfield_label_z = y.subfields.select{ |subfield| subfield.code == "z"}.first.value rescue ""
           subfield_value = y.subfields.select{ |subfield| subfield.code == "u"}.first.value rescue ""
-          h["label"] = (subfield_label_3 + " " + subfield_label_z).strip
+          h["label"] = (subfield_label_3 + " " + subfield_label_z).strip.sub(/:$/, '')
           h["value"] = subfield_value
           h["label"] = h["value"] if h["label"].blank?
     		  result << h
