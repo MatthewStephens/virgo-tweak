@@ -25,7 +25,7 @@
 		var PageTurner = {
 			<%= ("z: " + params[:z] + ",") if params[:z] -%>
 			<%= ("x: " + params[:x] + ",") if params[:x] -%>
-			<%= ("y: " + params[:y] + ",") if params[:y] -%>			
+			<%= ("y: " + params[:y] + ",") if params[:y] -%>
 			<%= ("lock: " + ( params[:lock] ? params[:lock] : 'false' ) + ",") -%>			
 			repo: '<%= @repository %>',
 			id: '<%= @document[:id] %>',
@@ -102,6 +102,7 @@
 		</div> <!--! end .page_container -->
   </div> <!--! end #container -->
 
+  <%= render :partial => 'catalog/analytics' %>
 
 </body>
 </html>

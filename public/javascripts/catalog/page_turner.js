@@ -212,11 +212,11 @@ $(document).ready(function() {
 	
 	/* =loadThumb
 	 *
-	 * Loads the 125x125 thumbnail for a given page image container
+	 * Loads a 125 (on the long side) thumbnail for a given page
 	-------------------------------------------------------------- */
 	function loadThumb(el) {
 	  var elPid = el.attr("id");
-	  var imgUrl = PageTurner.repo + "/get/" + elPid + "/djatoka:jp2SDef/getRegion?scale=125,125";
+	  var imgUrl = PageTurner.repo + "/get/" + elPid + "/djatoka:jp2SDef/getRegion?scale=125";
 	  var caption = el.children('.page_title').text();
 	  var elImg = el.children('.jp2kPreview').html('<img src="' + imgUrl + '" alt="' + caption + '" />');
 	}
