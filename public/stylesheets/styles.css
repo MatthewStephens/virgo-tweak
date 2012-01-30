@@ -585,7 +585,7 @@ a.more_facets_link { color: #2f3e6a;}
   -moz-border-radius:    4px 4px 4px 4px;
   border-radius:         4px 4px 4px 4px; }
 .availability-indicator.available {border: 1px solid #46a546; color: #46a546;}
-.map-indicator.no-map, .availability-indicator.non-circ {border: 1px solid #BFB5B0; color: #BFB5B0;}
+.map-indicator.no-map, .availability-indicator.non-circ {border: 1px solid #a1928a; color: #a1928a;}
 .holding_data .availability-indicator, .holding_data .map-indicator {line-height: 20px; margin-left: 2px;}
 #results .single-copy img {margin-top: 0;}
 .holding h3 {

@@ -1,6 +1,6 @@
 <tr class="document" id="<%= document[:id] %>">
   <td><!--number --></td>
-	<td><%= link_to 'Remove', folder_path(document[:id]), :method => :delete, :confirm => 'Remove star from this item?', :class => "remove-star" %></td>
+	<td class="folder_container"><%= link_to 'Remove Star', folder_path(document[:id]), :class=>'deleteFolder_link remove-star', :title=>'Remove Star' %></td>
 	<td class="title">
 		 <%- if (document[:linked_title_display] rescue false) -%><%= link_to_document document, :label => document.value_for(:linked_title_display) %><%- end -%>
 		 <%- unless (document[:linked_title_display] rescue false) -%><%= link_to_document document, :label => video_title(document) %><% end %>

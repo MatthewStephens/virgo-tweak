@@ -1,6 +1,6 @@
 <tr class="document" id="<%= document[:id] %>">
   <td><!--number --></td>
-	<td><%= link_to 'Remove', folder_path(document[:id]), :method => :delete, :confirm => 'Remove star from this item?', :class => "remove-star" %></td>
+  <td class="folder_container"><%= link_to 'Remove Star', folder_path(document[:id]), :class=>'deleteFolder_link remove-star', :title=>'Remove Star' %></td>
 	<td class="title"> <% heading_title = get_heading_title(document.value_for(:main_title_display), document.value_for(:series_title_display), document.value_for(:title_display)) %><%= link_to_document document, :label => heading_title%></td>
 	<td class="author"><span class="starred-author"><%= document.value_for :author_display %></span></td>
 	<td class="format"><%= document.value_for :format_facet%></td>

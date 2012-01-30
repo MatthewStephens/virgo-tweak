@@ -1,5 +1,5 @@
 <%- @add_to_html_head = capture do -%>
-  <%= javascript_include_tag 'catalog/index', 'jquery.dataTables.min.js', 'account-listing.js' %>
+  <%= javascript_include_tag 'catalog/index', 'jquery.dataTables.min.js', 'account-listing.js', 'jquery.form.min.js' %>
 <%- end -%>
 
 <div id="list_heading"><h1>Starred Items<%= " (#{session_folder_document_ids.count + session_folder_article_ids.count})"  %></h1></div>
