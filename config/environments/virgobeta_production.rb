@@ -71,6 +71,9 @@ Virgo::Application.configure do
   FEDORA_USERNAME = 'fedoraAdmin'
   FEDORA_PASSWORD = 'aro2def'
 
+  GC.copy_on_write_friendly = true
+  GC.limit = 256000000
+
 end
 
 
