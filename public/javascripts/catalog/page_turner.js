@@ -212,7 +212,8 @@ $(document).ready(function() {
 	
 	/* =loadThumb
 	 *
-	 * Loads a 125 (on the long side) thumbnail for a given page
+	 * Loads the 125px (on long side) thumbnail for a given
+	 * page image container
 	-------------------------------------------------------------- */
 	function loadThumb(el) {
 	  var elPid = el.attr("id");
