@@ -768,7 +768,7 @@ module ApplicationHelper
       articles.each do |article|
         csv << [article.id, article.doc_type, article.display.title, article.display.creator]
       end
-    end    
+    end .html_safe    
   end
   
   ############# end methods pending addition
