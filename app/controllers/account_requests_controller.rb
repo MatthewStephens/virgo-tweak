@@ -59,6 +59,8 @@ class AccountRequestsController < ApplicationController
   def solr_lookup
     ckey = params[:id]
     ckey = "u#{ckey}" unless ckey.start_with?("u")
+    # this shouldn't be needed, but we were ending up with id and :id
+    params.delete(:id)
     @response, @document = get_solr_response_for_doc_id(ckey, params)
   end
   
