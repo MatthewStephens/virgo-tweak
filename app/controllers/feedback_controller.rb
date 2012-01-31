@@ -3,8 +3,7 @@
 require "#{Blacklight.controllers_dir}/feedback_controller"
 
 class FeedbackController < ApplicationController
-  protected
-  
+
   def show
     @errors=[]
     if request.post?
@@ -14,7 +13,8 @@ class FeedbackController < ApplicationController
       end
     end
   end
-  
+
+  protected
   
   # validates the incoming params
   # returns either an empty array or an array with error messages
