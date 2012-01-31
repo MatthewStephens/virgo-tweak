@@ -100,7 +100,7 @@ class SpecialCollectionsRequestsController < ApplicationController
   # verifies that the current user is a special collections administrator
   def verify_admin
     if current_user.nil?
-      flash[:error] = "Please log in to manage Special Collections Requests. <a class='btn small' href='/login?redirect=special_collections_admin'>Login</a>"
+      flash[:error] = "Please log in to manage Special Collections Requests. <a class='btn small' href='/login?redirect=special_collections_admin'>Login</a>".html_safe
       redirect_to catalog_index_path 
     else
       unless SpecialCollectionsUser.find_by_computing_id(current_user[:login])
