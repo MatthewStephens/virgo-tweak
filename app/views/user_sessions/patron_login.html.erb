@@ -9,7 +9,7 @@
     	</p>
       <p class="login-field">
 				<%= label_tag 'pin', 'PIN' %>
-				<%= text_field_tag 'pin' %>
+				<%= password_field_tag 'pin' %>
       </p>
       <p class="login-submit">
 				<%= hidden_field_tag 'redirect', params[:redirect] if params[:redirect] %>
