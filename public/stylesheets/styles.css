@@ -1523,7 +1523,7 @@ transition: background 200ms ease-in-out; }
 #account_menu li a:hover {color: #222; background-color: #fffefa;}
 #account_menu ul ul { border: none; margin: 0; }
 #account_menu ul ul li { border: none; margin: 0; padding: 0; }
-#acccount_menu ul ul li a { border: none; font-size: 12px; line-height: 1.5em; padding: 0 1em 0.5em 0; }
+#account_menu ul ul li a { border: none; font-size: 12px; line-height: 1.5em; padding: 0 1em 0.5em 0; }
 
 .account-total {font-weight: bold;}
 .account-listing {width: 100%;}
