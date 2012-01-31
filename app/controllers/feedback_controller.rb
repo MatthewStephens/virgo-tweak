@@ -8,7 +8,7 @@ class FeedbackController < ApplicationController
     @errors=[]
     if request.post?
       if validate
-        Notifier.feedback(params)
+        Notifier.deliver_feedback(params)
         redirect_to feedback_complete_path
       end
     end
