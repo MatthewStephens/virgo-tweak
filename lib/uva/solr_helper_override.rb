@@ -26,7 +26,7 @@ module UVA
   
     # use music facets if it's the music portal
     def add_music_portal solr_parameters, user_parameters
-      solr_parameters["facet.field"] = Blacklight.config[:facet_music][:field_names] if user_parameters[:portal] == 'music'
+      solr_parameters["facet.field"] = Blacklight.config[:facet_music][:field_names] if user_parameters[:portal] == 'music' and user_parameters[:action] != "facet"
     end
   
     # show as many search results as allowed if requested

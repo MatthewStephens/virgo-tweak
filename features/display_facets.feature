@@ -24,5 +24,15 @@ Feature: Display Facets
 	  When I follow "A-Z"
 	  Then facet entry 1 should be "B - Philosophy (General)"
 	  And facet entry 2 should be "BX - Christian Denominations"
+	
+	Scenario: music portal facets should not be applied when the action is "facet"
+  	Given I am on the homepage
+	  And I choose "catalog_select_catalog"
+	  And I fill in "q" with "bach"
+	  And I press "Search"
+		And I follow "Music Results"
+		And I follow "Recordings and scores"
+		Then I should see "Recordings and/or Scores"
+		
 	  
 	  
