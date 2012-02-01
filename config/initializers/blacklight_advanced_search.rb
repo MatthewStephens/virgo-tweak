@@ -128,12 +128,13 @@ BlacklightAdvancedSearch.config.merge!(
 # this config option to have it request other facet params than
 # default in the Solr request handler, in desired.
 
-# BlacklightAdvancedSearch.config[:form_solr_parameters] = {
-  # "facet.field" => [
-    # "format",
-    # "lc_1letter_facet",
-    # "language_facet"    
-  # ],
-  # "facet.limit" => -1,  # all facet values
-  # "facet.sort" => "index"  # sort by index value (alphabetically, more or less)
-# }
+BlacklightAdvancedSearch.config[:form_solr_parameters] = {
+   "facet.field" => [
+     "library_facet",
+     "format_facet",
+     "call_number_broad_facet",
+     "digital_collection_facet"
+   ],
+   "facet.limit" => -1,  # all facet values
+   "facet.sort" => "index"  # sort by index value (alphabetically, more or less)
+ }

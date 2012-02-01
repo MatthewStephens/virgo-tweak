@@ -8,6 +8,10 @@ Feature: Advanced Search Results
     And I fill in "author" with "smith"
     And I press "advanced_search"
     Then I should get results
+
+	Scenario: Advanced Search should display all facet values
+		Given I am on the advanced search page
+		Then I should see "Biology & Psychology"
     
   Scenario: Title search should look at alternate_title_form_facet
     Given I am on the advanced search page
