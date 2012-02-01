@@ -3,6 +3,17 @@
 require "#{Blacklight.controllers_dir}/feedback_controller"
 
 class FeedbackController < ApplicationController
+
+  def show
+    @errors=[]
+    if request.post?
+      if validate
+        Notifier.deliver_feedback(params)
+        redirect_to feedback_complete_path
+      end
+    end
+  end
+
   protected
   
   # validates the incoming params
