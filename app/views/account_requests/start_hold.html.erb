@@ -9,7 +9,7 @@
       <% if @document.availability.holdable_call_numbers.count == 1 %>
         <%= @document.availability.holdable_call_numbers[0] %>
       <% else %>
-        <%= label_tag "call_number", "Please select an item: #{select_tag("call_number", options_for_select(@document.availability.holdable_call_numbers))}" %>
+        <%= label_tag "call_number", "Please select an item: #{select_tag("call_number", options_for_select(@document.availability.holdable_call_numbers))}".html_safe %>
       <% end %>
       </p>
     
@@ -19,8 +19,8 @@
       <%= hidden_field_tag(:id, params[:id]) %>
   
       <p class="request-submit">
-        <%= submit_tag "Place Request" %>
-        <%= link_to 'cancel', catalog_path(params[:id]), :target => "_top" %>
+        <%= submit_tag "Place Request", :class => "btn primary" %>
+        <%= link_to 'Cancel', catalog_path(params[:id]), :target => "_top", :class => "btn" %>
       </p>  
     <% end %>
   </div>

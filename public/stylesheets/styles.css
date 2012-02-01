@@ -1340,12 +1340,12 @@ p,ul,ol,dl,blockquote{margin-bottom:1.54em;}
 #content #title h1 {
   font-weight: 300;
 }
-#virgo_container #title.request-heading {width: 695px;}
+#virgo_container #title.request-heading {margin-left: -12px; width: 695px;}
 #virgo_container #requests_container {overflow: auto; width: 600px;}
 #request_container {font-size: 14px; line-height: 1.5em; margin: 20px auto; width: 400px;}
 #request_container p {text-align: center;}
 #request_container p.request-call-select {font-size: 15px; font-weight: 500; padding: 1em 0;}
-#request_container select {display: block; margin: 0.5em auto;}
+#request_container select {display: block; margin: 0.5em auto; width: 200px; }
 #request_container input[type='submit'] {font-size: 14px; margin-right: 1em;}
 #request_container .request-title {font-family: Georgia, "Times New Roman", Times, serif; font-size: 16px; color: #543; margin: 1em 0; text-align: center;}
 #request_container .request-submit  {margin-top: 2em; text-align: center;}
