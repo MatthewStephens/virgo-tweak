@@ -288,7 +288,7 @@ jQuery(document).ready(function($) {
 	}
 	
 	function addChatLink(){
-	  $('.no-items-ask').click(function() {
+	  $('.catalog-page .no-items-ask').click(function() {
       $('.libraryh3lp-container').show();
       return false;
 	  });
