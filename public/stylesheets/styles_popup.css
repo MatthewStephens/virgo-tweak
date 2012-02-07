@@ -34,6 +34,7 @@ body {margin: 0; padding: 0;}
 	margin-right: auto;
 	margin-left: auto;
 	overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 #left_column {
 	width: 248px;
