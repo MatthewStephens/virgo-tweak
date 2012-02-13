@@ -21,12 +21,10 @@ xml.rss(:version=>"2.0"){
           location=document.value_for(:library_facet)
           xml.description( author + summary + " Call number: " + call_number + "  Location: " +  location)
 				end
-			#  xml.author( document.value_for(:author_display) )
-				
+			#  xml.author( document.value_for(:author_display) )				
 			#xml.description{
        #  document.value_for(:subtitle_display) + "\n" + document.value_for(:author_display) +
-        #  xml.cdata!( image_tag(image_catalog_path(:format => :jpg, :id => document[:id] ), :alt => 'Cover for ' + document.value_for(:title_display) ) )
-          
+        #  xml.cdata!( image_tag(image_catalog_path(:format => :jpg, :id => document[:id] ), :alt => 'Cover for ' + document.value_for(:title_display) ) )          
       #}
       
 				
