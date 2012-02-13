@@ -19,7 +19,7 @@ gem 'rsolr-ext', '1.0.3'
 gem 'ruby-net-ldap', '0.0.4'
 gem 'rubytree', '0.5.2'
 gem 'will_paginate'
-gem 'unhappymapper', '0.4.1'
+gem 'uva-happymapper', '0.4.1'
 gem 'fastercsv'
 
 group :development, :virgobeta_development, :test, :cucumber, :virgobeta_test do

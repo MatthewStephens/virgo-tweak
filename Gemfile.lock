@@ -170,9 +170,9 @@ GEM
       polyglot (>= 0.3.1)
     ttfunk (1.0.3)
     tzinfo (0.3.31)
-    unhappymapper (0.4.1)
-      nokogiri (~> 1.5.0)
     unicode (0.4.0)
+    uva-happymapper (0.4.1)
+      nokogiri (~> 1.5.0)
     webrat (0.7.3)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
@@ -215,6 +215,6 @@ DEPENDENCIES
   rspec-rails (> 2.0.0)
   ruby-net-ldap (= 0.0.4)
   rubytree (= 0.5.2)
-  unhappymapper (= 0.4.1)
+  uva-happymapper (= 0.4.1)
   webrat
   will_paginate
