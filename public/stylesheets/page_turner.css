@@ -73,7 +73,8 @@ button {background: none; border: none; cursor: pointer; font-family: Arial, Hel
     width: 100%;
     margin: 0;
     overflow-y: scroll;
-    padding: 0; }
+    padding: 0; 
+    -webkit-overflow-scrolling: touch; }
 .page_thumbs_nav {
   background: #9e9781;
   color: #ECE5D2;

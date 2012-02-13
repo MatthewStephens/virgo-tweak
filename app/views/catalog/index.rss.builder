@@ -15,17 +15,16 @@ xml.rss(:version=>"2.0"){
         document.doc_type == :article ? link = document.links.first.fulltext_url : link = catalog_url(document[:id])
 				xml.link( link )
 				unless document.doc_type == :article
-          xml.cdata!( 
-            summary = document.value_for(:description_note_display).match('n/a') ? "" : document.value_for(:description_note_display) + "<br />")
-             xml.description( summary + "Call number: " + document.value_for(:call_number_display) + "  Location: " + document.value_for(:library_facet) 
-          )
+          author = document.value_for(:author_display).match('n/a') ? "" : document.value_for(:author_display)+ "<br />" 
+          summary = document.value_for(:description_note_display).match('n/a') ? "" : document.value_for(:description_note_display) + "<br />"
+          call_number= document.value_for(:call_number_display)
+          location=document.value_for(:library_facet)
+          xml.description( author + summary + " Call number: " + call_number + "  Location: " +  location)
 				end
-			#  xml.author( document.value_for(:author_display) )
-				
+			#  xml.author( document.value_for(:author_display) )				
 			#xml.description{
        #  document.value_for(:subtitle_display) + "\n" + document.value_for(:author_display) +
-        #  xml.cdata!( image_tag(image_catalog_path(:format => :jpg, :id => document[:id] ), :alt => 'Cover for ' + document.value_for(:title_display) ) )
-          
+        #  xml.cdata!( image_tag(image_catalog_path(:format => :jpg, :id => document[:id] ), :alt => 'Cover for ' + document.value_for(:title_display) ) )          
       #}
       
 				

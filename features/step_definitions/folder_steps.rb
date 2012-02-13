@@ -2,6 +2,10 @@ Then /^I should see an add to folder form for ckey "([^\"]*)"$/ do |arg1|
   page.should have_selector("form.addFolderForm input", :id=>"id#{arg1}")
 end
 
+Then /^I should see a remove from folder link for ckey "([^\"]*)"$/ do |arg1|
+  page.should have_selector(".document##{arg1} .deleteFolder_link")
+end
+
 Then /^I (should|should not) see ckey "([^\"]*)" in the folder$/ do |comparator, arg1|
   case comparator
     when "should"

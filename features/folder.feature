@@ -110,9 +110,7 @@ Feature: User Folder
 	      
   Scenario: Remove an item from the folder
     Given I have ckey "u5076740" in my folder
-    When I follow "Remove"
-    Then I should see "Removed from Starred Items"
-    And I should not see ckey "u5076740" in the folder
+    Then I should see a remove from folder link for ckey "u5076740"
     
   Scenario: Clearing folder should mean you don't see items in the folder
     Given I have ckey "u4322506" in my folder
