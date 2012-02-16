@@ -349,7 +349,7 @@ class UVA::VirgoMarcRecord
   end
   
   def original_version
-    subfields_of('534', ['p', 't', 'c', 'n']).join(' ')
+    subfields_of('534', ['p', 't', 'c', 'n', 'l', 'e']).join(' ')
   end
   
   def terms_of_use
