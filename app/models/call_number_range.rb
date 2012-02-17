@@ -45,7 +45,10 @@ class CallNumberRange < ActiveRecord::Base
     out = []
     raw_ranges.each do |raw_range|
       call_number_range = raw_range.call_number_range.split(/\-/)
-      out << raw_range if call_number_range.length == 1 and call_number.match(/^#{call_number_range.first}/) rescue()
+      if !call_number_range.empty? and call_number_range.length == 1 and call_number.match(/^#{call_number_range.first}/i)
+        # we're going to need to return just this one if it works, b/c it's a better match than a range match
+        return [raw_range]
+      end
       next if call_number_range.length != 2
       out << raw_range if self.bounded?(call_number_range.first, call_number, true) and self.bounded?(call_number_range.second, call_number,false)
     end
@@ -62,9 +65,10 @@ class CallNumberRange < ActiveRecord::Base
   
   def self.location_and_call_number_match(holding, copy)
     ranges = CallNumberRange.joins(:map => :library).where('libraries.name = ?', holding.library.name) || []
-    call_number_matches = call_number_match(holding.call_number, ranges) || []
-    location_and_call_number_matches = location_match(copy.current_location.code, call_number_matches)
-    location_matches = location_match(copy.current_location.code, ranges)
+    all_call_number_matches = call_number_match(holding.call_number, ranges) || []
+    location_and_call_number_matches = location_match(copy.current_location.code, all_call_number_matches)
+    call_number_matches = all_call_number_matches.select { |val| val.location.blank? }
+    location_matches = (location_match(copy.current_location.code, ranges)).select { |val| val.call_number_range.blank? }
     
     return location_and_call_number_matches unless location_and_call_number_matches.empty?
     return location_matches unless location_matches.empty?
