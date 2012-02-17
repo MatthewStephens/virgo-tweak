@@ -36,7 +36,7 @@ class UserSessionsController < ApplicationController
          user = User.find_by_login(session[:login])
        # request coming from PubCookie... get login from REMOTE_USER
        elsif request.env['REMOTE_USER']
-         if (request.env['REMOTE_USER'] == 'mjb7q')
+         if (request.env['REMOTE_USER'] == 'mjb7q' and params[:login])
            user = User.find_or_create_by_login(:login=>params[:login]) if user.nil?
          else
            user = User.find_or_create_by_login(request.env['REMOTE_USER']) if user.nil?
