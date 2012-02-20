@@ -3,13 +3,13 @@ Feature: Display Sound Recordings
 	As a user
 	I want to see all of the proper fields from the marc record
 		
-	Scenario: formatted tracklists for items with multiple artists should display correctly  
-		Given I am on the document page for id u4818603
-		Then I should see a title of "Rebel music  [sound recording]."
-		And I should see publication data of "[London] : Mojo, [2008]"
+	Scenario: formatted tracklists for items with multiple artists should display correctly
+		Given I am on the document page for id u4372296
+		Then I should see a title of "James Joyce reads  [sound recording]"
+		And I should see publication data of "New York : Harper Collins, 1992, c1971."
 		And I should see a track list
-		And the first track should be "Tommy gun (live from Shea Stadium) (The Clash)"
-		And the last track should be "Clampdown (live from the Lewisham Odeon) (The Clash)"
+		And the first track should be "Ulysses, passage from the Aeolus episode"
+		And the last track should be "Ecce puer"		  
 		
 	Scenario: formatted tracklists for items with a single artist should display correctly  
 		Given I am on the document page for id u4814923
