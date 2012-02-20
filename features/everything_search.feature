@@ -38,7 +38,7 @@ Feature: Everything (Default) Search Result Relevancy
 	  Then I should get at least 300000 results
     When I fill in "q" with "thomas jefferson library personal copy"
 	  And I press "Search"
-    Then I should get at most 500 results
+    Then I should get at most 501 results
     
   Scenario: Single-word searches should give precedence to exact matches
     Given I am on the homepage
