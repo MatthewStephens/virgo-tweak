@@ -17,3 +17,7 @@ Feature: Display Videos
 	Scenario: Display title, part, medium and subtitle
 	  Given I am on the document page for id u4354753
 	  Then I should see a title of "Berserk. Season one [videorecording] : complete collection"
+	  
+    Scenario: Display original version
+	  Given I am on the document page for id r039
+	  Then I should see "Original version" data of "Original version: Special Collections, University of Virginia Library, Charlottesville, Va., MSS 12801 (videocassette, Beta 1/2 in.)"
