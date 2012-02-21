@@ -21,6 +21,17 @@ Feature: Display Articles
 		Then I should get at least 5 results
 		And I should see the filter label "Format"
 		And I should see the filter value "articles"
+	
+	Scenario: Facet stickiness
+		Given I am on the homepage
+		And I choose "catalog_select_articles"
+		And I fill in "q" with "cat"
+		And I press "Search"
+		And I follow "Online resources"
+		And I fill in "q" with "dog"
+		And I press "Search"
+		Then I should see the filter label "Designation"
+		And I should see the filter value "online_resources"
 				
 	Scenario: Article pagination
 		Given I am on the homepage
