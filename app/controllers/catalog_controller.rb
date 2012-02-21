@@ -76,6 +76,7 @@ class CatalogController < ApplicationController
       else
         my_params = populated_advanced_search_fields.merge(:catalog_select => "articles", :search_field => params[:search_field])
       end
+      my_params[:f] = params[:f]
       my_params[:format] = params[:format]
       my_params[:sort_key] = params[:sort_key]
       redirect_to articles_path(my_params) and return
