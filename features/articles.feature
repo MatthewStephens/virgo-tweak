@@ -97,3 +97,21 @@ Feature: Display Articles
 		When I follow "refineSearchLink"
 		Then I should see select list "select#sort_key" with "Date" selected
 
+    Scenario: facet label links to the facet page
+		Given I am on the homepage
+		And I choose "catalog_select_articles"
+		And I fill in "q" with "dog"
+		And I press "Search"
+		When I follow "Designation"
+		Then I should see "Browse by Designation"
+		
+	Scenario: See more links to the facet page
+		Given I am on the homepage
+		And I choose "catalog_select_articles"
+		And I fill in "q" with "dog"
+		And I press "Search"
+		When I follow "See More →"
+		Then I should see "Browse by"
+		
+		
+		
