@@ -18,7 +18,7 @@ class SolrDocument
   end
   
   use_extension( UVA::DigitalLibraryImageDocument) do |document|
-    document.doc_type==:dl_image || document.doc_type==:dl_jp2k || document.doc_type==:dl_book
+    document.doc_type==:dl_image || document.doc_type==:dl_book
   end
   
   def initialize(doc, solr_response=nil)
@@ -78,7 +78,7 @@ class SolrDocument
         [:hathi, has?(:source_facet, 'Hathi Trust Digital Library')],
         [:dl_video, (has?(:source_facet, 'UVA Library Digital Repository') and has?(:format_facet, 'Video'))],
         [:lib_album, has?(:format_facet, /Musical Recording/i)],
-        [:dl_book, (has?(:content_model_facet, 'digital_book') or has?(:content_model_facet, 'jp2k'))],
+        [:dl_book, (has?(:content_model_facet, 'digital_book'))],
         [:lib_catalog, has?(:source_facet, 'Library Catalog')],
         [:lib_coins, has?(:source_facet, 'U.Va. Art Museum')],
         [:dl_image, has?(:content_model_facet, 'media')],
@@ -204,7 +204,7 @@ class SolrDocument
   # for marc items, that's the marc record
   # for digital library objects, it's desc_meta_file_display
   def to_xml      
-    raise RedirectNeeded.new(mods_get_url) if doc_type == :dl_jp2k
+    raise RedirectNeeded.new(mods_get_url) if (doc_type == :dl_book or doc_type == :dl_image)
     if self.respond_to?(:to_marc) and self.to_marc
       self.export_as_marcxml
     elsif !get(:desc_meta_file_display).nil?
