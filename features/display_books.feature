@@ -338,16 +338,3 @@ Feature: Display Books
  Scenario: show format for dl_books
     Given I am on the document page for id uva-lib:602113
     Then I should see "Format" data of "Online; Book"	
-
- Scenario: show location for dl_books
-    Given I am on the document page for id uva-lib:602113
-    Then I should see "Location" data of "Special Collections FOLIO"
-    
- Scenario: show Call number for dl_books
-    Given I am on the document page for id uva-lib:602113
-    Then I should see "Call Number" data of "NA2517 .D4 1576"
-    
-    
-    
-    
-    

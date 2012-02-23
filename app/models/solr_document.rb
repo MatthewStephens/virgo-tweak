@@ -18,7 +18,7 @@ class SolrDocument
   end
   
   use_extension( UVA::DigitalLibraryImageDocument) do |document|
-    document.doc_type==:dl_image || document.doc_type==:dl_book
+    document.doc_type==:dl_image || document.doc_type==:dl_book || document.doc_sub_type==:dl_book
   end
   
   def initialize(doc, solr_response=nil)
@@ -78,8 +78,9 @@ class SolrDocument
         [:hathi, has?(:source_facet, 'Hathi Trust Digital Library')],
         [:dl_video, (has?(:source_facet, 'UVA Library Digital Repository') and has?(:format_facet, 'Video'))],
         [:lib_album, has?(:format_facet, /Musical Recording/i)],
-        [:dl_book, (has?(:content_model_facet, 'digital_book'))],
+        [:dl_book, ((has?(:content_model_facet, 'digital_book') or has?(:content_model_facet, 'jp2k')) and !respond_to?(:to_marc))],
         [:lib_catalog, has?(:source_facet, 'Library Catalog')],
+        [:lib_catalog, (has?(:content_model_facet, 'digital_book') and respond_to?(:to_marc))],
         [:lib_coins, has?(:source_facet, 'U.Va. Art Museum')],
         [:dl_image, has?(:content_model_facet, 'media')],
         [:dl_text, has?(:content_model_facet, 'text')],
@@ -97,6 +98,7 @@ class SolrDocument
        types = [
          [:musical_recording, has?(:format_facet, /Musical Recording/i)],
          [:musical_score, has?(:format_facet, /Musical Score/i)],
+         [:dl_book, has?(:content_model_facet, 'digital_book')],
          [:finding_aid, has?(:digital_collection_facet, /UVa Archival Finding Aids/i)],
          [:default, true]
        ]

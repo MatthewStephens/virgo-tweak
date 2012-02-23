@@ -5,35 +5,33 @@
 	<% else %>
 		<h2>Availability</h2>
 	<% end %>
-	
+		
   	<% #------------ Online ------------- %>
   	<% if document[:marc_display] %>
-  	<% unless document.marc_display.nil? or document.marc_display.online_versions.empty? %>
-  	<div id="onlineAvailability" class="holding">
-  	  <h3><%= online_access_verb(document) %> Online</h3>
-  		<% document.marc_display.online_versions.each do |x| %>
-  		<div class="onlineHolding">
-  		  <%= link_to x["label"], x["value"], :target => '_blank' %>
-  		</div>
-  		<% end %>
-  	</div><!-- /#onlineAvailability -->
+   	<% unless document.marc_display.nil? or document.marc_display.online_versions.empty? %>
+	  	<div id="onlineAvailability" class="holding">
+	  	  <h3><%= online_access_verb(document) %> Online</h3>
+	  		<% document.marc_display.online_versions.each do |x| %>
+	  		<div class="onlineHolding">
+	  		  <%= link_to x["label"], x["value"], :target => '_blank' %>
+	  		</div>
+	  		<% end %>
+	  	</div><!-- /#onlineAvailability -->
   	<% end %>
   	<% end %>
 
   	<% #--------- DL Text Object  ------------- %>
-  	<% if document.has?(:source_facet, 'Digital Library') and (document[:content_model_facet].to_s == 'text' or document[:content_model_facet].to_s == 'finding aid') %>
-  	  <% unless document.doc_sub_type == :finding_aid %>
-  	    <div id="onlineAvailability" class="holding">
-					<h3><%= online_access_verb(document) %> Online</h3>
-					<div class="onlineHolding">
-	  	    	<%= xtf_url_link(document) %>
-					</div>
-  	    </div>
-  	  <% end %>
+  	<% if document.doc_type == :dl_text and document.doc_sub_type != :finding_aid %>  	  
+ 	    <div id="onlineAvailability" class="holding">
+				<h3><%= online_access_verb(document) %> Online</h3>
+				<div class="onlineHolding">
+  	    	<%= xtf_url_link(document) %>
+				</div>
+ 	    </div>
   	<% end %>
 
   	<% #--------- Digital Book Object  ------------- %>
-  	<% if document.has?(:content_model_facet, 'digital_book') or document.has?(:content_model_facet, 'jp2k') %>
+  	<% if document.doc_type == :dl_book or document.doc_sub_type == :dl_book %>
   	    <div id="onlineAvailability" class="holding">
 					<h3><%= online_access_verb(document) %> Online</h3>
 					<div class="onlineHolding">
@@ -51,7 +49,7 @@
 		</div>
 	<% end %>
 	
-	<% if document[:marc_display]%>  
+	<% if document[:marc_display] %>  
     <script type="text/javascript">
       // for info on this implementation, see http://markmail.org/message/o4wnzm7wdxbn66mu
       // Configure these lines for your page
@@ -84,10 +82,10 @@
     </script>
 	<% end %>
 		
-	<% unless document.online_only? or document.has?(:content_model_facet, 'digital_book') or document.has?(:content_model_facet, 'jp2k') %>
-	<div id="physicalAvailability" title="<%= document.id %>">
-		<%= image_tag 'ajax-loader.gif', :alt => "Loading availability", :class => "availability_loader" %>
-	</div>
+	<% unless document.online_only? or document.doc_type == :dl_book or document.doc_sub_type == :dl_book %>
+		<div id="physicalAvailability" title="<%= document.id %>">
+			<%= image_tag 'ajax-loader.gif', :alt => "Loading availability", :class => "availability_loader" %>
+		</div>
 	<% end %>
 
 	</div>
