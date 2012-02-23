@@ -174,13 +174,15 @@ Blacklight.configure(:shared) do |config|
       :field_names => (facet_fields = [
         "library_facet",
         "format_facet",
+        "video_genre_facet",
         "subject_facet",
         "language_facet",
-        "series_title_facet"   
+        "series_title_facet"
         ]),
       :labels => {
         "library_facet" => "Library",
         "format_facet" => "Format",
+        "video_genre_facet" => "Genre",
         "subject_facet" => "Subject",
         "language_facet" => "Language",
         "series_title_facet" => "Series Title"
