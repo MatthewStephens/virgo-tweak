@@ -265,14 +265,13 @@ class CatalogController < ApplicationController
         :per_page=>200, # load plenty to match up with the ids_for_docs_with_cached_covers output
         :fl=>%W(id format_facet library_facet),
         :sort=>"date_received_facet desc",
-        :phrase_filters=>phrase_filters,
+        :f=>phrase_filters,
         :qt => 'search'
-      }
-      featured_response, document_list = get_search_results(opts)
-      @featured_documents = document_list.select do |doc|
+      }  
+      featured_response, document_list = get_search_results(opts)          
+      @featured_documents = document_list.select do |doc|    
         doc.has_image?
       end
-        
       @featured_documents = @featured_documents.sort_by {rand}
     end
   end
