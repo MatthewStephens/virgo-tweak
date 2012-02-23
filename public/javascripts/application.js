@@ -106,8 +106,13 @@ jQuery(document).ready(function($) {
 
       // Post-submit callback function
       function checkStarResponse(responseText, statusText, xhr, $form)  { 
-        // Retrieve the item id (like u5333028) from a hidden field
-        var elId = target.children("input[name='id']").val();
+        // Retrieve the item id (like u5333028) from a hidden field 
+        // (id for catalog, article_id for articles)
+        if ( target.children("input[name='id']").length ) {
+          var elId = target.children("input[name='id']").val();
+        } else {
+          var elId = target.children("input[name='article_id']").val();
+        }       
         
         // Since the ajax submit call has succeeded, 
         // replace the star form with a delete link.
@@ -169,7 +174,12 @@ jQuery(document).ready(function($) {
 	  var unmarkedIds = new Array();
 	  var unmarkedEls = $('.addFolderForm .submitForm');
 	  unmarkedEls.each(function(index) {
-      unmarkedIds[index] = $(this).siblings("input[name='id']").val();
+      if ( $(this).siblings("input[name='id']").length ) {
+        unmarkedIds[index] = $(this).siblings("input[name='id']").val();
+      } else {
+        unmarkedIds[index] = $(this).siblings("input[name='article_id']").val();
+      }
+      
 	  });
 	  return unmarkedIds;
 	}
@@ -183,12 +193,13 @@ jQuery(document).ready(function($) {
       if($(selectIds).length > 0) {
 
         var select_link = $(this);
+        var selectData = $('body.articles-page') ? { 'article_id[]' : selectIds } : { 'id[]': selectIds };
                 
         $.ajax({
           url: "/folder",
           type: "POST",
           dataType: "json",
-          data: { 'id[]': selectIds },
+          data: selectData,
           beforeSend: function(jqXHR, settings){
             $('.addFolderForm .submitForm').addClass('saving-star');
             select_link.addClass('link_disabled');

@@ -45,11 +45,9 @@
   
 <% else %>
 	
-<% if params[:catalog_select] != 'articles' -%>
 	<div id="SelectClearAll">
 		<a class="select_all" href="#"><span class="screen-reader-text">Add Star to </span>All</a>
 	</div>
-<% end -%>
 	
   <%= render :partial=>'catalog/document_list' %>
 	
