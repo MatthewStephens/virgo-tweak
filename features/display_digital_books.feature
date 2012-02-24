@@ -19,3 +19,7 @@ Feature: Display Digital Books
 		And I should see "Title" data of "Untitled"
 		And I should see "Series" data of "Holsinger Studio Collection, 1889 - 1939"
 		And I should see "Creator" data of "Holsinger, Ralph W."
+
+	Scenario: Do not show "Access in Virgo Classic" for dl_book items that are marc-based
+	 	Given I am on the document page for id uva-lib:1002988
+		Then I should not see "Access in Virgo Classic"
