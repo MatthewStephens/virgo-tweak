@@ -4,13 +4,15 @@
 </div>
 <div id="video_genres">
   <ul class="genre_list">
-    <li class="genre"><%= link_to h("Action/Adventure"), add_facet_params(:subject_facet, "Action and adventure films") %></li>
-    <li class="genre"><%= link_to h("Animated"), add_facet_params(:subject_facet, "Animated films") %></li>
-    <li class="genre"><%= link_to h("Comedy"), add_facet_params(:subject_facet, "Comedy films") %></li>
-    <li class="genre"><%= link_to h("Documentary"), add_facet_params(:subject_facet, "Documentary films") %></li>
-    <li class="genre"><%= link_to h("Horror"), add_facet_params(:subject_facet, "Horror films") %></li>
-    <li class="genre"><%= link_to h("Mystery"), add_facet_params(:subject_facet, "Detective and mystery films") %></li>
-    <li class="genre"><%= link_to h("Science fiction"), add_facet_params(:subject_facet, "Science fiction films") %></li>
-    <li class="genre"><%= link_to h("International"), add_facet_params(:subject_facet, "Foreign films") %></li>
+    <li class="genre"><%= link_to h("Action & Adventure"), add_facet_params(:video_genre_facet, "Action/Adventure") %></li>
+    <li class="genre"><%= link_to h("Animation"), add_facet_params(:video_genre_facet, "Animation") %></li>
+    <li class="genre"><%= link_to h("Children & Family"), add_facet_params(:video_genre_facet, "Children/Family") %></li>
+    <li class="genre"><%= link_to h("Comedy"), add_facet_params(:video_genre_facet, "Comedy") %></li>
+    <li class="genre"><%= link_to h("Crime & Mystery"), add_facet_params(:video_genre_facet, "Crime/Mystery") %></li>
+    <li class="genre"><%= link_to h("Documentary"), add_facet_params(:video_genre_facet, "Documentary") %></li>
+    <li class="genre"><%= link_to h("Horror"), add_facet_params(:video_genre_facet, "Horror") %></li>
+    <li class="genre"><%= link_to h("Music & Musical"), add_facet_params(:video_genre_facet, "Music/Musicals") %></li>
+    <li class="genre"><%= link_to h("Science Fiction & Fantasy"), add_facet_params(:video_genre_facet, "SciFi/Fantasy") %></li>
+    <li class="genre"><%= link_to h("Television"), add_facet_params(:video_genre_facet, "Television") %></li>
   </ul>
 </div>
