@@ -29,6 +29,8 @@
   
 <% elsif video_home_page? %>
 
+  <%= render :partial => 'video_genres' %>
+
   <%= render :partial=>'featured_documents' %>
   
 <% elsif home_page? and params[:controller] == 'catalog' and params[:catalog_select].nil? %>
