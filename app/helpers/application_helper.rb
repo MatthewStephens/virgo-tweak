@@ -59,8 +59,8 @@ module ApplicationHelper
     end
     return '' if locations.length == 0
     return 'Multiple locations' if libraries.length > 1 or locations.length > 1
-    return locations2[0] if locations2[0] =~ /Special Collections/
-    return locations2[0] if locations2[0] =~ /Reserve/
+    return locations2[0] if (locations2 and locations2[0] =~ /Special Collections/)
+    return locations2[0] if (locations2 and locations2[0] =~ /Reserve/)
     return (document.values_for(:library_facet)[0] + " " + locations[0]) rescue locations[0]
   end
   
@@ -1091,5 +1091,5 @@ module ApplicationHelper
     end
     link_to "See all #{label} results &rarr;".html_safe, link, :class => style
   end
-
+    
 end

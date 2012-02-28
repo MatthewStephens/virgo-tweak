@@ -23,3 +23,14 @@ Feature: Display Digital Books
 	Scenario: Do not show "Access in Virgo Classic" for dl_book items that are marc-based
 	 	Given I am on the document page for id uva-lib:1002988
 		Then I should not see "Access in Virgo Classic"
+		
+	Scenario: Search results display for dl_book items
+		Given I am on the homepage
+		When I fill in "q" with "M1 .S445 v. 175 no. 13 online"
+		And I press "Search"
+		Then I should get exactly 1 results
+		And I should see "Then you'll remember me : ballad"
+		And I should see "M1 .S445 v. 175 no. 13"
+		And I should see "1895"
+		And I should not see "Availability"
+		

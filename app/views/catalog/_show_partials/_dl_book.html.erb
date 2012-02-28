@@ -156,12 +156,7 @@
 <% sidebar_items << capture do %>
   <div id="sub1">
   <div id="sub1Inner">
-		<div class="previewThumbImg">
-		  <span class="jp2kPreview">
-		    <%= link_to(image_tag(document.dl_jp2k_child_preview(get_exemplar(document.fedora_url, document[:id])), :class => :photo, :alt => document[:id]),
-		        document.dl_jp2k_applet_viewer(document[:id]) ) %>
-		  </span>
-		</div>
+	<%= render :partial => 'catalog/_show_partials/document_image', :locals => { :document => document } %>
   <%= render :partial => 'catalog/_show_partials/subjects', :locals => { :document => document } %>
   </div>
   </div>

@@ -17,9 +17,7 @@
 	    </dd>
      </dl>	
 
-		  <div class="previewThumbImg">		  
- 		  <%= link_to_document_from_cover document, :span => "coverImage book", :counter => (counter + 1 + offset), :bookmakrs_view => bookmarks_view  %>
- 		</div>
+		<%= render :partial => 'catalog/_index_partials/document_image', :locals => { :document => document, :counter => counter, :offset => offset, :bookmarks_view => bookmarks_view } %>
 
 		<dl class="metadata">
   		

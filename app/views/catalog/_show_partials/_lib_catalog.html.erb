@@ -396,12 +396,7 @@
   <div id="sub1">
   <div id="sub1Inner">
 		
-		<div class="previewThumbImg">
-			<span class="coverImage" title="<%= document.id %>">
-				<%= image_tag 'ajax-loader.gif', :class=>'ajaxLoader', :alt => 'Loading' %>
-			</span>
-		</div>
-	
+		<%= render :partial => 'catalog/_show_partials/document_image', :locals => { :document => document } %>
   	<%= render :partial => 'catalog/_show_partials/subjects', :locals => { :document => document } %>
   	<%= render :partial => 'catalog/_show_partials/related_names', :locals => { :document => document } %> 
   </div>

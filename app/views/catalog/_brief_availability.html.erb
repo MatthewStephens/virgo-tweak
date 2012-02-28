@@ -1,14 +1,16 @@
-<% unless document.online_only? && !document.get(:url_display).nil? -%>
+<% unless (document.online_only? && !document.get(:url_display).nil?) -%>
   <% if params[:portal] != 'video' -%>
-    <dt>Availability</dt>
-		<% if availability_on_index?(document) -%>
-			<dd id="availability_<%= document[:id] %>" class="availability">
-			<span class="single-copy"><img src="/images/loading-balls.gif" alt="loading..."></span>
-			</dd>
-		<% else -%>
-			<dd id="availability_<%= document[:id] %>" class="availability">
-      	<%= link_to 'View Locations and Availability ', catalog_path(document[:id]) %>
-			</dd>
+		<% unless document.doc_sub_type == :dl_book %>
+	    <dt>Availability</dt>
+			<% if availability_on_index?(document) -%>
+				<dd id="availability_<%= document[:id] %>" class="availability">
+				<span class="single-copy"><img src="/images/loading-balls.gif" alt="loading..."></span>
+				</dd>
+			<% else -%>
+				<dd id="availability_<%= document[:id] %>" class="availability">
+	      	<%= link_to 'View Locations and Availability ', catalog_path(document[:id]) %>
+				</dd>
+			<% end -%>
 		<% end -%>
 		<% unless call_number(document).blank? -%>
 			<dt>Call Number</dt>

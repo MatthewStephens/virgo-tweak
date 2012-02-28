@@ -10,9 +10,7 @@
       </dd>
     </dl>
 		
-		<div class="previewThumbImg">
-        <%= link_to(image_tag(document.dl_jp2k_child_preview(get_exemplar(document.fedora_url, document[:id])), :class => :photo, :alt => document[:id]), document.dl_jp2k_applet_viewer(document[:id]) ) %>
-    </div>
+		<%= render :partial => 'catalog/_index_partials/document_image', :locals => { :document => document } %>
 		
     <dl class="metadata">
 

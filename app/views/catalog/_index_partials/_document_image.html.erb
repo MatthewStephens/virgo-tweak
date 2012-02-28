@@ -1,0 +1,7 @@
+<div class="previewThumbImg">
+  <% if document.doc_type == :dl_book or document.doc_sub_type == :dl_book %>
+    <%= link_to(image_tag(document.dl_jp2k_child_preview(get_exemplar(document.fedora_url, document[:id])), :class => :photo, :alt => document[:id]), document.dl_jp2k_applet_viewer(document[:id]) ) %>
+  <% else %>
+    <%= link_to_document_from_cover document, :span => "coverImage book", :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view %> 
+  <% end %>    
+</div>
