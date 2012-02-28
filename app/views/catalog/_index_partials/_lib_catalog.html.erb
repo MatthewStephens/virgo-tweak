@@ -48,6 +48,12 @@
 
 			<%= render :partial=>'brief_availability', :locals=>{:document=>document} %>
 
+			<% if document.doc_sub_type == :dl_book %>
+				<dt>Contents</dt>
+				<dd class="onlineAccessField">
+					<%= link_to("View online", document.dl_jp2k_applet_viewer(document[:id])) %></dd>
+			<% end %>
+
 		</dl>
 		
 	</div>

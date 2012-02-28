@@ -33,4 +33,5 @@ Feature: Display Digital Books
 		And I should see "M1 .S445 v. 175 no. 13"
 		And I should see "1895"
 		And I should not see "Availability"
+		And I should see "View online"
 		
