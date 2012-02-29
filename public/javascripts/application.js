@@ -193,7 +193,7 @@ jQuery(document).ready(function($) {
       if($(selectIds).length > 0) {
 
         var select_link = $(this);
-        var selectData = $('body.articles-page') ? { 'article_id[]' : selectIds } : { 'id[]': selectIds };
+        var selectData = $('body.articles-page').length ? { 'article_id[]' : selectIds } : { 'id[]': selectIds };
                 
         $.ajax({
           url: "/folder",
