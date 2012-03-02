@@ -568,7 +568,7 @@ module ApplicationHelper
     availability.special_collections_holdings.each do |holding|
       holding.copies.each do |copy|
         if copy.home_location.code =~ /SC-IVY/
-          if copy.item_type == "archives"
+          if copy.item_type.code == "archives"
             return true
           else
             # don't display link
