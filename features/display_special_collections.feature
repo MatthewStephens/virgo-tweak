@@ -18,6 +18,11 @@ Feature: Display Special Collections Lens
     And I am on the availability page for id u5492
     Then I should not see "Request this Item"
 
+	Scenario: Show request link if the item is SC-IVY and item type of "archives"
+		Given I am in the Special Collections lens
+		And I am on the availability page for id u358
+		Then I should see "Request this Item"
+
 	Scenario: Do not show request link if the item has home location SC-IVY and is IN-PROCESS
 		Given I am in the Special Collections lens
 		And I am on the availability page for id u1896264

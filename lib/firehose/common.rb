@@ -77,6 +77,12 @@ module Firehose::Common
       false
     end
   end
+  
+  class ItemType
+    include HappyMapper
+    tag 'itemType'
+    attribute :code, String
+  end
     
   class Copy
     include HappyMapper
@@ -89,6 +95,7 @@ module Firehose::Common
     element :circulate, String
     has_one :current_location, CurrentLocation, :tag => "currentLocation"
     has_one :home_location, HomeLocation, :tag => "homeLocation"
+    has_one :item_type, ItemType, :tag => "itemType"
     def shadowed?
       @shadowed
     end
