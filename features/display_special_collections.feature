@@ -15,7 +15,7 @@ Feature: Display Special Collections Lens
     
   Scenario: Do not show request link if the item is only in SC-IVY
     Given I am in the Special Collections lens
-    And I am on the availability page for id u5492
+    And I am on the availability page for id u430758
     Then I should not see "Request this Item"
 
 	Scenario: Show request link if the item is SC-IVY and item type of "archives"
