@@ -26,11 +26,11 @@ class CallNumberRange < ActiveRecord::Base
     while out and ((k == 0 and i < bound[0].length) or (k==1 and j < bound[1].length))
       k == 0 ? m = i : m = j
       if lower == true
-        out = false if(bound[k][m] > call_number_parts[k][m])
-        break if bound[k][m] < call_number_parts[k][m]
+        out = false if(bound[k][m] > call_number_parts[k][m]) rescue false
+        break if bound[k][m] < call_number_parts[k][m] rescue break
       else
-        out = false if(bound[k][m] < call_number_parts[k][m])
-        break if bound[k][m] > call_number_parts[k][m]
+        out = false if(bound[k][m] < call_number_parts[k][m]) rescue false
+        break if bound[k][m] > call_number_parts[k][m] rescue break
       end
       k == 0 ? i=i+1 : j=j+1
       k == 0 ? (k = 1) : (k = 0)
