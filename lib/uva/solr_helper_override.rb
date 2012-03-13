@@ -60,7 +60,7 @@ module UVA
     def adjust_qt solr_parameters, user_parameters
       swap_handler(user_parameters, 'subject_search', 'subject')
       swap_handler(user_parameters, 'title_search', 'title')
-      swap_handler(user_parameters, 'journal_title_search', 'journal_title')
+      swap_handler(user_parameters, 'journal_title_search', 'journal')
     end
 
     # swap request handler based on old qt to new search_field
