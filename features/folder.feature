@@ -47,7 +47,7 @@ Feature: User Folder
 		When I fill in "q" with "george m. pickral"
 		And I choose "catalog_select_articles"
 		And I press "Search"
-		And I add ckey "crossref10.1021/ed060pA338" to my folder
+		And I add ckey "crossref10.1021/ed053p182" to my folder
 	  Given I am on the homepage
 	  When I fill in "q" with "A 2d. set of six sonatas for two violins"
 	  And I choose "catalog_select_catalog"
@@ -96,7 +96,7 @@ Feature: User Folder
 	  And I visit the folder page
 	  Then I should see ckey "u4322506" in the folder
 	  And I should see ckey "n14_1989_9" in the folder
-	  And I should see ckey "crossref10.1021/ed060pA338" in the folder
+	  And I should see ckey "crossref10.1021/ed053p182" in the folder
 	  And I should see ckey "uva-lib:610693" in the folder
 	  And I should see ckey "uva-lib:477191" in the folder
 	  And I should see ckey "uva-lib:1051794" in the folder
@@ -145,7 +145,7 @@ Feature: User Folder
 		When I fill in "q" with "george m. pickral"
 		And I choose "catalog_select_articles"
 		And I press "Search"
-		And I add ckey "crossref10.1021/ed060pA338" to my folder
+		And I add ckey "crossref10.1021/ed053p182" to my folder
 		And I visit the folder page
 		And I follow "Cite"
 		Then I should see "Pickral, George M."
