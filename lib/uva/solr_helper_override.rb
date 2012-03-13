@@ -14,7 +14,6 @@ module UVA
       base.solr_search_params_logic << :add_special_collections_lens
       base.solr_search_params_logic << :add_max_per_page
       base.solr_search_params_logic << :add_facet_limit
-      base.solr_search_params_logic << :adjust_qt
     end
   
     class HiddenSolrID < RuntimeError; end
@@ -56,21 +55,6 @@ module UVA
       solr_parameters["facet.limit"] = user_parameters["facet.limit"] if user_parameters["facet.limit"]
     end
     
-    # toss old request handler mappings
-    def adjust_qt solr_parameters, user_parameters
-      swap_handler(user_parameters, 'subject_search', 'subject')
-      swap_handler(user_parameters, 'title_search', 'title')
-      swap_handler(user_parameters, 'journal_title_search', 'journal')
-    end
-
-    # swap request handler based on old qt to new search_field
-    def swap_handler(user_parameters, original_qt, search_field)
-      if user_parameters[:qt] and user_parameters[:qt] == original_qt
-        user_parameters.delete(:qt)
-        user_parameters[:search_field] = search_field
-      end
-    end
-
     module UVACustomizations
             
       # overriding from plugin to test for shadowedness
@@ -119,6 +103,12 @@ module UVA
       # including config's "search field" params for current search field. 
       # also include setting spellcheck.q. 
       def add_query_to_solr(solr_parameters, user_parameters)
+        #
+        # added from plugin -- swapping qts
+        #
+        swap_handler(user_parameters, 'subject_search', 'subject')
+        swap_handler(user_parameters, 'title_search', 'title')
+        swap_handler(user_parameters, 'journal_title_search', 'journal')
         ###
         # Merge in search field configured values, if present, over-writing general
         # defaults
@@ -162,6 +152,13 @@ module UVA
         solr_parameters["spellcheck.q"] = user_parameters[:q] unless solr_parameters["spellcheck.q"]
       end
       
+      # swap request handler based on old qt to new search_field
+      def swap_handler(user_parameters, original_qt, search_field)
+        if user_parameters[:qt] and user_parameters[:qt] == original_qt
+          user_parameters.delete(:qt)
+          user_parameters[:search_field] = search_field
+        end
+      end
       
       
     end
