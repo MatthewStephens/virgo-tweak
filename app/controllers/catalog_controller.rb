@@ -250,7 +250,7 @@ class CatalogController < ApplicationController
   
   # gets cover images for featured documents
   def load_featured_documents
-    if (!params[:f] || params[:f].size == 0 || (params[:portal] == 'video' && params[:f].size <=1 && params[:f]['format_facet'].size <= 1)) && params[:q].blank? && params[:search_field] != 'advanced'
+    if (!params[:f] || params[:f].size == 0) && params[:q].blank? && params[:search_field] != 'advanced'
       phrase_filters = {}
       if params[:portal] == 'music'
         phrase_filters[:library_facet] = ["Music"]
@@ -321,8 +321,11 @@ class CatalogController < ApplicationController
       end
     end
     if session[:special_collections]
-      my_params = add_facet_param('library_facet', 'Special Collections') 
-      params[:f] = my_params[:f]
+      params[:special_collections] = "true" 
+      if params[:catalog_select].blank?
+        params[:catalog_select] = "catalog"
+        redirect_to catalog_index_path(params) and return
+      end
     end
   end
   
@@ -342,9 +345,9 @@ class CatalogController < ApplicationController
     unless params[:portal].blank?
       session[:search][:portal] = params[:portal]
     end
-    if params[:portal] == 'video'
-      my_params = add_facet_param('format_facet', 'Video') 
-      params[:f] = my_params[:f]
+    # this seems redundant, but we need it in the params in order to make portals work right
+    unless session[:search][:portal].blank?
+      params[:portal] = session[:search][:portal]
     end
   end
     
@@ -416,7 +419,9 @@ class CatalogController < ApplicationController
   
     def index_layout
       if searchless?
-        if default_portal? and facetless?
+        if special_collections_lens?
+          layout = "application"
+        elsif default_portal? and facetless?
           layout = "home"
         else
           layout = "application"
@@ -426,7 +431,6 @@ class CatalogController < ApplicationController
       else
         layout = "application"
       end
-      
       return layout
     end
     

@@ -32,6 +32,16 @@ module ApplicationHelper
     rows.delete_if{|v|v.empty?}
   end
   
+  # determines if we should show constraints on search results
+  def show_constraints?
+    if special_collections_lens?
+      return false if params[:catalog_select] == "all"
+      return true
+    end
+    return false if home_page? or music_home_page? or video_home_page? or params[:catalog_select] == 'all'
+    return true
+  end
+  
   # this method is highly questionable, but we want to use link_to_document to take
   # advantage of the smoke and mirrors used with the "counter", but we need to interleave
   # a <span> within the <a href> tags in order for the ajax loading to work correctly
@@ -457,13 +467,7 @@ module ApplicationHelper
   def dl_text_title(document)
     document.value_for(:main_title_display) == 'n/a' ? document.value_for(:title_display) : document.value_for(:main_title_display)
   end
-  
-  # determines if we are in the special collections lens
-  def special_collections_lens?
-    return true if !session.nil? && session[:special_collections]
-    false
-  end
-  
+    
   # makes a link to the special collections request if appropriate
   def special_collections_request_link(document, limit=0)
     if display_special_collections_request_link?(document.availability) && (limit == 0 or document.availability.holdings.size > limit)

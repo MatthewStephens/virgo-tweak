@@ -117,13 +117,7 @@ Feature: Display Special Collections Lens
     And I check "location_plus_call_number[BARR-VAULT][X004958780][]"
     And I press "Request"
     Then I should see "Request successfully submitted"
-  
-  Scenario:  Do not show Special Collections library facet twice
-    Given I am in the Special Collections lens
-    And I fill in "q" with "Papers of Henry James"
-    And I press "Search"
-    Then I should see one filter for Special Collections
-    
+      
 	Scenario: Display location notes without Z39.50
 	  Given I am in the Special Collections lens
 	  Given I am logged in as "factest"

@@ -10,8 +10,11 @@ module UVA
 
       base.solr_search_params_logic << :show_only_public_records
       base.solr_search_params_logic << :add_music_portal
+      base.solr_search_params_logic << :add_video_portal
+      base.solr_search_params_logic << :add_special_collections_lens
       base.solr_search_params_logic << :add_max_per_page
       base.solr_search_params_logic << :add_facet_limit
+      base.solr_search_params_logic << :adjust_qt
     end
   
     class HiddenSolrID < RuntimeError; end
@@ -28,6 +31,20 @@ module UVA
     def add_music_portal solr_parameters, user_parameters
       solr_parameters["facet.field"] = Blacklight.config[:facet_music][:field_names] if user_parameters[:portal] == 'music' and user_parameters[:action] != "facet"
     end
+    
+    # add format facet of video if it's the video portal
+    def add_video_portal solr_parameters, user_parameters
+      solr_parameters[:phrase_filters]||={}
+      solr_parameters[:phrase_filters]["format_facet"]||=[]
+      solr_parameters[:phrase_filters]["format_facet"] << "Video" if user_parameters[:portal] == 'video'
+    end
+    
+    # add library facet of special collections if it's the special collections lens
+    def add_special_collections_lens solr_parameters, user_parameters
+      solr_parameters[:phrase_filters]||={}
+      solr_parameters[:phrase_filters]["library_facet"]||=[]
+      solr_parameters[:phrase_filters]["library_facet"] << "Special Collections" if user_parameters[:special_collections] == 'true'
+    end
   
     # show as many search results as allowed if requested
     def add_max_per_page solr_parameters, user_parameters    
@@ -37,6 +54,21 @@ module UVA
     # set a facet limit based on user input
     def add_facet_limit solr_parameters, user_parameters
       solr_parameters["facet.limit"] = user_parameters["facet.limit"] if user_parameters["facet.limit"]
+    end
+    
+    # toss old request handler mappings
+    def adjust_qt solr_parameters, user_parameters
+      swap_handler(user_parameters, 'subject_search', 'subject')
+      swap_handler(user_parameters, 'title_search', 'title')
+      swap_handler(user_parameters, 'journal_title_search', 'journal_title')
+    end
+
+    # swap request handler based on old qt to new search_field
+    def swap_handler(user_parameters, original_qt, search_field)
+      if user_parameters[:qt] and user_parameters[:qt] == original_qt
+        user_parameters.delete(:qt)
+        user_parameters[:search_field] = search_field
+      end
     end
 
     module UVACustomizations

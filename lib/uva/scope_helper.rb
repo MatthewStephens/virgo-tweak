@@ -28,6 +28,12 @@ module UVA::ScopeHelper
     params[:portal] == 'music'
   end
   
+  # determines if we are in the special collections lens
+  def special_collections_lens?
+    return true if !session.nil? && session[:special_collections]
+    false
+  end
+   
   # determines if we are on the home page (no active search)
   def home_page?
     return true if facetless? and searchless? and !advanced_search? and !article_search? and default_portal?
@@ -39,10 +45,8 @@ module UVA::ScopeHelper
     return false
   end
   
-  # this is kind of gross.  we know that it's the video home page if the only
-  # constraing is format_facet = video
   def video_home_page?
-    return true if searchless? and facet_params.size <=1 and facet_params['format_facet'].size <=1 and facet_params['format_facet'].include?('Video') rescue false
+    return true if searchless? and video_portal?
     return false
   end
   
