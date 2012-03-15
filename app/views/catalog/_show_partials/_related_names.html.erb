@@ -8,7 +8,7 @@
   <% unless document.marc_display.nil? or document.marc_display.related_names.empty?  %>
 	<ul>
   	<% document.marc_display.related_names.each do |v| %>
-  		<li><%= link_to v, catalog_index_path({:q=>v.gsub(/\((.*)\)/,''), :search_field=>'author' }) %></li>
+		<li><%= link_to v, catalog_index_path({:q=>v, :search_field=>'author' }) %></li>
   	<% end %>
 	</ul>
   <% end %>
