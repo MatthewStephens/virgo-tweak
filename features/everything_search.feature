@@ -62,7 +62,13 @@ Feature: Everything (Default) Search Result Relevancy
     And "author_facet":"Darwin, Charles, 1809-1882" is applied
     And I fill in "q" with "geology"
     And I press "Search"
+    Then show me the page
     Then I should get exactly 3 results
+    
+  Scenario: Search related name should include 100c 
+    Given I am on the document page for id u1792787
+    When I follow "Thomas (Anglo-Norman poet)"
+    Then I should get exactly 38 results
  
 # Pending until I can actually find something with more than 3 call numbers    
 #  Scenario: Display "Multiple call numbers" when call numbers are > 3

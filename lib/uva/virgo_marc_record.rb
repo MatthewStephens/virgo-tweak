@@ -426,7 +426,7 @@ class UVA::VirgoMarcRecord
       name += ' ' + part['n'] unless part['n'].nil?
     end
     name += ' ' + part['d'] unless part['d'].nil?
-    if (field == '711' or field == '111')
+    if (field == '711' or field == '111' or field == '100' or field == '700')
       name += ' ' + part['c'] unless part['c'].nil?
     end
     name += role
@@ -455,7 +455,7 @@ class UVA::VirgoMarcRecord
         name = get_personal_name(part, field)
         related_names << name
         if field == '100'
-          uniform_title_codes = ['a', 'k', 'm', 'n', 'p', 'r', 't', 'f', 'l', 'o', 's']   
+          uniform_title_codes = ['a', 'k', 'm', 'n', 'p', 'r', 't', 'f', 'l', 'o', 's']  
           name_plus_title = name + ' ' + subfields_of('240', uniform_title_codes).join(' ')
           name_plus_title.strip!    
           related_names << name_plus_title

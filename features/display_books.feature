@@ -86,6 +86,10 @@ Feature: Display Books
     Scenario: related names should include 240 l,s
 	  Given I am on the document page for id u3785251
       Then I should see a related name "Verdi, Giuseppe, 1813-1901. Rigoletto. Libretto. French"
+      
+    Scenario: related names should include 100 c
+	  Given I am on the document page for id u1792787
+      Then I should see a related name "Thomas (Anglo-Norman poet)"
                                       
 	Scenario: make sure Publisher no. appears correctly
 	  Given I am on the document page for id u3916445
