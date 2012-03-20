@@ -145,3 +145,6 @@ Feature: Display Availability
 		Given I am on the availability page for id u480667
 		Then I should see holding "DS56 .A66 v.60 2010" before holding "DS56 .A66 v.59 2009"
     
+	Scenario: Display journals in reverse order (IVY)
+		Given I am on the availability page for id u648
+		Then I should see holding "QC925.7 .N4 1900" before holding "QC925.7 .N4 1899"

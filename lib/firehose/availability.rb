@@ -119,7 +119,7 @@ class Firehose::Availability
     if @document.journal?
       order = order.sort {|a, b| (a.library.name <=> b.library.name).nonzero? || b.shelving_key <=> a.shelving_key }
       hold_map.each { |library, holdings|
-        holdings.sort{|a, b| b.shelving_key <=> a.shelving_key }
+        holdings.sort!{|a, b| b.shelving_key <=> a.shelving_key }
       }
     else
       order = order.sort_by {|a| [a.library.name, a.shelving_key] } # sort by library and shelving key
