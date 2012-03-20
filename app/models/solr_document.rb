@@ -201,6 +201,11 @@ class SolrDocument
     has?(:shadowed_location_facet, 'HIDDEN')
   end
   
+  # determines wheter or not the document is a journal
+  def journal?
+    has?(:format_facet, 'Journal/Magazine')
+  end
+  
   # gets the xml that was used to generate the document
   # for marc items, that's the marc record
   # for digital library objects, it's desc_meta_file_display
