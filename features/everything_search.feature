@@ -62,7 +62,6 @@ Feature: Everything (Default) Search Result Relevancy
     And "author_facet":"Darwin, Charles, 1809-1882" is applied
     And I fill in "q" with "geology"
     And I press "Search"
-    Then show me the page
     Then I should get exactly 3 results
     
   Scenario: Search related name should include 100c 
