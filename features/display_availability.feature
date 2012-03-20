@@ -137,4 +137,11 @@ Feature: Display Availability
     When I am on the availability page for id u5289479
     Then I should not see "Request Item from Ivy"
   
+	Scenario: Display items in order
+		Given I am on the availability page for id u4676291
+		Then I should see holding "VIDEO .DVD15258 pt. 1" before holding "VIDEO .DVD15258 pt. 2"
+
+	Scenario: Display journals in reverse order
+		Given I am on the availability page for id u480667
+		Then I should see holding "DS56 .A66 v.60 2010" before holding "DS56 .A66 v.59 2009"
     

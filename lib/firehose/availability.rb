@@ -95,16 +95,9 @@ class Firehose::Availability
   end
   
   def finalize_holdings(order, hold_map)
-    # sort by library and shelving key (reverse sort for journals)
-    if @document.journal?
-      order = order.sort {|a, b| (a.library.name <=> b.library.name).nonzero? || b.shelving_key <=> a.shelving_key }
-    else
-      order = order.sort_by {|a| [a.library.name, a.shelving_key] } # sort by library and shelving key
-    end
     # add on the holdovers
     hold_order.each do |library|
-      # reverse sort for journals
-      @document.journal? ? order << hold_map[library].reverse : order << hold_map[library]
+      order << hold_map[library]
     end
     order.delete([])
     order.flatten!
@@ -120,6 +113,16 @@ class Firehose::Availability
       hold_map[:mt_lake] << holding and next if mt_lake?(holding.library.code)
       hold_map[:at_sea] << holding and next if at_sea?(holding.library.code)
       order << holding
+    end
+    # sort by library and shelving key
+    #reverse sort for journals
+    if @document.journal?
+      order = order.sort {|a, b| (a.library.name <=> b.library.name).nonzero? || b.shelving_key <=> a.shelving_key }
+      hold_map.each { |library, holdings|
+        holdings.sort{|a, b| b.shelving_key <=> a.shelving_key }
+      }
+    else
+      order = order.sort_by {|a| [a.library.name, a.shelving_key] } # sort by library and shelving key
     end
     finalize_holdings(order, hold_map)
   end

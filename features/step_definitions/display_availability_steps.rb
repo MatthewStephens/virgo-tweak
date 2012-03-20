@@ -50,9 +50,25 @@ Then /^the first holding library should be "([^\"]*)"$/ do |arg1|
   page.should have_selector("div.first h3", :text => arg1)
 end
 
+Then /^I should see holding "([^\"]*)" before holding "([^\"]*)"$/ do |arg1, arg2|
+  pos1 = get_position_of_holding(arg1)
+  pos2 = get_position_of_holding(arg2)
+  pos1.should_not == -1
+  pos2.should_not == -1
+  pos1.should < pos2
+end
 
 When /^I visit the status page for the first item$/ do
   #  <div class="document clearFix" id="Docu461865"> is the current format of a document div
     first_doc_link = response.body.scan(/<div class=\"document clearFix\" id=\"Doc(.*)\">/)[0]
     visit status_catalog_path(first_doc_link)
+end
+
+def get_position_of_holding(ckey)
+  page.all("td.call_number").each_with_index do |element, index|
+    if element.text.strip == ckey
+      return index
+    end
+  end
+  return -1
 end
