@@ -38,9 +38,10 @@ module Firehose::Common
   class Summary
     attr_accessor :text
     attr_accessor :note
-    def initialize(text, note)
+    attr_accessor :call_number_information
+    def initialize(text, note, call_number_information)
       text.chomp!(",")
-      @text, @note = text, note
+      @text, @note, @call_number_information = text, note, call_number_information
     end
   end
   

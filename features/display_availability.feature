@@ -112,6 +112,11 @@ Feature: Display Availability
   Scenario: Show number of copies for SAS but not whether they are available
     When I am on the availability page for id u5238302
     And I should not see "Available"
+
+	Scenario: Display summary holding call number information
+		When I am on the availability page for id u453228
+		Then I should see summary call number information "SI 4.1:"
+		And I should see summary call number information "Micfilm S-1334"
         
   Scenario: Display summary holding text
     When I am on the availability page for id u1614058

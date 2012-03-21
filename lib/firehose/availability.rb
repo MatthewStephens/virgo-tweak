@@ -137,7 +137,7 @@ class Firehose::Availability
     return if vals.nil?
     vals.each do |val|
       # summary_holdings_display comes out in this format:
-      # library | location | text | note | optional label
+      # library | location | text | note | optional label | call number information
       parts = val.split("|")
       # get library
       library = (@_summary_libraries.select {|library| library.name == parts[0] }).first
@@ -154,7 +154,7 @@ class Firehose::Availability
         library.summary_locations << location
       end
       # add summary
-      location.summaries << Firehose::Common::Summary.new(parts[2], parts[3])
+      location.summaries << Firehose::Common::Summary.new(parts[2], parts[3], parts[5])
     end
   end
   

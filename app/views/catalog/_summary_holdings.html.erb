@@ -8,6 +8,9 @@
 	    <div class="holdingGroup">
 	    <div class="homeLocation"><%= location.name + ":" unless location.name.blank? %></div>
 	    <% location.summaries.each do |summary| -%>
+				<% unless summary.call_number_information.blank? -%>
+					<div class="summaryCallNumberInformation"><%= summary.call_number_information %></div>
+				<% end %>
 	      <% unless summary.text.blank? -%>
 	        <div class="summaryText"><%= summary.text %><%= "," unless summary == location.summaries.last %></div>
 	      <% end -%>

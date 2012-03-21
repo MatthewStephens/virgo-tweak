@@ -42,6 +42,11 @@ Then /^I should see a summary note "([^\"]*)"$/ do |arg1|
   page.should have_selector("div.summaryNote", :text => arg1)
 end
 
+Then /^I should see summary call number information "([^\"]*)"$/ do |arg1|
+  page.should have_selector("div.summaryCallNumberInformation", :text => arg1)
+end
+
+
 Then /^I should see a holding header "([^\"]*)"$/ do |arg1|
   page.should have_selector("div.holdingHeader", :text => arg1)
 end
