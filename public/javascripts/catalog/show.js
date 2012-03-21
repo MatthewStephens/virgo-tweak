@@ -12,55 +12,70 @@ jQuery(function(){
 		var libItemAvail=$('#physicalAvailability');
 		if(libItemAvail.length > 0){
 			var id = libItemAvail.attr('title');
-			$.get('/catalog/' + id + '/availability', function(data){
-				libItemAvail.hide();
-				libItemAvail.html(data);
-				if($('#__GBS_Button0 > a').length > 0 && $("#physicalAvailability:contains('only available to Semester At Sea')").length > 0) {
-					//Set statusvar in case avail info loads after google, this way we can tell it to change the information.
-					$("#physicalAvailability").html("This item is also available in print to Semester at Sea participants");
-				}
-				if ($('tr.holding').is(':gt(4)')) {
-					$('table.holdings').dataTable({
-						"bAutoWidth": false,
-						"bInfo": false,
-						"bLengthChange": false,
-						"bPaginate": false,
-						"bSort": false,
-						"oLanguage": {"sSearch": "<label for='filter_input_field'>Filter Availability</label>"}
-					});
-					
-					var filterInput = $('.dataTables_filter input[type="text"]');	
-					var defaultText = "Filter availability by dates, keywords, etc.";
-					
-					filterInput.attr('id', 'filter_input_field');
-					
-					filterInput.val(defaultText).addClass('default_filter');
-					
-					filterInput.focus(function(srcc)
-				    {
-				        if ( $(this).val() == defaultText )
-				        {
-				            $(this).removeClass("default_filter");
-				            $(this).val("");
-				        }
-				    });
+      // Retrieve availability via Ajax
+      $.ajax({
+        url: '/catalog/' + id + '/availability',
+        type: "GET",
+        dataType: "html",
+        timeout: 60000,
+        success: function(data) {
+          loadAvailability(libItemAvail, data);
+        },
+        error: function() {
+          libItemAvail.html("Item status is temporarily unavailable.");
+        }
+      });      
 
-				    filterInput.blur(function()
-				    {
-				        if ($(this).val() == "")
-				        {
-				            $(this).addClass("default_filter");
-				            $(this).val(defaultText);
-				        }
-				    });
-
-				    filterInput.blur();
-				
-				}
-				libItemAvail.show();
-				$('.recallAndLeo').css('position', 'absolute');
-			});
 		}
 	})();
-	
+  
+  function loadAvailability(libItemAvail, data){
+  	libItemAvail.hide();
+  	libItemAvail.html(data);
+  	if($('#__GBS_Button0 > a').length > 0 && $("#physicalAvailability:contains('only available to Semester At Sea')").length > 0) {
+  		//Set statusvar in case avail info loads after google, this way we can tell it to change the information.
+  		$("#physicalAvailability").html("This item is also available in print to Semester at Sea participants");
+  	}
+  	if ($('tr.holding').is(':gt(4)')) {
+  		$('table.holdings').dataTable({
+  			"bAutoWidth": false,
+  			"bInfo": false,
+  			"bLengthChange": false,
+  			"bPaginate": false,
+  			"bSort": false,
+  			"oLanguage": {"sSearch": "<label for='filter_input_field'>Filter Availability</label>"}
+  		});
+					
+  		var filterInput = $('.dataTables_filter input[type="text"]');	
+  		var defaultText = "Filter availability by dates, keywords, etc.";
+					
+  		filterInput.attr('id', 'filter_input_field');
+					
+  		filterInput.val(defaultText).addClass('default_filter');
+					
+  		filterInput.focus(function(srcc)
+  	    {
+  	        if ( $(this).val() == defaultText )
+  	        {
+  	            $(this).removeClass("default_filter");
+  	            $(this).val("");
+  	        }
+  	    });
+
+  	    filterInput.blur(function()
+  	    {
+  	        if ($(this).val() == "")
+  	        {
+  	            $(this).addClass("default_filter");
+  	            $(this).val(defaultText);
+  	        }
+  	    });
+
+  	    filterInput.blur();
+				
+  	}
+  	libItemAvail.show();
+  	$('.recallAndLeo').css('position', 'absolute');
+  }
+  
 });
