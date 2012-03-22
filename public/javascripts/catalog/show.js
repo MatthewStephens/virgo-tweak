@@ -17,7 +17,7 @@ jQuery(function(){
         url: '/catalog/' + id + '/availability',
         type: "GET",
         dataType: "html",
-        timeout: 60000,
+        timeout: 120000,
         success: function(data) {
           loadAvailability(libItemAvail, data);
         },
