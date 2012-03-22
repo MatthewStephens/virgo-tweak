@@ -1,7 +1,5 @@
 <% @add_to_html_head = capture do %>
-  <%= javascript_include_tag 'jquery.form.min.js', 'catalog/search', 'catalog/index' %>
-  <%= javascript_include_tag  'jquery.hoverIntent.minified.js', 'catalog/video' if video_portal? %>
-  
+  <%= javascript_include_tag  'jquery.hoverIntent.minified.js', 'catalog/video' if video_portal? %>  
 <% end %>
 
 <% @your_search = capture do %>

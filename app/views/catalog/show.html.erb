@@ -1,7 +1,7 @@
 <%# code here should be generic enough to handle all types of items -%>
 <%# add custom HTML to the "view_type" partials -%>
 <% @add_to_html_head = capture do %>
-  <%= javascript_include_tag 'jquery.form.min.js', 'catalog/show', 'jquery.dataTables.min.js' %>
+<%= javascript_include_tag 'catalog/show.min.js', 'jquery.dataTables.min.js' %>
   <%= javascript_include_tag 'requests.js' if current_user %>
 <% end %>
 

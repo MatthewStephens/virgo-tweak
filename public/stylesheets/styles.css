@@ -446,7 +446,7 @@ a.more_facets_link { color: #2f3e6a;}
   transition: background 200ms ease-in-out; }
 #advanced_search_facets .facet-category-label {display: block; font-size: 14px; font-weight: bold; padding: 0.67em 1em;}
 #advanced_search_facets ul li:hover { background: #FCF8EF; border-top: 1px solid #dbd0ba; cursor: pointer; }
-#advanced_search_facets ul li.first { -moz-border-radius: 8px 0 0 0; -webkit-border-radius: 8px 0 0 0; border-radius: 8px 0 0 0; -webkit-background-clip: padding-box; }
+#advanced_search_facets ul li.first { border-top: 1px solid transparent; -moz-border-radius: 8px 0 0 0; -webkit-border-radius: 8px 0 0 0; border-radius: 8px 0 0 0; -webkit-background-clip: padding-box; }
 #advanced_search_facets ul li.facet-category-heading {background: #FFFEFD; cursor: auto; text-transform: uppercase; font-size: 12px;}
 #advanced_search_facets ul li.last { -moz-border-radius: 0 0 0 8px; -webkit-border-radius: 0 0 0 8px; border-radius: 0 0 0 8px; -webkit-background-clip: padding-box; }
 #advanced_search_facets ul ul { background: #fefdfa; color: #222; display: none; -webkit-text-shadow: none; -moz-text-shadow: none; text-shadow: none; }

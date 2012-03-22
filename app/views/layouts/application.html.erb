@@ -32,7 +32,7 @@
   <% if params[:view]=='print' %>
   	<%= stylesheet_link_tag 'print', :media => 'screen, print' %>
   <% else %>
-    <%= stylesheet_link_tag 'styles', 'components', 'virgo' %>
+    <%= stylesheet_link_tag 'all.min.css' %>
   	<%= stylesheet_link_tag 'print', :media => 'print' %>
   <% end %>
   <!--[if lte IE 8 ]>    
@@ -40,7 +40,7 @@
   <![endif]-->
   <%= stylesheet_link_tag 'yui-combo', javascript_path('colorbox/uva/colorbox.css'), 'uva_colorbox.css' %>
 
-  <%= javascript_include_tag 	'jquery-1.3.2.min.js', 'modernizr.custom.min.js', 'colorbox/colorbox/jquery.colorbox.min.js', 'application' %>
+  <%= javascript_include_tag 	'jquery-1.3.2.min.js', 'modernizr.custom.min.js', 'colorbox/colorbox/jquery.colorbox.min.js', 'combined.min.js' %>
 
   <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 

@@ -1,6 +1,6 @@
 <div id="advanced_search_facets">
   <ul class="facet-categories">
-    <li class="facet-category-heading facet-category-label first">Limit Results by:</li>
+    <li class="facet-category-heading facet-category-label first">Find Results with:</li>
 <% facet_field_names.each_with_index do |solr_fname, index| %>
   <% display_facet = @response.facets.detect {|f| f.name == solr_fname} -%>
   <% # if it's NOT a refinement facet -- they are handled in get_refine_facet -%>
