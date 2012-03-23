@@ -544,7 +544,7 @@ class UVA::VirgoMarcRecord
           next if (! subs.empty? and ! subs.include?(subfield.code)) or (not_subs.include?(subfield.code))
           v=subfield.value.match(value_regx).to_s
           v.empty? ? nil : v
-          v = v.html_safe
+          v
         end
       end
     end.flatten.uniq.reject{|v|v.to_s.blank?}
