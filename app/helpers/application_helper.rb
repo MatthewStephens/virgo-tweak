@@ -3,7 +3,7 @@ require 'lib/uva/fedora'
 require 'lib/uva/scope_helper'
 require 'lib/uva/utils'
 require 'uva/advanced_search/advanced_search_fields'
-
+require 'socket'
 
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
@@ -1097,5 +1097,8 @@ module ApplicationHelper
     end
     link_to "See all #{label} results &rarr;".html_safe, link, :class => style
   end
-    
+   
+  def host_server
+    Socket.gethostname  
+  end 
 end
