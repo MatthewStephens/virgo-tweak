@@ -109,6 +109,7 @@ module UVA
         swap_handler(user_parameters, 'subject_search', 'subject')
         swap_handler(user_parameters, 'title_search', 'title')
         swap_handler(user_parameters, 'journal_title_search', 'journal')
+        swap_handler(user_parameters, 'call_number_search', 'call_number')
         ###
         # Merge in search field configured values, if present, over-writing general
         # defaults
