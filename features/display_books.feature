@@ -330,10 +330,6 @@ Feature: Display Books
   Scenario: display responsibility statement from MARC 110 a b
 	Given I am on the document page for id u1599649  
 	Then I should see a responsibility statement of "United States. Congress. Joint Committee on the Library."
-	
-  Scenario: Display MARC 310 fields in one line
-	Given I am on the document page for id u4490622
-	Then I should see "Frequency (journals)" data of "Twenty-four no. a year, <2010->"
 
   Scenario: Display MARC 730 fields in one line
 	Given I am on the document page for id u5336635
