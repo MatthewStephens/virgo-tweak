@@ -59,15 +59,13 @@
 				<button id="lock_zoom" class="<%= params[:lock] == 'true' ? 'lock-active' : 'lock-inactive' %>">Set Default Zoom</button>	
 				
 				<span class="page_turner_prev">&laquo; Previous</span>
-				<% if @image_pids %>
 					<span class="page_turner_select">
 						<select>
-							<% @image_pids.each_with_index do |page, i| %>
-								<option value="<%= page %>"><%= @image_titles[i] %></option>
+							<% @images.each do |image| %>
+								<option value="<%= image[:pid] %>"><%= image[:title] %></option>
 							<% end %>
 						</select>
 					</span>
-				<% end %>				
 				<span class="page_turner_next">Next &raquo;</span>
 				
 				<button id="hide_header">Hide</button>	
@@ -77,28 +75,27 @@
 			
 			<div id="page_viewer"><!-- OpenLayers loads here --></div>
 
-			<% if @image_pids %>
-				<% start_page_index =  @image_pids.index(start_page) %>
-			  <div class="page_thumbs">
-  				<ul class="page_thumbs_list">
-  			<% @image_pids.each_with_index do |page, i| %>
-  			  <li id="<%= page %>" class="page_thumb previewThumbImg<%= ' thumb_select' if page == start_page %>">
-  			    <span class="jp2kPreview"><%= image_tag "/images/page_default.gif", :alt => "loading page image", :class => "page_default" %></span>
-  					<p class="page_title"><%= @image_titles[i] %></p>
-  					<p class="page_description"><%= @image_descriptions[i] %></p>
-  					<p class="page_download">
-  					  <a href="<%= @repository + "/objects/" + page + "/methods/djatoka:StaticSDef/getStaticImage" %>" target="_blank">Download</a>
-  					  <span class="terms-link"><%= link_to "Terms of Use",  "http://www2.lib.virginia.edu/small/using/use_of_materials_policy.html", :target => "_blank" %></span>
-  					</p>
-  			  </li>
-  			<% end %>
-  				</ul>
-				</div>
-				<div class="page_thumbs_nav">
-				  <span class="page_thumbs_info">Image <span class="thumbs-current-num"><%= start_page_index %></span> of <span class="thumbs-total"><%= @image_pids.length %></span></span>
-				  <button id="hide_thumbs">Hide</button>	
-				</div>
-			<% end %>
+			<% start_page_index =  (@images.collect { |image| image[:pid] }).index(start_page) %>
+		  <div class="page_thumbs">
+ 				<ul class="page_thumbs_list">
+ 			<% @images.each do |image| %>
+ 			  <li id="<%= image[:pid] %>" class="page_thumb previewThumbImg<%= ' thumb_select' if image[:pid] == start_page %>">
+ 			    <span class="jp2kPreview"><%= image_tag "/images/page_default.gif", :alt => "loading page image", :class => "page_default" %></span>
+ 					<p class="page_title"><%= image[:title] %></p>
+ 					<p class="page_description"><%= image[:description] %></p>
+ 					<p class="page_download">
+ 					  <a href="<%= @repository + "/objects/#{image[:pid]}/methods/djatoka:StaticSDef/getStaticImage" %>" target="_blank">Download</a>
+ 					  <span class="terms-link"><%= link_to "Terms of Use",  "http://www2.lib.virginia.edu/small/using/use_of_materials_policy.html", :target => "_blank" %></span>
+ 					</p>
+ 			  </li>
+ 			<% end %>
+ 				</ul>
+			</div>
+			<div class="page_thumbs_nav">
+			  <span class="page_thumbs_info">Image <span class="thumbs-current-num"><%= start_page_index %></span> of <span class="thumbs-total"><%= @images.length %></span></span>
+			  <button id="hide_thumbs">Hide</button>	
+			</div>
+			
 		</div> <!--! end .page_container -->
   </div> <!--! end #container -->
 

@@ -182,48 +182,21 @@ class CatalogController < ApplicationController
   def page_turner
     # The id passed is the pid of the Fedora aggregation object (the book,
     # manuscript, etc. for which we want to display page images)
-    # @pid = document[:id]
     @repository = @document.value_for(:repository_address_display) || FEDORA_REST_URL 
-    @pid = params[:id]
 
     # get id of image to use for initial_page_pid
-    @exemplar_id = get_exemplar(@document.fedora_url, @pid) 
+    @exemplar_id = get_exemplar(@document.fedora_url, params[:id]) 
 
     # get list of pids for images belonging to this item
-    response=sparql_query_others(@document.fedora_url, @pid, "hasCatalogRecordIn", :supp => "dc:title", :desc => "dc:description")
+    response = sparql_query_others(@document.fedora_url, params[:id], "hasCatalogRecordIn", :supp => "dc:title", :desc => "dc:description")
     
-    media_ids = Array.new
-    media_ids = get_pids_from_sparql(response)
-    if media_ids == []
-      single_image = { 
-        :pid => @exemplar_id, 
-        :title => @document.value_for(:main_title_display), 
-        :description => @document.value_for(:note_display) 
-      }
-      media_ids << single_image 
-    end    
+    all = get_pids_from_sparql(response)
+    single =  [{ :pid => @exemplar_id, 
+                :title => @document.value_for(:main_title_display), 
+                :description => @document.value_for(:note_display) }]
     
-    @initial_page_pid=String.new
-    if params[:focus] 
-      @initial_page_pid=params[:focus] 
-    else 
-      @initial_page_pid=@exemplar_id 
-    end
-
-    #params[:pages]=@media_ids
-    @image_pids=[]
-    @image_titles=[]
-    @image_descriptions=[]
-    media_ids.each { |m| 
-      @image_pids << m[:pid]
-      @image_titles << m[:title]
-      @image_descriptions << m[:description]
-    }
-    @pid_string = String.new
-    @caption_string= String.new
-    @image_pids.each { |p| @pid_string << "#{p};" }
-    @image_titles.each { |p| @caption_string << "#{p};" }
-
+    all.empty? ? @images = single : @images = all
+    
     render :layout => false
   end
   
