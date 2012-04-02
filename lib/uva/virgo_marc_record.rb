@@ -147,7 +147,12 @@ class UVA::VirgoMarcRecord
   end
   
   def publication_statement
-    subfields_of('260', nil, /.*/, ['6'])
+    publication_statement=[]
+    a = subfields_of('260')
+    b = linked_subfields_of('260', nil, /.*/, ['6'])
+    publication_statement << a unless a.nil?
+    publication_statement << b unless b.nil?
+    publication_statement.delete_if {|x| x.empty? }
   end
   
   def subject_subfields
@@ -373,7 +378,12 @@ class UVA::VirgoMarcRecord
   end
   
   def local_note
-    subfields_of('590')
+    local_note=[]
+    a = subfields_of('590')
+    b = linked_subfields_of('590', nil, /.*/, ['6'])
+    local_note << a unless a.nil?
+    local_note << b unless b.nil?
+    local_note.delete_if {|x| x.empty? }
   end
   
   def personal_name_as_subject
@@ -549,6 +559,41 @@ class UVA::VirgoMarcRecord
       end
     end.flatten.uniq.reject{|v|v.to_s.blank?}
   end
+  
+  # This methods returns a single dimensional array of values for subfields (it also removes blank values)
+   # if subs is specified, only the matching subfields are returned
+   # if subs is nil, the all subfields are returned
+   # the value_regx can be used to match the value of the subfield
+   #not_subs is for listing subfields that should not be returned, if nil no restriction will be placed
+   #
+   # =example: linked_subfields_of '045', [:a]
+   #
+   # =parameters
+   # field_name - '045' etc.
+   # subs - [:a, :b] etc.
+   # value_regx - a Regexp
+   #not_subs - [:a, :b] etc.
+   def linked_subfields_of(field_name, subs=nil, value_regx=/.*/,not_subs=nil)
+     subs ||= []
+     not_subs ||= []
+     result = []
+     self.fields.each do |field|
+       if field.tag=='880' and ! field.value.blank?
+         field.subfields.each do |sf|
+           if (sf.code=='6' and sf.value.starts_with?(field_name))
+             result << field.subfields.collect do |subfield|
+               next if (! subs.empty? and !subs.include?(subfield.code)) or (not_subs.include?(subfield.code))
+               v=subfield.value.match(value_regx).to_s
+               v.empty? ? nil : v
+               v
+             end
+           end
+         end
+       end
+     end
+     result.flatten.uniq.reject{|v|v.to_s.blank?}
+   end
+   
   
   protected
     

@@ -135,7 +135,9 @@
 			<% #------------ Publication statement ------------- %>
 			<% unless document.marc_display.publication_statement.empty? %>
 			<dt>Published</dt>
-			<dd><%= document.marc_display.publication_statement.join(' ') %></dd>
+			<% document.marc_display.publication_statement.each do |ps| %>
+			<dd><%= ps %></dd>
+			<% end %>	
 			<% end %>
 
 			<% #------------ ISBN ------------- %>
