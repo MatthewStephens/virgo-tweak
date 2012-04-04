@@ -338,3 +338,7 @@ Feature: Display Books
  Scenario: show format for dl_books
     Given I am on the document page for id uva-lib:602113
     Then I should see "Format" data of "Online; Book"	
+    
+ Scenario: display foreign language from 880 field
+	  Given I am on the document page for id u4366149
+	  Then I should see a publication statement "[China :凌瀛初,明, between 1615 and 1644]"

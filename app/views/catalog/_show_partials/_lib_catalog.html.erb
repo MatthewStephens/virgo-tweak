@@ -135,9 +135,11 @@
 			<% #------------ Publication statement ------------- %>
 			<% unless document.marc_display.publication_statement.empty? %>
 			<dt>Published</dt>
-			<% document.marc_display.publication_statement.each do |ps| %>
-			<dd><%= ps %></dd>
-			<% end %>	
+			<dd><ul>
+				<% document.marc_display.publication_statement.each do |ps| %>
+					<li><%= ps %></li>
+				<% end %>	
+			</ul></dd>
 			<% end %>
 
 			<% #------------ ISBN ------------- %>
@@ -277,9 +279,11 @@
 			<% #------------ Local note ------------- %>
 			<% unless document.marc_display.local_note.empty? %>
 			<dt>Local Notes</dt>
-			<% document.marc_display.local_note.each do |v| %>
-			<dd><%= v %></dd>
-			<% end %>
+			<dd><ul>
+				<% document.marc_display.local_note.each do |v| %>
+					<li><%= v %></li>
+				<% end %>
+			</ul></dd>
 			<% end %>
 			
 			<% #------------ Reproduction note ------------- %>

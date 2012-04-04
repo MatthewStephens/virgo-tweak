@@ -98,6 +98,10 @@ Then /^I should see form of "([^\"]*)"$/ do |title|
   page.should have_selector("span.documentForm", :text => title)
 end
 
+Then /^I should see a publication statement "([^\"]*)"$/ do |published|
+  has_details_label_and_list_value?("Published", published).should be_true
+end
+
 # determines if the details section includes the specified label
 def has_details_label?(label)
   details_hash.has_key?(label) rescue false
