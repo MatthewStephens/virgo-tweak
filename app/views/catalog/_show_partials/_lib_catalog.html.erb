@@ -54,13 +54,12 @@
 			
 
 			<% #------------ Uniform title ------------- %>
-			<% unless document.marc_display.uniform_title.empty? %>
+			<% unless document.values_for(:uniform_title_facet).nil? -%>
 			<dt>Uniform title</dt>
-			<% document.marc_display.uniform_title.each do |v| %>
-			<dd><%= link_to v, add_facet_params(:uniform_title_facet, v).merge(:action=>nil,:id=>nil) %></dd>
-			
+			<% (document.values_for :uniform_title_facet).each do |v| %>		
+				<dd><%= link_to v, add_facet_params(:uniform_title_facet, v).merge(:action=>nil,:id=>nil) %></dd>
 			<% end %>
-			<% end %>
+			<% end -%>
 
 
 			<% #------------ Variant title -------------%>
