@@ -148,7 +148,7 @@ class UVA::VirgoMarcRecord
   
   def publication_statement
     publication_statement=[]
-    a = subfields_of('260')
+    a = subfields_of('260', nil, /.*/, ['6'])
     b = linked_subfields_of('260', nil, /.*/, ['6'])
     publication_statement << a unless a.nil?
     publication_statement << b unless b.nil?
