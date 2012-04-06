@@ -142,11 +142,11 @@ Feature: Display Books
   
   Scenario: make sure uniform title appears correctly
     Given I am on the document page for id u2057213
-    Then I should see "Uniform title" data of "Bible. English. Authorized 1748."
+    Then I should see "Uniform title" data of "Bible"
     Given I am on the document page for id u2499441
     Then I should see "Uniform title" data of "Symphonies, no. 1, op. 21, C major."
     Given I am on the document page for id u2114442
-    Then I should see "Uniform title" data of "Symphonies; arr."
+    Then I should see "Uniform title" data of "Symphonies"
   
   Scenario: Display Title history note
     Given I am on the document page for id u4318366

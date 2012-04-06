@@ -13,7 +13,7 @@ Feature: Display Musical Scores
 	Scenario: Publisher/plate no. should display correctly
 	  Given I am on the document page for id u3949470
 	  Then I should see a title of "The Godowsky collection"
-	  And I should see "Published" data of "New York : C. Fischer, c2001-"
+	  And I should see "Published" data of "New York :C. Fischer,c2001-"
 	  And I should see a Publisher/plate no. "ATF122 C. Fischer (v. 1)"
     And I should see a Publisher/plate no. "ATF123 C. Fischer (v. 2)"
     And I should see a Publisher/plate no. "ATF137 C. Fischer (v. 3)"

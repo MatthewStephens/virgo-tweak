@@ -6,7 +6,7 @@ Feature: Display Digital Books
 		Then I should see "Format" data of "Online; Book"
 		And I should see "Description" data of "2 v. in 1. fronts. (ports.) 24 cm."
 		And I should see "Edition" data of "13th ed."
-		And I should see "Published" data of "New York, D. Appleton & company, 1840."
+		And I should see "Published" data of "New York,D. Appleton & company,1840."
 		And I should see "Notes" data of "Vols. 1 and 2 have also special title-pages."
 		And I should see "Local Notes" data of "SPECIAL COLLECTIONS: Ms. letter of John Randolph tipped in."
 		And I should see a related name of "Garland, Hugh A, 1805-1854." with no role
