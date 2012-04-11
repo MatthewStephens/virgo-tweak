@@ -131,5 +131,12 @@ Feature: Display Accounts
 		And I press "Sign in"
 		Then I should see "Checked-out Items"
 		
+	Scenario: Spaces in login names should be encoded
+		Given I am on the homepage
+		And I follow "Non-U.Va. User?"
+		And I fill in "login" with "FAC TEST"
+		And I fill in "pin" with "TEST"
+		And I press "Sign in"
+		Then I should see "No account information found" 
 	
 	
