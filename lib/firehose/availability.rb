@@ -22,6 +22,9 @@ class Firehose::Availability
   
   def might_be_holdable?
     return true if ["yes", "maybe"].include?(@_catalog_item.holdability.value)
+    @_catalog_item.holdings.each do |holding|
+      return true if holding.holdable?
+    end
     return false
   end
   
@@ -36,12 +39,12 @@ class Firehose::Availability
   end
 
   def has_holdable_holding?(call_number)
-    selected = @_catalog_item.holdings.select { |holding| holding.holdable == true and holding.call_number == call_number }
+    selected = @_catalog_item.holdings.select { |holding| holding.holdable? == true and holding.call_number == call_number }
     selected.size > 0
   end
 
   def holdable_call_numbers
-    selected = @_catalog_item.holdings.select { |holding| holding.holdable == true }
+    selected = @_catalog_item.holdings.select { |holding| holding.holdable? == true }
     selected.collect { |holding| holding.call_number }
   end
   

@@ -146,6 +146,14 @@ module Firehose::Common
     def shadowed?
       return @shadowed
     end
+    def holdable?
+      return true if @holdable
+      return false unless @library.code == "MUSIC"
+      @copies.each do |copy|
+        return true if copy.current_location.code == "CIRCDESK"
+      end
+      return false
+    end
   end  
   
   class Holdability
