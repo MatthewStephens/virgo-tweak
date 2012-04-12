@@ -7,5 +7,6 @@ To install VIRGO, clone it, run bundler, then start it:
 <pre>
 git clone git@github.com:uvalib/virgo.git
 bundle install
+rake db:migrate
 script/server
 </pre>
