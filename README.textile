@@ -27,7 +27,7 @@ rails server
 
 You should now be able to access the application at http://localhost:3000
 
-To run the tests, do the migrations for the test environment:
+To run the tests, set up a test database and user in the same way you did for development above, but use the "test" settings as defined in config/database.yml.  Then do the migrations for the test environment:
 
 <pre>
 rake RAILS_ENV=test db:migrate
