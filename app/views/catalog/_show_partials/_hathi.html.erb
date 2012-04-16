@@ -51,7 +51,7 @@
 			<dt>Published</dt>
 			<dd><%= document.marc_display.publication_statement.join(' ') %></dd>
 			<% end %>
-
+			
 			<% #------------ ISBN ------------- %>
 			<% unless document.marc_display.isbn(document.doc_sub_type).empty? %>
 			<dt>ISBN(s)</dt>
@@ -61,6 +61,29 @@
 			<% end %>	    
 			</dd>
 			<% end %>
+			
+			
+			<% #------------ Series statement -------------%>
+			<% unless document.marc_display.series_statement.empty? %>
+			<dt>Series statement</dt>
+			<% document.marc_display.series_statement.each do |v| %>
+			<dd><%= v %></dd>
+			<% end %>
+			<% end %>
+			
+			
+			<% # ------------ Contents ----------------- %>
+			<% unless document.marc_display.track_list.empty? %>
+			<dt>Contents</dt>
+			<dd>
+      <ul>
+      <% document.marc_display.track_list.each do |track| %>
+      <li><%= track %></li>
+      <% end %>
+      </ul>
+      </dd>
+      <% end %>
+		 
 			
 			<% #------------ Language -------------%>
 			<% unless document.marc_display.language.empty? %>
@@ -87,14 +110,22 @@
 			<% end %>
 			<% end %>
 			
-			
-			<% #------------ Series statement -------------%>
-			<% unless document.marc_display.series_statement.empty? %>
-			<dt>Series statement</dt>
-			<% document.marc_display.series_statement.each do |v| %>
+			<% #------------------ Note -----------------%>
+			<% unless document.marc_display.note.empty? %>
+			<dt>Notes</dt>
+			<% document.marc_display.note.each do |v| %>
 			<dd><%= v %></dd>
 			<% end %>
 			<% end %>
+
+			<% #------------------ Bibliographical References Note -----------------%>
+			<% unless document.marc_display.bibliographical_references_note.empty? %>
+			<dt>Notes</dt>
+			<% document.marc_display.bibliographical_references_note.each do |v| %>
+			<dd><%= v %></dd>
+			<% end %>
+			<% end %>
+
 			
   		<%= render :partial => "catalog/_show_partials/tech_details", :locals => { :document => document } %>
 

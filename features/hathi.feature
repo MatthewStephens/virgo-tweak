@@ -13,4 +13,20 @@ Feature: Display Hathi materials
   Scenario: View Hathi item
 		Given I am on the document page for id 000046596
 		Then I should see "Transactions"
-    
+		
+	Scenario: Display "Published"
+		Given I am on the document page for id 000000040
+		Then I should see "Published" data of "New York, Walker [1968]"
+		
+	Scenario: Display "Content"
+		Given I am on the document page for id 000000040
+    Then the first track should be "v. 1. From mannerism to romanticism."
+		And the last track should be "v. 2. Victorian and after."
+		
+	Scenario: Display "Notes"
+		Given I am on the document page for id 000000040		
+		Then I should see "Notes" data of "Includes bibliographical references."
+		
+	Scenario:  Display series statement
+		Given I am on the document page for id 000000862
+		Then I should see "Series statement" data of "National Bureau of Standards miscellaneous publication 284"
