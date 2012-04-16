@@ -150,6 +150,10 @@ Feature: Display Special Collections Lens
 	  Given I am logged in as a Special Collections administrator
 		Then I should see "Smith, Harley P."
    
+   	Scenario: Advanced search should work in special collection lens
+   		Given I am in the Special Collections lens
+		And I follow "Catalog Advanced Search"
+		Then I am on the advanced search page
    
    
    
