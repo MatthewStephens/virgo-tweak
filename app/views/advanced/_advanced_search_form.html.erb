@@ -36,7 +36,7 @@
       <li><a class="catalog-article-search" href="/catalog?catalog_select=all">Catalog + Article Search</a></li>
       <% if params[:catalog_select] == 'articles' %>
         <li><a class="catalog-search" href="/catalog?catalog_select=catalog">Catalog Search</a></li>
-        <li><%= link_to "Catalog Advanced Search", "/advanced", :class => "catalog-search" %></li>
+		<li><%= link_to "Catalog Advanced Search", advanced_path(:catalog_select => 'catalog'), :class => "catalog-search" %></li>
       <% else %>
         <li><a class="article-search" href="/catalog?catalog_select=articles">Article Search</a></li>
         <li><%= link_to "Article Advanced Search", advanced_articles_path(:catalog_select => 'articles'), :class => "article-search" %></li>
