@@ -389,6 +389,12 @@ module ApplicationHelper
     p
   end
   
+  # label to use at top of advanced search page
+  def advanced_search_label
+    return "Article Advanced Search" if params[:catalog_select] and params[:catalog_select] == "articles"
+    "Catalog Advanced Search"
+  end
+  
   # gets the advanced search param list
   def advanced_search_params
     fields = []    
@@ -1098,6 +1104,7 @@ module ApplicationHelper
     link_to "See all #{label} results &rarr;".html_safe, link, :class => style
   end
    
+  # used as hidden element in footer so that we can tell what node served up the content
   def host_server
     Socket.gethostname  
   end 

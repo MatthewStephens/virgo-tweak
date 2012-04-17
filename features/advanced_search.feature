@@ -3,6 +3,24 @@ Feature: Advanced Search Results
   As an end user
   I want to enter search terms in Advanced Search, click the search button, and see awesome results
 
+	Scenario: Advanced search label
+		Given I am on the advanced search page
+		Then I should see "Catalog Advanced Search"
+		
+	Scenario: Advanced search label for articles
+		Given I am on the articles advanced search page
+		Then I should see "Article Advanced Search"
+		
+	Scenario: Advanced search label in Special Collections lens
+		Given I am in the Special Collections lens
+		And I follow "Catalog Advanced Search"
+		Then I should see "Catalog Advanced Search"
+		
+	Scenario: Advanced search label in Special Collections lens for articles
+		Given I am in the Special Collections lens
+		And I follow "Article Advanced Search"
+		Then I should see "Article Advanced Search"
+
   Scenario: Perform advanced search
     Given I am on the advanced search page
     And I fill in "author" with "smith"

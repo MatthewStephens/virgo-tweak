@@ -2,7 +2,7 @@
         <%= javascript_include_tag 'accordion.js' %>
 <% end %>
 <div id="adv_search_container" class="<%= params[:catalog_select] ? "article-advanced" : "catalog-advanced"  %>">
-  <div id="adv_search"><h1><%= params[:catalog_select] ? "Article " : "Catalog "  %>Advanced Search</h1></div>
+  <div id="adv_search"><h1><%= advanced_search_label %></h1></div>
 	<div id="adv_search_content">
 		<%= render 'advanced/advanced_search_form' %>
 	</div>
