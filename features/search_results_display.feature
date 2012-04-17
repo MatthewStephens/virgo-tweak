@@ -10,7 +10,7 @@ Feature: Everything (Default) Search Results Display
     And I press "Search"
     Then I should see "Author" data of "Great Britain. Ordnance Survey"
     
-  Scenario: Display availability link if there are multiple copies
+	Scenario: Display availability link if there are multiple copies
     Given I am on the homepage
     When I fill in "q" with "da vinci code videorecording 2006"
     And I press "Search"
@@ -122,21 +122,33 @@ Feature: Everything (Default) Search Results Display
     Then I should get ckey u4020156 in the results
     And the result display for ckey u4020156 should have a title of "Wars on terrorism and Iraq : human rights, unilateralism, and U.S. foreign policy"
    
- Scenario: Display complete title or statement of responsibility field
+ 	Scenario: Display complete title or statement of responsibility field
     Given I am on the homepage
     When I fill in "q" with "Papers of the President of the University of Virginia"
     And I press "Search"
     Then I should get ckey u4298149 in the results
     And the result display for ckey u4298149 should have a title of "Papers of the University of Virginia President's Office [manuscript] 1987-2003 (bulk 2002-2003)"
     
- Scenario: Display complete title or statement of responsibility field
+	Scenario: Display complete title or statement of responsibility field
     Given I am on the homepage
     When I fill in "q" with "Dust jacket blurb"
     And I press "Search"
     Then I should get ckey u2042892 in the results
     And the result display for ckey u2042892 should have a title of "Dust jacket blurb [manuscript] 1992 January 15 typescript signed"
-    
 
+	Scenario: Display SuDocs number for congressional hearings items
+		Given I am on the homepage
+		When I fill in "q" with "Hearings on the So-Called Beveridge Amendment"
+		And I press "Search"
+		Then I should get ckey cis2007400001 in the results
+		And the result display for ckey cis2007400001 should have the call number "Y 4.Ag 8/1:C 43"
+
+	Scenario: Do not display SuDocs number for congressional hearings items if the item doesn't have one
+		Given I am on the homepage
+		When I fill in "q" with "Bills Relating to Oleomargarine 1910"
+		And I press "Search"
+		Then I should get ckey cis2007400006 in the results
+		And the result display for ckey cis2007400006 should not have a call number
 
    
         

@@ -206,6 +206,11 @@ class SolrDocument
     has?(:format_facet, 'Journal/Magazine')
   end
   
+  # determines whether of not the item is a congressional hearings item
+  def congressional_hearings?
+    has?(:series_title_facet, 'ProQuest U.S. Congressional Hearings Digital Collection')
+  end
+  
   # gets the xml that was used to generate the document
   # for marc items, that's the marc record
   # for digital library objects, it's desc_meta_file_display

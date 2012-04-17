@@ -34,14 +34,21 @@
 		 	<%= document.value_for :format_facet %> 			
 			</dd>
 		
-		  <% unless journal?(document) %>
+		  <% unless document.journal? %>
 			<dt>Publication Date</dt>
 			<dd class="formatField">
 				<%= document.value_for :published_date_display %>
 			</dd>
 			<% end %>
+			
+			<% if document.congressional_hearings? and !document.get(:call_number_display).blank? %>
+			<dt>SuDocs Number</dt>
+			<dd class="callNumberField">
+					<%= document.value_for :call_number_display %>
+			</dd>
+			<% end %>
 		
-			<% if !document.get(:url_display).nil? %>
+			<% if !document.get(:url_display).blank? %>
   		  <dt>Online Versions</dt>
   		  <dd class="onlineAccessField"><%= link_to_online_access(document) %></dd>
   		<% end %>
