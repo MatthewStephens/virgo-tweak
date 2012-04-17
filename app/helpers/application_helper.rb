@@ -57,30 +57,15 @@ module ApplicationHelper
     val.html_safe
   end
    
-  # gets the location for a document, or "Multiple Locations" if there is more than 1
-  def location_listing(document)
-    libraries = document.values_for(:library_facet)
-    locations = document.values_for(:location_facet)
-    locations2 = document.values_for(:location2_facet)
-    return '' if libraries.nil? or locations.nil?
-    if special_collections_lens?
-      libraries = libraries.select{ |lib| lib =~ /Special Collections/ }
-      return libraries[0]
-    end
-    return '' if locations.length == 0
-    return 'Multiple locations' if libraries.length > 1 or locations.length > 1
-    return locations2[0] if (locations2 and locations2[0] =~ /Special Collections/)
-    return locations2[0] if (locations2 and locations2[0] =~ /Reserve/)
-    return (document.values_for(:library_facet)[0] + " " + locations[0]) rescue locations[0]
-  end
-  
   # gets a list of the call numbers for a document, or "Multiple call numbers" if there are more than 3
   def call_number(document, sep=";", default='n/a')
     values = document.values_for(:call_number_display)
+    libraries = document.values_for(:library_facet)
+    locations = document.values_for(:location_facet)
     return '' if values.nil?
     values.delete_if {|val| val =~ /VOID/i }
     return '' if values.empty?
-    return '' if location_listing(document) == 'Multiple locations'
+    return '' if (libraries and libraries.length > 1) or (locations and locations.length > 1)
     return '' if document.online_only?
     return 'Multiple call numbers' if values.size > 3
     values.join(sep).html_safe
@@ -222,11 +207,6 @@ module ApplicationHelper
     title=document.value_for(:title_display, '; ', document.value_for(:id))
     "#{base_url}?url=#{URI.escape(url)}&title=#{URI.escape(title)}"
   end
-    
-  # determines if the supplied link is a link to an EAD
-  def link_to_ead?(link)
-    link =~ /^http:\/\/ead\.lib\.virginia\.edu.*file=viu.*\.xml/
-  end
   
   def availability_on_index?(document)
     document.values_for(:barcode_facet) and document.values_for(:barcode_facet).length == 1
@@ -284,7 +264,7 @@ module ApplicationHelper
     out.html_safe
   end
 
-    # parses :url_display for Kaltura video URLs
+  # parses :url_display for Kaltura video URLs
   def show_streaming_thumbnails(document, options = {})
     return if document.get(:url_display).nil?
     link_text = options[:text] || ""
@@ -306,27 +286,6 @@ module ApplicationHelper
       out += link_to(image_tag("http://cdn.kaltura.com/p/0/thumbnail/entry_id/#{kaltura_id}/width/#{width}/height/#{height}/type/1/quality/#{quality}") + '<span class="image-caption">'.html_safe + label + '</span>'.html_safe, url, :target => '_blank') + '</div>'.html_safe
     end
     out.html_safe
-  end
-      
-  # returns the list of facets from the config/initializers file
-  def facet_list
-    Blacklight.config[:facet][:field_names]
-  end
-   
-  # which facets are in the params list
-  def facet_params
-    params[:f]
-  end
-   
-  # lets us know if there are facets in the params list
-  def facet_params?
-    facet_params.size > 0 rescue false
-  end
-  
-  # how many facet values should be displayed in the sidebar
-  #
-  def facet_limit
-    Blacklight.config[:facet][:limit]
   end
   
   # Returns the default sort pattern for the facet values
@@ -385,7 +344,7 @@ module ApplicationHelper
     keepers.each do |k|
       p.merge!(k=>params[k]) unless params[k].blank?
     end
-    scrunge_portal(p)
+    scrub_portal(p)
     p
   end
   
@@ -410,13 +369,14 @@ module ApplicationHelper
   end
   
   # removes references to the current portal from the parameters if we are in the default portal
-  def scrunge_portal(my_params)
+  def scrub_portal(my_params)
     my_params.delete_if { |key, value|
       key.to_sym == :portal and value == 'all' and (value == session[:search][:portal]  or !session[:search][:portal])
     }
   end
 
-  def scrunge_page(my_params)
+  # removes references to the current page from the parameters
+  def scrub_page(my_params)
     my_params.delete_if { |key, value|
       key.to_sym == :page
     }
@@ -525,15 +485,6 @@ module ApplicationHelper
     out.html_safe
   end
   
-  # show text when it's a sas item
-  def sas_availability_text(document, library, sas_counter)
-    if library.is_sas?
-      if document.availability.has_non_sas_items? and sas_counter == 0 
-        return "<div class=\"holding\">This item is also available to Semester at Sea participants.</div>".html_safe
-      end
-    end
-  end
-  
   def location_text(holding, copy)      
     return "Special Collections" if holding.library.is_special_collections? and !copy.special_collections_display?
     return "" if copy.current_location.suppressed?
@@ -591,32 +542,10 @@ module ApplicationHelper
     return false
   end
   
-  # determines offset for number of bookmarks
-  def bookmark_offset
-    page = params[:page].to_i - 1
-    page = 0 if page < 1
-    Blacklight.config[:bookmarks_per_page] * page
-  end
-  
-  def folder_offset
-    page = params[:page].to_i - 1
-    page = 0 if page < 1
-    per_page = params[:per_page].to_i rescue 0
-    per_page = Blacklight.config[:bookmarks_per_page] if per_page == 0
-    per_page * page
-  end
-  
   # determines if the given availability only has one holding with one copy
   def one_copy?(availability)
     special_collections_lens? ? holdings = availability.special_collections_holdings : holdings = availability.holdings
     holdings.size == 1 and holdings[0].copies.size == 1
-  end
-    
-  # determines which fielded search is in use
-  def selected_fielded_search
-    return h(params[:search_field]) unless params[:search_field].nil?
-    return h(session[:search][:search_field]) unless session[:search][:search_field].nil?
-    return ''
   end
 
   # remove a populated advanced search field
@@ -693,8 +622,7 @@ module ApplicationHelper
             #add call_number_facet case here
           else 
             facet = facet.gsub(/_\w\w\w\w\w$/,'')
-            my_params[facet]= h(values)
-          
+            my_params[facet]= h(values)     
          end
   	    end
   	  end
@@ -913,8 +841,8 @@ module ApplicationHelper
     p[:f] = (p[:f] || {}).dup # the command above is not deep in rails3, !@#$!@#$
     p[:f][field] = (p[:f][field] || []).dup
     p[:f][field].push(value)
-    scrunge_portal(p) 
-    scrunge_page(p)
+    scrub_portal(p) 
+    scrub_page(p)
     p
   end
 
@@ -970,7 +898,7 @@ module ApplicationHelper
     query_params.delete :counter
     query_params.delete :total
     query_params.delete :controller
-    scrunge_portal(query_params)
+    scrub_portal(query_params)
     link_url = catalog_index_path(query_params)
     link_to opts[:label], link_url
   end
