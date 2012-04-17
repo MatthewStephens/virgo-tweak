@@ -36,7 +36,7 @@
 		 	<%= document.value_for :format_facet %> 			
 			</dd>
 		
-		  <% unless journal?(document) %>
+		  <% unless document.journal? %>
 			<dt>Publication Date</dt>
 			<dd class="formatField">
 				<%= document.value_for :published_date_display %>

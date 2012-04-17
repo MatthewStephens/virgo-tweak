@@ -22,7 +22,7 @@
   	</div>
 
   	<div class="year">
-      <% unless journal?(document) %>
+      <% unless document.journal? %>
   		  <%= document.value_for :published_date_display %>
 	  	<% end %>
   	</div>

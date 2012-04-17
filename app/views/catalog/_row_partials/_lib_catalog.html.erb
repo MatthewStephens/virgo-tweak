@@ -10,7 +10,7 @@
 	</td>
 	<td class="format"><%= document.value_for :format_facet %></td>
 	<td class="year">
-		<% unless journal?(document) -%>
+		<% unless document.journal? -%>
 			<%= document.value_for :published_date_display %>
 		<% end %>
 	</td>

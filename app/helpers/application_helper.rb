@@ -611,12 +611,7 @@ module ApplicationHelper
     special_collections_lens? ? holdings = availability.special_collections_holdings : holdings = availability.holdings
     holdings.size == 1 and holdings[0].copies.size == 1
   end
-  
-  # determines if the document is a journal or magazine
-  def journal?(document)
-    return document.has?(:format_facet, 'Journal/Magazine')
-  end
-  
+    
   # determines which fielded search is in use
   def selected_fielded_search
     return h(params[:search_field]) unless params[:search_field].nil?
