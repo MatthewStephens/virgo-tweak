@@ -150,8 +150,26 @@ Feature: Everything (Default) Search Results Display
 		Then I should get ckey cis2007400006 in the results
 		And the result display for ckey cis2007400006 should not have a call number
 
-   
-        
+  Scenario: In Video portal search results, don't display "VIDEO" as part of the call number
+		Given I am on the homepage
+		And I follow "Video Search"
+		And I fill in "q" with "tirante el blanco"
+		And I press "Search"
+   	Then the result display for ckey u5583764 should not have the video call number "VIDEO.DVD15887"
+ 		And the result display for ckey u5583764 should have the video call number "DVD15887"
+
+	Scenario: In Video portal search results, don't display parts as part of the call number
+		Given I am on the homepage
+		And I follow "Video Search"
+		And I fill in "q" with "the tokyo trial"
+		And I press "Search"
+		Then show me the page
+   	Then the result display for ckey u5583823 should not have the video call number "VIDEO.DVD15845  pt.1, pt.2, pt.3"
+ 		And the result display for ckey u5583823 should have the video call number "DVD15845"
+		
+	
+	
+    
 #	 Facets trail and search box no longer visible on item record display    
 #  Scenario: Facet stickiness
 #    Given I am on the homepage

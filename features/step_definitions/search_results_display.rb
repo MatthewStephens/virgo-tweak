@@ -21,6 +21,16 @@ Then /^the result display for ckey (.+) should have the call number "([^\"]*)"$/
   page.should have_selector(string, :text => /^.*#{value}.*$/)
 end
 
+Then /^the result display for ckey (.+) should have the video call number "([^\"]*)"$/ do |ckey, value|
+  string = "div#Doc#{ckey} div.callNumberField"
+  page.should have_selector(string, :text => /^.*#{value}.*$/)
+end
+
+Then /^the result display for ckey (.+) should not have the video call number "([^\"]*)"$/ do |ckey, value|
+  string = "div#Doc#{ckey} div.callNumberField"
+  page.should_not have_selector(string, :text => /^.*#{value}.*$/)
+end
+
 Then /^the result display for ckey (.+) should not have the call number "([^\"]*)"$/ do |ckey, value|
   string = "div#Doc#{ckey} div dl.metadata dd.callNumberField"
   page.should_not have_selector(string, :text => /^.*#{value}.*$/)
