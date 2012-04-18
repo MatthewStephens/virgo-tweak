@@ -238,9 +238,9 @@ class UVA::VirgoMarcRecord
   def series_statement
     series_statement = []
     a = subfields_of('440').join(' ')
-    b = subfields_of('490').join(' ')
+    b = subfields_of('490', nil, /.*/, ['6']).join(' ')
     c = subfields_of('800').join(' ')
-    d = subfields_of('830').join(' ')
+    d = subfields_of('830', nil, /.*/, ['6']).join(' ')
     series_statement << a unless a.nil?
     series_statement << b unless b.nil?
     series_statement << c unless c.nil?
@@ -338,11 +338,11 @@ class UVA::VirgoMarcRecord
   end
   
   def credits
-    subfields_of('508')
+    subfields_of('508', nil, /.*/, ['6'])
   end
   
   def plot_summary
-    subfields_of('520')
+    subfields_of('520', nil, /.*/, ['6'])
   end
   
   def citation_note
