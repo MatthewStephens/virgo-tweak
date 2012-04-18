@@ -342,7 +342,12 @@ class UVA::VirgoMarcRecord
   end
   
   def plot_summary
-    subfields_of('520', nil, /.*/, ['6'])
+    plot_summary=[]
+    a = subfields_of('520', nil, /.*/, ['6'])
+    b = linked_subfields_of('520', nil, /.*/, ['6'])
+    plot_summary << a unless a.nil?
+    plot_summary << b unless b.nil?
+    plot_summary.delete_if {|x| x.empty? }
   end
   
   def citation_note
