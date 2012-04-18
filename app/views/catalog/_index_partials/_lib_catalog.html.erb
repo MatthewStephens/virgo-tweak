@@ -42,7 +42,7 @@
 			<% end %>
 			
 			<% if document.congressional_hearings? and !document.get(:call_number_display).blank? %>
-			<dt>SuDocs Number</dt>
+			<dt>SuDoc Call Number</dt>
 			<dd class="callNumberField">
 					<%= document.value_for :call_number_display %>
 			</dd>
