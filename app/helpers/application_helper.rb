@@ -208,16 +208,19 @@ module ApplicationHelper
     "#{base_url}?url=#{URI.escape(url)}&title=#{URI.escape(title)}"
   end
   
+  # determines whether or not availability should display on search results
   def availability_on_index?(document)
     document.values_for(:barcode_facet) and document.values_for(:barcode_facet).length == 1
   end
   
+  # creates a leo link, which is really an ilink link, but it only happens if the item is LEOable
   def link_to_leo(doc, label, style="")
     if doc.availability and doc.availability.leoable?
       return link_to_ilink_record(doc, label, style)
     end
   end
   
+  # creates a link to the ilink record
   def link_to_ilink_record(doc, label, style="")
     linkable = doc.availability.linkable_to_ilink? rescue true
     if linkable
@@ -459,6 +462,7 @@ module ApplicationHelper
     end
   end
   
+  # determines if a there should be an IVY delivery link
   def display_ivy_link?(document)
     return false unless document.availability and document.availability.has_ivy_holdings?
     call_numbers = document.availability.holdings.collect { |holding| holding.call_number } || []
@@ -485,13 +489,14 @@ module ApplicationHelper
     out.html_safe
   end
   
+  # location to display in availability results
   def location_text(holding, copy)      
     return "Special Collections" if holding.library.is_special_collections? and !copy.special_collections_display?
     return "" if copy.current_location.suppressed?
     return copy.current_location.name
   end
   
-  # display "Available" or "Unavilable"
+  # display "Available" or "Unavailable"
   def availability_text(copy)
     copy.available? ? "Available" : "Unavailable"
   end
@@ -578,6 +583,7 @@ module ApplicationHelper
     body["id"]
   end
   
+  # use google link shortener for an article link
   def shortened_article_link(article, host)
     url = "https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyDTcTFIqkvnwK0VJ9q64BZLs7AGx_0oJdI"
     data = {"longUrl" => article.links.first.fulltext_url, :only_path => false, :host => host}.to_json
@@ -590,16 +596,18 @@ module ApplicationHelper
     body["id"]    
   end
 
+  # the super-secret zotero mojo
   def zotero_span(document)
     "<span class=\"Z3988\" title=\"#{document.export_as_openurl_ctx_kev(document.get(:format_facet) || '')}&amp;rft_id=http%3A%2F%2F#{request.host}%2Fcatalog%2F#{document.id}\" ><!-- COinS --></span>".html_safe
   end
 
- # find advanced search
+  # find advanced search
   def advanced_search_case?
     return true if params[:f_inclusive] && ! params[:f_inclusive].empty?
     ! populated_advanced_search_fields.empty?
   end
 
+  # list of params to send to advanced_path so that the advanced form will re-populate as best it can
   def refine_search_hash
     my_params = Hash.new
     populated_advanced_search_fields.each_pair do |key, value|
@@ -694,7 +702,8 @@ module ApplicationHelper
     val
   end
   
- def render_csv(documents, articles=[])
+  # make a csv string out of a list of documents
+  def render_csv(documents, articles=[])
     csv_string = FasterCSV.generate do |csv|
       csv << ["ITEM_ID", "ITEM_FORMAT", "ITEM_TITLE", "ITEM_AUTHOR"]        
       documents.each do |doc|
@@ -712,7 +721,6 @@ module ApplicationHelper
   ############# methods overridden from Blacklight plugin -- revisit as needed
   
   # overriding so as to take into account facets from advanced search
-  
   def facet_in_params?(field, value)
     return true if params[:f] and params[:f][field] and params[:f][field].include?(value)
     return true if params[:f_inclusive] and params[:f_inclusive][field] and params[:f_inclusive][field].include?(value)
@@ -760,6 +768,7 @@ module ApplicationHelper
     end
   end
   
+  # this is for the folder rows -- not an override, but here b/c it's so similar to the other render_document-* methods
   def render_document_row(doc)
     format = document_partial_name(doc)
     begin
