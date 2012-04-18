@@ -249,7 +249,7 @@ class UVA::VirgoMarcRecord
   end
   
   def note
-    subfields_of('500')
+    subfields_of('500', nil, /.*/, ['6'])
   end
   
   def with_note
