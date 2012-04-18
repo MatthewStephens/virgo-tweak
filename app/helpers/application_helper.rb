@@ -913,9 +913,9 @@ module ApplicationHelper
   
   ############# methods for Video Search view
   
+  # Strips out VIDEO, pt. nn, and parenthetical volume info from call number
   def video_call_number(document, sep=";", default='n/a')
     call = call_number(document, sep, default)
-    # Stripping out VIDEO, pt. nn, and parenthetical volume info from call number
     return call.gsub(/video\./i, '').gsub(/pt\.[ 0-9,]+/i, '').gsub(/\([a-z0-9 ]+\)/i, '')
   end
   
