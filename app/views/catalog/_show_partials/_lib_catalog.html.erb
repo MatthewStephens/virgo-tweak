@@ -229,9 +229,11 @@
 			<% #------------ Plot summary ------------- %>
 			<% unless document.marc_display.plot_summary.empty? %>
 			<dt>Summary</dt>
-			<% document.marc_display.plot_summary.each do |v| %>
-			<dd><%= v %></dd>
-			<% end %>
+			<dd><ul> 
+				<% document.marc_display.plot_summary.each do |v| %>
+					<li><%= v %></li>
+				<% end %>
+			</ul></dd>
 			<% end %>
 
 			<% #------------ Contents ------------- %>
