@@ -396,7 +396,7 @@ class UVA::VirgoMarcRecord
   
   def local_note
     local_note=[]
-    a = subfields_of('590')
+    a = subfields_of('590', nil, /.*/, ['6'])
     b = linked_subfields_of('590', nil, /.*/, ['6'])
     local_note << a unless a.nil?
     local_note << b unless b.nil?
