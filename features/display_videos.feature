@@ -21,3 +21,7 @@ Feature: Display Videos
     Scenario: Display original version
 	  Given I am on the document page for id r039
 	  Then I should see "Original version" data of "Original version: Special Collections, University of Virginia Library, Charlottesville, Va., MSS 12801 (videocassette, Beta 1/2 in.)"
+	  
+	Scenario: Display performers
+	  Given I am on the document page for id u4814856
+	  Then I should see "Performer(s)" data of "William Shatner, James Spader, Candice Bergen, John Larroquette."

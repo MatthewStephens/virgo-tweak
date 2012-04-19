@@ -356,6 +356,18 @@
 			<dd><%= v %></dd>
 			<% end %>
 			<% end %>
+			
+			<% #------------ Performers ------------- %>
+			<% unless document.marc_display.performers.empty? %>
+			<dt class="show_detail">Performer(s)</dt>
+			<dd class="show_detail">
+				<ul>
+				<% document.marc_display.performers.each do |performer| %>
+				<li><%= performer %></li>
+				<% end %>
+				</ul>
+			</dd>
+			<% end %>
 
 			<% #------------ Recording information -------------%>
 			<% unless document.marc_display.recording_information.empty? %>
@@ -368,9 +380,11 @@
 			<% #------------ Credits -------------%>
 			<% unless document.marc_display.credits.empty? %>
 			<dt>Credits</dt>
-			<% document.marc_display.credits.each do |v| %>
-			<dd><%= v %></dd>
-			<% end %>
+			<dd><ul>
+				<% document.marc_display.credits.each do |v| %>
+				<li><%= v %></li>
+				<% end %>
+			</ul></dd>
 			<% end %>
 			
 			<% #------------ Other forms-------------%>

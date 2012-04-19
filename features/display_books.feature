@@ -342,3 +342,8 @@ Feature: Display Books
  Scenario: display foreign language from 880 field
 	  Given I am on the document page for id u4366149
 	  Then I should see a publication statement "[China :凌瀛初,明, between 1615 and 1644]"
+	  
+  Scenario: display performers from 511 field
+	  Given I am on the document page for id u5101350
+	  Then I should see a performer statement "Zhu Xinyun, Zhao Ruping, Bo Guanjun, Liu Jiang."
+	  Then I should see a performer statement "祝新运, 赵汝平, 薄贯君, 刘江."

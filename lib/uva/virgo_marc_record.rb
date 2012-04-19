@@ -261,7 +261,7 @@ class UVA::VirgoMarcRecord
   end
   
   def cited_in
-    subfields_of('510').join(' ')
+    subfields_of('510', nil, /.*/, ['6']).join(' ')
   end
   
   def target_audience
@@ -284,13 +284,20 @@ class UVA::VirgoMarcRecord
     unless self['511'] 
       return [] 
     end
+    performers=[]
+    a = subfields_of('511', nil, /.*/, ['6'])
+    b = linked_subfields_of('511', nil, /.*/, ['6'])
+    performers << a unless a.nil?
+    performers << b unless b.nil?
+    performers.delete_if {|x| x.empty? }
+    
     #subfields_of('511')
-    a = self['511'].value.split(';')
-    b = []
-    a.each do |performer|
-      b << performer.squeeze(" ").strip
-    end
-    return b
+    #a = self['511'].value.split(';')
+    #b = []
+    #a.each do |performer|
+     # b << performer.squeeze(" ").strip
+    #end
+    #return b
   end
   
   #track_list and contents_note both return an array of the items listed in a 505 field. We want to be able to 
@@ -338,7 +345,12 @@ class UVA::VirgoMarcRecord
   end
   
   def credits
-    subfields_of('508', nil, /.*/, ['6'])
+    credits=[]
+    a = subfields_of('508', nil, /.*/, ['6'])
+    b = linked_subfields_of('508', nil, /.*/, ['6'])
+    credits << a unless a.nil?
+    credits << b unless b.nil?
+    credits.delete_if {|x| x.empty? }
   end
   
   def plot_summary

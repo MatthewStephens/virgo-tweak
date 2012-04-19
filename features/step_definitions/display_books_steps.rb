@@ -102,6 +102,10 @@ Then /^I should see a publication statement "([^\"]*)"$/ do |published|
   has_details_label_and_list_value?("Published", published).should be_true
 end
 
+Then /^I should see a performer statement "([^\"]*)"$/ do |name|
+   has_details_label_and_list_value?("Performer(s)", name).should be_true
+end
+
 # determines if the details section includes the specified label
 def has_details_label?(label)
   details_hash.has_key?(label) rescue false
