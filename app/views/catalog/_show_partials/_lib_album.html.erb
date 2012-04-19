@@ -105,13 +105,9 @@
 			<% #------------ Performers ------------- %>
 			<% unless document.marc_display.performers.empty? %>
 			<dt class="show_detail">Performer(s)</dt>
-			<dd class="show_detail">
-				<ul>
-				<% document.marc_display.performers.each do |performer| %>
-				<li><%= performer %></li>
-				<% end %>
-				</ul>
-			</dd>
+			<% document.marc_display.performers.each do |performer| %>
+			<dd class="show_detail"><%= performer %></dd>
+			<% end %>
 			<% end %>
 			
 			<% #---------- Credits ---------- %>

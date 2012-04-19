@@ -134,11 +134,9 @@
 			<% #------------ Publication statement ------------- %>
 			<% unless document.marc_display.publication_statement.empty? %>
 			<dt>Published</dt>
-			<dd><ul>
-				<% document.marc_display.publication_statement.each do |ps| %>
-					<li><%= ps %></li>
-				<% end %>	
-			</ul></dd>
+			<% document.marc_display.publication_statement.each do |ps| %>
+			<dd><%= ps %></dd>
+			<% end %>
 			<% end %>
 			
 			<% #------------------- SuDoc call number --------------- %>
@@ -229,47 +227,39 @@
 			<% #------------ Plot summary ------------- %>
 			<% unless document.marc_display.plot_summary.empty? %>
 			<dt>Summary</dt>
-			<dd><ul> 
-				<% document.marc_display.plot_summary.each do |v| %>
-					<li><%= v %></li>
-				<% end %>
-			</ul></dd>
+			<% document.marc_display.plot_summary.each do |v| %>
+			<dd><%= v %></dd>
+			<% end %>
 			<% end %>
 
 			<% #------------ Contents ------------- %>
 			<% unless document.marc_display.track_list.nil? or document.marc_display.track_list.empty? %>
 			<dt>Contents</dt>
-			<dd><ul>
-				<% document.marc_display.track_list.each do |v| %>
-					<li><%= v %></li>
-				<% end %>
-			</ul></dd>
+			<% document.marc_display.track_list.each do |v| %>
+			<dd><%= v %></dd>
+			<% end %>
 			<% end %>
 
 			<% #------------ Notes ------------- %>
 			<% unless document.marc_display.note.empty? and document.marc_display.with_note.empty? and document.marc_display.bibliographical_references_note.empty? %>
 			<dt>Notes</dt>
-			<dd>
-				<ul> 
-					<% document.marc_display.note.each do |v| %>
-					<li><%= v %></li>
-					<% end %>
+			<% document.marc_display.note.each do |v| %>
+				<dd><%= v %></dd>
+				<% end %>
 
           <% #------------- with note -------------------- %>
           <% unless document.marc_display.with_note.empty? %>
           <% document.marc_display.with_note.each do |v| %>
-        	<li><%= v %></li>
+        	<dd><%= v %></dd>
         	<% end %>
         	<% end %>
 
 					<% #------------ Bibliographical references note ------------- %>
 					<% unless document.marc_display.bibliographical_references_note.empty? %>
 					<% document.marc_display.bibliographical_references_note.each do |v| %>
-					<li><%= v %></li>
+					<dd><%= v %></dd>
 					<% end %>
 					<% end %>
-				</ul>
-			</dd>
 			<% end %>
 
 			<% #------------ Cited in ------------- %>
@@ -289,11 +279,9 @@
 			<% #------------ Local note ------------- %>
 			<% unless document.marc_display.local_note.empty? %>
 			<dt>Local Notes</dt>
-			<dd><ul>
-				<% document.marc_display.local_note.each do |v| %>
-					<li><%= v %></li>
-				<% end %>
-			</ul></dd>
+			<% document.marc_display.local_note.each do |v| %>
+			<dd><%= v %></dd>
+			<% end %>
 			<% end %>
 			
 			<% #------------ Reproduction note ------------- %>
@@ -313,11 +301,9 @@
 			<% #------------ Label/Publisher's no. -------------%>	
 			<% unless document.marc_display.label_no.empty? %>
 			<dt><%= label_no_label(document) %></dt>
-			<dd><ul>
-				<% document.marc_display.label_no.each do |v| %>
-					<li><%= v %></li>
-				<% end %>
-			</ul></dd>
+			<% document.marc_display.label_no.each do |v| %>
+			<dd><%= v %></dd>
+			<% end %>
 			<% end %>			
 			
 			<% #------------ Original version -------------%>
@@ -360,13 +346,9 @@
 			<% #------------ Performers ------------- %>
 			<% unless document.marc_display.performers.empty? %>
 			<dt class="show_detail">Performer(s)</dt>
-			<dd class="show_detail">
-				<ul>
-				<% document.marc_display.performers.each do |performer| %>
-				<li><%= performer %></li>
-				<% end %>
-				</ul>
-			</dd>
+			<% document.marc_display.performers.each do |performer| %>
+			<dd class="show_detail"><%= performer %></dd>
+			<% end %>
 			<% end %>
 
 			<% #------------ Recording information -------------%>
@@ -380,11 +362,9 @@
 			<% #------------ Credits -------------%>
 			<% unless document.marc_display.credits.empty? %>
 			<dt>Credits</dt>
-			<dd><ul>
-				<% document.marc_display.credits.each do |v| %>
-				<li><%= v %></li>
-				<% end %>
-			</ul></dd>
+			<% document.marc_display.credits.each do |v| %>
+			<dd><%= v %></dd>
+			<% end %>
 			<% end %>
 			
 			<% #------------ Other forms-------------%>
