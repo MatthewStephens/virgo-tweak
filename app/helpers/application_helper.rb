@@ -928,20 +928,26 @@ module ApplicationHelper
     return call.gsub(/video\./i, '').gsub(/pt\.[ 0-9,]+/i, '').gsub(/\([a-z0-9 ]+\)/i, '')
   end
   
+  # Strips out "Video" from format list for video materials and wraps in a <span>
   def video_format(document)
     vals = document.fetch :format_facet
+    # "video" as format confuses users, so let's not display
     vals.delete_if {|format| format.match(/video/i) }    
     format = ''
 
     vals.each do |val|
+      # Creates HTML class names (replacing slash separated values with hyphen-separated ones)
       class_name = val.downcase.gsub(/\//i, '-')
+      # Adds a space before and after slashes in format names to prevent line clobbering lengths
       val_name = val.gsub(/([a-z])\/([a-z])/i, '\1 / \2')
+      # Wraps the value in an HTML <span> and return 
       format = format + '<span class="format_value ' + class_name + '">' + val_name + '</span>'
     end
 
     return format.html_safe
   end
   
+  # Strips out "[video recording]" and "[video-recording]" from titles in Video Search
   def video_title(document)
     return full_title(document).gsub(/\[video[ ,-]*recording\]/i, '')
   end
