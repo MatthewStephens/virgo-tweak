@@ -219,11 +219,10 @@ Components used only in view/action catalog/show --*/
 #extendedFields{width:482px;}
 #details {clear:both;}
 #details dl {margin-bottom:5px;}
-#details dt,
-#extendedFields dt{width:124px;margin:0 -100% 0 0;text-align:left;padding:.67em 0;float:left;clear:both;}
-#details dd,
-#extendedFields dd{border-top:1px solid #EEE;margin-left:0;padding:.67em 0 .67em 139px;float:left;/*margin-right:-482px;*/
+#details dt, #extendedFields dt{width:124px;margin:0 -100% 0 0;text-align:left;padding:.67em 0;float:left;clear:both;}
+#details dd, #extendedFields dd{border-top:1px solid #EEE;margin-left:0;padding:.67em 0 .67em 139px;float:left;/*margin-right:-482px;*/
 width:560px;}
+#details dd + dd, #extendedFields dd + dd { border-top: none; padding-top: 0; }
 #details ul, #details ul li {padding-left:0; margin-left:0;}
 #details dd.first{border-top:0;}
 #details dl dt.readOnline {color:#5D712D; text-transform:uppercase;}
