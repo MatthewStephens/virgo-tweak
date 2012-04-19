@@ -1408,7 +1408,7 @@ p,ul,ol,dl,blockquote{margin-bottom:1.54em;}
 
 /* Video Search */
 
-#video_genres {margin: 10px auto; width: 490px;}
+#video_genres {margin: 10px auto; width: 600px;}
 #video_genres + #header {margin-top: 40px;}
 .genre_list {overflow: hidden; margin: 2em 0 1em; padding: 0; width: 100%;}
 .genre_list .genre {
@@ -1417,7 +1417,7 @@ p,ul,ol,dl,blockquote{margin-bottom:1.54em;}
   background: -moz-linear-gradient(top,  #fff,  #e4ecfd);
   float: left; 
   font-size: 17px; 
-  margin: 0.33em 10px; 
+  margin: 0.5em 10px; 
   border: 1px solid #dde5f6;
   border-radius: 7px;
   -webkit-border-radius: 7px;
@@ -1429,7 +1429,7 @@ p,ul,ol,dl,blockquote{margin-bottom:1.54em;}
   -moz-text-shadow:    0 1px 0 #FFF;
   text-shadow:         0 1px 0 #FFF; }
 .genre_list .genre:hover {background: #f3faff;}
-.genre_list .genre a {display: block; padding: 0.67em 11px; width: 200px;}
+.genre_list .genre a {display: block; padding: 0.67em 9px; width: 160px; text-align: center; }
 .genre_list .genre a:hover {color: #000;}
 
 .document.video_doc {background: #EEE; clear: both; display: block; margin-bottom: 0; position: relative; width: 727px; z-index: 10;}
