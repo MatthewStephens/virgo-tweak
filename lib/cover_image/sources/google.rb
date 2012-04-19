@@ -12,6 +12,7 @@ module CoverImage::Sources
     def find(keys)
       data=[]
       q = create_query(keys)
+      return if q.blank?
       cb='CALLBACK'
       url = "http://books.google.com/books?jscmd=viewapi&bibkeys=#{q}&callback=#{cb}&zoom=0"
       puts("searching for image at url #{url}")
