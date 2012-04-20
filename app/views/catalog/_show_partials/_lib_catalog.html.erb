@@ -235,9 +235,11 @@
 			<% #------------ Contents ------------- %>
 			<% unless document.marc_display.track_list.nil? or document.marc_display.track_list.empty? %>
 			<dt>Contents</dt>
-			<% document.marc_display.track_list.each do |v| %>
-			<dd><%= v %></dd>
-			<% end %>
+			<dd><ul>
+      		<% document.marc_display.track_list.each do |v| %>
+	           <li><%= v %></li>
+        	<% end %>
+      		</ul></dd>
 			<% end %>
 
 			<% #------------ Notes ------------- %>
