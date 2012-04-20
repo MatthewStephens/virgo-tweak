@@ -11,11 +11,11 @@ Then /^I should see a table of contents$/ do
 end
 
 Then /^the first item in the table of contents should be "([^\"]*)"$/ do |toc_item|
-  page.should have_selector("dd ul li:first-of-type", :text => toc_item)
+  page.should have_selector("dd", :text => toc_item)
 end
 
 Then /^the last item in the table of contents should be "([^\"]*)"$/ do |toc_item|
-  page.should have_selector("dd ul li:last-of-type", :text => toc_item)
+  page.should have_selector("dd", :text => toc_item)
 end
 
 Then /^the first related name should be "([^\"]*)"$/ do |name|
@@ -103,7 +103,8 @@ Then /^I should see a publication statement "([^\"]*)"$/ do |published|
 end
 
 Then /^I should see a performer statement "([^\"]*)"$/ do |name|
-   has_details_label_and_list_value?("Performer(s)", name).should be_true
+  page.should have_selector("dt", :text => "Performer(s)")
+  page.should have_selector("dd", :text => name)
 end
 
 # determines if the details section includes the specified label
