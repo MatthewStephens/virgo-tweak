@@ -84,14 +84,6 @@ Feature: Display Availability
 		Given I am on the availability page for id u611539
 		Then I should not see "Request Unavailable Item"
 		
-	Scenario: Show "Request Unavailable Item" for MUSIC CIRCDESK items even though firehose says they aren't holdable
-		Given I am on the availability page for id u5415954
-		Then I should see "Request Unavailable Item"
-	
-	Scenario: Don't show "Request Unavailable Item" for CIRCDESK items that aren't in MUSIC
-		Given I am on the availability page for id u3507292
-		Then I should not see "Request Unavailable Item"
-
 	Scenario: Do not show "LEO delivery (faculty/SCPS)" for an item whose only holding is on Semester at Sea
 	  When I am on the availability page for id u2380852
 	  Then I should see "This item is only available to Semester At Sea participants."

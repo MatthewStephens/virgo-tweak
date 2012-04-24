@@ -150,7 +150,7 @@ module Firehose::Common
       return true if @holdable
       return false unless @library.code == "MUSIC"
       @copies.each do |copy|
-        return true if copy.current_location.code == "CIRCDESK"
+        return true if copy.home_location.code == "CIRCDESK" and copy.current_location.code == "CHECKEDOUT"
       end
       return false
     end
@@ -309,7 +309,6 @@ module Firehose::Common
     element :first_name, String, :tag => "givenName"
     element :middle_name, String, :tag => "initials"
     element :last_name, String, :tag => "surName"
-    element :physical_delivery, String, :tag => "physicalDelivery"
     element :status_id, Integer, :tag => "statusId"
     element :telephone, String
     element :title, String
@@ -320,7 +319,6 @@ module Firehose::Common
       @holds.sort_by { |a| [a.date_placed, a.catalog_item.title] }
     end
     has_many :courses, Course, :tag =>"course"
-    element :status_id, Integer, :tag => "statusId"
     def sorted_courses
       @courses.sort_by { |a| a.code }
     end
