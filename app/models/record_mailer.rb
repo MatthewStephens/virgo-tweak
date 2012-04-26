@@ -5,7 +5,7 @@ class RecordMailer < ActionMailer::Base
   helper :application
   
   # overriding from Blacklight plugin so that we can add availability data and allow for multiple docs
-  def email_record(documents, articles, to, full_record, message, from_host, host)
+  def email_record(documents, articles, to, message, full_record, from_host, host)
     documents.each do |document|
       document.availability = Firehose::Availability.find(document)
     end
