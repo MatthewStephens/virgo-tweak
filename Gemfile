@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.6'
-gem 'blacklight', '3.1.2'
+gem 'rails', '3.0.10'
+gem 'blacklight', '3.2.0'
 gem 'blacklight_advanced_search', '1.1.2'
 gem 'authlogic', '2.1.6'
 gem 'curb'

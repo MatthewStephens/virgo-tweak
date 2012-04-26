@@ -1,7 +1,7 @@
 # for sending feedback
 class Notifier < ActionMailer::Base
   
-  def feedback(form_params)
+  def feedback(name, email, message, referer)
     raise 'FEEDBACK_NOTIFICATION_RECIPIENTS is not defined. This should be an array of email recipients' unless defined?(FEEDBACK_NOTIFICATION_RECIPIENTS)
     # Email header info MUST be added here
     recipients FEEDBACK_NOTIFICATION_RECIPIENTS # set in config/environment.rb
@@ -10,15 +10,15 @@ class Notifier < ActionMailer::Base
     body <<-EOF
 VIRGO USER FEEDBACK
 
-SENDER NAME: #{form_params[:name]}
+SENDER NAME: #{name}
 
-SENDER EMAIL: #{form_params[:email]}
+SENDER EMAIL: #{email}
 
 SENDER MESSAGE:
-#{form_params[:message]}
+#{message}
 
 REFERING URL:
-#{form_params[:referer]}
+#{referer}
 EOF
   end
   

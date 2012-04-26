@@ -155,19 +155,18 @@ class CatalogController < ApplicationController
             if params[:to].length != 10
               flash[:error] = "You must enter a valid 10 digit phone number"
             else
-              email = RecordMailer.create_sms_record(@documents, @articles, {:to => params[:to], :carrier => params[:carrier]}, from, host)
+              email = RecordMailer.sms_record(@documents, @articles, params[:to], params[:carrier], from, host)
             end
           else
             flash[:error] = "You must select a carrier"
           end
         when 'email'
           if params[:to].match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
-            email = RecordMailer.create_email_record(@documents, @articles, {:to => params[:to], :message => params[:message], :full_record => params[:full_record]}, from, host)
+            email = RecordMailer.email_record(@documents, @articles, params[:to], params[:message], params[:full_record], from, host)
           else
             flash[:error] = "You must enter a valid email address"
           end
       end
-      RecordMailer.deliver(email) unless flash[:error]
       if @articles.size == 0 && @documents.size == 1
         redirect_to catalog_path(@documents.first.id) and return
       else

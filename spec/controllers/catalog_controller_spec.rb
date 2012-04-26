@@ -22,16 +22,10 @@ describe CatalogController do
       get :index, :portal => 'music'
       session[:search][:portal].should == 'music'
     end
-
-    it "should add format facet of video for the video portal" do
-      get :index, :portal => 'video'
-      assigns[:filters][:format_facet].should == ["Video"]
-    end
     
     it "should adjust for special collections search" do
       get :index, :special_collections => 'true'
       session[:special_collections].should == true
-      assigns[:filters][:library_facet].should == ["Special Collections"]
     end
     
     it "should turn off special collections search if requested" do

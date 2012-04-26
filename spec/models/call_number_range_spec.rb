@@ -38,19 +38,16 @@ describe CallNumberRange do
       CallNumberRange.call_number_match('PRE.123', []).should be_empty
     end
 
-    it "should return map guides where the call number is bounded by the map guide's call number range" do
+    it "should return call number ranges where the call number is bounded by the supplied ranges" do
       lib = Library.create(:name => "ALDERMAN")
       
       map = Map.create(:url => 'url', :description => 'desc', :library_id => lib.id)
       map2 = Map.create(:url => 'url2', :description => 'desc2', :library_id => lib.id)
       
-      guide = CallNumberRange.new(:map_id => map.id, :call_number_range => 'AB - DF')
-      guide2 = CallNumberRange.new(:map_id => map2.id, :call_number_range => 'Y - Z')
-      
-      map.call_number_ranges << guide
-      map2.call_number_ranges << guide2
-      
-      CallNumberRange.call_number_match('CD.123', [map, map2]).should == [map]
+      range = CallNumberRange.new(:map_id => map.id, :call_number_range => 'AB - DF')
+      range2 = CallNumberRange.new(:map_id => map2.id, :call_number_range => 'Y - Z')
+            
+      CallNumberRange.call_number_match('CD.123', [range, range2]).should == [range]
     end
   end
   

@@ -37,13 +37,14 @@ describe Map do
   
   describe "find best map" do
     it "should return the first of the matched guides" do
-      lib = Library.new(:name => 'ALDERMAN')
-      map = Map.new(:url => 'foo', :description => 'blah', :library_id => lib.id)
-      map2 = Map.new(:url => 'foo2', :description => 'blah2', :library_id => lib.id)  
-      holding = mock("Holding")
-      holding.stubs(:library).returns(lib)
-      CallNumberRange.stubs(:location_and_call_number_match).returns([map, map2])
-      Map.find_best_map(holding, 'XYZ.123').should == map
+      map = Map.new(:url => 'foo', :description => 'blah', :library_id => "test")
+      map2 = Map.new(:url => 'foo2', :description => 'blah2', :library_id => "test")  
+      range = CallNumberRange.new(:map_id => map.id, :call_number_range => "A-Z", :location => "TEST")
+      range2 = CallNumberRange.new(:map_id => map2.id, :call_number_range => "A-Z", :location => "TEST")
+      range.stubs(:map).returns(map)
+      range2.stubs(:map).returns(map2)
+      CallNumberRange.stubs(:location_and_call_number_match).returns([range, range2])
+      Map.find_best_map(mock("Holding"), 'XYZ.123').should == map
     end
   end
   

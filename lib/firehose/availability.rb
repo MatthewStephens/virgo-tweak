@@ -205,7 +205,7 @@ class Firehose::Availability
       ret = Firehose::Availability.new(document, Firehose::Common::CatalogItem.parse(xml, :single=>true, :use_default_namespace => true), xml)
       return ret
     rescue
-      RAILS_DEFAULT_LOGGER.info("bad thing!")
+      Rails.logger.info("unable to construct availability from #{ret.inspect}")
       return
     end
   end
