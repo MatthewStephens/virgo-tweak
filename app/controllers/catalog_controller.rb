@@ -167,6 +167,7 @@ class CatalogController < ApplicationController
             flash[:error] = "You must enter a valid email address"
           end
       end
+      email.deliver unless flash[:error]
       if @articles.size == 0 && @documents.size == 1
         redirect_to catalog_path(@documents.first.id) and return
       else
