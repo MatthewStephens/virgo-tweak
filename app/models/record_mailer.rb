@@ -15,12 +15,11 @@ class RecordMailer < ActionMailer::Base
       subject = "Item records"
     end
     from =  "no-reply@" + from_host
-    full_record == "true" ? @full_record = true : @full_record = false
     @documents = documents
     @articles = articles
     @host = host
     @message = message
-    @full_record = full_record
+    full_record == "true" ? @full_record = true : @full_record = false
     mail(:to => to, :subject => subject, :from => from)
   end  
   
