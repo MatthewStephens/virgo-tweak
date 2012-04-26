@@ -9,20 +9,19 @@ class RecordMailer < ActionMailer::Base
     documents.each do |document|
       document.availability = Firehose::Availability.find(document)
     end
-    recipients to
     if documents.size == 1 and articles.size == 0
-      subject "Item Record: #{documents.first.value_for :title_display}"
+      subject ="Item Record: #{documents.first.value_for :title_display}"
     else
-      subject "Item records"
+      subject = "Item records"
     end
-    from "no-reply@" << from_host
-    full_record == "true" ? full_record = true : full_record = false
+    from =  "no-reply@" + from_host
+    full_record == "true" ? @full_record = true : @full_record = false
     @documents = documents
     @articles = articles
     @host = host
     @message = message
     @full_record = full_record
-    mail(:to => to, :subject => subject)
+    mail(:to => to, :subject => subject, :from => from)
   end  
   
   # overriding from Blacklight plugin so that we can add multiple docs
@@ -30,12 +29,11 @@ class RecordMailer < ActionMailer::Base
     if sms_mapping[carrier]
       to = "#{to}@#{sms_mapping[carrier]}"
     end
-    recipients to
-    from "no-reply@" << from_host
+    from = "no-reply@" + from_host
     @documents = documents
     @articles = articles
     @host = host
-    mail(:to => to, :subject => subject)
+    mail(:to => to, :subject => subject, :from => from)
   end
   
 end
