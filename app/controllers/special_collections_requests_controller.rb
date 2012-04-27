@@ -71,7 +71,7 @@ class SpecialCollectionsRequestsController < ApplicationController
     @special_collections_request = SpecialCollectionsRequest.find(params[:id])  
     respond_to do |format|
       if @special_collections_request.update_attributes(params[:special_collections_request])
-        format.html { redirect_to(special_collections_request_path(params[:id])) }
+        format.html { redirect_to :action => 'show', :format => 'pdf' }      
       else
         format.html { render :action => 'edit' }
       end
@@ -86,15 +86,12 @@ class SpecialCollectionsRequestsController < ApplicationController
     @response, @document = get_solr_response_for_doc_id(@special_collections_request.document_id) 
     @date = @special_collections_request.created_at.strftime("%A, %B %e, %Y")
     respond_to do |format|
-      format.pdf {
-        prawnto :prawn=>{:page_layout=>:landscape}, :inline=>false
-        render :layout => false
-      }
+      format.pdf do
+        prawnto :prawn => { :page_layout => :landscape }
+        format.pdf { prawnto :filename => "Request #{params[:id]}", :inline => false }
+      end
     end
-  end
-
- 
-  
+  end  
   
   protected
   # verifies that the current user is a special collections administrator
