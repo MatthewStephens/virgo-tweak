@@ -55,10 +55,10 @@ end
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
 #Load Fixtures
-Fixtures.reset_cache  
+ActiveRecord::Fixtures.reset_cache  
 fixtures_folder = File.join(Rails.root.to_s, 'test', 'fixtures')
 fixtures = Dir[File.join(fixtures_folder, '*.yml')].map {|f| File.basename(f, '.yml') }
-Fixtures.create_fixtures(fixtures_folder, fixtures)
+ActiveRecord::Fixtures.create_fixtures(fixtures_folder, fixtures)
 require 'cucumber/rails/rspec'
 require 'webrat/core/matchers'
 
