@@ -11,6 +11,7 @@ Given /^I am logged in as a Special Collections administrator$/ do
   visit logout_path
   login = "BigWig"
   email = "bigwig@bigwig.com"
+  User.acts_as_authentic_config[:maintain_sessions] = false # authlogic/issues/262
   user = User.find_or_create_by_login(:login => login, :email =>email, :password => "password", :password_confirmation => "password")
   superuser = SpecialCollectionsUser.create(:id => user.id, :computing_id => user.login)
   visit login_path(:login => login)
