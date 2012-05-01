@@ -347,3 +347,8 @@ Feature: Display Books
 	  Given I am on the document page for id u5101350
 	  Then I should see a performer statement "Zhu Xinyun, Zhao Ruping, Bo Guanjun, Liu Jiang."
 	  Then I should see a performer statement "祝新运, 赵汝平, 薄贯君, 刘江."
+	  
+  Scenario: Do not show "Access in Virgo Classic" for Congressional Hearings Digital Collection items 
+	 	Given I am on the document page for id cis2007400078 
+		Then I should not see "Access in Virgo Classic"
+		
