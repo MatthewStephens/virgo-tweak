@@ -1,7 +1,7 @@
 <dt class="technicalDetails">Technical details</dt>
 <dd class="technicalDetails">
   <ul>
-		<% unless document.doc_type == :hathi or document.doc_type == :dl_book or document.doc_sub_type == :dl_book %>
+		<% unless document.doc_type == :hathi or document.doc_type == :dl_book or document.doc_sub_type == :dl_book or document.congressional_hearings? %>
     	<li><%= link_to_ilink_record(document, 'Access in Virgo Classic') %></li>
 		<% end %>
     <li>
