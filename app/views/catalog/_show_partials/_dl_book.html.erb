@@ -138,6 +138,16 @@
 		<% end %>
 	<% end %>
 	
+	<% #----------Date Indexed----------- %>
+	<% if ENV["RAILS_ENV"]== 'development'%>
+		<% unless document.value_for(:date_indexed_facet).empty? %>
+  			<% date = document.value_for(:date_indexed_facet) %>
+			<% date = date[0,4]+ "-" + date[4,2] + "-"+ date[6,2] + " " + date[8,2] + ":" + date[10, 2]%>
+  			<dt>Date Indexed</dt>		
+  			<dd><%= date %></dd>
+  		<% end %>
+	<% end %>
+	
 	<% if document.has?(:content_model_facet, 'jp2k') %>
 		<dt class="show_detail">Download</dt>
 		<dd class="show_detail">
