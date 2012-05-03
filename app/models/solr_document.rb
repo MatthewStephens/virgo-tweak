@@ -78,6 +78,7 @@ class SolrDocument
         [:hathi, has?(:source_facet, 'Hathi Trust Digital Library')],
         [:dl_video, (has?(:source_facet, 'UVA Library Digital Repository') and has?(:format_facet, 'Video'))],
         [:lib_album, has?(:format_facet, /Musical Recording/i)],
+        [:lib_video_full, has?(:format_facet, 'Video')],
         [:dl_book, ((has?(:content_model_facet, 'digital_book') or has?(:content_model_facet, 'jp2k')) and !has?(:marc_display_facet, 'true'))],
         [:lib_catalog, (has?(:source_facet, 'Library Catalog') or has?(:marc_display_facet, 'true'))],
         [:lib_coins, has?(:source_facet, 'U.Va. Art Museum')],
