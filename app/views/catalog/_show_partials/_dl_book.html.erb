@@ -140,9 +140,9 @@
 	
 	<% #----------Date Indexed----------- %>
 	<% if Rails.env.virgobeta_development? %>
-		<% unless document.value_for(:date_indexed_facet).empty? %>
-  			<% date = document.value_for(:date_indexed_facet) %>
-			<% date = date[0,4]+ "-" + date[4,2] + "-"+ date[6,2] + " " + date[8,2] + ":" + date[10, 2]%>
+		<% unless document.value_for(:date_indexed_facet) == 'n/a' %>
+  			<% datestr = document.value_for(:date_indexed_facet) %>
+			<% date = DateTime.parse(datestr).strftime('%Y-%m-%d %H:%M')%>
   			<dt>Date Indexed</dt>		
   			<dd><%= date %></dd>
   		<% end %>
