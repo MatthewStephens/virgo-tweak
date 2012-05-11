@@ -13,7 +13,7 @@
 <div class="adv_search_sort">
   <%= label_tag(:sort_key, "Sort results by", :class => "adv_sort_label") %> 
   <%= select_tag(:sort_key, options_for_select(sort_fields, label_tag_default_for(:sort_key))) %>
-  <%= hidden_field_tag(:search_field, BlacklightAdvancedSearch.config[:url_key]) %>
+  <%= hidden_field_tag(:search_field, blacklight_config.advanced_search[:url_key]) %>
 </div>
 
 
@@ -41,8 +41,8 @@
         <li><a class="article-search" href="/catalog?catalog_select=articles">Article Search</a></li>
         <li><%= link_to "Article Advanced Search", advanced_articles_path(:catalog_select => 'articles'), :class => "article-search" %></li>
       <% end %>
-      <li><a class="music-search" href="/catalog?portal=music">Music Search</a></li>
-      <li><a class="video-search" href="/catalog?portal=video">Video Search</a></li>
+      <li><a class="music-search" href="/music">Music Search</a></li>
+      <li><a class="video-search" href="/video">Video Search</a></li>
       <li><a class="start-over" href="/">Start Over</a></li>
     </ul>
     <h3 class="elsewhere-heading">Elsewhere:</h3>

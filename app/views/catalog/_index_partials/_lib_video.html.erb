@@ -5,7 +5,7 @@
         <%= render :partial=>'folder_control', :locals=>{:document=>document} %>
       </div>
   		<div class="title">
-  		  <span class="linked_title"><%= link_to_document document, :label => document.value_for(:linked_title_display), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view %></span><span class="main_title"><%= link_to_document document, :label => full_title(document), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view  %></span></div>
+  		  <span class="linked_title"><%= link_to_document document, :label => document.value_for(:linked_title_display), :counter => (counter + 1 + offset) %></span><span class="main_title"><%= link_to_document document, :label => full_title(document), :counter => (counter + 1 + offset) %></span></div>
   <%- end -%>
 	<%- unless (document[:linked_title_display] rescue false) -%>
 		<div class="listItemNumber"><%= counter + 1 + offset %>.</div>
@@ -13,7 +13,7 @@
       <%= render :partial=>'folder_control', :locals=>{:document=>document} %>
     </div>
     <div class="title">
-      <%= link_to_document document, :label => video_title(document), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view  %>
+      <%= link_to_document document, :label => video_title(document), :counter => (counter + 1 + offset)  %>
     </div>
 	<%- end -%>
  
@@ -40,7 +40,7 @@
     <div class="more_info">
       <h1><%= link_to_document document, :label => video_title(document), :counter => (counter + 1 + offset) %></h1>
       <div class="cover_summary <%= 'cover_only' if document.get(:description_note_display).nil? %>">
-          <%= link_to_document_from_cover document, :span => "coverImage book", :counter => (counter + 1 + offset), :bookmakrs_view => bookmarks_view  %>
+          <%= link_to_document_from_cover document, :span => "coverImage book", :counter => (counter + 1 + offset) %>
           <%= truncate(document.get(:description_note_display), :length => 800, :omission => ' [...]') if !document.get(:description_note_display).nil? %>
  		  </div>
       <dl class="more_info_meta">

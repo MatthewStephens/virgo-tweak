@@ -1,14 +1,12 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 require 'firehose/patron'
-require 'lib/uva/search_fields_helper'
 require 'lib/uva/solr_helper_override'
 require 'lib/uva/virgo_marc_record'
 
 class ApplicationController < ActionController::Base
   include Blacklight::Controller
   include Firehose::Patron
-  include UVA::SearchFieldsHelper
   helper :all # include all helpers, all the time
   helper_method :user_session, :current_user, :new_user_session_path, :destroy_user_session_path
   protect_from_forgery # See ActionController::RequestForgeryProtection for details

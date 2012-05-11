@@ -1,5 +1,5 @@
 <% unless (document.online_only? && !document.get(:url_display).nil?) -%>
-  <% if params[:portal] != 'video' -%>
+  <% unless params[:controller] == 'video' -%>
 		<% unless document.doc_sub_type == :dl_book %>
 	    <dt>Availability</dt>
 			<% if availability_on_index?(document) -%>

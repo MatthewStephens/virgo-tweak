@@ -4,7 +4,6 @@ describe UVA::ArticlesHelper do
   
   class FakeArticlesHelper
     include UVA::ArticlesHelper
-    include UVA::SearchFieldsHelper
     # add in a #config method that includes search field config
     # that will be used by SearchFields
     def config

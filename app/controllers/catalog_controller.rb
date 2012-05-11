@@ -15,6 +15,7 @@ class CatalogController < ApplicationController
   include UVA::AdvancedSearch::AdvancedSearchFields
   include UVA::ArticlesHelper
   include UVA::SolrHelperOverride
+  include BlacklightAdvancedSearch::ParseBasicQ
   
   # the featured_documents are used when there are no queries or filters applied
   before_filter :notices_update, :only=>[:index, :show]
@@ -24,11 +25,8 @@ class CatalogController < ApplicationController
   before_filter :adjust_for_special_collections_search, :only=>:index
   before_filter :adjust_for_full_view, :only=>[:index, :show]
   before_filter :resolve_sort, :only=>:index
-  before_filter :load_featured_documents, :only=>:index  
   before_filter :add_lean_query_type, :only=>[:image_load, :image, :brief_availability]
-  before_filter :adjust_for_bookmarks_view, :only=>:update
   before_filter :recaptcha_check, :only=>:send_email_record
-  before_filter :filters, :only =>:show
   before_filter :articles, :only=>[:email, :send_email_record, :citation]
   before_filter :set_solr_document, :only=>[:availability, :brief_availability, :firehose, :image_load, :image, :page_turner, :fedora_metadata]
   before_filter :set_document_availability, :only=>[:availability, :brief_availability]
@@ -65,25 +63,145 @@ class CatalogController < ApplicationController
   rescue_from ActionController::MethodNotAllowed, :with => lambda {
     redirect_to catalog_index_path and return
   }
+    
+  configure_blacklight do |config|
+    config.default_solr_params = {
+      :qt => "search",
+      :rows => 20
+    }
+    config.default_qt = "search"
+    # solr field values given special treatment in the index (search results) view
+    config.index.show_link = "title_display"
+    config.index.record_display_type = "format"
+    
+    # solr field values given special treatment in the show (single result) view
+    config.show.html_title = "title_display"
+    config.show.heading = "title_display"
+    config.show.display_type = "format"
+    
+    # facets
+    config.add_facet_field 'library_facet', :label => 'Library' 
+    config.add_facet_field 'format_facet', :label => 'Format'
+    config.add_facet_field 'published_date_facet', :label => 'Publication Era'
+    config.add_facet_field 'author_facet', :label => 'Author'
+    config.add_facet_field 'subject_facet', :label => 'Subject'
+    config.add_facet_field 'language_facet', :label => 'Language'
+    config.add_facet_field 'call_number_facet', :label => 'Call Number'
+    config.add_facet_field 'region_facet', :label => 'Geographic Location'
+    config.add_facet_field 'digital_collection_facet', :label => 'Digital Collection'
+    config.add_facet_field 'source_facet', :label => 'Source'
+    config.add_facet_field 'series_title_facet', :label => 'Series'
+    config.add_facet_field 'call_number_broad_facet', :label => 'Call Number'
+    
+    # index fields
+    config.add_index_field 'title_display', :label => 'Title:' 
+    config.add_index_field 'author_display', :label => 'Author:' 
+    config.add_index_field 'format_facet', :label => 'Format:' 
+    config.add_index_field 'language_facet', :label => 'Language:' 
+    config.add_index_field 'published_date_display', :label => 'Published:' 
+    config.add_index_field 'location_facet', :label => 'Location:' 
+  
+    # show fields
+    config.add_show_field 'year_facet', :label => 'Date:'
+    config.add_show_field 'author_display', :label => 'Creator:'
+    config.add_show_field 'digital_collection_facet', :label => 'Collection:'
+    config.add_show_field 'media_resource_id_display', :label => 'Type:'
+    config.add_show_field 'title_display', :label => 'Title:' 
+    config.add_show_field 'subtitle_display', :label => 'Subtitle:' 
+    config.add_show_field 'format_facet', :label => 'Format:'
+    config.add_show_field 'language_facet', :label => 'Language:'
+    config.add_show_field 'note_display', :label => 'Note:'
+    config.add_show_field 'published_date_display', :label => 'Published:'
+    config.add_show_field 'isbn_display', :label => 'ISBN'
+
+    # search fields
+    config.add_search_field('author') do |field|
+      field.solr_local_parameters = {
+       :qf => '$qf_author',
+       :pf => '$pf_author'
+      }
+    end
+    config.add_search_field('title') do |field|
+      field.solr_local_parameters = {
+       :qf => '$qf_title',
+       :pf => '$pf_title'
+      }
+    end
+    config.add_search_field('journal') do |field|
+      field.label = 'Journal Title'
+      field.solr_local_parameters = {
+       :qf => '$qf_journal_title',
+       :pf => '$pf_journal_title'
+      }
+    end
+    config.add_search_field('subject') do |field|
+      field.solr_local_parameters = {
+       :qf => '$qf_subject',
+       :pf => '$pf_subject'
+      }
+    end
+    config.add_search_field 'keyword' do |field|
+      field.label = 'Keywords'
+      field.solr_local_parameters = {
+        :qf => '$qf_keyword',
+        :pf => '$pf_keyword'
+       }
+    end
+    config.add_search_field('call_number') do |field|
+      field.label = 'Call Number'
+      field.solr_local_parameters = {
+       :qf => '$qf_call_number',
+       :pf => '$pf_call_number'
+      }
+    end
+    config.add_search_field('published') do |field|
+      field.label = 'Publisher/Place of Publication'
+      field.solr_local_parameters = {
+       :qf => '$qf_published',
+       :pf => '$pf_published'
+      }
+    end
+    config.add_search_field('publication_date') do |field|
+      field.label = 'Year Published'
+      field.range = 'true'
+      field.solr_field = 'year_multisort_i'
+    end
+    config.add_search_field('issn') do |field|
+      field.include_in_advanced_search = false
+      field.label = 'ISSN'
+      field.solr_local_parameters = {
+        :qf => '$qf_issn',
+        :pf => '$pf_issn'
+      }
+    end
+    
+    # sort fields
+    config.add_sort_field 'score desc, year_multisort_i desc', :label => 'Relevancy', :sort_key => 'relevancy'
+    config.add_sort_field 'date_received_facet desc', :label => 'Date Received', :sort_key => 'received'
+    config.add_sort_field 'year_multisort_i desc', :label => 'Date Published - newest first', :sort_key => 'published'
+    config.add_sort_field 'year_multisort_i asc', :label => 'Date Published - oldest first', :sort_key => 'published_a'
+    config.add_sort_field 'title_sort_facet asc, author_sort_facet asc', :label => 'Title', :sort_key => 'title'
+    config.add_sort_field 'author_sort_facet asc, title_sort_facet asc', :label => 'Author', :sort_key => 'author'
+    
+    config.spell_max = 5
+
+    # advanced search facets
+    config.advanced_search = {
+      :form_solr_parameters => {
+        'facet.field' => ['library_facet', 'format_facet', 'call_number_broad_facet', 'digital_collection_facet'],
+        'facet.limit' => -1, # return all facet values
+        'facet.sort' => 'index', # sort by byte order of values
+      },
+      :url_key => 'advanced',
+      :qt => 'search'
+    }
+  end
   
   # get search results from the solr index
   # overriding from plugin to add cleanup_call_number_search and json response
   def index
-    if params[:catalog_select] == "articles"
-      my_params = {}
-      unless params[:q].blank?
-        my_params[:q] = params[:q]
-      else
-        my_params = populated_advanced_search_fields.merge(:catalog_select => "articles", :search_field => params[:search_field])
-      end
-      my_params[:f] = params[:f]
-      my_params[:format] = params[:format]
-      my_params[:sort_key] = params[:sort_key]
-      redirect_to articles_path(my_params) and return
-    end
     (@response, @document_list) = get_search_results(params)
     cleanup_call_number_search
-    @filters = params[:f] || []
     respond_to do |format|
       format.html { render :layout => index_layout }
       format.json { render :json => @response.to_json}
@@ -221,34 +339,6 @@ class CatalogController < ApplicationController
     @document.availability = Firehose::Availability.find(@document)
   end
   
-  # gets cover images for featured documents
-  def load_featured_documents
-    if (!params[:f] || params[:f].size == 0) && params[:q].blank? && params[:search_field] != 'advanced'
-      phrase_filters = {}
-      if params[:portal] == 'music'
-        phrase_filters[:library_facet] = ["Music"]
-        phrase_filters[:format_facet] = "\"Musical_Recording\"^2.0 \"Book\""
-      elsif params[:portal] == 'video'
-        phrase_filters[:format_facet] = ["Video"]
-      else
-        phrase_filters[:format_facet] = ["Book"]
-      end
-      opts={
-        :page=>1,
-        :per_page=>200, # load plenty to match up with the ids_for_docs_with_cached_covers output
-        :fl=>%W(id format_facet library_facet),
-        :sort=>"date_received_facet desc",
-        :f=>phrase_filters,
-        :qt => 'search'
-      }  
-      featured_response, document_list = get_search_results(opts)          
-      @featured_documents = document_list.select do |doc|    
-        doc.has_image?
-      end
-      @featured_documents = @featured_documents.sort_by {rand}
-    end
-  end
-
   # fetch all doc ids that have pre-cached cover images
   def ids_for_docs_with_cached_covers(solr_docs, max_file_size=1500)
     # get the solr ids so we can send them to mysql
@@ -313,27 +403,23 @@ class CatalogController < ApplicationController
     end
   end
   
-  # storing which portal we are in
+  # redirecting to appropriate portal
   def adjust_for_portal
-    unless params[:portal].blank?
-      session[:search][:portal] = params[:portal]
+    if params[:catalog_select] == "articles"
+      redirect_to articles_path(params_to_keep.merge(:catalog_select => "articles")) and return
     end
-    # this seems redundant, but we need it in the params in order to make portals work right
-    unless session[:search][:portal].blank?
-      params[:portal] = session[:search][:portal]
+    return if params[:portal].blank?
+    if params[:portal] == 'all' and params[:controller] != 'catalog'
+      redirect_to catalog_index_path(params_to_keep)
     end
-  end
-    
-  # we need to know if we are viewing the bookmarks page so we can
-  # include certain partials or not
-  def adjust_for_bookmarks_view
-    if params[:bookmarks_view] == "true"
-      session[:search][:bookmarks_view] = true
-    else
-      session[:search][:bookmarks_view] = false
+    if params[:portal] == 'music' and params[:controller] != 'music'
+      redirect_to music_index_path(params_to_keep)
+    end
+    if params[:portal] == 'video' and params[:controller] != 'video'
+      redirect_to video_index_path(params_to_keep)
     end
   end
-  
+      
   # do recaptcha check before allowing email to be sent out
   def recaptcha_check
     unless verify_recaptcha(:model => @post)
@@ -346,12 +432,7 @@ class CatalogController < ApplicationController
     flash[:notice] = "Sorry, you seem to have encountered an error."
     redirect_to catalog_index_path and return
   end
-  
-  # grabs the facet filters from the session
-  def filters
-    @filters = session[:search][:f] || []
-  end
- 
+   
   def delete_or_assign_search_session_params
     portal = session[:search][:portal]
     session[:search] = {}
@@ -387,28 +468,38 @@ class CatalogController < ApplicationController
     return ""
   end
   
+  def params_to_keep
+    my_params = {}
+    unless params[:q].blank?
+      my_params[:q] = params[:q]
+    else
+      my_params = populated_advanced_search_fields.merge(:search_field => params[:search_field])
+    end
+    my_params[:f] = params[:f]
+    my_params[:format] = params[:format]
+    my_params[:sort_key] = params[:sort_key]
+    my_params
+  end
   
-  private
-  
-    def index_layout
-      if searchless?
-        if special_collections_lens?
-          layout = "application"
-        elsif default_portal? and facetless?
-          layout = "home"
-        else
-          layout = "application"
-        end
-      elsif params[:catalog_select] == "all"
-        layout = "combined"
+  def index_layout
+    if searchless?
+      if special_collections_lens?
+        layout = "application"
+      elsif default_portal? and facetless?
+        layout = "home"
       else
         layout = "application"
       end
-      return layout
+    elsif params[:catalog_select] == "all"
+      layout = "combined"
+    else
+      layout = "application"
     end
-    
-    def articles
-      @articles = get_articles_by_ids(params[:article_id])
-    end
+    return layout
+  end
+  
+  def articles
+    @articles = get_articles_by_ids(params[:article_id])
+  end
  
 end

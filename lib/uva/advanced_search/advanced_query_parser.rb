@@ -7,10 +7,10 @@ module UVA::AdvancedSearch
     def range_queries
       unless(@range_queries)
         @range_queries = {}
-        return @range_queries unless @params[:search_field] == BlacklightAdvancedSearch.config[:url_key]
-        Blacklight.config[:extra_search_fields].each do | field_def |
-          next if !field_def[:range]          
-          key = field_def[:key]
+        return @range_queries unless @params[:search_field] == @config.advanced_search[:url_key]
+        @config.search_fields.each do | field_def |
+          key = field_def[0]
+          next if !field_def[1]["range"]
           key_start = "#{key}_start"
           key_end = "#{key}_end"          
         
@@ -33,18 +33,18 @@ module UVA::AdvancedSearch
         }
       end
     end    
-    
+ 
     # overriding from plugin to include range_queries
-    def process_query(params,config)
-      queries = []
-      keyword_queries.each do |field,query| 
-        queries << ParsingNesting::Tree.parse(query).to_query( local_param_hash(field)  )            
-      end
-      range_queries.each do |key,ranges|
-        queries << UVA::AdvancedSearch::RangeQueryParser.parse(key,ranges)
-      end
-      queries.join( ' ' + keyword_op + ' ')
-    end
+     def process_query(params,config)
+       queries = []
+       keyword_queries.each do |field,query| 
+         queries << ParsingNesting::Tree.parse(query).to_query( local_param_hash(field, config)  )            
+       end
+       range_queries.each do |key,ranges|
+         queries << UVA::AdvancedSearch::RangeQueryParser.parse(key,ranges)
+       end
+       queries.join( ' ' + keyword_op + ' ')
+     end
   
   end
   

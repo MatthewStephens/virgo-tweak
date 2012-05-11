@@ -32,7 +32,7 @@
 
 			  <% if @document.export_formats.keys.include?( :refworks_marc_txt ) %>
 			    <li class="refworks">
-			      <%= link_to "Export (RefWorks)", refworks_export_url(@document), :target => '_blank' %> 
+			      <%= link_to "Export (RefWorks)", refworks_export_url(@document[:id]), :target => '_blank' %> 
 			    </li>
 			  <% end %>
   

@@ -238,11 +238,11 @@ module UVA
     # extract populated advanced search fields and make URL pieces
     def get_advanced_search_queries(extra_controller_params={})
       queries = []
-      fields = BlacklightAdvancedSearch.config[:article_search_fields].collect  {|obj| normalize_config(obj)}
+      fields = ArticlesController.blacklight_config.search_fields
       fields.each do |field_def|
-        key = field_def[:key].to_sym
-        primo_key = field_def[:primo_key]
-        if field_def[:range]
+        key = field_def[0].to_sym
+        primo_key = field_def[1][:primo_key]
+        if field_def[1][:range]
           raw_value = extra_controller_params[key]
           if ! raw_value.blank?          
             if raw_value =~ /-/
@@ -288,10 +288,11 @@ module UVA
     # extract sort and make URL piece
     def get_sort(extra_controller_params={})
       if extra_controller_params[:format] == "rss"
-        extra_controller_params[:sort_key] = 'articles_date'
+        extra_controller_params[:sort_key] = 'date'
       end
       return "" if extra_controller_params[:sort_key].blank?
-      sort = Blacklight.config[:articles_sort_fields][extra_controller_params[:sort_key]][1] rescue ''
+      match = blacklight_config.sort_fields.select { |key, value| value.sort_key == extra_controller_params[:sort_key] }
+      sort = match[0][0] rescue ''
       return "&sortField=#{sort}" 
     end
   

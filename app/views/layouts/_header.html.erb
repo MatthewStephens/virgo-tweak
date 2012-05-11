@@ -44,8 +44,8 @@
   <div class="app_banner_container">        
     <div class="app_banner container_24">
       <hgroup class="virgo_logo grid_14 alpha">
-    	  <h1 class="virgo-logo-heading"><%= link_to "Virgo", catalog_index_path(:portal => :all), :id => "virgo_logo_link" %></h1>
-    	  <% if params[:controller] == 'articles' or params[:controller] == 'catalog' and params[:action] == 'index' and !home_page? -%>
+    	  <h1 class="virgo-logo-heading"><%= link_to "Virgo", catalog_index_path, :id => "virgo_logo_link" %></h1>
+    	  <% if (params[:controller] == 'articles' or params[:controller] == 'catalog' or params[:controller] == 'music' or params[:controller] == 'video') and params[:action] == 'index' and !home_page? -%>
     	    <h2 class="search-scope <%= search_result_label.downcase %>-scope"><%= search_result_label %> Search</h2>
     	  <% end %>
     	</hgroup> <!-- end .virgo_logo -->

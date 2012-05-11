@@ -23,14 +23,14 @@
 			  
 			  <dd class="titleField">
 			    <span class="listItemNumber"><%= counter + 1 + offset %>.</span>
-			    <h2 class="document-title"><%= link_to_document document, :label => flag == 0 ? title + part + medium + subtitle : linked_title + part + medium + subtitle, :counter => counter + 1 + offset, :bookmarks_view => bookmarks_view %></h2>
+			    <h2 class="document-title"><%= link_to_document document, :label => flag == 0 ? title + part + medium + subtitle : linked_title + part + medium + subtitle, :counter => counter + 1 + offset %></h2>
 			  </dd>
 			  <% flag = 1 %>
 			<% end %>
 		</dl>
 		
 		<div class="previewThumbImg">
-		   <%= link_to_document_from_cover document, :span => "coverImage album", :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view  %>
+		   <%= link_to_document_from_cover document, :span => "coverImage album", :counter => (counter + 1 + offset) %>
 		</div>
 		
 		<dl class="metadata">

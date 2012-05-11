@@ -7,7 +7,7 @@
 			<% heading_title = get_heading_title(document.value_for(:main_title_display), document.value_for(:series_title_display), document.value_for(:title_display)) %>
 			<dd class="titleField">
 			  <span class="listItemNumber"><%= counter + 1 + offset %>.</span>
-			  <h2 class="document-title"><%= link_to_document document, :label => heading_title, :counter => counter + 1 + offset, :bookmarks_view => bookmarks_view  %></h2>
+			  <h2 class="document-title"><%= link_to_document document, :label => heading_title, :counter => counter + 1 + offset  %></h2>
 			</dd>
 		</dl>
 		

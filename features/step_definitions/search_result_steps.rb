@@ -131,11 +131,10 @@ end
 
 #When "library_facet":"Special Collections" is applied
 When /^"([^\"]*)":"([^\"]*)" is applied$/ do |facet_name, facet_value|
-  h = build_request_hash
- 
+  h = build_request_hash   
   #Assemble a hash of the values that url_for needs to construct the url
   #e.g., url_for(:controller => 'catalog', :action => 'index', facet_name.to_sym => facet_value)  
-  h[:controller] = 'catalog'
+  h[:controller] = current_controller
   h[:action] = 'index'  
     
   if h.has_key?(facet_name.to_sym) # tack on additional values
@@ -175,6 +174,12 @@ def get_num_results_for_query(query)
   fill_in "q", :with => query 
   click_button "Search"
   results = get_num_results(response)
+end
+
+def current_controller
+  parts = page.current_url.split('?')[0].split('/')
+  return parts[3] if parts.size >= 4
+  return 'catalog'
 end
 
 def build_request_hash

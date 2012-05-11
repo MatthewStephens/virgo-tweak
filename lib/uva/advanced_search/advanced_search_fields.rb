@@ -4,14 +4,14 @@ module UVA::AdvancedSearch
 
     # list of advanced search fields
     def advanced_search_fields
-      fields = BlacklightAdvancedSearch.config[:search_fields].collect {|x| x[:key]}
-      fields.push(BlacklightAdvancedSearch.config[:article_search_fields].collect{|x| x[:key]})
+      fields = CatalogController.blacklight_config.search_fields.collect {|x| x[0]}
+      #fields.push(ArticleController.blacklight_config.search_fields.collect{|x| x[1][:key]})
       fields.flatten
     end
   
     def advanced_search_range_fields
-      range_fields = BlacklightAdvancedSearch.config[:search_fields].select {|x| x[:range] == 'true'}
-      range_fields.collect {|x| x[:key]}
+      range_fields = CatalogController.blacklight_config.search_fields.select {|x| x[1][:range] == 'true'}
+      range_fields.collect {|x| x[0]}
     end
 
     # hash of populated advanced search fields

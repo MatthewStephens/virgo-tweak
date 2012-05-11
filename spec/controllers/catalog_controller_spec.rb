@@ -132,20 +132,7 @@ describe CatalogController do
       flash[:notice].should == "Sorry, you seem to have encountered an error."
     end
   end
-  
-  describe "update" do
-    doc_id = "u3954069"
-    it "should adjust for bookmarks view" do
-      put :update, :id => doc_id, :bookmarks_view => 'true'
-      session[:search][:bookmarks_view].should be_true
-    end
     
-    it "should not be bookmarks view if it isn't asked for" do
-      put :update, :id => doc_id
-      session[:search][:bookmarks_view].should be_false
-    end
-  end
-  
   describe "availability" do
     doc_id = "u3954069"
     it "should get the availability" do

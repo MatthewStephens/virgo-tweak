@@ -19,13 +19,13 @@
 
   <div class="resultNav top">
 
-		<% if session[:search][:counter].to_i > -1 && !session[:search][:bookmarks_view] %>
+		<% if session[:search][:counter].to_i > -1 and @results_view.blank? %>
 
 		  <%= render 'previous_next_doc' %>
 
 		  <div id="returnToSearch">
-		    <%= link_back_to_catalog :label=>'&larr; Return to search results'.html_safe %> |
-				<%= link_to "Start&nbsp;over".html_safe, catalog_index_path(:portal => session[:search][:portal]||"all"), :class=>"start_over" %>
+		    <%= link_back_to_catalog :label=>'&larr; Return to search results' %> |
+				<%= start_over_link("Start&nbsp;over", "start_over") %>
 		  </div>
 
 		<% end %>

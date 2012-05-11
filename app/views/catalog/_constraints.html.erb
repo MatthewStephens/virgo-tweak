@@ -10,8 +10,12 @@
 				
 				<% if params[:controller] == 'articles' %>
 				  <% link = articles_path(localized_params.merge(:q=>nil, :action=>'index')) %>
+				<% elsif params[:controller] == 'music' %>
+					<% link = music_index_path(localized_params.merge(:q=>nil, :controller=>'music', :action=>'index')) %>
+				<% elsif params[:controller] == 'video' %>
+					<% link = video_index_path(localized_params.merge(:q=>nil, :controller=>'video', :action=>'index')) %>
 				<% else %>
-				  <% link = catalog_index_path(localized_params.merge(:q=>nil, :action=>'index')) %>
+				  <% link = catalog_index_path(localized_params.merge(:q=>nil, :controller=>'catalog', :action=>'index')) %>
 				<% end %>
 				<%= link_to('x', link, :class=>'btnRemove imgReplace') %>
 			</span>
@@ -49,6 +53,10 @@
 							</span>
 							<% if params[:controller] == 'articles' %>
 							  <% link = articles_path(remove_facet_params(facet, v, localized_params)) %>
+							<% elsif params[:controller] == 'music' %>
+								<% link = music_index_path(remove_facet_params(facet, v, localized_params)) %>							
+							<% elsif params[:controller] == 'video' %>
+								<% link = video_index_path(remove_facet_params(facet, v, localized_params)) %>							
 							<% else %>
 							  <% link = catalog_index_path(remove_facet_params(facet, v, localized_params)) %>							
 							<% end %>
@@ -84,7 +92,7 @@
 		</span>
 	<% end %>
 
-	<%=link_to "Start&nbsp;over".html_safe, catalog_index_path(:portal => session[:search][:portal]||"all"), :id=>"startOverLink" %>
+	<%=link_to "Start&nbsp;over".html_safe, portal_index_path, :id=>"startOverLink" %>
 	
 	
 	<% unless params[:catalog_select] == 'all' %>
