@@ -338,19 +338,6 @@ class CatalogController < ApplicationController
   def set_document_availability
     @document.availability = Firehose::Availability.find(@document)
   end
-  
-  # fetch all doc ids that have pre-cached cover images
-  def ids_for_docs_with_cached_covers(solr_docs, max_file_size=1500)
-    # get the solr ids so we can send them to mysql
-    solr_doc_ids = solr_docs.docs.collect { |doc| doc.get(:id) }
-    # limit the query to just our ids and make an upper-bound on the image size
-    docs = DocumentImageRequest.find(:all, :select => 'document_id', :conditions => {:document_id => solr_doc_ids, :image_size => 0..max_file_size.kilobytes })
-    doc_ids = []
-    docs.each do |doc|
-      doc_ids << doc.document_id
-    end
-    doc_ids
-  end
 
   # used for images, since we don't need much data for them
   def add_lean_query_type
