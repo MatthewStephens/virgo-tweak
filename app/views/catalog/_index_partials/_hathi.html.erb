@@ -5,7 +5,7 @@
 		<%- if (document[:linked_title_display] rescue false) -%>
     	<dd class="titleField">
 				<span class="listItemNumber"><%= counter + 1 + offset %>.</span>
-				<h2 class="document-title"><%= link_to_document document, :label => document.value_for(:linked_title_display), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view %></h2>
+				<h2 class="document-title"><%= link_to_document document, :label => document.value_for(:linked_title_display), :counter => (counter + 1 + offset) %></h2>
 			</dd>
     <%- end -%>
 	  	  
@@ -13,7 +13,7 @@
 				<%- unless (document[:linked_title_display] rescue false) -%>
 					<span class="listItemNumber"><%= counter + 1 + offset %>.</span>
 				<%- end -%>
-	<%= link_to_document document, :label => full_title(document), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view  %></dd>
+	<%= link_to_document document, :label => full_title(document), :counter => (counter + 1 + offset)  %></dd>
      </dl>	
 
 		<dl class="metadata">
@@ -42,7 +42,7 @@
 				<dt>Access Online</dt>
   			<dd class="onlineAccessField">
 					<% if document[:url_display].length > 1 %>
-						<%= link_to_document document, :label => "View list of available content", :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view %>
+						<%= link_to_document document, :label => "View list of available content", :counter => (counter + 1 + offset) %>
 					<% else %>
 						<%= link_to_online_access(document, "", "View full text from Hathi Trust") %>
 					<% end %>
@@ -52,7 +52,7 @@
 		
 	</div>
 	
-	<% unless bookmarks_view or params[:catalog_select] == 'all' %>
+	<% unless params[:catalog_select] == 'all' %>
   <div class="tools">
     <%= render :partial=>'catalog/folder_control', :locals=>{:document=>document} %>
   </div>

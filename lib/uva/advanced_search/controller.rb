@@ -24,15 +24,15 @@ module UVA::AdvancedSearch
         # map that to solr #q, over-riding whatever some other logic may have set, yeah.
         # the hint right now is :search_field request param is set to a magic
         # key.     
-        if (req_params[:search_field] == BlacklightAdvancedSearch.config[:url_key] ||
-          req_params[:f_inclusive])
+        if ( (req_params[:search_field] == self.blacklight_config.advanced_search[:url_key]) ||
+                  req_params[:f_inclusive] )
           # Set this as a controller instance variable, not sure if some views/helpers depend on it. Better to leave it as a local variable
           # if not, more investigation later.       
-          @advanced_query = UVA::AdvancedSearch::QueryParser.new(req_params, BlacklightAdvancedSearch.config )
-          deep_merge!(solr_parameters, @advanced_query.to_solr )
+          @advanced_query = UVA::AdvancedSearch::QueryParser.new(req_params, self.blacklight_config )
+          BlacklightAdvancedSearch.deep_merge!(solr_parameters, @advanced_query.to_solr )
           if @advanced_query.keyword_queries.length > 0 or @advanced_query.range_queries.length > 0
             # force :qt if set
-            solr_parameters[:qt] = BlacklightAdvancedSearch.config[:qt] if BlacklightAdvancedSearch.config[:qt]
+            solr_parameters[:qt] = self.blacklight_config.advanced_search[:qt]
             solr_parameters[:defType] = "lucene"
           end
         end

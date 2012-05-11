@@ -7,8 +7,8 @@
     <h2 class="split-heading">Collections</h2>
     <ul class="split_list">
       <li><%= link_to h("Digital Collections"), catalog_index_path(:catalog_select => "catalog", :"f_inclusive[source_facet][Digital Library]" => "1", :"f_inclusive[source_facet][UVA Library Digital Repository]" => "1") %></li>
-      <li><%= link_to 'Video Search', catalog_index_path(:portal=>:video) %></li>
-      <li><%= link_to 'Music Search', catalog_index_path(:portal=>:music) %></li>
+      <li><%= link_to 'Video Search', video_index_path %></li>
+      <li><%= link_to 'Music Search', music_index_path %></li>
     </ul>
   </div>
   <header class="help_header entry_header">

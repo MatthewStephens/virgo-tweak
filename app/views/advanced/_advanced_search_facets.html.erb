@@ -2,7 +2,7 @@
   <ul class="facet-categories">
     <li class="facet-category-heading facet-category-label first">Find Results with:</li>
 <% facet_field_names.each_with_index do |solr_fname, index| %>
-  <% display_facet = @response.facets.detect {|f| f.name == solr_fname} -%>
+	<% display_facet = @response.facets.detect {|f| f.name == solr_fname} -%>
   <% # if it's NOT a refinement facet -- they are handled in get_refine_facet -%>
   <% if display_facet && display_facet.items.length > 0 %>
      <li class="facet-category<%= ' last' if index == facet_field_names.length - 1 %>">

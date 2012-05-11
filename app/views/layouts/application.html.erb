@@ -60,7 +60,7 @@
 
     <div id="main" class="clearfix container_24">
       
-      <% if ['catalog', 'articles'].include?(params[:controller]) and params[:action]=='index' %>
+      <% if ['catalog', 'music', 'video', 'articles'].include?(params[:controller]) and params[:action]=='index' %>
     	  <div class="results_search_container grid_24 alpha omega">
           <%= render :partial=>'catalog/search_box'%>
         </div>
@@ -72,7 +72,7 @@
   
       <article id="content" role="main" class="grid_18 alpha omega">       
         <%= render :partial=>'/flash_msg' %>
-        <% if params[:controller]=='catalog' and params[:action]=='show' %>
+        <% if document_page? %>
       		<%= render :partial=>'item_title'%>
       	<% end %>
         <%= yield %>

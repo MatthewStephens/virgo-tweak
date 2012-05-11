@@ -5,11 +5,11 @@ module UVA::ScopeHelper
   end
 
   def default_portal?
-    search_session[:portal].nil? or search_session[:portal] == "all"
+    params[:controller] == "catalog"
   end
 
   def facetless?
-    !params[:f]
+    params[:f].blank?
   end
 
   def article_search?
@@ -21,11 +21,15 @@ module UVA::ScopeHelper
   end
 
   def video_portal?
-    search_session[:portal] == 'video' 
+    params[:controller] == 'video' 
   end
 
   def music_portal?
-    params[:portal] == 'music'
+    params[:controller] == 'music'
+  end
+  
+  def document_page?
+    ['catalog', 'music', 'video'].include?(params[:controller]) and params[:action]=='show'
   end
   
   # determines if we are in the special collections lens
@@ -91,7 +95,8 @@ module UVA::ScopeHelper
   # lookup the solr sort from the config for this sort_key
   def solr_sort_val(sort_key)
     return if sort_key.blank?
-    Blacklight.config[:sort_fields][sort_key][1] rescue return
+    match = blacklight_config.sort_fields.select { |key, value| value.sort_key == sort_key }
+    return match[0][0] rescue return
   end
   
   # adds the value and/or field to params[:f]

@@ -1,4 +1,3 @@
-require 'lib/uva/search_fields_helper'
 require 'lib/uva/solr_helper_override'
 require 'lib/cover_image/finder'
 require 'lib/cover_image/sources/google'
@@ -9,7 +8,6 @@ require 'lib/cover_image/sources/syndetics'
 module CoverImage
   class Loader
     include Blacklight::SolrHelper
-    include UVA::SearchFieldsHelper
     include UVA::SolrHelperOverride
 
     def initialize(do_solr_updates, date_string)

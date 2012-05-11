@@ -6,14 +6,13 @@ module UVA
 
     # set up search_params_logic, which will get sent with every search  
     def self.included(base)
-      base.send :include, UVACustomizations
-
+      base.send :include, UVACustomizations      
       base.solr_search_params_logic << :show_only_public_records
-      base.solr_search_params_logic << :add_music_portal
-      base.solr_search_params_logic << :add_video_portal
       base.solr_search_params_logic << :add_special_collections_lens
       base.solr_search_params_logic << :add_max_per_page
       base.solr_search_params_logic << :add_facet_limit
+      base.solr_search_params_logic << :add_video_filter
+      base.solr_search_params_logic << :add_default_search_field
     end
   
     class HiddenSolrID < RuntimeError; end
@@ -22,32 +21,20 @@ module UVA
     # @param [Hash] solr_parameters a hash of parameters to be sent to Solr (via RSolr)
     # @param [Hash] user_parameters a hash of user-supplied parameters (often via `params`)
     def show_only_public_records solr_parameters, user_parameters
-      solr_parameters[:phrase_filters]||={}
-      solr_parameters[:phrase_filters]["-shadowed_location_facet"] = ["HIDDEN"]    
+      solr_parameters[:fq]||=[]
+      solr_parameters[:fq] << '-shadowed_location_facet:HIDDEN'    
     end
-  
-    # use music facets if it's the music portal
-    def add_music_portal solr_parameters, user_parameters
-      solr_parameters["facet.field"] = Blacklight.config[:facet_music][:field_names] if user_parameters[:portal] == 'music' and user_parameters[:action] != "facet"
-    end
-    
-    # add format facet of video if it's the video portal
-    def add_video_portal solr_parameters, user_parameters
-      solr_parameters[:phrase_filters]||={}
-      solr_parameters[:phrase_filters]["format_facet"]||=[]
-      solr_parameters[:phrase_filters]["format_facet"] << "Video" if user_parameters[:portal] == 'video'
-    end
-    
+          
     # add library facet of special collections if it's the special collections lens
     def add_special_collections_lens solr_parameters, user_parameters
-      solr_parameters[:phrase_filters]||={}
-      solr_parameters[:phrase_filters]["library_facet"]||=[]
-      solr_parameters[:phrase_filters]["library_facet"] << "Special Collections" if user_parameters[:special_collections] == 'true'
+      return unless user_parameters[:special_collections] == 'true'
+      solr_parameters[:fq]||=[]
+      solr_parameters[:fq] << 'library_facet:Special Collections'
     end
   
     # show as many search results as allowed if requested
     def add_max_per_page solr_parameters, user_parameters    
-      solr_parameters[:per_page] = 100 if user_parameters[:show_max_per_page]
+      solr_parameters[:rows] = 100 if user_parameters[:show_max_per_page]
     end
   
     # set a facet limit based on user input
@@ -55,8 +42,36 @@ module UVA
       solr_parameters["facet.limit"] = user_parameters["facet.limit"] if user_parameters["facet.limit"]
     end
     
+    def add_video_filter solr_parameters, user_parameters
+      return unless user_parameters[:controller] == 'video'
+      solr_parameters[:fq]||=[]
+      solr_parameters[:fq] << 'format_facet:Video'
+    end
+        
+    def add_default_search_field solr_parameters, user_parameters
+      return unless user_parameters[:search_field].blank?
+      user_parameters[:controller] == 'music' ? user_parameters[:search_field] = 'music' : user_parameters[:search_field] = 'keyword'
+    end
+    
     module UVACustomizations
-            
+      
+      # adding for featured document search
+      def get_featured_documents(phrase_filters)
+        opts={
+          :page=>1,
+          :per_page=>200, # load plenty to match up with the ids_for_docs_with_cached_covers output
+          :fl=>%W(id format_facet library_facet),
+          :sort=>"date_received_facet desc",
+          :f=>phrase_filters,
+          :qt => 'search'
+        }  
+        featured_response, document_list = get_search_results(opts)          
+        featured_documents = document_list.select do |doc|    
+          doc.has_image?
+        end
+        featured_documents.sort_by {rand}
+      end
+
       # overriding from plugin to test for shadowedness
       def get_solr_response_for_doc_id(id=nil, extra_controller_params={})
         solr_response = find solr_doc_params(id).merge(extra_controller_params)

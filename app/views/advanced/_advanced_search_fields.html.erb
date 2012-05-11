@@ -1,14 +1,14 @@
-<%- search_field_list(params).each do |field_def| -%>
-<div class="advsearch_field<%= ' range_field' if field_def[:range]  %>">
-  <% if field_def[:range] %>
-    <h4><%= field_def[:display_label] %></h4>
-    <label for="<%=field_def[:key]%>_start">Start</label>
-    <%= text_field_tag "#{field_def[:key]}_start", range_value(field_def[:key])[:start] %>
-		<label for="<%=field_def[:key]%>_end">End</label>
-    <%= text_field_tag "#{field_def[:key]}_end", range_value(field_def[:key])[:end] %>
-  <% else %>
-    <h4><%= label_tag field_def[:key], "#{field_def[:display_label] }" %></h4>
-    <%= text_field_tag field_def[:key], label_tag_default_for(field_def[:key]) %>
+<%- blacklight_config.search_fields.each do |key, field_def| -%>
+<div class="advsearch_field<%= ' range_field' if field_def.range  %>">
+  <% if field_def.range %>
+    <h4><%= field_def.label %></h4>
+    <label for="<%=key%>_start">Start</label>
+    <%= text_field_tag "#{key}_start", range_value(key)[:start] %>
+		<label for="<%=key%>_end">End</label>
+    <%= text_field_tag "#{key}_end", range_value(key)[:end] %>
+  <% elsif field_def.include_in_advanced_search.nil? %>
+    <h4><%= label_tag key, "#{field_def.label}" %></h4>
+    <%= text_field_tag key, label_tag_default_for(key) %>
   <% end %>
   </div>
 <%- end -%>

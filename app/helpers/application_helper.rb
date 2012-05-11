@@ -12,7 +12,6 @@ module ApplicationHelper
   include UVA::Fedora  
   include UVA::AdvancedSearch::AdvancedSearchFields
   include UVA::ScopeHelper
-  include UVA::SearchFieldsHelper
   
   # Slices the @featured_documents up into to arrays/"rows"
   # This makes it easy to do "rows" in the view.
@@ -42,14 +41,21 @@ module ApplicationHelper
     return true
   end
   
+  def link_to_document(doc, opts={:label=>nil, :counter => nil})
+    label ||= blacklight_config.index.show_link.to_sym
+    label = render_document_index_label doc, opts
+    link_to label, portal_show_path(doc[:id])
+   end
+  
+  
   # this method is highly questionable, but we want to use link_to_document to take
   # advantage of the smoke and mirrors used with the "counter", but we need to interleave
   # a <span> within the <a href> tags in order for the ajax loading to work correctly
   #
-  def link_to_document_from_cover(doc, opts={:span => "", :label=>Blacklight.config[:index][:show_link].to_sym, :counter => nil, :bookmarks_view => false})
+  def link_to_document_from_cover(doc, opts={:span => "", :label => blacklight_config.index.show_link.to_sym, :counter => nil})
     span_open = "<span class=\"#{opts[:span]}\" title=\"#{doc[:id]}\">\n"
     span_close = "</span>\n"
-    val = link_to_document(doc, opts={:label=>Blacklight.config[:index][:show_link].to_sym, :counter => opts[:counter], :bookmarks_view => opts[:bookmarks_view]})
+    val = link_to_document(doc, opts={:label => blacklight_config.index.show_link.to_sym, :counter => opts[:counter]})
     val.insert(val.index(">") + 1, span_open)
     # unforunately, the :plugin setting doesn't work when referencing an image
     # in the /javascript path, so a hardcoded path like this will have to do for now
@@ -298,7 +304,7 @@ module ApplicationHelper
   def facet_sort_scheme(facet_name = '')
     if params[:facet_sort].blank?
       return 'alpha' if facet_name == 'call_number_facet'
-      return 'alpha' if facet_name == 'subject_facet' and params[:portal] == 'video'
+      return 'alpha' if facet_name == 'subject_facet' and params[:controller] == 'video'
       return 'hits'
     end
     return params[:facet_sort]
@@ -341,13 +347,12 @@ module ApplicationHelper
   # sifts through params to see what we should keep for facet values
   def params_for_facet_values
     p = {}
-    keepers = [:f, :f_inclusive, :q, :qt, :sort, :portal, :search_field, :op]
+    keepers = [:f, :f_inclusive, :q, :qt, :sort, :search_field, :op]
     keepers << advanced_search_params
     keepers = keepers.flatten
     keepers.each do |k|
       p.merge!(k=>params[k]) unless params[k].blank?
     end
-    scrub_portal(p)
     p
   end
   
@@ -360,23 +365,17 @@ module ApplicationHelper
   # gets the advanced search param list
   def advanced_search_params
     fields = []    
-    BlacklightAdvancedSearch.config[:search_fields].each do |field_def|
-      if field_def[:range]
-        fields << "#{field_def[:key]}_start".to_sym
-        fields << "#{field_def[:key]}_end".to_sym
+    blacklight_config.search_fields.each do |field_def|
+      if field_def[1][:range]
+        fields << "#{field_def[1][:key]}_start".to_sym
+        fields << "#{field_def[1][:key]}_end".to_sym
       else
-        fields << field_def[:key].to_sym
+        fields << field_def[1][:key].to_sym
       end
     end
     fields
   end
   
-  # removes references to the current portal from the parameters if we are in the default portal
-  def scrub_portal(my_params)
-    my_params.delete_if { |key, value|
-      key.to_sym == :portal and value == 'all' and (value == session[:search][:portal]  or !session[:search][:portal])
-    }
-  end
 
   # removes references to the current page from the parameters
   def scrub_page(my_params)
@@ -663,6 +662,23 @@ module ApplicationHelper
     return {:start => first, :end => last}
   end
 
+  # render appropriate start over link
+  def start_over_link(label, style)
+    link_to label.html_safe, portal_index_path, :class=>style
+  end
+  
+  def portal_index_path
+    return music_index_path if params[:controller] == 'music'
+    return video_index_path if params[:controller] == 'video'
+    return catalog_index_path
+  end
+  
+  def portal_show_path(doc_id)
+    return music_path(doc_id) if params[:controller] == 'music'
+    return video_path(doc_id) if params[:controller] == 'video'
+    return catalog_path(doc_id)
+  end
+  
   ############# end local methods
   
   ############# methods pending addition to Blacklight plugin -- revisit as needed
@@ -727,44 +743,19 @@ module ApplicationHelper
     return false
   end
 
-  # overriding from Blacklight plugin since default_search_field now needs (params) passed to it
-  # Search History and Saved Searches display
-   def link_to_previous_search(params)
-     query_part = case
-                    when params[:q].blank?
-                      ""
-                    when (params[:search_field] == Blacklight.default_search_field(params)[:key])
-                      params[:q]
-                    else
-                      "#{Blacklight.label_for_search_field(params[:search_field])}:(#{params[:q]})"
-                  end      
-
-     facet_part = 
-     if params[:f]
-       tmp = 
-       params[:f].collect do |pair|
-         "#{Blacklight.config[:facet][:labels][pair.first]}:#{pair.last}"
-       end.join(" AND ")
-       "{#{tmp}}"
-     else
-       ""
-     end
-     link_to("#{query_part} #{facet_part}", catalog_index_path(params))
-   end
-
   # overriding from the Blacklight plugin.  We want to use regular expression mathches to determine
   # which partial, as opposed to a value indexed in solr.
   def document_partial_name(document)
-    (params[:portal] == 'video' && params[:action] == 'index' ? "lib_video" : document.doc_type) rescue document.doc_type
+    (params[:controller] == 'video' && params[:action] == 'index' ? "lib_video" : document.doc_type) rescue document.doc_type
   end
 
   # overriding from Blacklight plugin to account for bookmarks view
-  def render_document_partial(doc, action_name, counter, offset=0, bookmarks_view=false)
+  def render_document_partial(doc, action_name, counter, offset=0)
     format = document_partial_name(doc)
     begin
-      render :partial=>"catalog/_#{action_name}_partials/#{format}", :locals=>{:document=>doc, :counter=>counter, :offset=>offset, :bookmarks_view=>bookmarks_view}
+      render :partial=>"catalog/_#{action_name}_partials/#{format}", :locals=>{:document=>doc, :counter=>counter, :offset=>offset}
     rescue ActionView::MissingTemplate
-      render :partial=>"catalog/_#{action_name}_partials/default", :locals=>{:document=>doc, :counter=>counter, :offset=>offset, :bookmarks_view=>bookmarks_view}
+      render :partial=>"catalog/_#{action_name}_partials/default", :locals=>{:document=>doc, :counter=>counter, :offset=>offset}
     end
   end
   
@@ -772,38 +763,11 @@ module ApplicationHelper
   def render_document_row(doc)
     format = document_partial_name(doc)
     begin
-      render :partial=>"catalog/_row_partials/#{format}", :locals=>{:document=>doc}
+      render :partial=>"catalog/_row_partials/#{format}", :locals=>{:document=>doc, :results_view=>false}
     rescue ActionView::MissingTemplate
-      render :partial=>"catalog/_row_partials/default", :locals=>{:document=>doc}
+      render :partial=>"catalog/_row_partials/default", :locals=>{:document=>doc, :results_view=>false}
     end
   end
-
-  # overriding from Blacklight plugin to keep track of if we are in Bookmarks view or not.
-  def link_to_document(doc, opts={:label=>Blacklight.config[:index][:show_link].to_sym, :counter => nil, :bookmarks_view => false})
-    label = case opts[:label]
-    when Symbol
-      doc.get(opts[:label])
-    when String
-      opts[:label]
-    else
-      raise 'Invalid label argument'
-    end
-    link_to_with_data(label, catalog_path(doc[:id]), {:method => :put, :data => {:counter => opts[:counter], :bookmarks_view => opts[:bookmarks_view]}}).html_safe
-  end
-
-  # overriding from the Blacklight plugin so that we can switch facets depending on the portal
-  def facet_field_labels
-    if params[:portal] == 'music'
-      Blacklight.config[:facet_music][:labels]
-    elsif params[:portal] == 'video'
-      Blacklight.config[:facet_video][:labels]
-    elsif params[:controller] == 'articles'
-      Blacklight.config[:facet_articles][:labels]
-    else
-      Blacklight.config[:facet][:labels]
-    end
-  end
-  
   
   #
   # Displays the "showing X through Y of N" message. Not sure
@@ -825,32 +789,12 @@ module ApplicationHelper
     end
   end
 
-  # overriding from the Blacklight plugin so that we can switch facets depending on the portal
-  def facet_field_names
-    if params[:portal] == 'music' && home_page?
-      Blacklight.config[:facet_music][:home_field_names]
-    elsif params[:portal] == 'music' 
-      Blacklight.config[:facet_music][:field_names]
-    elsif params[:portal] == 'video'
-      Blacklight.config[:facet_video][:field_names]        
-    elsif params[:controller] == 'advanced'
-      Blacklight.config[:facet][:advanced_field_names]
-    elsif params[:controller] == 'articles'
-      Blacklight.config[:facet_articles][:field_names]
-    elsif home_page?
-      Blacklight.config[:facet][:home_field_names]
-    else
-      Blacklight.config[:facet][:field_names]
-    end
-  end
-
-  # overriding from Blacklight plugin to add logic for cleaning up the portal references
+  # overriding from Blacklight plugin to add logic for cleaning up the page references
   def add_facet_params(field, value)
     p = params.dup
     p[:f] = (p[:f] || {}).dup # the command above is not deep in rails3, !@#$!@#$
     p[:f][field] = (p[:f][field] || []).dup
     p[:f][field].push(value)
-    scrub_portal(p) 
     scrub_page(p)
     p
   end
@@ -858,58 +802,19 @@ module ApplicationHelper
 
   # overriding from the blacklight plugin to shift out relevancy if there is no search
   def sort_fields
-    sort_fields = []
-    Blacklight.config[:sort_fields_order].each { |key|
-      if params[:controller] == 'articles' or params[:catalog_select] == 'articles'
-        my_sort_fields = Blacklight.config[:articles_sort_fields]
-      else
-        my_sort_fields = Blacklight.config[:sort_fields]
-      end
-      next if !my_sort_fields[key]
-      sort_fields << [my_sort_fields[key][0], key]
-    }
-    # remove 'relevancy' if there is no search
+    sort_fields = blacklight_config.sort_fields.map { |key, x| [x.label, x.sort_key] }
     sort_fields.shift if params[:q].blank? and params[:controller] != 'advanced' and params[:search_field] != 'advanced' and params[:catalog_select] != 'articles'
     sort_fields
   end
 
-  # overriding from the Blacklight plugin, since plugin does h(name) -- that h messes up display of some titles
-  def link_to_with_data(*args, &block)
-    if block_given?
-      options      = args.first || {}
-      html_options = args.second
-      concat(link_to(capture(&block), options, html_options))
-    else
-      name         = args.first
-      options      = args.second || {}
-      html_options = args.third
-
-      url = url_for(options)
-
-      if html_options
-        html_options = html_options.stringify_keys
-        href = html_options['href']
-        convert_options_to_javascript_with_data!(html_options, url)
-        tag_options = tag_options(html_options)
-      else
-        tag_options = nil
-      end
-
-      href_attr = "href=\"#{url}\"" unless href
-      "<a #{href_attr}#{tag_options}>#{name || h(url)}</a>".html_safe
-    end
-  end
-
   # overriding from plugin to account for when the search session doesn't exist;
-  # also overriding to clean up portal references
   def link_back_to_catalog(opts={:label=>'Back to Search'})
     query_params = session[:search].dup || {} rescue {}
     query_params.delete :counter
     query_params.delete :total
     query_params.delete :controller
-    scrub_portal(query_params)
-    link_url = catalog_index_path(query_params)
-    link_to opts[:label], link_url
+    link_url = portal_index_path(query_params)
+    link_to opts[:label].html_safe, link_url
   end
   
   # overriding from the Blacklight plugin. this is hardcoded in the plugin to be 'Blacklight', and
@@ -962,17 +867,11 @@ module ApplicationHelper
   
   # picks appropriate lael for the search results
   def search_result_label
-    if params[:controller] == 'articles'
-      return 'Article'
-    elsif params[:catalog_select] == 'all'
-      return 'Catalog + Article'
-    elsif params[:portal] == 'music'
-      return 'Music'
-    elsif params[:portal] == 'video'
-      return 'Video'
-    else
-      return 'Catalog'
-    end
+    return 'Article' if params[:controller] == 'articles'
+    return 'Catalog + Article' if params[:catalog_select] == 'all'
+    return 'Music' if params[:controller] == 'music'
+    return 'Video' if params[:controller] == 'video'
+    return 'Catalog'
   end
 
 
@@ -980,16 +879,15 @@ module ApplicationHelper
   def switch_search_scope_links
     base_params = {:q => params[:q], :search_field => params[:search_field]}.merge(populated_advanced_search_fields)
     all_label = 'Catalog + Article'
-    all_link = catalog_index_path(base_params.merge(:catalog_select => 'all', :portal => 'all'))
+    all_link = catalog_index_path(base_params.merge(:catalog_select => 'all'))
     catalog_label = 'Catalog'
-    catalog_link = catalog_index_path(base_params.merge(:portal => 'all'))
+    catalog_link = catalog_index_path(base_params)
     articles_label = 'Article'
-    articles_link = catalog_index_path(base_params.merge(:catalog_select => 'articles',:portal => 'all'))
+    articles_link = catalog_index_path(base_params.merge(:catalog_select => 'articles'))
     music_label = "Music"
-    music_link = catalog_index_path(base_params.merge(:portal => 'music'))
+    music_link = music_index_path(base_params)
     video_label = "Video"
-    video_link = catalog_index_path(base_params.merge(:portal => 'video'))
-    
+    video_link = video_index_path(base_params)
     
     if search_result_label == 'Article'
       parts = [all_label, all_link, catalog_label, catalog_link, music_label, music_link, video_label, video_link]
@@ -1021,7 +919,7 @@ module ApplicationHelper
     else
       parts = [all_label, all_link, articles_label, articles_link]
     end
-    "<li>#{link_to( 'Search ' + parts[0], parts[1] )}</li><li>#{link_to( 'Search ' + parts[2], parts[3] )}</li><li>#{link_to "Start&nbsp;over".html_safe, catalog_index_path(:portal => session[:search][:portal]||"all")}</li>".html_safe
+    "<li>#{link_to( 'Search ' + parts[0], parts[1] )}</li><li>#{link_to( 'Search ' + parts[2], parts[3] )}</li><li>#{link_to "Start&nbsp;over".html_safe, catalog_index_path}</li>".html_safe
   end
   
   # catalog items and articles paginate differently
