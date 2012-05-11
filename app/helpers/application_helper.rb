@@ -664,6 +664,10 @@ module ApplicationHelper
 
   # render appropriate start over link
   def start_over_link(label, style)
+    my_params = params.dup || {}
+    my_params.delete(:id)
+    my_params.delete(:action)
+    my_params.delete(:controller)
     link_to label.html_safe, portal_index_path, :class=>style
   end
   
@@ -808,13 +812,17 @@ module ApplicationHelper
   end
 
   # overriding from plugin to account for when the search session doesn't exist;
-  def link_back_to_catalog(opts={:label=>'Back to Search'})
+  def link_back_to_catalog(label='Back to Search')
     query_params = session[:search].dup || {} rescue {}
     query_params.delete :counter
     query_params.delete :total
     query_params.delete :controller
-    link_url = portal_index_path(query_params)
-    link_to opts[:label].html_safe, link_url
+    query_params.delete :id
+    query_params.delete :action
+    link = catalog_index_path(query_params)
+    link = music_index_path(query_params) if params[:controller] == 'music'
+    link = video_index_path(query_params) if params[:controller] == 'video'
+    link_to label.html_safe, link
   end
   
   # overriding from the Blacklight plugin. this is hardcoded in the plugin to be 'Blacklight', and
