@@ -420,16 +420,6 @@ class CatalogController < ApplicationController
     redirect_to catalog_index_path and return
   end
    
-  def delete_or_assign_search_session_params
-    portal = session[:search][:portal]
-    session[:search] = {}
-    params.each_pair do |key, value|
-      session[:search][key.to_sym] = value unless ["commit", "counter"].include?(key.to_s) ||
-      value.blank?
-      session[:search][:portal] = portal unless portal.blank?
-    end
-  end
-  
   def adjust_for_advanced_search
     my_params = params.dup
     if (params[:f_inclusive] or params[:search_field] == 'advanced') and params[:q]
@@ -444,11 +434,6 @@ class CatalogController < ApplicationController
       my_params.delete(:q)
       redirect_to catalog_index_path(my_params) and return
     end
-  end
-  
-  # Returns a list of Searches from the ids in the user's history.
-  def searches_from_history
-    session[:history].blank? ? [] : Search.find(session[:history]) rescue []
   end
   
   def extra_head_content
