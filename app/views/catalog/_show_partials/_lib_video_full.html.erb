@@ -31,9 +31,88 @@
 	<div id="details">
 	  <dl>	
 	  	<% #------------ Format ------------- %>
-	    <dt>Format</dt>
-		  <dd><%= document.value_for :format_facet %></dd>
+	    <dt class="show_detail">Format</dt>
+		  <dd class="show_detail"><%= document.value_for :format_facet %></dd>
+		  
+		  
+			<% #------------ Plot summary ------------- %>
+			<% unless document.marc_display.plot_summary.empty? %>
+			<dt class="show_detail">Summary</dt>
+			<% document.marc_display.plot_summary.each do |v| %>
+			<dd class="show_detail"><%= v %></dd>
+			<% end %>
+			<% end %>
 
+			<% #------------ Director ------------- %>
+			<% unless document.get(:video_director_facet).nil? %>	
+  		  		<dt class="show_detail">Director</dt>
+        		<dd class="show_detail directorField">
+          		<%= document.value_for :video_director_facet %>
+        		</dd>
+      		<% end %>
+			
+			<% #------------ Performers ------------- %>
+			<% unless document.marc_display.performers.empty? %>
+			<dt class="show_detail">Performer(s)</dt>
+			<% document.marc_display.performers.each do |performer| %>
+			<dd class="show_detail"><%= performer %></dd>
+			<% end %>
+			<% end %>
+			
+			<% #------------ Release Date ------------- %>
+			<% unless document.get(:release_date_facet).nil? %>	
+  		  	<dt class="show_detail">Release Date</dt>
+        	<dd class="show_detail releaseDateField">
+          	<%= document.value_for :release_date_facet %>
+        	</dd>
+      		<% end %> 
+			
+			<% #------------ Run Time ------------- %>    
+      		<% unless document.get(:video_run_time_display).nil? %>	
+  		  		<dt class="show_detail">Run Time</dt>
+        		<dd class="show_detail runTimeField">
+          		<%= document.value_for :video_run_time_display %> min.
+        		</dd>
+      		<% end %>
+			
+			<% #------------ Language -------------%>
+			<% unless document.marc_display.language.empty? %>
+			<dt class="show_detail">Language</dt>
+			<% document.marc_display.language.each do |v| %>
+			<dd class="show_detail"><%= v %></dd>
+			<% end %>
+			<% end %>
+			
+			<% #------------ Target audience ------------- %>
+			<% unless document.marc_display.target_audience.empty? %>
+				<dt><%= document.value_for(:format_facet).match(/video/i) ? "Rating" : "Target audience" %></dt>
+				<% document.marc_display.target_audience.each do |v| %>
+				<dd><%= v %></dd>
+				<% end %>
+			<% end %>
+			
+			<% #------------ Notes ------------- %>
+			<% unless document.marc_display.note.empty? and document.marc_display.with_note.empty? and document.marc_display.bibliographical_references_note.empty? %>
+				<dt>Notes</dt>
+				<% document.marc_display.note.each do |v| %>
+				<dd><%= v %></dd>
+				<% end %>
+
+          		<% #------------- with note -------------------- %>
+          		<% unless document.marc_display.with_note.empty? %>
+          			<% document.marc_display.with_note.each do |v| %>
+        			<dd><%= v %></dd>
+        			<% end %>
+        		<% end %>
+
+				<% #------------ Bibliographical references note ------------- %>
+				<% unless document.marc_display.bibliographical_references_note.empty? %>
+					<% document.marc_display.bibliographical_references_note.each do |v| %>
+					<dd><%= v %></dd>
+					<% end %>
+				<% end %>
+			<% end %>
+			
 			<% #------------ Uniform title ------------- %>
 			<% unless document.values_for(:uniform_title_facet).nil? -%>
 			<dt>Uniform title</dt>
@@ -42,7 +121,7 @@
 			<% end %>
 			<% end -%>
 
-
+			
 			<% #------------ Variant title -------------%>
 			<% unless document.marc_display.variant_title.empty? %>
 			<dt>Variant title</dt>
@@ -83,51 +162,10 @@
 			<dd><%= document.marc_display.later_title %></dd>
 			<% end %>
 			
-			<% #------------ Edition ------------- %>
-			<% unless document.marc_display.edition.empty? %>
-			<dt>Edition</dt>
-			<dd><%= document.marc_display.edition %></dd>
-			<% end %>
-			
-			
-			<% #------------ Plot summary ------------- %>
-			<% unless document.marc_display.plot_summary.empty? %>
-			<dt>Summary</dt>
-			<% document.marc_display.plot_summary.each do |v| %>
-			<dd><%= v %></dd>
-			<% end %>
-			<% end %>
-			
-			<% #------------ Contents ------------- %>
-			<% unless document.marc_display.track_list.nil? or document.marc_display.track_list.empty? %>
-			<dt>Contents</dt>
-			<dd><ul>
-      		<% document.marc_display.track_list.each do |v| %>
-	           <li><%= v %></li>
-        	<% end %>
-      		</ul></dd>
-			<% end %>
-			
-			<% #------------ Notes ------------- %>
-			<% unless document.marc_display.note.empty? and document.marc_display.with_note.empty? and document.marc_display.bibliographical_references_note.empty? %>
-				<dt>Notes</dt>
-				<% document.marc_display.note.each do |v| %>
-				<dd><%= v %></dd>
-				<% end %>
-
-          		<% #------------- with note -------------------- %>
-          		<% unless document.marc_display.with_note.empty? %>
-          			<% document.marc_display.with_note.each do |v| %>
-        			<dd><%= v %></dd>
-        			<% end %>
-        		<% end %>
-
-				<% #------------ Bibliographical references note ------------- %>
-				<% unless document.marc_display.bibliographical_references_note.empty? %>
-					<% document.marc_display.bibliographical_references_note.each do |v| %>
-					<dd><%= v %></dd>
-					<% end %>
-				<% end %>
+			<% #----------- Awards Notes -----------------------%>
+			<% unless document.marc_display.awards_note.empty? %>
+			<dt>Awards note</dt>
+			<dd><%= document.marc_display.awards_note %></dd>
 			<% end %>
 			
 			<% #------------ Local note ------------- %>
@@ -138,44 +176,10 @@
 			<% end %>
 			<% end %>
 			
-			<% #------------ Director ------------- %>
-			<% unless document.get(:video_director_facet).nil? %>	
-  		  		<dt class="show_detail">Director</dt>
-        		<dd class="show_detail directorField">
-          		<%= document.value_for :video_director_facet %>
-        		</dd>
-      		<% end %>
-			
-			<% #------------ Performers ------------- %>
-			<% unless document.marc_display.performers.empty? %>
-			<dt class="show_detail">Performer(s)</dt>
-			<% document.marc_display.performers.each do |performer| %>
-			<dd class="show_detail"><%= performer %></dd>
-			<% end %>
-			<% end %>
-			
-			 <% #------------ Release Date ------------- %>
-			<% unless document.get(:release_date_facet).nil? %>	
-  		  	<dt>Release Date</dt>
-        	<dd class="releaseDateField">
-          	<%= document.value_for :release_date_facet %>
-        	</dd>
-      		<% end %>  
-			
-			<% #------------ Run Time ------------- %>    
-      		<% unless document.get(:video_run_time_display).nil? %>	
-  		  		<dt>Run Time</dt>
-        		<dd class="runTimeField">
-          		<%= document.value_for :video_run_time_display %> min.
-        		</dd>
-      		<% end %>
-			
-			<% #------------ Target audience ------------- %>
-			<% unless document.marc_display.target_audience.empty? %>
-				<dt><%= document.value_for(:format_facet).match(/video/i) ? "Rating" : "Target audience" %></dt>
-				<% document.marc_display.target_audience.each do |v| %>
-				<dd><%= v %></dd>
-				<% end %>
+			<% #------------ Edition ------------- %>
+			<% unless document.marc_display.edition.empty? %>
+			<dt>Edition</dt>
+			<dd><%= document.marc_display.edition %></dd>
 			<% end %>
 			
 			<% #------------ Series ------------- %>
@@ -194,12 +198,14 @@
 			<% end %>
 			<% end %>
 			
-			<% #------------ Language -------------%>
-			<% unless document.marc_display.language.empty? %>
-			<dt>Language</dt>
-			<% document.marc_display.language.each do |v| %>
-			<dd><%= v %></dd>
-			<% end %>
+			<% #------------ Contents ------------- %>
+			<% unless document.marc_display.track_list.nil? or document.marc_display.track_list.empty? %>
+			<dt>Contents</dt>
+			<dd><ul>
+      		<% document.marc_display.track_list.each do |v| %>
+	           <li><%= v %></li>
+        	<% end %>
+      		</ul></dd>
 			<% end %>
 			
 			<% #------------ ISBN ------------- %>
@@ -264,13 +270,13 @@
 			<% # URL fields need some special processing, you can't just print them out on the screen. '%>
 			<% # See http://www.loc.gov/marc/bibliographic/bd856.html for the full specification of 856 %>
 
+			<% #------------ Related resources ------------- %>
 			<% unless document.marc_display.related_resources.empty? %> 
 			<dt class="show_detail">Related resources</dt>
 			<% document.marc_display.related_resources.each do |x| %>
 			<dd class="show_detail"><%= link_to x["label"], x["value"], :target => '_blank' %></dd>			
 			<% end %>
 			<% end %>
-			
 			
 			<% #------------ Access Online ------------- %>
 			<% unless document.marc_display.online_versions.empty? %>

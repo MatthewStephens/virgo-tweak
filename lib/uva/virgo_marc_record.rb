@@ -394,6 +394,10 @@ class UVA::VirgoMarcRecord
     subfields_of('580', 'a')
   end
   
+  def awards_note
+    subfields_of('586', 'a')
+  end
+  
   def local_note
     local_note=[]
     a = subfields_of('590', nil, /.*/, ['6'])
