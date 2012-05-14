@@ -3,21 +3,36 @@ require 'spec_helper'
 describe UVA::ArticlesHelper do
   
   class FakeArticlesHelper
+    include Blacklight::Configurable
     include UVA::ArticlesHelper
-    # add in a #config method that includes search field config
-    # that will be used by SearchFields
-    def config
-      {:search_fields => [{:key => 'keyword', :primo_key => 'any', :display_label => 'Keyword'},
-                                    {:key => 'author',  :primo_key =>  'creator', :display_label => 'Author'},
-                                    {:key => 'title', :primo_key =>  'title', :display_label => 'Title'},
-                                    {:key => 'journal', :primo_key =>  'jtitle', :display_label => 'Journal Title'},
-                                    {:key => 'publication_date', :primo_key => 'creationdate', :display_label => 'Year Published', :range => 'true'}
-                        ],
-      :default_qt => "search"
-      }
-    end
-    
-  end
+    configure_blacklight do |config|
+      # search fields
+       config.add_search_field('keyword') do |field|
+         field.primo_key = 'any'
+         field.label = 'Keyword'
+       end
+       config.add_search_field('author') do |field|
+         field.primo_key = 'creator'
+         field.label = 'Author'
+       end
+       config.add_search_field('title') do |field|
+         field.primo_key = 'title'
+         field.label = 'Title'
+       end
+       config.add_search_field('journal') do |field|
+         field.primo_key = 'jtitle'
+         field.label = 'Journal Title'
+       end
+       config.add_search_field('publication_date') do |field|
+         field.primo_key = 'creationdate'
+         field.label = 'Year Published'
+         field.range = 'true'
+       end
+       config.add_sort_field 'popularity', :label => 'Relevancy', :sort_key => 'articles_relevancy'
+       config.add_sort_field 'scdate', :label => 'Date', :sort_key => 'articles_date'
+     end
+   end
+  
   
   describe "article requests" do
     
