@@ -5,7 +5,7 @@
 		<%- if (document[:linked_title_display] rescue false) -%>
     	<dd class="titleField">
 				<span class="listItemNumber"><%= counter + 1 + offset %>.</span>
-				<h2 class="document-title"><%= link_to_document document, :label => document.value_for(:linked_title_display), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view %></h2>
+				<h2 class="document-title"><%= link_to_document document, :label => document.value_for(:linked_title_display), :counter => (counter + 1 + offset) %></h2>
 			</dd>
     <%- end -%>
 	  	  
@@ -13,11 +13,11 @@
 				<%- unless (document[:linked_title_display] rescue false) -%>
 					<span class="listItemNumber"><%= counter + 1 + offset %>.</span>
 				<%- end -%>
-	      <h2 class="document-title"><%= link_to_document document, :label => full_title(document), :counter => (counter + 1 + offset), :bookmarks_view => bookmarks_view  %></h2>
+	      <h2 class="document-title"><%= link_to_document document, :label => full_title(document), :counter => (counter + 1 + offset)  %></h2>
 	    </dd>
      </dl>	
 
-		<%= render :partial => 'catalog/_index_partials/document_image', :locals => { :document => document, :counter => counter, :offset => offset, :bookmarks_view => bookmarks_view } %>
+		<%= render :partial => 'catalog/_index_partials/document_image', :locals => { :document => document, :counter => counter, :offset => offset } %>
 
 		<dl class="metadata">
   		
