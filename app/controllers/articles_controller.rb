@@ -44,8 +44,8 @@ class ArticlesController < ApplicationController
       field.range = 'true'
     end
     
-    config.add_sort_field 'popularity', :label => 'Relevancy', :sort_key => 'relevancy'
-    config.add_sort_field 'scdate', :label => 'Date', :sort_key => 'date'
+    config.add_sort_field 'popularity', :label => 'Relevancy', :sort_key => 'articles_relevancy'
+    config.add_sort_field 'scdate', :label => 'Date', :sort_key => 'articles_date'
     
     config.advanced_search = {
       :url_key => 'advanced'
