@@ -272,9 +272,9 @@
 
 			<% #------------ Related resources ------------- %>
 			<% unless document.marc_display.related_resources.empty? %> 
-			<dt class="show_detail">Related resources</dt>
+			<dt>Related resources</dt>
 			<% document.marc_display.related_resources.each do |x| %>
-			<dd class="show_detail"><%= link_to x["label"], x["value"], :target => '_blank' %></dd>			
+			<dd><%= link_to x["label"], x["value"], :target => '_blank' %></dd>			
 			<% end %>
 			<% end %>
 			
