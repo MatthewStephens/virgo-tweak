@@ -174,6 +174,14 @@ class CatalogController < ApplicationController
         :pf => '$pf_issn'
       }
     end
+    config.add_search_field('isbn') do |field|
+      field.include_in_advanced_search = false
+      field.label = 'ISBN'
+      field.solr_local_parameters = {
+        :qf => '$qf_isbn',
+        :pf => '$pf_isbn'
+      }
+    end
     
     # sort fields
     config.add_sort_field 'score desc, year_multisort_i desc', :label => 'Relevancy', :sort_key => 'relevancy'
