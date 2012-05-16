@@ -3,7 +3,7 @@ class VideoController < CatalogController
   before_filter :featured_documents, :only=>:index
     
   configure_blacklight do |config|
-    config.facet_fields = {}
+    config.facet_fields.clear
     config.add_facet_field 'library_facet', :label => 'Library'
     config.add_facet_field 'format_facet', :label => 'Format'
     config.add_facet_field 'video_genre_facet', :label => 'Genre'
