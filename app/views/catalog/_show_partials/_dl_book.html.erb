@@ -147,7 +147,7 @@
   			<dd><%= date %></dd>
   		<% end %>
 	<% end %>
-	
+		
 	<% if document.has?(:content_model_facet, 'jp2k') %>
 		<dt class="show_detail">Download</dt>
 		<dd class="show_detail">
@@ -156,6 +156,15 @@
 		</dd>
 	<% end %>
 
+	<% #----------Metadata Editor----------- %>
+	<% if Rails.env.virgobeta_development? %>
+	<% if document.value_for(:iseditable_facet) == 'true'  %>
+	    <% unless document.value_for(:editorlocation_display) == 'n/a' %>
+		<%= button_to('Edit Metadata', document.value_for(:editorlocation_display)) %>	
+		<% end %>
+	<% end %>	
+	<% end %>
+	
   </dl>	
 </div>
 
