@@ -34,5 +34,18 @@ Feature: Display Facets
 		And I follow "Recordings and scores"
 		Then I should see "Recordings and/or Scores"
 		
+	Scenario: Music portal should remain sticky for facet browsing
+		Given I am on the homepage
+		And I follow "Music Search"
+		And I follow "Alderman"
+		Then I should be in the Music Search portal
+		When I follow "See More →"
+		And I follow "Chemistry"
+		Then I should be in the Music Search portal
+		When I follow "See More →"
+		And I follow "A-Z"
+		And I follow "Physics"
+		Then I should be in the Music Search portal
+		
 	  
 	  

@@ -671,16 +671,22 @@ module ApplicationHelper
     link_to label.html_safe, portal_index_path, :class=>style
   end
   
-  def portal_index_path
-    return music_index_path if params[:controller] == 'music'
-    return video_index_path if params[:controller] == 'video'
-    return catalog_index_path
+  def portal_index_path(opts={})
+    return music_index_path(opts) if params[:controller] == 'music'
+    return video_index_path(opts) if params[:controller] == 'video'
+    return catalog_index_path(opts)
   end
   
   def portal_show_path(doc_id)
     return music_path(doc_id) if params[:controller] == 'music'
     return video_path(doc_id) if params[:controller] == 'video'
     return catalog_path(doc_id)
+  end
+  
+  def portal_facet_path(opts={})
+    return music_facet_path(opts) if params[:controller] == 'music'
+    return video_facet_path(opts) if params[:controller] == 'video'
+    return catalog_facet_path(opts)
   end
   
   ############# end local methods

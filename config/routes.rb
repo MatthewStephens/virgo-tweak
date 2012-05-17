@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   Blacklight.add_routes(self)
   
   root :to => "catalog#index"
-  
   match 'catalog/:id/image', :to => 'catalog#image', :as => 'image' 
   match 'catalog/:id/brief_availability', :to => 'catalog#brief_availability', :as => 'brief_availability'
   match 'catalog/:id/availability', :to => 'catalog#availability', :as => 'availability'
@@ -29,10 +28,12 @@ Rails.application.routes.draw do
   match 'account_requests/renew_all', :to => 'account_requests#renew_all', :as => 'renew_all'
   match 'reserves/:computing_id/:key', :to => 'reserves#course', :as => 'reserve_course'
   match 'special_collections_requests/:id/new', :to => 'special_collections_requests#new', :as => 'new_special_collections_request'
-  match 'music', :to => 'music#index', :as => 'music_index'
-  match 'video', :to => 'video#index', :as => 'video_index'
-  match 'music/:id', :to => 'music#show', :as => 'music'
-  match 'video/:id', :to => 'video#show', :as => 'video'
+  
+  match "music/facet/:id", :to => 'music#facet', :as => 'music_facet'
+  resources :music, :only => [:index, :show, :update]
+  
+  match "video/facet/:id", :to => 'video#facet', :as => 'video_facet'
+  resources :video, :only => [:index, :show, :update]
 
   resources :account, :only => [:index] do
     member do
