@@ -480,6 +480,26 @@ Feature: Everything (Default) Search Result Relevancy
     And I press "update"
     Then I should get ckey u1659100 in the first 1 results
     And I should get ckey u1651581 in the first 2 results
+
+	Scenario: Make sure portal sticks when changing sort
+		Given I am on the homepage
+		And I follow "Music Search"
+		And I fill in "q" with "hands"
+		And I press "Search"
+		Then I should be in the Music Search portal
+		When I select "Author" from "sort_key"
+		And I press "update"
+		Then I should be in the Music Search portal
+
+	Scenario: Make sure portal sticks when changing per page
+		Given I am on the homepage
+		And I follow "Music Search"
+		And I fill in "q" with "hands"
+		And I press "Search"
+		Then I should be in the Music Search portal
+		When I select "100" from "per_page"
+		And I press "update"
+		Then I should be in the Music Search portal
     
   Scenario: Make sure there are no errors when an invalid sort option is specified
     Given I am on the homepage

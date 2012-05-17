@@ -9,7 +9,7 @@
   	  <% elsif params[:controller] == 'articles' %>
   	    <% link = articles_path %>
   	  <% else %>
-  	    <% link = catalog_index_path %>
+  	    <% link = portal_index_path %>
   	  <% end %>
 				<%= form_tag link, :method => :get, :class => 'sort', :id => 'sort_form' do %>
 					<%= label_tag(:sort_key) do %>
@@ -28,7 +28,7 @@
         <% elsif params[:controller] == 'articles' %>
           <% link = articles_path %>
         <% else %>
-          <% link = catalog_index_path %>
+          <% link = portal_index_path %>
         <% end %>
     		<%= form_tag link, :method=>:get, :class=>'per_page' do %>
     			<%= label_tag(:per_page) do %>
@@ -49,7 +49,7 @@
 			<% rss_params.delete :controller %>
      	<%= link_to(
        image_tag('browser-rss.png', :alt => 'RSS feed', :title => 'RSS feed', :height => '20', :width => '20'),
-       catalog_index_path(:format => :rss) + "?" + rss_params.to_query, :target => '_blank', :id => "resultsRSSLink"
+       portal_index_path(:format => :rss) + "?" + rss_params.to_query, :target => '_blank', :id => "resultsRSSLink"
      )%>    
      <% end %>
     </div>
