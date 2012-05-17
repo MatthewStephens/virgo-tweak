@@ -1,7 +1,5 @@
 <% if @previous_document || @next_document %>
-<div id="previousNext">
-	<%= link_to_previous_document(@previous_document) %>
+  <%= link_to_document(@previous_document, :label => "&laquo; Previous".html_safe, :counter => session[:search][:counter].to_i - 1) %>
 	<% if @previous_document && @next_document %> | <% end %>
-	<%= link_to_next_document(@next_document)%>	
-</div>
+	<%= link_to_document(@next_document, :label => "Next &raquo;".html_safe, :counter => session[:search][:counter].to_i + 1 )%>	
 <% end %>
