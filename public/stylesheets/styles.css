@@ -74,7 +74,7 @@ html body {
   font-style: italic;
   font-weight: bold;
   padding-right: 0.67em;}  
-#catalogShow #virgo_banner a.libra_link {
+.show-page #virgo_banner a.libra_link {
   clear: right;
   margin: 7px 8px 0 0; }
 #itemSearchBox {
@@ -533,7 +533,7 @@ a.more_facets_link { color: #2f3e6a;}
 	width: 50px;
 	max-width: 110px;
 }
-#catalogShow .imageCollection.previewThumbImg {
+.show-page .imageCollection.previewThumbImg {
 	background: #f2f2f2;
 	border-right: 1px solid #DDD;
 	float: left;
@@ -545,7 +545,7 @@ a.more_facets_link { color: #2f3e6a;}
 	text-align: center;
 	vertical-align: middle;
 }
-#catalogShow .imageCollection.previewThumbImg.first {
+.show-page .imageCollection.previewThumbImg.first {
 	border-left: 1px solid #DDD;
 }
 
@@ -944,7 +944,7 @@ a.more_facets_link { color: #2f3e6a;}
 	width: 100%;
 }
 
-#returnToSearch, #markedListTools, #returnToItem, .add_star, #catalogShow #ActionListContainer {
+#returnToSearch, #markedListTools, #returnToItem, .add_star, .show-page #ActionListContainer {
 	padding: 0.5em 0;
 }
 
@@ -974,27 +974,27 @@ a.more_facets_link { color: #2f3e6a;}
 #folder_full_notice {font-size: 15px; padding: 10px;}
 #folder_full_notice a {text-decoration: underline;}
 
-#catalogShow #ActionListContainer {
+.show-page #ActionListContainer {
   padding-left: 0;
   margin: 1px 4px 0;
 }
 
-#catalogShow #ActionListContainer .list_body {
+.show-page #ActionListContainer .list_body {
   margin-top: 12px;
 }
 
-#catalogShow #ActionListContainer .action_list {
+.show-page #ActionListContainer .action_list {
   background: none;
 }
 
-#catalogShow #ActionListContainer .list_title {
+.show-page #ActionListContainer .list_title {
   padding-bottom: 2px;
   padding-left: 2px;
   width: 168px;
 }
 
-#catalogShow #ActionListContainer li,
-#catalogShow #ActionListContainer a {line-height: 20px;}
+.show-page #ActionListContainer li,
+.show-page #ActionListContainer a {line-height: 20px;}
 li.Z3988-container {display: none;}
 #folderIndex #list_heading {margin-bottom: 0.5em;}
 #folderIndex #account_menu.tools h2 {font-size: 15px; font-weight: bold; line-height: 3em; margin: 0; padding: 0 0.5em; text-align: right; background: url("/images/marked-list.gif") no-repeat scroll 33% 49% #fffefa; }

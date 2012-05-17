@@ -50,7 +50,7 @@
   <%= @add_to_html_head %>
 </head>
 
-<body id="<%= "#{h(params[:controller])}#{h(params[:action]).capitalize}" %>" class="<%= "#{h(params[:controller])}-page #{h(params[:action])}-page" %>">
+<body id="<%= "#{h(params[:controller])}#{h(params[:action]).capitalize}" %>" class="<%= "#{h(params[:controller])}-page #{h(params[:action])}-page #{h(params[:controller])}-#{h(params[:action])}-page" %>">
   <div id="virgo_container">
     
     <%= render :partial => 'layouts/header' %>

@@ -21,7 +21,9 @@
 
 		<% if session[:search][:counter].to_i > -1 and @results_view.blank? %>
 
-		  <%= render 'previous_next_doc' %>
+      <div id="previousNext">
+        <%= render 'previous_next_doc' %>
+      </div>
 
 		  <div id="returnToSearch">
 		    <%= link_back_to_catalog '&larr; Return to search results' %> |
@@ -37,12 +39,8 @@
     <%= render_document_partial @document, :show, session[:search][:counter] %>
 <div class="clearFix"><!-- ye olde clearfixe --></div>
 <div class="resultNav bottom">
-  <% if @previous_document || @next_document %>
-   <div id="previousNextDocument">
-   	<%= link_to_previous_document(@previous_document) %>
-   	<% if @previous_document && @next_document %> | <% end %>
-   	<%= link_to_next_document(@next_document)%>	
-   </div>
-   <% end %>
-
+  <div id="previousNextDocument">
+    <%= render 'previous_next_doc' %>
+  </div>
+  
 </div>

@@ -13,7 +13,7 @@
   width: 20px;
 }
 
-#catalogShow .printPreview {
+.show-page .printPreview {
   position: absolute;
   right: 15px;
   top: 15px;
@@ -193,7 +193,7 @@ text-align:center; padding:20px; white-space:nowrap;}
 
 /*--
 Components used only in view/action catalog/show --*/
-#catalogShow .previewThumbImg{
+.show-page .previewThumbImg{
 	padding:15px;
 	background:transparent;
 	border:0;
@@ -201,7 +201,7 @@ Components used only in view/action catalog/show --*/
 	float: none;
 	max-width: 100%; }
 
-#catalogShow .previewThumbImg.imageCollectionList {
+.show-page .previewThumbImg.imageCollectionList {
   width: 700px;
 }
 
@@ -209,13 +209,13 @@ Components used only in view/action catalog/show --*/
 	padding-left: 0;
 }
 
-#catalogShow #details,
+.show-page #details,
 #extendedFields{
 	width:100%;
 	clear:both;
 }
-#catalogShow #details {margin:1.5em 0 2em; overflow: hidden;}
-#catalogShow #availability dt{width:auto;}
+.show-page #details {margin:1.5em 0 2em; overflow: hidden;}
+.show-page #availability dt{width:auto;}
 #extendedFields{width:482px;}
 #details {clear:both;}
 #details dl {margin-bottom:5px;}
@@ -226,15 +226,15 @@ width:560px;}
 #details ul, #details ul li {padding-left:0; margin-left:0;}
 #details dd.first{border-top:0;}
 #details dl dt.readOnline {color:#5D712D; text-transform:uppercase;}
-#catalogShow #main #identifierFields{padding-bottom:.77em;}
-#catalogShow #main h1{margin:0.5em 0;line-height:1.25em;}
-#catalogShow #main h1 #subtitle{font-weight:bold;}
-#catalogShow #respStmtField{font-size:1.154em;line-height:1.5em;}
-#catalogShow .document {position:relative; }
+.show-page #main #identifierFields{padding-bottom:.77em;}
+.show-page #main h1{margin:0.5em 0;line-height:1.25em;}
+.show-page #main h1 #subtitle{font-weight:bold;}
+.show-page #respStmtField{font-size:1.154em;line-height:1.5em;}
+.show-page .document {position:relative; }
 .itemShowView {clear:both;}
-#catalogShow .document dd ul{margin-left:0;}
-#catalogShow .document dd li{padding: 0.25em 0;}
-#catalogShow .document .tools{
+.show-page .document dd ul{margin-left:0;}
+.show-page .document dd li{padding: 0.25em 0;}
+.show-page .document .tools{
 	float:right;
 	clear:none;
 	width:470px;
@@ -246,13 +246,13 @@ width:560px;}
 	padding-bottom: 28px;
 	padding-left: 15px;
 }
-#catalogShow .tools li, #catalogShow .tools form, #catalogShow .tools div {display:block;}
-#catalogShow .tools ul {list-style: none inside none; margin: 0; padding:0;}
-#catalogShow .tools li {background:url(/images/icons/bul_sq_gry.gif) no-repeat .2em .58em; padding:0 15px 8px 15px;}
-#catalogShow .tools h3 {float:left; padding-right:10px; margin:0;}
-#catalogShow .tools .toolsSub {clear:both;padding:15px 15px 0 15px;width:218px;}
-#catalogShow #sub1Inner{padding-top:3.85em;}
-#catalogShow .holding{
+.show-page .tools li, .show-page .tools form, .show-page .tools div {display:block;}
+.show-page .tools ul {list-style: none inside none; margin: 0; padding:0;}
+.show-page .tools li {background:url(/images/icons/bul_sq_gry.gif) no-repeat .2em .58em; padding:0 15px 8px 15px;}
+.show-page .tools h3 {float:left; padding-right:10px; margin:0;}
+.show-page .tools .toolsSub {clear:both;padding:15px 15px 0 15px;width:218px;}
+.show-page #sub1Inner{padding-top:3.85em;}
+.show-page .holding{
 	padding:.35em 0;
 }
 .holdingHeader{
@@ -262,10 +262,10 @@ width:560px;}
 	font-style:italic;
 }
 .holdingGroup{padding:.35em 0;}
-#catalogShow #availability .first{border-top:0;}
+.show-page #availability .first{border-top:0;}
 .previewThumbImg {float:right;width:auto;padding:9px;margin: 0;}
-#catalogIndex .previewThumbImg {margin-top: 5px;}
-#catalogIndex #recently_added_items .previewThumbImg {margin: 10px;}
+.index-page .previewThumbImg {margin-top: 5px;}
+.index-page #recently_added_items .previewThumbImg {margin: 10px;}
 .resultNav {
 	padding-left: 10px;
 	display: inline;
@@ -308,7 +308,7 @@ width:560px;}
 #results .document .folder_container .submitForm {background:url('/images/unmarked-list.gif') no-repeat scroll 0 0 transparent; display:block;height:20px; width:20px; text-indent:-9999px;}
 #results .document .tools .iconHeartSmall {padding:0 0 0 25px;}
 
-#catalogShow #previousNext{clear:both; padding: 0.5em 0 0.5em 1em;}
+.show-page #previousNext{clear:both; padding: 0.5em 0 0.5em 1em;}
 /* Table displaying catalog availability info */
 #availability {width:700px; margin-bottom:10px;}
 #availability, #physicalAvailability {clear:both;}
