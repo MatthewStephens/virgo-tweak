@@ -54,7 +54,7 @@
       // for info on this implementation, see http://markmail.org/message/o4wnzm7wdxbn66mu
       // Configure these lines for your page
       // Put in all the identifiers you know of to ensure a match
-      var keys = <%= google_preview_numbers(document) %>;
+      var keys = <%= google_preview_numbers(document).html_safe %>;
       var cburl = "http://books.google.com/books";
   
       // Retrieve the info for these bibkeys           
