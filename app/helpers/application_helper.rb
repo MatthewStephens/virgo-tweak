@@ -671,6 +671,7 @@ module ApplicationHelper
   end
   
   def portal_index_path(opts={})
+    return articles_path(opts) if params[:controller] == 'articles'
     return music_index_path(opts) if params[:controller] == 'music'
     return video_index_path(opts) if params[:controller] == 'video'
     return catalog_index_path(opts)

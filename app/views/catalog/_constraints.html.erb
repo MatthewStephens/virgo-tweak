@@ -6,17 +6,8 @@
 				<span class="first">
 					<span class="queryName"><%= search_field_label(localized_params) %></span>
 					<span><%= h(localized_params[:q]) %></span>
-				</span>
-				
-				<% if params[:controller] == 'articles' %>
-				  <% link = articles_path(localized_params.merge(:q=>nil, :action=>'index')) %>
-				<% elsif params[:controller] == 'music' %>
-					<% link = music_index_path(localized_params.merge(:q=>nil, :controller=>'music', :action=>'index')) %>
-				<% elsif params[:controller] == 'video' %>
-					<% link = video_index_path(localized_params.merge(:q=>nil, :controller=>'video', :action=>'index')) %>
-				<% else %>
-				  <% link = catalog_index_path(localized_params.merge(:q=>nil, :controller=>'catalog', :action=>'index')) %>
-				<% end %>
+				</span>				
+				<% link = portal_index_path(localized_params.merge(:q=>nil, :action=>'index')) %>
 				<%= link_to('x', link, :class=>'btnRemove imgReplace') %>
 			</span>
 		<% elsif !populated_advanced_search_fields.empty? %>	
@@ -26,11 +17,7 @@
             <span class="queryName"><%= label_for_search_field(key) %></span>
             <span><%= h(value)%></span>
           </span>		  		  		 
-          <% if params[:controller] == 'articles' %> 
-            <% link = articles_path(remove_advanced_search_field(key)) %>
-          <% else %>
-            <% link = catalog_index_path(remove_advanced_search_field(key)) %>          
-          <% end %>
+          <% link = portal_index_path(remove_advanced_search_field(key)) %>
           <%= link_to('x', link, :class=>'btnRemove imgReplace')%>
         </span>
       <% end %>
@@ -51,15 +38,7 @@
 									<span class="filterValue"><%= h v %></span>
 								</span>
 							</span>
-							<% if params[:controller] == 'articles' %>
-							  <% link = articles_path(remove_facet_params(facet, v, localized_params)) %>
-							<% elsif params[:controller] == 'music' %>
-								<% link = music_index_path(remove_facet_params(facet, v, localized_params)) %>							
-							<% elsif params[:controller] == 'video' %>
-								<% link = video_index_path(remove_facet_params(facet, v, localized_params)) %>							
-							<% else %>
-							  <% link = catalog_index_path(remove_facet_params(facet, v, localized_params)) %>							
-							<% end %>
+							<% link = portal_index_path(remove_facet_params(facet, v, localized_params)) %>							
 							<%= link_to('x', link, :class=>'btnRemove imgReplace') %>
 						</span>
 					<% end %>
@@ -79,11 +58,7 @@
 									<span class="filterValue"><%= h v.first %></span>
 								</span>
 							</span>
-							<% if params[:controller] == 'articles '%>
-							  <% link = articles_path(remove_advanced_facet_param(facet, v.first, localized_params)) %>
-							<% else %>
-							  <% link = catalog_index_path(remove_advanced_facet_param(facet, v.first, localized_params)) %>							
-							<% end %>
+							<% link = portal_index_path(remove_advanced_facet_param(facet, v.first, localized_params)) %>							
 							<%= link_to('x', link, :class=>'btnRemove imgReplace') %>
 						</span>
 					<% end %>
