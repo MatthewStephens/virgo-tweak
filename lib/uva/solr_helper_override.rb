@@ -29,7 +29,7 @@ module UVA
     def add_special_collections_lens solr_parameters, user_parameters
       return unless user_parameters[:special_collections] == 'true'
       solr_parameters[:fq]||=[]
-      solr_parameters[:fq] << 'library_facet:Special Collections'
+      solr_parameters[:fq] << 'library_facet:"Special Collections"'
     end
   
     # show as many search results as allowed if requested

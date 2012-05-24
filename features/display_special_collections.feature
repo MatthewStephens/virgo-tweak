@@ -2,6 +2,10 @@ Feature: Display Special Collections Lens
   In order to get only the relevant information for Special Collections items
   As a user
   I want to see accurate information
+
+	Scenario: Only show Special Collections items in search results
+		Given I am in the Special Collections lens
+	  Then I should get at most 500000 results
 	
   Scenario: do not display non-Special Collections holdings on availability
     Given I am in the Special Collections lens
