@@ -299,6 +299,10 @@ module UVA
     def get_scope(extra_controller_params={})
       "&loc=adaptor,primo_central_multiple_fe"
     end
+    
+    def get_full_text_filter(extra_controller_params={})
+      "&query=facet_tlevel,exact,online_resources_PC_TN"
+    end
   
     def build_articles_url(extra_controller_params={})
       url = PRIMO_URL
@@ -316,6 +320,7 @@ module UVA
       url += get_paging(extra_controller_params)
       url += get_sort(extra_controller_params)
       url += get_scope(extra_controller_params)
+      url += get_full_text_filter(extra_controller_params)
       Rails.logger.info("primo request url: #{url}")
       url
     end
