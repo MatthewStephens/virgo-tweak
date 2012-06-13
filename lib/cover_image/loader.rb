@@ -7,8 +7,18 @@ require 'lib/cover_image/sources/music_brainz'
 require 'lib/cover_image/sources/syndetics'
 module CoverImage
   class Loader
+    include Blacklight::Configurable
     include Blacklight::SolrHelper
     include UVA::SolrHelperOverride
+
+    configure_blacklight do |config|
+      config.default_solr_params = {
+        :qt => "search",
+        :rows => 500
+      }
+      config.max_per_page = 500
+      config.default_qt = "search"
+    end
 
     def initialize(do_solr_updates, date_string)
       do_solr_updates ? docs = solr_add_docs(date_string) : docs = hourly_updates
@@ -26,8 +36,8 @@ module CoverImage
       local_params[:f] = {}
       local_params[:f][:date_first_indexed_facet] = [date_string]
       local_params[:sort] = 'date_received_facet desc'
-      local_params[:per_page] = 100
       response, documents = get_search_results(local_params)
+      puts "got #{documents.size} documents"
       documents
     end
     
