@@ -1,0 +1,47 @@
+<div><h1>Place on Course Reserve</h1></div>
+
+<div id="returnToSearch">
+  <%= link_back_to_catalog '&larr; Return to search results' %>
+</div>
+
+<div>
+<% if session_folder_document_ids.empty? %>
+<h2 class='no-items'>No Starred Catalog Items</h2>
+<% else %>
+  <%= form_tag send_email_record_catalog_path, :id => 'cres_email', :method => :post do %>
+    <%= check_box_tag 'is_instructor'%> Is this request on behalf of an instructor?<br />
+    <%= label_tag(:to_instructor, "Instructor Computing ID") %>
+    <%= text_field_tag :to_instructor %><br />
+    <%= label_tag(:instructor_name, "Instructor Name") %>
+    <%= text_field_tag :instructor_name %><br />
+    <%= label_tag(:requestor_name, "Your Name") %>
+    <%= text_field_tag :requestor_name %><br />
+    <%= label_tag(:to, "Your Computing ID") %>
+    <%= text_field_tag :to %><br />
+    <%= label_tag(:requestor_uvaid, "Your University ID") %>
+    <%= text_field_tag :requestor_uvaid %><br />
+    <%= label_tag(:course_id, "Course ID") %>
+    <%= text_field_tag :course_id %><br />
+    <%= label_tag(:semester, "Semester") %>
+    <% semesters_list = ['Fall', 'January','Spring', 'Summer I', 'Summer II', 'Summer III'] %>
+    <%= select_tag :semester, options_for_select(semesters_list) %><br />
+    <%= label_tag(:full_record, "Brief or detail record") %>
+    <%= radio_button_tag(:full_record, "false", true)%> Send brief listing of the record(s)<br />
+    <%= radio_button_tag(:full_record, "true", false)%> Send detail listing of the record(s)<br />
+  
+    <%= render :partial => 'reserve_rows', :locals=>{:documents => @documents} %>
+
+    <%=label_tag 'Please type the two words below to help us prevent spam.'%><%= recaptcha_tags %>
+    
+    <% @documents.each do |doc| %>
+      <%=hidden_field_tag "id[]", doc.get(:id)%>
+    <% end %>
+
+
+    <%=hidden_field_tag :style, 'reserves_email'%>
+    <%=hidden_field_tag :show_max_per_page, 'true'%>
+    <%= submit_tag "Send" %>
+  <% end %>
+  
+<% end %>
+</div>

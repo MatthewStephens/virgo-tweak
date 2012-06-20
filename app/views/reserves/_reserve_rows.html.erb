@@ -1,0 +1,9 @@
+<% i = 0 %>
+<% documents.each do |document| %>
+	<%= render_document_row document %>
+    <% locations_list = ['Astronomy', 'Biology/Psychology','Brown Science & Engineering','Chemistry','Clemons', 'Education', 'Fine Arts', 'Law', 'Math', 'Music','Physics'] %>	
+	<% id = document[:id].to_s%>
+    <%= select_tag "location[" + id + "][]", options_for_select(locations_list) %><br />
+  <% i+= 1%>
+<% end %>
+
