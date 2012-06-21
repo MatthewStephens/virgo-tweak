@@ -26,7 +26,7 @@ module CoverImage::Sources
       "
       
       uri = URI.parse(url)
-      RAILS_DEFAULT_LOGGER.info "*** URL: #{uri.to_s}"
+      Rails.logger.info "*** URL: #{uri.to_s}"
       
       begin
         doc = Nokogiri::XML(open(uri.to_s))
@@ -34,8 +34,8 @@ module CoverImage::Sources
         puts "
         MUSIC BRAINZ CONNECTION ERROR: #{$!}
         "
-        RAILS_DEFAULT_LOGGER.info "*** MUSIC BRAINZ ERROR: #{$!} "
-        RAILS_DEFAULT_LOGGER.info "*** URL: #{uri.to_s}"
+        Rails.logger.info "*** MUSIC BRAINZ ERROR: #{$!} "
+        Rails.logger.info "*** URL: #{uri.to_s}"
         return data
       end
       node = doc.children[0]
