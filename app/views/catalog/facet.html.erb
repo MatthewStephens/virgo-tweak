@@ -42,7 +42,7 @@
 
 
   <% if params[:controller] == 'articles' %>
-    <% items = facet_sort!(params[:id], (@response.facets.detect {|f| f.name == params[:id]}).items) %>
+   <% items = facet_sort!(params[:id], ((@response.facets.detect {|f| f.name == params[:id]}).items rescue [])) %>
   <% else %>
     <% items = facet_sort!(params[:id], @pagination.items) %>
   <% end %>
