@@ -291,6 +291,12 @@ class CatalogController < ApplicationController
             email = RecordMailer.email_record(@documents, @articles, params[:to], params[:message], params[:full_record], from, host)
           else
             flash[:error] = "You must enter a valid email address"
+        end
+        when 'reserves_email'
+          if params[:to].match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
+            email = RecordMailer.email_reserves(@documents, params[:to], params[:to_instructor],params[:instructor_name],params[:requestor_name],params[:requestor_uvaid], params[:course_id],params[:semester],params[:location],params[:full_record], from, host)          
+          else
+            flash[:error] = "You must enter a valid email address"
           end
       end
       email.deliver unless flash[:error]
@@ -303,6 +309,7 @@ class CatalogController < ApplicationController
       flash[:error] = "You must enter a recipient in order to send this message"
     end
   end
+
   
   # Displays the page turner UI, for viewing page images of DL text resources
   def page_turner

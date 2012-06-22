@@ -1,0 +1,50 @@
+Course Reserve Information: 
+
+<%= @instructor_id %>
+<%= @instructor_name %>
+<%= @requestor_name %>
+<%= @requestor_uvaid %>
+<%= @course_id %>
+<%= @semester %>
+
+<% @documents.each do |document| -%>
+<% if @full_record -%>
+<%= render_document_partial document, :email, 0 %>
+<% else -%>
+<% format = document_partial_name(document) -%>
+<% case format.to_s -%>
+<% when "dl_text" %>
+<%= document.value_for(:main_title_display, ";", "") %>
+<% unless document.value_for(:author_display) == 'n/a' -%>
+Creator: <% document.values_for(:author_display).each do |v| %><%= v %><% end %><% end %>
+<% unless document.value_for(:digital_collection_facet) == 'n/a' -%>
+Collection: <% document.values_for(:digital_collection_facet).each do |v| %><%= v %><% end %><% end %>
+<% when "dl_book" -%>
+<%= document.value_for(:main_title_display, ";", "") %>
+<% unless document.value_for(:author_display) == 'n/a' -%>
+Creator: <% document.values_for(:author_display).each do |v| %><%= v %><% end %><% end %>
+<% unless document.value_for(:series_title_display) == 'n/a' -%>
+Series: <%= document.value_for :series_title_display  %><% end %>
+<% when "lib_coins" -%>
+<%= document.value_for(:title_display, ";", "") %>
+Collection: <%= document.value_for :collection_facet  %>
+Full View: <%= document.value_for :url_display %>		
+<% else -%>
+<%= document.value_for(:title_display, ";", "")  %> <%= document.value_for(:subtitle_display, ";", "") %> 
+<%= document.marc_display.responsibility_statement unless (document.to_marc.nil? or document.marc_display.responsibility_statement.nil?) %>
+<%= render :partial => 'catalog/availability', :locals => { :document => document }  %>
+<% end -%>
+<% # end of case -%>
+<% end -%>
+<% #end of else-fullrecord -%>
+
+<%= @reserve_library[document[:id].to_s].html_safe %>
+
+URL of page:
+<%= catalog_path(document.id, :only_path => false, :host => @host) %>
+--------------------------------------------------------------------
+<% end -%>
+<% # end of @documents.each -%>
+
+
+

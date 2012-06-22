@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   match 'folder/csv', :to => 'folder#csv', :as => 'csv'
   match 'folder/citation', :to => 'folder#citation', :as => 'citation'
   match 'folder/email', :to => 'folder#email', :as => 'email'
-  match 'folder/endnote', :to => 'folder#endnote', :as => 'endnote'
+  match 'folder/endnote', :to => 'folder#endnote', :as => 'endnote' 
+  match 'reserves/cres_email', :to => 'reserves#cres_email', :as => 'reserves_email'
   match 'advanced', :to => 'advanced#index', :as => 'advanced'
   match 'login', :to => 'user_sessions#new', :as => 'login'
   match 'logout', :to => 'user_sessions#destroy', :as => 'logout'
@@ -26,7 +27,6 @@ Rails.application.routes.draw do
   match 'do_patron_login', :to => 'user_sessions#do_patron_login', :as => 'do_patron_login'
   match 'account_requests/:id/renew/:checkout_key', :to => 'account_requests#renew', :as => 'renew'
   match 'account_requests/renew_all', :to => 'account_requests#renew_all', :as => 'renew_all'
-  match 'reserves/:computing_id/:key', :to => 'reserves#course', :as => 'reserve_course'
   match 'special_collections_requests/:id/new', :to => 'special_collections_requests#new', :as => 'new_special_collections_request'
   
   match "music/facet/:id", :to => 'music#facet', :as => 'music_facet'
@@ -75,8 +75,6 @@ Rails.application.routes.draw do
       post :create_hold
     end
   end
-
-  resources :reserves, :only => [:index]
 
   resources :folder, :only => [:index, :create, :update, :destroy] do
     collection do

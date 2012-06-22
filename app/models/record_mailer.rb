@@ -35,4 +35,52 @@ class RecordMailer < ActionMailer::Base
     mail(:to => to, :subject => subject, :from => from)
   end
   
+  def email_reserves(documents, to, instructor_id, instructor_name, requestor_name, requestor_uvaid, course_id, semester, location, full_record, from_host, host)
+    documents.each do |document|
+      document.availability = Firehose::Availability.find(document)
+    end
+    if documents.size == 1 
+      subject ="Reserve Item: #{documents.first.value_for :title_display}"
+    else
+      subject = "Reserve Items"
+    end
+    from =  "no-reply@" + from_host
+   
+    @documents = documents
+    @host = host
+    @instructor_id = "Instructor Computing ID: " + instructor_id
+    @instructor_name = "Instructor Name: " + instructor_name
+    @requestor_name = "Requestor Name: " + requestor_name
+    @requestor_uvaid = "Requstor Computing ID: " + requestor_uvaid
+    @course_id = "Course ID: " + course_id
+    @semester = "Semester : " + semester
+    @reserve_library = {}
+    coordinator = []
+    location.each do |item_key, library| 
+      case library.to_s
+        when "Astronomy", "Brown Science & Engineering", "Chemistry", "Math"
+          coordinator << "," + RESERVE_COORDINATOR_SCI
+        when "Biology/Psychology"
+          coordinator << "," + RESERVE_COORDINATOR_BIO
+        when "Clemons"
+          coordinator << "," + RESERVE_COORDINATOR_CLEMONS
+        when "Education"
+          coordinator << "," + RESERVE_COORDINATOR_ED
+        when "Fine Arts"
+          coordinator << "," + RESERVE_COORDINATOR_FA
+        when "Law"
+          coordinator << "," + RESERVE_COORDINATOR_LAW
+        when "Music"
+          coordinator << "," + RESERVE_COORDINATOR_MUSIC
+        when "Physics"
+          coordinator << "," + RESERVE_COORDINATOR_PHYSICS
+      end
+      @reserve_library[item_key] = "Reserve Library: " + library.to_s             
+    end
+  
+    email_list=[]
+    email_list << to + coordinator.uniq.to_s 
+    full_record == "true" ? @full_record = true : @full_record = false
+    mail(:to =>email_list, :subject => subject, :from => from)
+  end    
 end

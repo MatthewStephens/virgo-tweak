@@ -43,6 +43,10 @@
 			  <% end %>
 
     		<li class="delicious"><%= link_to 'Export (Delicious)', delicious_export_url(@document), :target=>:_blank %></li>
+			
+			<li>
+		       <%= link_to "Place on Course Reserve", reserves_email_path(:id => @document.id), {:id => 'reserves_email'} %>
+		    </li>
 
 			</ul>
 		</li>
