@@ -51,7 +51,7 @@ class RecordMailer < ActionMailer::Base
     @instructor_id = "Instructor Computing ID: " + instructor_id
     @instructor_name = "Instructor Name: " + instructor_name
     @requestor_name = "Requestor Name: " + requestor_name
-    @requestor_uvaid = "Requstor Computing ID: " + requestor_uvaid
+    @requestor_uvaid = "Requstor University ID: " + requestor_uvaid
     @course_id = "Course ID: " + course_id
     @semester = "Semester : " + semester
     @reserve_library = {}
