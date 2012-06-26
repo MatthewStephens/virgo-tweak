@@ -74,6 +74,10 @@ class FolderController < ApplicationController
     redirect_to :controller => 'catalog', :action => 'endnote', :id => session_folder_document_ids, :format => 'endnote', :show_max_per_page => 'true'
   end
  
+  def course_reserve
+    redirect_to :controller => 'reserves', :action => 'cres_email', :id => session_folder_document_ids, :show_max_per_page => 'true'
+  end
+  
   def remaining_id_count
     100 - session_folder_document_ids.count - session_folder_article_ids.count
   end
