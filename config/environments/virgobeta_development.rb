@@ -38,6 +38,18 @@ Virgo::Application.configure do
   FEEDBACK_NOTIFICATION_FROM = 'virgo-feedback@virginia.edu'
   FEEDBACK_NOTIFICATION_SUBJECT = 'Virgo Feedback (dev)'
 
+  RESERVE_COORDINATOR_SCI = 'xw5d@virginia.edu'
+  RESERVE_COORDINATOR_BIO = 'ming@virginia.edu' 
+  RESERVE_COORDINATOR_CLEMONS = 'joe.gilbert@gmail.com'
+  #RESERVE_COORDINATOR_SCI = 'scires@virginia.edu'
+  #RESERVE_COORDINATOR_BIO = 'sbd2f@virginia.edu' 
+  #RESERVE_COORDINATOR_CLEMONS = 'clemres@virginia.edu'
+  #RESERVE_COORDINATOR_ED = 'edures@virginia.edu'
+  #RESERVE_COORDINATOR_FA = 'artsres@virginia.edu'
+  #RESERVE_COORDINATOR_LAW = 'twb4n@virginia.edu'
+  #RESERVE_COORDINATOR_MUSIC = 'musiclib@virginia.edu'
+  #RESERVE_COORDINATOR_PHYS = 'physres@virginia.edu'
+  
   FIREHOSE_URL = "http://webservice.lib.virginia.edu:8080/firehose2"
   PRIMO_URL = "http://primo4.hosted.exlibrisgroup.com:1701/PrimoWebServices/xservice/search/brief?institution=UVA&onCampus=true"
   
