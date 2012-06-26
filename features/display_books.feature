@@ -122,7 +122,7 @@ Feature: Display Books
 	  
 	Scenario: show with note
 	  Given I am on the document page for id u301933
-	  Then I should see a note "With: Monteverdi, C.  Madrigals. Selections."
+	  Then I should see a note "Edition recorded: Roma, Edizioni de Santis, 1958."
 	  
 	Scenario: show cited in
 	  Given I am on the document page for id u4856074

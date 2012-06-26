@@ -5,7 +5,7 @@ Feature: Display Sound Recordings
 		
 	Scenario: formatted tracklists for items with multiple artists should display correctly
 		Given I am on the document page for id u4372296
-		Then I should see a title of "James Joyce reads  [sound recording]"
+		Then I should see a title of "James Joyce reads "
 		And I should see publication data of "New York : Harper Collins, 1992, c1971."
 		And I should see a track list
 		And the first track should be "Ulysses, passage from the Aeolus episode"
@@ -13,7 +13,7 @@ Feature: Display Sound Recordings
 		
 	Scenario: formatted tracklists for items with a single artist should display correctly  
 		Given I am on the document page for id u4814923
-		Then I should see a title of "Hedwig and the angry inch  [sound recording] : original cast recording"
+		Then I should see a title of "Hedwig and the angry inch "
 		And I should see publication data of "New York, NY : Atlantic, p1999."
 		And I should see a track list
 		And the first track should be "Tear me down"
@@ -22,7 +22,7 @@ Feature: Display Sound Recordings
 				
 	Scenario: tracklists for items with concatenated track listings should display correctly
 		Given I am on the document page for id u4814865
-		Then I should see a title of "Atlantis Nath  [sound recording]"
+		Then I should see a title of "Atlantis Nath "
 		And I should see a track list
 		And the first track should be "Crucifixion voices (5:43)"
 		And the last track should be "The crucifixion of my humble self (9:22)"
@@ -30,11 +30,11 @@ Feature: Display Sound Recordings
 		
 	Scenario: tracklists for items with 505 subfield g should display correctly 
 		Given I am on the document page for id u4814872
-		Then I should see a title of "Parade  [sound recording]"
+		Then I should see a title of "Parade "
 		And I should see a track list
 		And the first track should be "The old red hills of home (6:32)"
 		And the last track should be "Finale (3:03)"
-		And I should see "Label no." data of "09026-63378-2 RCA Victor"
+		And I should see "Publisher no." data of "09026-63378-2 RCA Victor"
 		And I should see a related name of "Uhry, Alfred" with a role of "Librettist"
 		And I should see a related name of "Prince, Harold, 1928-" with a role of "Other"
 		And I should see a related name of "Stern, Eric" with a role of "Conductor"
@@ -47,7 +47,7 @@ Feature: Display Sound Recordings
 
 	Scenario: Calexico Feast of Wire
 	  Given I am on the document page for id u3964377
-	  Then I should see a title of "Feast of wire  [sound recording]"
+	  Then I should see a title of "Feast of wire "
 	  And the first track should be "Sunken waltz (2:27)"
 	  And the last track should be "No doze (4:21)"
 	  
@@ -61,9 +61,9 @@ Feature: Display Sound Recordings
 
   Scenario: Display Label no. for sound recordings
     Given I am on the document page for id u2959823
-    Then I should see a title of "The Joshua tree  [sound recording]"
+    Then I should see a title of "The Joshua tree "
     And I should see publication data of "New York : Island Records, p1987."
-    And I should see "Label no." data of "422 842 298-2 Island"
+    And I should see "Publisher no." data of "422 842 298-2 Island"
     
   Scenario: Display credits
     Given I am on the document page for id u4819080
@@ -75,7 +75,7 @@ Feature: Display Sound Recordings
     
   Scenario: Display Format
     Given I am on the document page for id u5279645
-    Then I should see "Format" data of "Audio CD; Musical Recording"
+    Then I should see "Format" data of "CD; Sound Recording"
     
   Scenario: Display Description
     Given I am on the document page for id u5279645
