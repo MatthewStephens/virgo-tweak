@@ -42,7 +42,7 @@ module ApplicationHelper
   end
   
   def link_to_document(doc, opts={:label=>nil, :counter => nil, :results_view => true})
-    label ||= blacklight_config.index.show_link.to_sym
+    label ||= blacklight_config.index.show_link.to_sym unless blacklight_config.index.show_link.nil?
     label = render_document_index_label doc, opts
     link_to label, portal_show_path(doc[:id]), { :'data-counter' => opts[:counter] }.merge(opts.reject { |k,v| [:label, :counter, :results_view].include? k  })
   end
@@ -778,6 +778,7 @@ module ApplicationHelper
       render :partial=>"catalog/_row_partials/default", :locals=>{:document=>doc, :results_view=>false}
     end
   end
+  
   
   #
   # Displays the "showing X through Y of N" message. Not sure
