@@ -997,11 +997,11 @@ a.more_facets_link { color: #2f3e6a;}
 .show-page #ActionListContainer a {line-height: 20px;}
 li.Z3988-container {display: none;}
 #folderIndex #list_heading {margin-bottom: 0.5em;}
-#folderIndex #account_menu.tools h2 {font-size: 15px; font-weight: bold; line-height: 3em; margin: 0; padding: 0 0.5em; text-align: right; background: url("/images/marked-list.gif") no-repeat scroll 33% 49% #fffefa; }
-#folderIndex #account_menu ul ul { margin: 0; list-style: square outside none;}
-#folderIndex .tools ul ul li {border: none;}
-#folderIndex .tools ul ul li a {font-size: 13px; line-height: 2em;}
-#folderIndex #returnToSearch {float: left; padding-left: 15px;}
+#folderIndex #account_menu.tools h2, .reserves-page #account_menu.tools h2 {font-size: 15px; font-weight: bold; line-height: 3em; margin: 0; padding: 0 0.5em; text-align: right; background: url("/images/marked-list.gif") no-repeat scroll 33% 49% #fffefa; }
+#folderIndex #account_menu ul ul, .reserves-page #account_menu ul ul { margin: 0; list-style: square outside none;}
+#folderIndex .tools ul ul li, .reserves-page .tools ul ul li {border: none;}
+#folderIndex .tools ul ul li a, .reserves-page .tools ul ul li a {font-size: 13px; line-height: 2em;}
+#folderIndex #returnToSearch, .reserves-page #returnToSearch {float: left; padding-left: 15px;}
 #folderIndex .pagination h2 {  display: none;}
 #folderIndex #searchTools {float: left; padding-top: 4px;}
 #folderIndex .prev_page {float: left;}

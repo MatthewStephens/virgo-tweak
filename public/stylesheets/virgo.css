@@ -448,19 +448,20 @@ a.start-over {background: url('/images/icon-sprite.png') no-repeat scroll 0 -280
 /* =ITEM & TOOL DISPLAY
 -------------------------------------------------------------- */
 
-.show-page #main, .account-page #main, .folder-page #main, .user_sessions-page #main, .advanced-page #main, .sms-page #main, .email-page #main, .citation-page #main, .special_collections_requests-page #main, .account_requests-page #main, .feedback-page #main, .maps-page #main, .maps_users-page #main, .map_guides-page #main {background: transparent; border-left: none;}
-.show-page #content, .account-page #content, .folder-page #content, .user_sessions-page #content, .advanced-page #content, .sms-page #content, .email-page #content, .citation-page #content, .special_collections_requests-page #content, .account_requests-page #content, .feedback-page #content, .maps-page #content, .maps_users-page #content, .map_guides-page #content {background: white; border-left: 1px solid #DACDCA; min-height: 360px; padding-left: 12px; padding-right: 12px; width: 702px;}
-.show-page #sidebar, .account-page #sidebar, .folder-page #sidebar, .user_sessions-page #sidebar, .advanced-page #sidebar, .sms-page #sidebar, .email-page #sidebar, .citation-page #sidebar, .special_collections_requests-page #sidebar, .account_requests-page #sidebar, .feedback-page #sidebar, .maps-page #sidebar, .maps_users-page #sidebar, .map_guides-page #sidebar {background: transparent;}
+.show-page #main, .account-page #main, .folder-page #main, .reserves-page #main, .user_sessions-page #main, .advanced-page #main, .sms-page #main, .email-page #main, .citation-page #main, .special_collections_requests-page #main, .account_requests-page #main, .feedback-page #main, .maps-page #main, .maps_users-page #main, .map_guides-page #main {background: transparent; border-left: none;}
+.show-page #content, .account-page #content, .folder-page #content, .reserves-page #content, .user_sessions-page #content, .advanced-page #content, .sms-page #content, .email-page #content, .citation-page #content, .special_collections_requests-page #content, .account_requests-page #content, .feedback-page #content, .maps-page #content, .maps_users-page #content, .map_guides-page #content {background: white; border-left: 1px solid #DACDCA; min-height: 360px; padding-left: 12px; padding-right: 12px; width: 702px;}
+.show-page #sidebar, .account-page #sidebar, .folder-page #sidebar, .reserves-page #sidebar, .user_sessions-page #sidebar, .advanced-page #sidebar, .sms-page #sidebar, .email-page #sidebar, .citation-page #sidebar, .special_collections_requests-page #sidebar, .account_requests-page #sidebar, .feedback-page #sidebar, .maps-page #sidebar, .maps_users-page #sidebar, .map_guides-page #sidebar {background: transparent;}
 #list_heading, #tool_heading, #adv_search,
 .show-page .resultNav.top, #item_title {
   display: block;
   margin: 0 0 0 -12px;
   padding: 5px 15px;
   width: 695px; }
-.folder-page #list_heading {margin: 0;}
-.folder-page #main #content {padding-left: 0; padding-right: 0; width: 727px; }
+.folder-page #list_heading, .reserves-page #list_heading {margin: 0;}
+.folder-page #main #content, .reserves-page #main #content {padding-left: 0; padding-right: 0; width: 727px; }
 .folder-page #main #content .notice {margin: 1em 1em 0; }
-.folder-page #main #content .dataTables_wrapper { width: 716px; }
+.folder-page #main #content .dataTables_wrapper, 
+.reserves-page #main #content .dataTables_wrapper { width: 716px; }
 .show-page .resultNav.top {
   background: #F7F3EA;
   border-bottom: 1px solid #C4B18D;
