@@ -21,5 +21,9 @@
 	<td class="format"><%= document.value_for :format_facet %></td>
 	<td class="year"><%= document.value_for :published_display, '<br/>' %></td>
 	<td class="type">Catalog</td>
-	<td class="access"><%= link_to 'Check availability', catalog_path(document[:id]) %></td>
+	<% if params[:controller] == "reserves" -%>
+		<td><%= reserve_library_list(document) %></td>
+	<% else -%>
+		<td class="availability"><%= link_to 'Check availability', catalog_path(document[:id]) %></td>
+	<% end -%>
 </tr>
