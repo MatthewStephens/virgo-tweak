@@ -48,4 +48,9 @@ $(document).ready(function() {
 			}
 		}
   });
+
+  $('#is_instructor').change(function(event) {
+    $('#instructor_info').toggleClass('hidden');
+  });
+
 });

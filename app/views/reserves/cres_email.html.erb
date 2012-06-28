@@ -1,47 +1,83 @@
-<div><h1>Place on Course Reserve</h1></div>
+<%- @add_to_html_head = capture do -%>
+	<%= javascript_include_tag 'catalog/index', 'jquery.dataTables.min.js', 'account-listing.js', 'jquery.form.min.js' %>
+<%- end -%>
 
-<div id="returnToSearch">
-  <%= link_back_to_catalog '&larr; Return to search results' %>
-</div>
+<div id="list_heading"><h1>Place on Course Reserve</h1></div>
 
-<div>
+<% sidebar_items << capture do %>
+		<div id="sub1" class="bookmarks_sub">
+		<div id="sub1Inner">
+			<div id="account_menu" class="tools box menu">
+			<ul>
+				<li class="account-home-nav"><%= link_to("My Account", account_index_path) %></li>
+				<li class="account-home-nav"><%= link_to("Starred Items", folder_index_path) %></li>
+			</ul>
+		</div>
+		</div>
+		</div>
+<% end %>
+
+<div id="results" class="account_container">
 <% if session_folder_document_ids.empty? %>
 <h2 class='no-items'>No Starred Catalog Items</h2>
 <% else %>
-  <%= form_tag send_email_record_catalog_path, :id => 'cres_email', :method => :post do %>
-    <%= check_box_tag 'is_instructor'%> Is this request on behalf of an instructor?<br />
-    <%= label_tag(:to_instructor, "Instructor Computing ID") %>
-    <%= text_field_tag :to_instructor %><br />
-    <%= label_tag(:instructor_name, "Instructor Name") %>
-    <%= text_field_tag :instructor_name %><br />
-    <%= label_tag(:requestor_name, "Your Name") %>
-    <%= text_field_tag :requestor_name %><br />
-    <%= label_tag(:to, "Your Email Address") %>
-    <%= text_field_tag :to %><br />
-    <%= label_tag(:requestor_uvaid, "Your University ID, e.g. 1234-12345 ") %>
-    <%= text_field_tag :requestor_uvaid %><br />
-    <%= label_tag(:course_id, "Course ID, e.g. MDST 3840") %>
-    <%= text_field_tag :course_id %><br />
-    <%= label_tag(:semester, "Semester") %>
-    <% semesters_list = ['Fall', 'January','Spring', 'Summer I', 'Summer II', 'Summer III'] %>
-    <%= select_tag :semester, options_for_select(semesters_list) %><br />
-    <%= label_tag(:full_record, "Brief or detail record") %>
-    <%= radio_button_tag(:full_record, "false", true)%> Send brief listing of the record(s)<br />
-    <%= radio_button_tag(:full_record, "true", false)%> Send detail listing of the record(s)<br />
-  
-    <%= render :partial => 'reserve_rows', :locals=>{:documents => @documents} %>
+	<%= form_tag send_email_record_catalog_path, :id => 'cres_email', :method => :post do %>
+	<div class="tool_content">
+		<%= check_box_tag 'is_instructor'%> Is this request on behalf of an instructor?
+		<div id="instructor_info" class="hidden">
+			<%= label_tag(:to_instructor, "Instructor Computing ID") %>
+			<%= text_field_tag :to_instructor %>
+			<%= label_tag(:instructor_name, "Instructor Name") %>
+			<%= text_field_tag :instructor_name %>
+		</div>
+		<%= label_tag(:requestor_name, "Your Name") %>
+		<%= text_field_tag :requestor_name %>
+		<%= label_tag(:to, "Your Email Address") %>
+		<%= text_field_tag :to %>
+		<%= label_tag(:requestor_uvaid, "Your University ID, e.g. 1234-12345 ") %>
+		<%= text_field_tag :requestor_uvaid %>
+		<%= label_tag(:course_id, "Course ID, e.g. MDST 3840") %>
+		<%= text_field_tag :course_id %>
+		<%= label_tag(:semester, "Semester") %>
+		<% semesters_list = ['Fall', 'January','Spring', 'Summer I', 'Summer II', 'Summer III'] %>
+		<%= select_tag :semester, options_for_select(semesters_list) %>
+		<h2>Items to be placed on reserve</h2>
+		<p><em>Please note:</em> some types of items (such as online articles) cannot be placed on reserve through Virgo.</p>
+	</div>
 
-    <%=label_tag 'Please type the two words below to help us prevent spam.'%><%= recaptcha_tags %>
-    
-    <% @documents.each do |doc| %>
-      <%=hidden_field_tag "id[]", doc.get(:id)%>
-    <% end %>
+		<table id="starred-listing" class="account-listing">
+			<thead>
+			<tr>
+				<th class="starred-number-heading hidden-heading"> <!-- Number --> </th>
+				<th class="starred-star-heading hidden-heading"> <!-- Remove --> </th>
+				<th class="starred-title-heading">Title</th>
+				<th class="starred-author-heading">Creator</th>
+				<th class="starred-format-heading">Format</th>
+				<th class="starred-year-heading">Year</th>
+				<th class="starred-library-heading">Type</th>
+				<th class="starred-availability-heading">Reserve Library</th>        
+			</tr>
+			</thead>
+			<tbody>
+				<%= render :partial => 'reserve_rows', :locals=>{:documents => @documents} %>
+			</tbody>
+		</table>
 
+	<div class="tool_content">
 
-    <%=hidden_field_tag :style, 'reserves_email'%>
-    <%=hidden_field_tag :show_max_per_page, 'true'%>
-    <%= submit_tag "Send" %>
-  <% end %>
-  
+		<%=label_tag 'Please type the two words below to help us prevent spam.'%><%= recaptcha_tags %>
+		
+		<% @documents.each do |doc| %>
+			<%=hidden_field_tag "id[]", doc.get(:id)%>
+		<% end %>
+
+		<%= hidden_field_tag :full_record, "true" %>
+		<%= hidden_field_tag :style, 'reserves_email' %>
+		<%= hidden_field_tag :show_max_per_page, 'true' %>
+		<%= submit_tag "Send", :class => "btn btn-large large" %>
+	</div>
+	</div>
+
+	<% end %>
+	
 <% end %>
-</div>

@@ -13,7 +13,7 @@ Course Reserve Information:
 <% else -%>
 <% format = document_partial_name(document) -%>
 <% case format.to_s -%>
-<% when "dl_text" %>
+<% when "dl_text" -%>
 <%= document.value_for(:main_title_display, ";", "") %>
 <% unless document.value_for(:author_display) == 'n/a' -%>
 Creator: <% document.values_for(:author_display).each do |v| %><%= v %><% end %><% end %>
