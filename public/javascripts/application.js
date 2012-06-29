@@ -126,7 +126,7 @@ jQuery(document).ready(function($) {
 
 		});
 		
-		$('.deleteFolder_link').live('click', function(){
+		$('.deleteFolder_link, .deleteFolderArticle_link').live('click', function(){
       var el = $(this);
       // Retrieve the item ID (after "folder/" in the link URL)
       var elId = $(this).attr('href').substring(8);
@@ -229,7 +229,7 @@ jQuery(document).ready(function($) {
 
         $(this).addClass('link_disabled');
         
-        $('.deleteFolder_link').each(function(index) {
+        $('.deleteFolder_link, .deleteFolderArticle_link').each(function(index) {
           var el=$(this);
     			var elId = $(this).attr('href').substring(8);      			
   		    el.closest('.folder_container').html('<form action="/folder" class="addFolderForm" method="post" name="folder' + elId +'"><input id="id" name="id" type="hidden" value="' + elId + '"><a href="/folder" class="submitForm">Add Star</a><input class="hide" id="submitFolderForm_' + elId + '" name="commit" type="submit" value="Add Star"></form>');  		    
