@@ -20,6 +20,8 @@
 <div id="results" class="account_container">
 <% if session_folder_document_ids.empty? %>
 <h2 class='no-items'>No Starred Catalog Items</h2>
+<% elsif current_user.blank?%>
+<h2 class='no-items'>Please log in to place on course reserve</h2>
 <% else %>
 	<%= form_tag send_email_record_catalog_path, :id => 'cres_email', :method => :post do %>
 	<div class="tool_content">
@@ -31,9 +33,9 @@
 			<%= text_field_tag :instructor_name %>
 		</div>
 		<%= label_tag(:requestor_name, "Your Name") %>
-		<%= text_field_tag :requestor_name %>
+		<%= text_field_tag :requestor_name, @user_patron.display_name %>
 		<%= label_tag(:to, "Your Email Address") %>
-		<%= text_field_tag :to %>
+		<%= text_field_tag :to, @user_patron.email %>
 		<%= label_tag(:requestor_uvaid, "Your University ID, e.g. 1234-12345 ") %>
 		<%= text_field_tag :requestor_uvaid %>
 		<%= label_tag(:course_id, "Course ID, e.g. MDST 3840") %>
