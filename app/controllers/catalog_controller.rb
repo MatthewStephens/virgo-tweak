@@ -300,8 +300,12 @@ class CatalogController < ApplicationController
           end
       end
       email.deliver unless flash[:error]
-      if @articles.size == 0 && @documents.size == 1
-        redirect_to catalog_path(@documents.first.id) and return
+      if @articles.size == 0 && @documents.size == 1 
+        if ( params[:style] == 'reserves_email' && flash[:error])
+          redirect_to reserves_email_path and return
+        else 
+          redirect_to catalog_path(@documents.first.id) and return
+        end          
       else
         redirect_to folder_index_path and return
       end
