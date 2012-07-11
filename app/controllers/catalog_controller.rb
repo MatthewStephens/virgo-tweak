@@ -304,6 +304,7 @@ class CatalogController < ApplicationController
         if ( params[:style] == 'reserves_email' && flash[:error])
           redirect_to reserves_email_path and return
         else 
+          flash[:notice] = "Everything went ok"
           redirect_to catalog_path(@documents.first.id) and return
         end          
       else
