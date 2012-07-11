@@ -294,7 +294,7 @@ class CatalogController < ApplicationController
         end
         when 'reserves_email'
           if params[:to].match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
-            email = RecordMailer.email_reserves(@documents, params[:to], params[:to_instructor],params[:instructor_name],params[:requestor_name],params[:requestor_uvaid], params[:course_id],params[:semester],params[:location],params[:full_record], from, host)          
+            email = RecordMailer.email_reserves(@documents, params[:to], params[:to_instructor],params[:instructor_name],params[:requestor_name],params[:requestor_uvaid], params[:course_id],params[:semester],params[:location],params[:loan],params[:full_record], from, host)          
           else
             flash[:error] = "You must enter a valid email address"
           end

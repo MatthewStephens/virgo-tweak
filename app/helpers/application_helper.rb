@@ -957,9 +957,16 @@ module ApplicationHelper
 
   # displays a drop-down list of reserve library options
   def reserve_library_list(document)
-    locations_list = ['Astronomy', 'Biology/Psychology','Brown Science & Engineering','Chemistry','Clemons', 'Education', 'Fine Arts', 'Law', 'Math', 'Music','Physics']
+    locations_list = ['Please select a location','Astronomy', 'Biology/Psychology','Brown Science & Engineering','Chemistry','Clemons', 'Education', 'Fine Arts', 'Law', 'Math', 'Music','Physics']
     id = document[:id].to_s
     select_tag "location[" + id + "][]", options_for_select(locations_list)
+  end
+  
+  # displays a drop-down list of loan period options
+  def reserve_loan_list(document)
+    loan_list = ['Please select','3 hours', '2 days']
+    id = document[:id].to_s
+    select_tag "loan[" + id + "][]", options_for_select(loan_list)
   end
    
   # used as hidden element in footer so that we can tell what node served up the content

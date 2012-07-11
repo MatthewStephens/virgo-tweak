@@ -17,6 +17,7 @@
 	<td>Catalog</td>
 	<% if params[:controller] == "reserves" -%>
 		<td><%= reserve_library_list(document) %></td>
+		<td><%= reserve_loan_list(document) %></td>
 	<% else -%>
 		<td class="availability"><%= link_to 'Check availability', catalog_path(document[:id]) %></td>
 	<% end -%>

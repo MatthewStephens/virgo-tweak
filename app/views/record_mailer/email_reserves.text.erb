@@ -39,6 +39,7 @@ Full View: <%= document.value_for :url_display %>
 <% #end of else-fullrecord -%>
 
 <%= @reserve_library[document[:id].to_s].html_safe %>
+<%= @loan_period[document[:id].to_s] %>
 
 URL of page:
 <%= catalog_path(document.id, :only_path => false, :host => @host) %>
