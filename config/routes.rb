@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   match 'folder/citation', :to => 'folder#citation', :as => 'citation'
   match 'folder/email', :to => 'folder#email', :as => 'email'
   match 'folder/endnote', :to => 'folder#endnote', :as => 'endnote' 
-  match 'reserves/cres_email', :to => 'reserves#cres_email', :as => 'reserves_email'
+  match 'reserves/email', :to => 'reserves#email', :as => 'reserves_email'
   match 'advanced', :to => 'advanced#index', :as => 'advanced'
   match 'login', :to => 'user_sessions#new', :as => 'login'
   match 'logout', :to => 'user_sessions#destroy', :as => 'logout'
