@@ -75,7 +75,7 @@ class FolderController < ApplicationController
   end
  
   def course_reserve
-    redirect_to :controller => 'reserves', :action => 'cres_email', :id => session_folder_document_ids, :show_max_per_page => 'true'
+    redirect_to :controller => 'reserves', :action => 'email', :id => session_folder_document_ids, :show_max_per_page => 'true'
   end
   
   def remaining_id_count
