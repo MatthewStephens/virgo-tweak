@@ -85,7 +85,6 @@ class SolrDocument
         [:dl_image, has?(:content_model_facet, 'media')],
         [:dl_text, has?(:content_model_facet, 'text')],
         [:dl_text, has?(:content_model_facet, 'finding aid')],
-        [:dl_manuscript, has?(:content_model_facet, 'manuscript')],
         [:default, true]
       ]
       types.detect{|v|v.last}.first
