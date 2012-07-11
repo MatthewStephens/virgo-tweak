@@ -1,0 +1,26 @@
+<% heading_title = get_heading_title(document.value_for(:main_title_display), document.value_for(:series_title_display), document.value_for(:title_display)) -%>
+<%= heading_title %>
+<% unless document.value_for(:format_facet) == 'n/a' -%>
+
+Format:
+<%= document.value_for (:format_facet) %>
+<% end -%>
+<% -%>
+<% authors = document.author_type_fields %>
+<% authors.each do |k,v| %>
+
+Author
+<%= document.value_for k %>
+<% end -%>
+<% unless document.journal? %>
+
+Publication Date
+<%= document.value_for :published_date_display %>
+<% end -%>
+<% -%>
+<% if !document.get(:url_display).nil? %>
+
+Online Versions
+<%= link_to_online_access(document) %>
+<% end -%>
+
