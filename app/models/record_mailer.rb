@@ -35,7 +35,7 @@ class RecordMailer < ActionMailer::Base
     mail(:to => to, :subject => subject, :from => from)
   end
   
-  def email_reserves(documents, to, instructor_id, instructor_name, requestor_name, requestor_uvaid, course_id, semester, location, loan, full_record, from_host, host)
+  def email_reserves(documents, to, instructor_id, instructor_name, requestor_name, requestor_uvaid, course_id, semester, location, loan, from_host, host)
     documents.each do |document|
       document.availability = Firehose::Availability.find(document)
     end
@@ -83,10 +83,8 @@ class RecordMailer < ActionMailer::Base
       @loan_period[item_key] = "Loan Period: " + loan.to_s 
     end
   
-  
     email_list=[]
     email_list << to + coordinator.uniq.to_s 
-    full_record == "true" ? @full_record = true : @full_record = false
     mail(:to =>email_list, :subject => subject, :from => from)
   end    
 end

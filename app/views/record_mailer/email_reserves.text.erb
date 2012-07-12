@@ -9,9 +9,6 @@ Course Reserve Information
 
 <% @documents.each_with_index do |document, index| -%>
 <%= index %>.
-<% if @full_record -%>
-<%= render_document_partial document, :email, 0 %>
-<% else -%>
 <% format = document_partial_name(document) -%>
 <% case format.to_s -%>
 <% when "dl_text" -%>
@@ -36,12 +33,9 @@ Full View: <%= document.value_for :url_display %>
 <%= render :partial => 'catalog/availability', :locals => { :document => document }  %>
 <% end -%>
 <% # end of case -%>
-<% end -%>
-<% #end of else-fullrecord -%>
 <%= @reserve_library[document[:id].to_s].html_safe %>
 <%= @loan_period[document[:id].to_s] %>
 
 Virgo URL: <%= catalog_path(document.id, :only_path => false, :host => @host) %>
 
 <% end -%>
-<% # end of @documents.each -%>
