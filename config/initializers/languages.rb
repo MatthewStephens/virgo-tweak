@@ -1,3 +1,4 @@
+# encoding: UTF-8
 LANGUAGES =
 {"aar" => "Afar",
 "abk" => "Abkhaz",

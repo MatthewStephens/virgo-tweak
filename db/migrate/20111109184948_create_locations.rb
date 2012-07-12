@@ -6,7 +6,7 @@ class CreateLocations < ActiveRecord::Migration
       t.string :code
 	    t.string :value
     end
-    Fixtures.create_fixtures('test/fixtures', 'locations')  
+    ActiveRecord::Fixtures.create_fixtures('test/fixtures', 'locations')  
     end
 
   def self.down

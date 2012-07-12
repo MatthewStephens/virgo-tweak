@@ -2,8 +2,8 @@
 # This is the "Marked List" functionality.
 
 require "#{Blacklight.controllers_dir}/folder_controller"
-require 'lib/uva/articles_helper'
-require 'lib/uva/solr_helper_override'
+require '/usr/local/projects/virgo/lib/uva/articles_helper'
+require '/usr/local/projects/virgo/lib/uva/solr_helper_override'
 
 class FolderController < ApplicationController
   include UVA::ArticlesHelper

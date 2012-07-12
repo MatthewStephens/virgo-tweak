@@ -71,3 +71,4 @@ end
 # group :development, :test do
 #   gem 'webrat'
 # end
+gem 'awesome_print'

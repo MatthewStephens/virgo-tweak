@@ -1,8 +1,8 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 require 'firehose/patron'
-require 'lib/uva/solr_helper_override'
-require 'lib/uva/virgo_marc_record'
+require '/usr/local/projects/virgo/lib/uva/solr_helper_override'
+require '/usr/local/projects/virgo/lib/uva/virgo_marc_record'
 
 class ApplicationController < ActionController::Base
   include Blacklight::Controller

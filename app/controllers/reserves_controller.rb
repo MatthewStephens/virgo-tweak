@@ -1,5 +1,5 @@
-require 'lib/uva/solr_helper_override'
-require 'lib/firehose/patron'
+require '/usr/local/projects/virgo/lib/uva/solr_helper_override'
+require '/usr/local/projects/virgo/lib/firehose/patron'
 
 
 class ReservesController < ApplicationController

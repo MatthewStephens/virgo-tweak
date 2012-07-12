@@ -1,9 +1,9 @@
-require 'lib/firehose/libraries'
-require 'lib/firehose/patron'
-require 'lib/firehose/holds'
-require 'lib/firehose/checkouts'
-require 'lib/firehose/common'
-require 'lib/uva/solr_helper_override'
+require '/usr/local/projects/virgo/lib/firehose/libraries'
+require '/usr/local/projects/virgo/lib/firehose/patron'
+require '/usr/local/projects/virgo/lib/firehose/holds'
+require '/usr/local/projects/virgo/lib/firehose/checkouts'
+require '/usr/local/projects/virgo/lib/firehose/common'
+require '/usr/local/projects/virgo/lib/uva/solr_helper_override'
 class AccountRequestsController < ApplicationController
 
   include Firehose::Libraries

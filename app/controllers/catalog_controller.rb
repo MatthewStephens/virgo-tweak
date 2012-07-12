@@ -1,12 +1,12 @@
 # Catalog controller base class is included in the Blacklight plugin.  Overriding all sorts of methods for
 # custom behavior.  Once folder logic is included in the plugin, we can remove several methods.
-require 'lib/uva/fedora'
-require 'lib/firehose/holds'
-require 'lib/firehose/availability'
-require 'lib/uva/advanced_search/controller'
-require 'lib/uva/advanced_search/advanced_search_fields'
-require 'lib/uva/articles_helper'
-require 'lib/uva/solr_helper_override'
+require '/usr/local/projects/virgo/lib/uva/fedora'
+require '/usr/local/projects/virgo/lib/firehose/holds'
+require '/usr/local/projects/virgo/lib/firehose/availability'
+require '/usr/local/projects/virgo/lib/uva/advanced_search/controller'
+require '/usr/local/projects/virgo/lib/uva/advanced_search/advanced_search_fields'
+require '/usr/local/projects/virgo/lib/uva/articles_helper'
+require '/usr/local/projects/virgo/lib/uva/solr_helper_override'
 class CatalogController < ApplicationController
   include UVA::Fedora
   include Blacklight::Catalog

@@ -5,7 +5,7 @@ class CreateLibraries < ActiveRecord::Migration
     create_table :libraries do |t|
 	    t.string :name
     end
-    Fixtures.create_fixtures('test/fixtures', 'libraries')  
+    ActiveRecord::Fixtures.create_fixtures('test/fixtures', 'libraries')  
   end
 
   def self.down

@@ -1,6 +1,6 @@
-require 'lib/uva/digital_library_image_document'
+require '/usr/local/projects/virgo/lib/uva/digital_library_image_document'
 require 'blacklight/solr/document'
-require 'lib/cover_image/image'
+require '/usr/local/projects/virgo/lib/cover_image/image'
 
 class SolrDocument
   
@@ -110,7 +110,7 @@ class SolrDocument
   # doc.value_for(:title_display, ' | ', 'no title')
   #
   def value_for(field, sep='; ', default='n/a')
-    values = get(field, {sep, default})
+    values = get(field, {sep => default})
     return default if values.nil?
     # seems that a lot of field values end with " ;" or " :"
     # we'll be removing this from within the index, but for now we'll handle it here...
@@ -125,7 +125,7 @@ class SolrDocument
   
   # gets an array of values for the given field
   def values_for(field)
-    get(field, {nil, ''}) rescue []
+    get(field, {nil => ''}) rescue []
   end
 
   def locations

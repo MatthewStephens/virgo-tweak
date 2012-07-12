@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120104181944) do
+ActiveRecord::Schema.define(:version => 20111109184948) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -33,7 +34,6 @@ ActiveRecord::Schema.define(:version => 20120104181944) do
     t.datetime "requested_at", :null => false
   end
 
-  add_index "document_image_request_records", ["document_id"], :name => "index_document_image_request_records_on_document_id"
   add_index "document_image_request_records", ["requested_at"], :name => "index_document_image_request_records_on_requested_at"
 
   create_table "libraries", :force => true do |t|
@@ -43,6 +43,12 @@ ActiveRecord::Schema.define(:version => 20120104181944) do
   create_table "locations", :force => true do |t|
     t.string "code"
     t.string "value"
+  end
+
+  create_table "map_guides", :force => true do |t|
+    t.integer "location_id"
+    t.integer "map_id"
+    t.string  "call_number_range"
   end
 
   create_table "maps", :force => true do |t|

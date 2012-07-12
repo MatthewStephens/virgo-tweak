@@ -1,4 +1,4 @@
-require 'lib/cover_image/loader'
+require '/usr/local/projects/virgo/lib/cover_image/loader'
 
 namespace :cover_images do
   

@@ -1,10 +1,10 @@
-require 'lib/uva/solr_helper_override'
-require 'lib/cover_image/finder'
-require 'lib/cover_image/sources/google'
-require 'lib/cover_image/sources/last_fm'
-require 'lib/cover_image/sources/library_thing'
-require 'lib/cover_image/sources/music_brainz'
-require 'lib/cover_image/sources/syndetics'
+require '/usr/local/projects/virgo/lib/uva/solr_helper_override'
+require '/usr/local/projects/virgo/lib/cover_image/finder'
+require '/usr/local/projects/virgo/lib/cover_image/sources/google'
+require '/usr/local/projects/virgo/lib/cover_image/sources/last_fm'
+require '/usr/local/projects/virgo/lib/cover_image/sources/library_thing'
+require '/usr/local/projects/virgo/lib/cover_image/sources/music_brainz'
+require '/usr/local/projects/virgo/lib/cover_image/sources/syndetics'
 module CoverImage
   class Loader
     include Blacklight::Configurable

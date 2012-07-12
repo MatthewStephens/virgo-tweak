@@ -2,7 +2,7 @@
 # viewing items.  Also used by special collections administrators to view and process the
 # request queue.
 require 'uva/ldap'
-require 'lib/uva/solr_helper_override'
+require '/usr/local/projects/virgo/lib/uva/solr_helper_override'
 class SpecialCollectionsRequestsController < ApplicationController
   include Blacklight::SolrHelper
   include UVA::SolrHelperOverride

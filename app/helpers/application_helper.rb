@@ -1,7 +1,7 @@
 require 'fastercsv'
-require 'lib/uva/fedora'
-require 'lib/uva/scope_helper'
-require 'lib/uva/utils'
+require '/usr/local/projects/virgo/lib/uva/fedora'
+require '/usr/local/projects/virgo/lib/uva/scope_helper'
+require '/usr/local/projects/virgo/lib/uva/utils'
 require 'uva/advanced_search/advanced_search_fields'
 require 'socket'
 
