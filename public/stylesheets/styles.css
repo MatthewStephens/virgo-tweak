@@ -1008,6 +1008,11 @@ li.Z3988-container {display: none;}
 #folderIndex .next_page {float: right;}
 #folderIndex #results {	margin: 0.77em auto 1.54em; }
 #folderIndex .remove-item {padding-left: 15px;}
+.change-all-reserves { padding: 0 1em 1em 1em; text-align: right; }
+.change-all-reserves strong { font-weight: bold; }
+.change-all-reserves label { padding: 0 0.5em 0 2em; }
+.reserves-notice { background: #DFF0D8; color: #232; font-size: 14px; margin: 0.5em 1em; padding: 1em 1em 0 1em; }
+.reserves-notice p { margin-bottom: 1.5em; }
 
 #catalogCitation .tool_heading h1 {
 	color: #5B4418;

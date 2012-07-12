@@ -4,6 +4,10 @@
 
 <div id="list_heading"><h1>Starred Items<%= " (#{session_folder_document_ids.count + session_folder_article_ids.count})"  %></h1></div>
 
+    <% if flash[:reserves_notice] %>
+      <div class="reserves-notice"><%= flash[:reserves_notice] %></div>
+    <% end %>
+    
 <% unless folder_empty? %>
   <p class="starred-info">Track and export up to <strong>100</strong> items by starring results. Starred items are not saved permanently but will persist for your full visit to Virgo.</p>
 	<p class="ui-state-highlight ui-corner-all notice">Please note: Export to Refworks, EndNote, and Zotero is not yet available for starred articles. Starred catalog items are still available for export.</p>

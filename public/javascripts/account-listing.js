@@ -49,8 +49,17 @@ $(document).ready(function() {
 		}
   });
 
+  // Course Reserves
   $('#is_instructor').change(function(event) {
     $('#instructor_info').toggleClass('hidden');
+  });
+
+  $('#reserve_library_all').change(function(event) {
+    $('.reserve-library-select').val( $(this).val() );
+  });
+
+   $('#reserve_period_all').change(function(event) {
+    $('.reserve-period-select').val( $(this).val() );
   });
 
 });

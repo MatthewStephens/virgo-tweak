@@ -19,12 +19,12 @@
 	</td>
 	<td class="author"><span class="starred-author"><% document.author_type_fields.each do |k,v| %><%= document.value_for k %><% end %></span></td>
 	<td class="format"><%= document.value_for :format_facet %></td>
-	<td class="year"><%= document.value_for :published_display, '<br/>' %></td>
-	<td class="type">Catalog</td>
 	<% if params[:controller] == "reserves" -%>
 		<td><%= reserve_library_list(document) %></td>
 		<td><%= reserve_loan_list(document) %></td>
 	<% else -%>
+    <td class="year"><%= document.value_for :published_display, '<br/>' %></td>
+    <td class="type">Catalog</td>
 		<td class="availability"><%= link_to 'Check availability', catalog_path(document[:id]) %></td>
 	<% end -%>
 </tr>

@@ -47,16 +47,16 @@
 		<p><em>Please note:</em> some types of items (such as online articles) cannot be placed on reserve through Virgo.</p>
 	</div>
 
+		<p class="change-all-reserves"><strong>Change all:</strong> <%= all_reserve_loan_list %></p>
+
 		<table id="starred-listing" class="account-listing">
 			<thead>
 			<tr>
 				<th class="starred-number-heading hidden-heading"> <!-- Number --> </th>
-				<th class="starred-star-heading hidden-heading"> <!-- Remove --> </th>
+				<th class="starred-star-heading hidden-heading"> <!-- Star --> </th>
 				<th class="starred-title-heading">Title</th>
 				<th class="starred-author-heading">Creator</th>
 				<th class="starred-format-heading">Format</th>
-				<th class="starred-year-heading">Year</th>
-				<th class="starred-library-heading">Type</th>
 				<th class="starred-availability-heading">Reserve Library</th> 
 				<th class="starred-availability-heading">Loan Period</th>       
 			</tr>
@@ -74,7 +74,7 @@
 			<%=hidden_field_tag "id[]", doc.get(:id)%>
 		<% end %>
 
-		<%= hidden_field_tag :full_record, "true" %>
+		<%= hidden_field_tag :full_record, "false" %>
 		<%= hidden_field_tag :style, 'reserves_email' %>
 		<%= hidden_field_tag :show_max_per_page, 'true' %>
 		<%= submit_tag "Send", :class => "btn btn-large large" %>

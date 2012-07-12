@@ -300,13 +300,21 @@ class CatalogController < ApplicationController
           end
       end
       email.deliver unless flash[:error]
-      if @articles.size == 0 && @documents.size == 1 
-        if ( params[:style] == 'reserves_email' && flash[:error])
+      if params[:style] == 'reserves_email'
+        if flash[:error]
           redirect_to reserves_email_path and return
-        else 
-          flash[:notice] = "Everything went ok"
-          redirect_to catalog_path(@documents.first.id) and return
-        end          
+        else
+          msg  = "<p>Thank you for your course reserve request. If we have questions regarding your request someone will contact you. "
+          msg += "A copy of your request has been emailed to you.  When your request has been processed, you'll be able to see your reserves by signing into your Virgo account.</p>"
+          msg += "<p>If the Library doesn't own an item that you need for reserve, you may make a <a class=\"btn\" href=\"http://library.virginia.edu/services/purchase-requests/\">Purchase Request</a></p>"
+          msg += "<p>If you have personal copies of items to be placed on reserve, please complete our <a class=\"btn\" href=\"http://library.virginia.edu//services/course-reserves/\">Personal Copy Form</a> and bring it with the items.</p>"
+          msg += "<p>All done? <a class=\"btn\" href=\"#{clear_folder_path}\">Finish &amp; Clear Starred Items</a></p>"
+          flash[:reserves_notice] = msg.html_safe
+          redirect_to folder_index_path and return
+        end
+      end
+      if @articles.size == 0 && @documents.size == 1 
+        redirect_to catalog_path(@documents.first.id) and return
       else
         redirect_to folder_index_path and return
       end

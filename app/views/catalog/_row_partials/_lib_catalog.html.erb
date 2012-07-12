@@ -8,17 +8,17 @@
 			<span class="starred-author"><%= document.value_for(k) %></span>
 		<% end %>
 	</td>
-	<td class="format"><%= document.value_for :format_facet %></td>
-	<td class="year">
-		<% unless document.journal? -%>
-			<%= document.value_for :published_date_display %>
-		<% end %>
-	</td>
-	<td>Catalog</td>
+  <td class="format"><%= document.value_for :format_facet %></td>
 	<% if params[:controller] == "reserves" -%>
 		<td><%= reserve_library_list(document) %></td>
 		<td><%= reserve_loan_list(document) %></td>
 	<% else -%>
+  	<td class="year">
+  		<% unless document.journal? -%>
+  			<%= document.value_for :published_date_display %>
+  		<% end %>
+  	</td>
+  	<td>Catalog</td>
 		<td class="availability"><%= link_to 'Check availability', catalog_path(document[:id]) %></td>
 	<% end -%>
 </tr>

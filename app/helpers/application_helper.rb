@@ -959,14 +959,26 @@ module ApplicationHelper
   def reserve_library_list(document)
     locations_list = ['Please select a location','Astronomy', 'Biology/Psychology','Brown Science & Engineering','Chemistry','Clemons', 'Education', 'Fine Arts', 'Law', 'Math', 'Music','Physics']
     id = document[:id].to_s
-    select_tag "location[" + id + "][]", options_for_select(locations_list)
+    select_tag "location[" + id + "][]", options_for_select(locations_list), :class => "reserve-library-select"
   end
   
   # displays a drop-down list of loan period options
   def reserve_loan_list(document)
     loan_list = ['Please select','3 hours', '2 days']
     id = document[:id].to_s
-    select_tag "loan[" + id + "][]", options_for_select(loan_list)
+    select_tag "loan[" + id + "][]", options_for_select(loan_list), :class => "reserve-period-select"
+  end
+
+    # displays drop-down lists for reserve library and loan period options that apply to all items
+  def all_reserve_loan_list
+    locations_list = ['Please select','Astronomy', 'Biology/Psychology','Brown Science & Engineering','Chemistry','Clemons', 'Education', 'Fine Arts', 'Law', 'Math', 'Music','Physics']
+    loan_list = ['Please select','3 hours', '2 days']
+
+    lists = label "reserve_library_all", "Reserve Library"
+    lists += select_tag "reserve_library_all", options_for_select(locations_list), :class => "reserve-library-select"
+    lists += label "reserve_period_all", "Loan Period"
+    lists += select_tag "reserve_period_all", options_for_select(loan_list), :class => "reserve-period-select"
+    lists
   end
    
   # used as hidden element in footer so that we can tell what node served up the content
